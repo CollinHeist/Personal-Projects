@@ -1,3 +1,7 @@
+# Music Cleaner Program 
+# Made by Collin Heist
+# Last Modified 03.05.18
+
 # ----------------------- Global variables and necessary imports ----------------------- #
 
 import os
