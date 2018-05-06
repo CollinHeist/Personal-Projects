@@ -1,3 +1,7 @@
+// Duration Visualization Program
+// Made by Collin Heist
+// Last Modified 05.05.18
+
 /* -------------------------- Global variable declarations --------------------------- */
 
 StringList dates, titles;
