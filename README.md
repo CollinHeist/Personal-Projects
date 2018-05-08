@@ -13,3 +13,8 @@ A repository where I'll post all of my random, personal projects
   * As of now, this aligns wherever the user's first three clicks are to `leftGuide`, `rightGuide`, and `bottomGuide`. In that order.
   * This creates a resized 6016 x 4014 `.png` image where the current image is resized to align with the above guides, and the rest of the image is transparent (will look white on most image-viewers).
   * Kind of hard to visualize or explain, if it sounds like something that might be useful, try it with a test image to see how it works and perhaps tweak it for your liking.
+### MusicViz
+  * __Super__ basic music vizualization program that live visualizes a song's relative loudness in an circle as a series of lines projecting outward.
+  * This utilizes the minim music class, although that was primarily because I couldn't find any other way to analyze music.
+  * There is a lot of changes that need to be made here, but if you'd like to see how it works, put `.mp3` songs in the Processing `/data/` folder. Then specify the song inside the program.
+  * I'd like to fix the line-drawing code, and basically refactor everything, but for now it _works_...
