@@ -1,3 +1,9 @@
+// Music Visualization Program
+// Made by Collin Heist
+// Last Modified 11.14.17
+
+/* ----------------- Required imports and classes for music analysis ----------------- */
+
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 
@@ -7,9 +13,11 @@ FFT fft;
 BeatDetect beat;
 BeatListener bl;
 
-float secondScale = 3;    //Number of seconds per ticker
-int circleSize = 500;  //600 is max
-int circleRad = circleSize/2;
+/* -------------------------- Global variable declarations --------------------------- */
+
+float secondScale = 3; /* ------- Number of seconds represented by each ticker ------- */
+int circleSize = 500;
+int circleRad = circleSize / 2;
 int Y_AXIS = 1, X_AXIS = 2, timeElapsed = 0, timesCounted = 0;
 float runningAverage = 0;
 color b1 = color(0, 0, 0);
@@ -17,6 +25,8 @@ color b2 = color(9, 56, 72);
 int time = millis();
 
 float degPerSec, songLength;
+
+/* -------------------- Implementation of the BeatListener class --------------------- */
 
 class BeatListener implements AudioListener {
   private BeatDetect beat;
@@ -53,29 +63,27 @@ void setup() {
   // and also needs to know the sample rate of the audio it is analyzing
   fft = new FFT(song.bufferSize(), song.sampleRate());
 
-  // Gradient Background
+  /* ----- Draw the gradient background between the two colors established above ----- */
   setGradient(0, 0, width, height, b1, b2, X_AXIS);
 
   float songLength = song.length() / (secondScale * 1000);    //Number of tickers
   float degPerSec = 360.0/songLength;    //Number of degrees per second
 
-  /* First Ellipse, the largest one */
-  drawEllipse(circleSize);    //Function to draw ellipses
-  drawLines(degPerSec, songLength, circleRad);    //Function to draw segmenting lines
+  /* -------------------- Draw the outer ellipse, the largest one -------------------- */
+  drawEllipse(circleSize);
+  drawLines(degPerSec, songLength, circleRad);
 
-  /* Second Ellipse, the second-largest one */
   //drawEllipse(circleSize/2+circleSize/6);
   //drawLines(degPerSec, songLength, (circleSize/2+circleSize/6)/2);
 
-  /* Third Ellipse, the smallest one */
   //drawEllipse(circleSize/4+circleSize/12);
   //drawLines(degPerSec, songLength, (circleSize/4+circleSize/12)/2);
 }
 
 void draw() {
-  if (millis() >= time + 1000) { timeElapsed++; time = millis(); println(timeElapsed);  }//Increments second(s)
+  /* ----------- Increment the timeElapsed (seconds) counter every 1000 ms ----------- */
+  if (millis() >= time + 1000) { timeElapsed++; time = millis(); println(timeElapsed);  }
 
-  //Start old visualization
   fft.forward(song.mix);
 
   stroke(255, 0, 0, 128);
@@ -93,33 +101,35 @@ void draw() {
 }
 
 void visualize(float degPerSec, float runningAverage) {
-  stroke(255, 255, 255, 55); //Alpha was 55
-  float degVal = degPerSec * ((timeElapsed-1) / secondScale);  //Degree value of where to draw
+  stroke(255, 255, 255, 55);
+  float degVal = degPerSec * ((timeElapsed - 1) / secondScale);  //Degree value of where to draw
   float startX = 0, startY = 0, endX = 0, endY = 0;
 
   if (degVal >= 0 && degVal <= 90) {
-    startX = (width/2) +(circleRad*sin(radians(degVal)));
-    startY = (height/2)-(circleRad*cos(radians(degVal)));
-    endX   = (width/2) +((circleRad+(runningAverage*75))*sin(radians(degVal)));
-    endY   = (height/2)-((circleRad+(runningAverage*75))*cos(radians(degVal)));
-  } else if (degVal > 90 && degVal <= 180) {
-    startX = (width/2) +(circleRad*sin(radians(180-degVal)));
-    startY = (height/2)+(circleRad*cos(radians(180-degVal)));
-    endX   = (width/2) +((circleRad+runningAverage*75)*sin(radians(180-degVal)));
-    endY   = (height/2)+((circleRad+runningAverage*75)*cos(radians(180-degVal)));
-  } else if (degVal > 180 && degVal <= 270) {
-    startX = (width/2) -(circleRad*sin(radians(degVal-180)));
-    startY = (height/2)+(circleRad*cos(radians(degVal-180)));
-    endX   = (width/2) -((circleRad+runningAverage*75)*sin(radians(degVal-180)));
-    endY   = (height/2)+((circleRad+runningAverage*75)*cos(radians(degVal-180)));
-  } else if (degVal > 270 && degVal <= 360) {
-    startX = (width/2) -(circleRad*sin(radians(360-degVal)));
-    startY = (height/2)-(circleRad*cos(radians(360-degVal)));
-    endX   = (width/2) -((circleRad+runningAverage*75)*sin(radians(360-degVal)));
-    endY   = (height/2)-((circleRad+runningAverage*75)*cos(radians(360-degVal)));
+    startX = (width  / 2) + (circleRad  * sin(radians(degVal)));
+    startY = (height / 2) - (circleRad  * cos(radians(degVal)));
+    endX   = (width  / 2) + ((circleRad + (runningAverage * 75)) * sin(radians(degVal)));
+    endY   = (height / 2) - ((circleRad + (runningAverage * 75)) * cos(radians(degVal)));
+  }
+  else if (degVal > 90 && degVal <= 180) {
+    startX = (width  / 2) + (circleRad  * sin(radians(180 - degVal)));
+    startY = (height / 2) + (circleRad  * cos(radians(180 - degVal)));
+    endX   = (width  / 2) + ((circleRad + runningAverage * 75) * sin(radians(180 - degVal)));
+    endY   = (height / 2) + ((circleRad + runningAverage * 75) * cos(radians(180 - degVal)));
+  }
+  else if (degVal > 180 && degVal <= 270) {
+    startX = (width  / 2) - (circleRad  * sin(radians(degVal - 180)));
+    startY = (height / 2) + (circleRad  * cos(radians(degVal - 180)));
+    endX   = (width  / 2) - ((circleRad + runningAverage * 75) * sin(radians(degVal - 180)));
+    endY   = (height / 2) + ((circleRad + runningAverage * 75) * cos(radians(degVal - 180)));
+  }
+  else if (degVal > 270 && degVal <= 360) {
+    startX = (width  / 2) - (circleRad  * sin(radians(360 - degVal)));
+    startY = (height / 2) - (circleRad  * cos(radians(360 - degVal)));
+    endX   = (width  / 2) - ((circleRad + runningAverage * 75) * sin(radians(360 - degVal)));
+    endY   = (height / 2) - ((circleRad + runningAverage * 75) * cos(radians(360 - degVal)));
   }
   line(startX, startY, endX, endY);
-  //rect(startX, startY, endX-startX, endY-startY);    //Parameter c and d are widths and lengths
 }
 
 void drawLines(float degPerSec, float songLength, int circleRad) {
@@ -128,27 +138,26 @@ void drawLines(float degPerSec, float songLength, int circleRad) {
 
   for (int secCount = 0; secCount < songLength; secCount++) {
     if (degCount >= 0 && degCount <= 90) {
-      startX = (width/2) +((circleRad-3)*sin(radians(degCount)));
-      startY = (height/2)-((circleRad-3)*cos(radians(degCount)));
-      endX   = (width/2) +((circleRad+3)*sin(radians(degCount)));
-      endY   = (height/2)-((circleRad+3)*cos(radians(degCount)));
+      startX = (width  / 2) + ((circleRad - 3) * sin(radians(degCount)));
+      startY = (height / 2) - ((circleRad - 3) * cos(radians(degCount)));
+      endX   = (width  / 2) + ((circleRad + 3) * sin(radians(degCount)));
+      endY   = (height / 2) - ((circleRad + 3) * cos(radians(degCount)));
     } else if (degCount > 90 && degCount <= 180) {
-      startX = (width/2)+((circleRad-3)*sin(radians(180-degCount)));
-      startY = (height/2)+((circleRad-3)*cos(radians(180-degCount)));
-      endX   = (width/2)+((circleRad+3)*sin(radians(180-degCount)));
-      endY   = (height/2)+((circleRad+3)*cos(radians(180-degCount)));
+      startX = (width  / 2) + ((circleRad - 3) * sin(radians(180 - degCount)));
+      startY = (height / 2) + ((circleRad - 3) * cos(radians(180 - degCount)));
+      endX   = (width  / 2) + ((circleRad + 3) * sin(radians(180 - degCount)));
+      endY   = (height / 2) + ((circleRad + 3) * cos(radians(180 - degCount)));
     } else if (degCount > 180 && degCount <= 270) {
-      startX = (width/2)-((circleRad-3)*sin(radians(degCount-180)));
-      startY = (height/2)+((circleRad-3)*cos(radians(degCount-180)));
-      endX   = (width/2)-((circleRad+3)*sin(radians(degCount-180)));
-      endY   = (height/2)+((circleRad+3)*cos(radians(degCount-180)));
+      startX = (width  / 2) - ((circleRad - 3) * sin(radians(degCount - 180)));
+      startY = (height / 2) + ((circleRad - 3) * cos(radians(degCount - 180)));
+      endX   = (width  / 2) - ((circleRad + 3) * sin(radians(degCount - 180)));
+      endY   = (height / 2) + ((circleRad + 3) * cos(radians(degCount - 180)));
     } else if (degCount > 270 && degCount <= 360) {
-      startX = (width/2)-((circleRad-3)*sin(radians(360-degCount)));
-      startY = (height/2)-((circleRad-3)*cos(radians(360-degCount)));
-      endX   = (width/2)-((circleRad+3)*sin(radians(360-degCount)));
-      endY   = (height/2)-((circleRad+3)*cos(radians(360-degCount)));
+      startX = (width  / 2) - ((circleRad - 3) * sin(radians(360 - degCount)));
+      startY = (height / 2) - ((circleRad - 3) * cos(radians(360 - degCount)));
+      endX   = (width  / 2) - ((circleRad + 3) * sin(radians(360 - degCount)));
+      endY   = (height / 2) - ((circleRad + 3) * cos(radians(360 - degCount)));
     }
-
     line(startX, startY, endX, endY);
     degCount += degPerSec;
   }
