@@ -18,3 +18,6 @@ A repository where I'll post all of my random, personal projects
   * This utilizes the minim music class, although that was primarily because I couldn't find any other way to analyze music.
   * There is a lot of changes that need to be made here, but if you'd like to see how it works, put `.mp3` songs in the Processing `/data/` folder. Then specify the song inside the program.
   * I'd like to fix the line-drawing code, and basically refactor everything, but for now it _works_...
+### CS-Hashing
+  * This program was written for my CS course at UI.
+  * Implements a hashing program with variable bin-size. Also outputs a few analytical parameters about how quickly the program ran, etc.
