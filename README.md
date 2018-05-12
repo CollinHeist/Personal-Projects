@@ -21,3 +21,7 @@ A repository where I'll post all of my random, personal projects
 ### CS-Hashing
   * This program was written for my CS course at UI.
   * Implements a hashing program with variable bin-size. Also outputs a few analytical parameters about how quickly the program ran, etc.
+### CS-ImageRotation 
+  * This program was written for my CS course at UI.
+  * Very basic 'image' rotation that reads from a `.txt` file containing a 2D array of space-separated numbers.
+  * There are right and left rotating functions.
