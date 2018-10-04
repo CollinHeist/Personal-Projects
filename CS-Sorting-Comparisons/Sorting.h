@@ -1,4 +1,6 @@
-// Header file for the Sorting class 
+/* Header file for the Sorting class */
+/* Made by Collin Heist */
+/* Last updated 12.02.17 */
 
 class Sorting {
 private:
