@@ -1,4 +1,6 @@
-// Implementation file for the Sorting class 
+/* Implementation file for the Sorting class */
+/* Made by Collin Heist */
+/* Last updated 12.04.17 */
 
 #include "Sorting.h"
 
