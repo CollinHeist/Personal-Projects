@@ -1,12 +1,6 @@
-/* Main.cpp
- *
- * CS 121.Bolden.........clang-900.0.38...........Collin H. Heist
- * 11/2/2017 ............Macbook Pro & CPU........heis0741@vandals.uidaho.edu
- *
- * Read from a data file containing information about movies, add that information to a BST
- * and, using BST traversal methods, check and output various aspects of the movies, actors and years
- *---------------------------------------------------------------------
- */
+/* Main file for the Movie Database */
+/* Made by Collin Heist */
+/* Last modified 11.02.17 */
 
 #include <iostream>
 #include <string>
