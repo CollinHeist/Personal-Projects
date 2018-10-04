@@ -1,6 +1,6 @@
 /* Binary Search Tree Header File */
 /* Collin Heist */
-/* CS 121 - 10/24/2017 */
+/* Last modified 10.24.17 */
 
 #include <string>
 using namespace std; /* Need for std::string */
