@@ -1,7 +1,12 @@
-/* 
-   Collin Heist
-   10/04/2017
-   Custom Maze Output
+/* Maze Creator main file */
+/* Made by Collin Heist */
+/* Last updated 12.23.17 */
+
+/* The input file to this (data.txt) is formatted like:
+		width height numInputs
+		item1 weight1
+		item2 weight2
+		etc...
  */
 
 #include <iostream>
