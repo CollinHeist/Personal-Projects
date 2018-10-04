@@ -1,6 +1,6 @@
 /* Binary Search Tree Implementation File */
-/* Collin Heist */ 
-/* CS 121 - 10/24/2017 */
+/* Made by Collin Heist */ 
+/* Last modified 10.24.17 */
 
 #include <iostream>
 #include "BinaryTree.h"
