@@ -1,15 +1,6 @@
-/* Main.cpp
- *
- * CS 121.Bolden.........clang-900.0.38...........Collin H. Heist
- * 12/6/2017 ............Macbook Pro & CPU........heis0741@vandals.uidaho.edu
- *
- * Reads from 9 data files containg various data sets
- * Compares how selection, quick, and merge sort perform on these data sets
- * The sets are...
- * data100rand.txt , data1000rand.txt , data10000rand.txt
- * data100lth.txt  , data1000lth.txt  , data10000lth.txt
- * data100htl.txt  , data1000htl.txt  , data10000htl.txt
- */
+/* Main file implementation for the Sorting Algorithm Comparison */
+/* Made by Collin Heist */
+/* Last modified 12.06.17 */
 
 #include <iostream>
 #include <fstream>
