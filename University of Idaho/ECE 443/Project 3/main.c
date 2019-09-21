@@ -27,16 +27,19 @@ void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uartRXWrapper(void)
 xSemaphoreHandle cn_semaphore;			// Semaphore for unblocking the handler task from the ISR
 xSemaphoreHandle send_to_eeprom;		// Semaphore for unblocking the send-to-EEPROM task when a message is ready
 
+xQueueHandle eeprom_read_queue;			// Queue of addresses the EEPROM needs to read from
+
 unsigned int previous_BTN1_status;		// Previous status of BTN1 - used to detect a PRESS
+unsigned int eeprom_write_addr;			// Current address in EEPROM memory we are writing to
 
 char current_uart_input[UART_MAX_NUM_CHARS];	// Character string of the current UART input
 
 #if (configUSE_TRACE_FACILITY == 1)		// TraceAlyzer variables
-	traceString trace_cn_isr;			// Channel for the Change Notice ISR
-	traceString trace_cn_handler;		// Channel for the Change Notice handler
+	traceString trace_cn;				// Channel for the Change Notice ISR & Handler
 	traceString trace_heartbeat;		// Channel for the 1ms "heartbeat"
 	traceString trace_uartRX_isr;		// Channel for the UART-RX ISR
 	traceString trace_send_msg_eeprom;	// Channel for sending a complete message to the EEPROM
+	traceString trace_read_eeprom;		// Channel for reading from the EEPROM
 #endif
 
 	
@@ -81,8 +84,7 @@ static void initHardware() {
 	mCNClearIntFlag();
 	mCNIntEnable(1);
 
-	// Turn on the interrupt for UART1
-
+	// Turn on the interrupt for UART1-RX
 	ConfigIntUART1(UART_ERR_INT_DIS | UART_RX_INT_EN | UART_INT_PR2 |
 		UART_INT_SUB_PR0 | UART_TX_INT_DIS);
 
@@ -90,31 +92,43 @@ static void initHardware() {
 	INTEnableSystemMultiVectoredInt();
 }
 
-// Create all FreeRTOS Objects
+// Create all FreeRTOS Objects - i.e. queues, semaphores, traces, etc.
 static unsigned int createRTOSObjects() {
 	// Turn on the TraceAlyzer
 	// -> Also assign user-event labels to each of the TraceAlyzer Channels
 	if (configUSE_TRACE_FACILITY) {
 		vTraceEnable(TRC_START);	// Initialize and start recording
-		trace_cn_isr = xTraceRegisterString("Change Notice ISR");
+		trace_cn = xTraceRegisterString("Change Notice");
 		trace_heartbeat = xTraceRegisterString("1ms LEDC Heartbeat");
-		trace_cn_handler = xTraceRegisterString("Change Notice Handler");
+		trace_uartRX_isr = xTraceRegisterString("UART RX ISR");
+		trace_send_msg_eeprom = xTraceRegisterString("EEPROM Writing Task");
+		trace_read_eeprom = xTraceRegisterString("EEPROM Reading Task");
 	}
 
 	// Create the semaphore needed for the CN ISR to trigger a handler task
 	vSemaphoreCreateBinary(cn_semaphore);
 	if (cn_semaphore == NULL)
-		return TRUE;// Error creating the semaphore
+		return TRUE;	// Error creating the semaphore
+
+	// Create the EEPROM read queue
+	eeprom_read_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
+	if (eeprom_read_queue == NULL)
+		return TRUE;	// Error creating the queue
 } 
 
-// Create all FreeRTOS tasks
+// Create all FreeRTOS tasks needed for this project
 static unsigned int createTasks() {
-	// 1ms LEDB toggle task - Highest priority so the kernel always calls it every 1 ms
 	BaseType_t task_success;
+	// Create the CN ISR handler task
 	task_success = xTaskCreate(task_changeNoticeHandler, "CN ISR Handler Task",
-							   configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+							   configMINIMAL_STACK_SIZE, NULL, CN_HANDLER_TASK_PRIORITY, NULL);
+	// Create the send-to-EEPROM task
+	task_success |= xTaskCreate(task_sendMessageEEPROM, "Sending Messages to EEPROM Task",
+								configMINIMAL_STACK_SIZE, NULL, EEPROM_SEND_TASK_PRIORITY, NULL);
+	
+	// Error creating a task - return a failure
 	if (task_success != pdPASS)
-		return TRUE; // Error creating the task - return a failure
+		return TRUE; 
 }
 
 // ISR for UART1 RX and TX
@@ -133,7 +147,7 @@ void isr_uartRXHandler(void) {
 		if (getStrU1(current_uart_input, sizeof(current_uart_input))) {
 			xSemaphoreGiveFromISR(send_to_eeprom, &move_to_higher_priority);
 			if (configUSE_TRACE_FACILITY)
-				vTracePrint(trace_uartRX_isr, "Deteted a complete message - Giving semaphore");
+				vTracePrint(trace_uartRX_isr, "Detected a complete message - Giving semaphore");
 		}
 
 		// Clear the RX Interrupt Flag
@@ -154,8 +168,11 @@ void isr_uartRXHandler(void) {
 }
 
 // This task is unblocked when the incoming UART message is finished
-// This task writes the message to the EEPROM
+// This task writes the message to the EEPROM then adds that memory location to the read queue
+// While the queue is being written to the EEPROM / reset, interrupts are disabled
 static void task_sendMessageEEPROM(void *task_params) {
+	unsigned int i = 0; // Used for iterating over message buffer
+	portBASE_TYPE queue_status;
 	// Try and take the semaphore to start (no delay) in case it was given
 	// before the task started
 	xSemaphoreTake(send_to_eeprom, 0);
@@ -166,39 +183,55 @@ static void task_sendMessageEEPROM(void *task_params) {
 		if (configUSE_TRACE_FACILITY)
 			vTracePrint(trace_send_msg_eeprom, "Received the semaphore");
 
+		// Disable interrupts
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_send_msg_eeprom, "Disabling interrupts");
+		INTDisableInterrupts();
+
 		// Write the UART message to the EEPROM
 		unsigned int write_error = NO_ERR;
 		if (configUSE_TRACE_FACILITY)
 			vTracePrint(trace_send_msg_eeprom, "Writing to the EEPROM");
-		write_error = write_eeprom(EEPROM_SLAVE_ADDR, eeprom_write_addr, current_uart_input, message_length);
+		write_error = write_eeprom(EEPROM_SLAVE_ADDR, eeprom_write_addr, current_uart_input, UART_MAX_NUM_CHARS);
 		if (write_error && configUSE_TRACE_FACILITY)
 			vTracePrint(trace_send_msg_eeprom, "An error occurred while writing to the EEPROM");
 
-		// Increase the memory address where we're currently writing to on the EEPROM
+		// Add the latest message's starting position to the READ queue
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_send_msg_eeprom, "Added EEPROM memory address to read Queue");
+		queue_status = xQueueSendToBack(eeprom_read_queue, &eeprom_write_addr, 0);
+		if (configUSE_TRACE_FACILITY && queue_status == errQUEUE_FULL)
+			vTracePrint(trace_send_msg_eeprom, "Error adding to read Queue: Queue full");
+
+		// Increase the memory address where we're currently writing to on the EEPROM - don't run over 'x' messages
 		eeprom_write_addr += message_length;
+		eeprom_write_addr %= UART_MAX_NUM_CHARS * MAX_NUM_MSGS;
+
+		// Clear the message buffer - prevents long messages from being rewritten to the EEPROM
+		for (i = 0; i < UART_MAX_NUM_CHARS; i++)
+			current_uart_input[i] = 0;
+
+		// Turn interrupts back on
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_send_msg_eeprom, "Reenabling interrupts");
+		INTEnableInterrupts();
 	}
 }
 
 // This function is called when the CN ISR triggers
 // Clears the CN flag and gives a semaphore to unblock the handler TASK
 void isr_changeNoticeHandler(void) {
-	if (configUSE_TRACE_FACILITY)
-		vTracePrint(trace_cn_isr, "Entering C-Portion of CN ISR");
-	
 	// Flag for if returning to a higher priority task is necessary
 	portBASE_TYPE move_to_higher_priority = pdFALSE;
 	
 	// Give the semaphore to unlock the task
 	xSemaphoreGiveFromISR(cn_semaphore, &move_to_higher_priority);
 	if (configUSE_TRACE_FACILITY)
-		vTracePrint(trace_cn_isr, "Giving semaphore from CN ISR");
+		vTracePrint(trace_cn, "Giving semaphore from CN ISR");
 	
 	// Clear the interrupt flag
 	mCNClearIntFlag();
 	mCNOpen(CN_OFF, (CN8_ENABLE), 0);
-	
-	if (configUSE_TRACE_FACILITY)
-		vTracePrint(trace_cn_isr, "Exiting C-Portion of CN ISR");
 	
 	// Exit the ISR, returning to the higher priority task if necessary
 	portEND_SWITCHING_ISR(move_to_higher_priority);
@@ -218,12 +251,12 @@ static void task_changeNoticeHandler(void *task_params) {
 		// -> this take is also noted in Tracealyzer
 		xSemaphoreTake(cn_semaphore, portMAX_DELAY);
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_cn_handler, "Received the semaphore");
+			vTracePrint(trace_cn, "Received the semaphore in handler");
 		
 		// Debounce the task for (x) milliseconds
 		// -> note this in Tracealyzer
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_cn_handler, "Debouncing button");
+			vTracePrint(trace_cn, "Debouncing button in handler");
 		vTaskDelay(MS_TO_TICKS(DEBOUNCE_TIME_MS));
 		
 		//  Read BTN1
@@ -234,6 +267,18 @@ static void task_changeNoticeHandler(void *task_params) {
 		
 		// Update the previous button status
 		previous_BTN1_status = new_BTN1_status;
+	}
+}
+
+// This task reads from the EEPROM - Only unblocked when the read queue has items in it
+static void task_readMessageEEPROM(void* task_params) {
+	portBASE_TYPE queue_status;
+	unsigned int eeprom_read_addr;	// The memory address to read from
+
+	for (;;) {
+		// Try and read from the queue forever
+		queue_status = xQueueReceive(eeprom_read_queue, &eeprom_read_addr, portMAX_DELAY);
+		char latest_message[UART_MAX_NUM_CHARS] = {0}; 
 	}
 }
 
