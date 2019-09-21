@@ -24,10 +24,11 @@ void __ISR(_CHANGE_NOTICE_VECTOR, IPL1) isr_changeNoticeWrapper(void);
 void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uartRXWrapper(void)
 
 /* ---------------------------- Global Variables ---------------------------- */
-xSemaphoreHandle cn_semaphore;			// Semaphore for unblocking the handler task from the ISR
+xSemaphoreHandle cn_semaphore;			// Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
 xSemaphoreHandle send_to_eeprom;		// Semaphore for unblocking the send-to-EEPROM task when a message is ready
 
 xQueueHandle eeprom_read_queue;			// Queue of addresses the EEPROM needs to read from
+xQueueHandle eeprom_pending_queue;		// Queue of pending retrievals to send to the LCD
 
 unsigned int previous_BTN1_status;		// Previous status of BTN1 - used to detect a PRESS
 unsigned int eeprom_write_addr;			// Current address in EEPROM memory we are writing to
@@ -105,14 +106,16 @@ static unsigned int createRTOSObjects() {
 		trace_read_eeprom = xTraceRegisterString("EEPROM Reading Task");
 	}
 
-	// Create the semaphore needed for the CN ISR to trigger a handler task
+	// Create the semaphore needed for the CN ISR, and UART RX ISR
 	vSemaphoreCreateBinary(cn_semaphore);
-	if (cn_semaphore == NULL)
-		return TRUE;	// Error creating the semaphore
+	vSemaphoreCreateBinary(send_to_eeprom);
+	if (cn_semaphore == NULL || send_to_eeprom == NULL)
+		return TRUE;	// Error creating the semaphore(s)
 
-	// Create the EEPROM read queue
+	// Create the EEPROM read queue, and the EEPROM pending retrieval queue
 	eeprom_read_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
-	if (eeprom_read_queue == NULL)
+	eeprom_pending_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
+	if (eeprom_read_queue == NULL || eeprom_pending_queue == NULL)
 		return TRUE;	// Error creating the queue
 } 
 
@@ -225,9 +228,9 @@ void isr_changeNoticeHandler(void) {
 	portBASE_TYPE move_to_higher_priority = pdFALSE;
 	
 	// Give the semaphore to unlock the task
-	xSemaphoreGiveFromISR(cn_semaphore, &move_to_higher_priority);
 	if (configUSE_TRACE_FACILITY)
 		vTracePrint(trace_cn, "Giving semaphore from CN ISR");
+	xSemaphoreGiveFromISR(cn_semaphore, &move_to_higher_priority);
 	
 	// Clear the interrupt flag
 	mCNClearIntFlag();
@@ -240,7 +243,7 @@ void isr_changeNoticeHandler(void) {
 // This is the handler TASK that executes the CN code
 // Unblocks only from the CN ISR
 static void task_changeNoticeHandler(void *task_params) {
-	unsigned int new_BTN1_status = 0;
+	portBASE_TYPE queue_status;
 	// Try and take the semaphore to start (no delay) in case it was given
 	// before the task started
 	xSemaphoreTake(cn_semaphore, 0);
@@ -248,37 +251,61 @@ static void task_changeNoticeHandler(void *task_params) {
 	for (;;) {
 		// Wait for the semaphore forever
 		// -> this only unblocks when the semaphore is GIVEN by the ISR
-		// -> this take is also noted in Tracealyzer
 		xSemaphoreTake(cn_semaphore, portMAX_DELAY);
 		if (configUSE_TRACE_FACILITY)
 			vTracePrint(trace_cn, "Received the semaphore in handler");
 		
 		// Debounce the task for (x) milliseconds
-		// -> note this in Tracealyzer
 		if (configUSE_TRACE_FACILITY)
 			vTracePrint(trace_cn, "Debouncing button in handler");
 		vTaskDelay(MS_TO_TICKS(DEBOUNCE_TIME_MS));
 		
-		//  Read BTN1
-		new_BTN1_status = PORTG & BTN1; // Read BTN1 
-		if (previous_BTN1_status == 0 && new_BTN1_status > 0) {
-			// Button PRESS
+		// Check if this CN was triggered by a PRESS - If so, add to the pending queue
+		if (previous_BTN1_status == 0 && (PORTG & BTN1) > 0) {
+			if (configUSE_TRACE_FACILITY)
+				vTracePrint(trace_cn, "BTN1 pressed - Adding retrieval to pending queue")
+			queue_status = xQueueSendToBack(eeprom_pending_queue, &1, 0);
 		}
+		if (configUSE_TRACE_FACILITY && queue_status == errQUEUE_FULL)
+			vTracePrint(trace_cn, "Error adding to pending Queue: Queue full");
 		
 		// Update the previous button status
 		previous_BTN1_status = new_BTN1_status;
 	}
 }
 
-// This task reads from the EEPROM - Only unblocked when the read queue has items in it
+// This task reads from the EEPROM
+// -> Only unblocked when the CN ISR gives a semaphore, AND the read queue has items in it
 static void task_readMessageEEPROM(void* task_params) {
 	portBASE_TYPE queue_status;
 	unsigned int eeprom_read_addr;	// The memory address to read from
+	unsigned int dummy_val;
 
 	for (;;) {
-		// Try and read from the queue forever
-		queue_status = xQueueReceive(eeprom_read_queue, &eeprom_read_addr, portMAX_DELAY);
-		char latest_message[UART_MAX_NUM_CHARS] = {0}; 
+		// Create empty message buffer
+		char eeprom_message[UART_MAX_NUM_CHARS] = {0};
+
+		// Wait for item in pending queue - signifies a button press requested a new retrieval
+		xQueueReceive(eeprom_pending_queue, &dummy_val, portMAX_DELAY);
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_read_eeprom, "Retrieval request read from pending queue");
+
+		// Look in the address queue for an address to read at - do not wait any time
+		queue_status = xQueueReceive(eeprom_read_queue, &eeprom_read_addr, 0);
+		if (queue_status == pdTRUE) {
+			// There was an address in the address queue - read from the EEPROM
+			if (configUSE_TRACE_FACILITY)
+				vTracePrint(trace_read_eeprom, "Address received from address queue - reading from EEPROM");
+			unsigned int read_error = NO_ERR;	// Error status of I2C read
+			read_error = read_eeprom(EEPROM_SLAVE_ADDR, eeprom_read_addr, eeprom_message, UART_MAX_NUM_CHARS);
+			if (configUSE_TRACE_FACILITY && read_error)
+				vTracePrint(trace_read_eeprom, "Error occurred while reading from EEPROM");
+		}
+		else {
+			// There was a request initiated, but no addresses to read from
+			if (configUSE_TRACE_FACILITY)
+				vTracePrint(trace_read_eeprom, "Retrieval requested, but the address queue is empty");
+		}
 	}
 }
 
