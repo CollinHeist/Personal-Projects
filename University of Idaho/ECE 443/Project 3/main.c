@@ -64,6 +64,7 @@ int main() {
 	return 0;
 }
 
+/* ------------------------ Initialization Functions ------------------------ */
 // Hardware initialization task
 static void initHardware() {
 	chipKIT_PRO_MX7_Setup();				// Set up board
@@ -98,7 +99,7 @@ static unsigned int createRTOSObjects() {
 	// Turn on the TraceAlyzer
 	// -> Also assign user-event labels to each of the TraceAlyzer Channels
 	if (configUSE_TRACE_FACILITY) {
-		vTraceEnable(TRC_START);	// Initialize and start recording
+		vTraceEnable(TRC_START);
 		trace_cn = xTraceRegisterString("Change Notice");
 		trace_heartbeat = xTraceRegisterString("1ms LEDC Heartbeat");
 		trace_uartRX_isr = xTraceRegisterString("UART RX ISR");
@@ -106,7 +107,7 @@ static unsigned int createRTOSObjects() {
 		trace_read_eeprom = xTraceRegisterString("EEPROM Reading Task");
 	}
 
-	// Create the semaphore needed for the CN ISR, and UART RX ISR
+	// Create the semaphore needed for the CN ISR -> Handler, and UART-RX ISR -> Handler
 	vSemaphoreCreateBinary(cn_semaphore);
 	vSemaphoreCreateBinary(write_to_eeprom);
 	if (cn_semaphore == NULL || write_to_eeprom == NULL)
@@ -121,18 +122,21 @@ static unsigned int createRTOSObjects() {
 
 // Create all FreeRTOS tasks needed for this project
 static unsigned int createTasks() {
-	BaseType_t task_success;
+	BaseType_t task_success;	// Whether the task creation was successful
+
 	// Create the CN ISR handler task
 	task_success = xTaskCreate(task_changeNoticeHandler, "CN ISR Handler Task",
-							   configMINIMAL_STACK_SIZE, NULL, CN_HANDLER_TASK_PRIORITY, NULL);
+		configMINIMAL_STACK_SIZE, NULL, CN_HANDLER_TASK_PRIORITY, NULL);
 	// Create the write-to-EEPROM task
 	task_success |= xTaskCreate(task_writeMessageEEPROM, "Writing to EEPROM Task",
-								configMINIMAL_STACK_SIZE, NULL, EEPROM_WRITE_TASK_PRIORITY, NULL);
+		configMINIMAL_STACK_SIZE, NULL, EEPROM_WRITE_TASK_PRIORITY, NULL);
 	
 	// Error creating a task - return a failure
 	if (task_success != pdPASS)
 		return TRUE; 
 }
+
+/* --------------------------- 'Normal' Functions --------------------------- */
 
 // ISR for UART1 RX and TX
 // void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uart1Handler() {
@@ -313,6 +317,8 @@ static void task_readMessageEEPROM(void* task_params) {
 	}
 }
 
+/* --------------------------- 'Helper' Functions --------------------------- */
+
 // Function to return how many characters are in the message buffer
 // -> Increments until the return or null character is found
 static unsigned int getMessageLength(char* message_buffer, unsigned int max_buffer_length) {
@@ -325,7 +331,7 @@ static unsigned int getMessageLength(char* message_buffer, unsigned int max_buff
 	return max_buffer_length;
 }
 
-/* The below functions are overwriting FreeRTOS tasks for specific functionality */
+/* --------------------- FreeRTOS Functional Functions ---------------------- */
 
 // Tick hook task that toggles LEDC every 1ms 
 void vApplicationTickHook(void) {
