@@ -25,9 +25,9 @@ void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uartRXWrapper(void)
 
 /* ---------------------------- Global Variables ---------------------------- */
 xSemaphoreHandle cn_semaphore;			// Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
-xSemaphoreHandle send_to_eeprom;		// Semaphore for unblocking the send-to-EEPROM task when a message is ready
+xSemaphoreHandle write_to_eeprom;		// Semaphore for unblocking the write-to-EEPROM task when a message is ready
 
-xQueueHandle eeprom_read_queue;			// Queue of addresses the EEPROM needs to read from
+xQueueHandle eeprom_addr_queue;			// Queue of addresses the EEPROM needs to read from
 xQueueHandle eeprom_pending_queue;		// Queue of pending retrievals to send to the LCD
 
 unsigned int previous_BTN1_status;		// Previous status of BTN1 - used to detect a PRESS
@@ -39,7 +39,7 @@ char current_uart_input[UART_MAX_NUM_CHARS];	// Character string of the current 
 	traceString trace_cn;				// Channel for the Change Notice ISR & Handler
 	traceString trace_heartbeat;		// Channel for the 1ms "heartbeat"
 	traceString trace_uartRX_isr;		// Channel for the UART-RX ISR
-	traceString trace_send_msg_eeprom;	// Channel for sending a complete message to the EEPROM
+	traceString trace_write_msg_eeprom;	// Channel for writing a complete message to the EEPROM
 	traceString trace_read_eeprom;		// Channel for reading from the EEPROM
 #endif
 
@@ -102,20 +102,20 @@ static unsigned int createRTOSObjects() {
 		trace_cn = xTraceRegisterString("Change Notice");
 		trace_heartbeat = xTraceRegisterString("1ms LEDC Heartbeat");
 		trace_uartRX_isr = xTraceRegisterString("UART RX ISR");
-		trace_send_msg_eeprom = xTraceRegisterString("EEPROM Writing Task");
+		trace_write_msg_eeprom = xTraceRegisterString("EEPROM Writing Task");
 		trace_read_eeprom = xTraceRegisterString("EEPROM Reading Task");
 	}
 
 	// Create the semaphore needed for the CN ISR, and UART RX ISR
 	vSemaphoreCreateBinary(cn_semaphore);
-	vSemaphoreCreateBinary(send_to_eeprom);
-	if (cn_semaphore == NULL || send_to_eeprom == NULL)
+	vSemaphoreCreateBinary(write_to_eeprom);
+	if (cn_semaphore == NULL || write_to_eeprom == NULL)
 		return TRUE;	// Error creating the semaphore(s)
 
-	// Create the EEPROM read queue, and the EEPROM pending retrieval queue
-	eeprom_read_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
+	// Create the EEPROM address queue, and the EEPROM pending retrieval queue
+	eeprom_addr_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
 	eeprom_pending_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
-	if (eeprom_read_queue == NULL || eeprom_pending_queue == NULL)
+	if (eeprom_addr_queue == NULL || eeprom_pending_queue == NULL)
 		return TRUE;	// Error creating the queue
 } 
 
@@ -125,9 +125,9 @@ static unsigned int createTasks() {
 	// Create the CN ISR handler task
 	task_success = xTaskCreate(task_changeNoticeHandler, "CN ISR Handler Task",
 							   configMINIMAL_STACK_SIZE, NULL, CN_HANDLER_TASK_PRIORITY, NULL);
-	// Create the send-to-EEPROM task
-	task_success |= xTaskCreate(task_sendMessageEEPROM, "Sending Messages to EEPROM Task",
-								configMINIMAL_STACK_SIZE, NULL, EEPROM_SEND_TASK_PRIORITY, NULL);
+	// Create the write-to-EEPROM task
+	task_success |= xTaskCreate(task_writeMessageEEPROM, "Writing to EEPROM Task",
+								configMINIMAL_STACK_SIZE, NULL, EEPROM_WRITE_TASK_PRIORITY, NULL);
 	
 	// Error creating a task - return a failure
 	if (task_success != pdPASS)
@@ -138,19 +138,21 @@ static unsigned int createTasks() {
 // void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uart1Handler() {
 void isr_uartRXHandler(void) {
 	// The RX and TX flags trigger the same interrupt vector
-	// Was this specifically the RX flag?
 	portBASE_TYPE move_to_higher_priority = pdFALSE;
-	if (INTGetFlag(INT_SOURCE_UART_RX(UART1))) {
+	if (INTGetFlag(INT_SOURCE_UART_RX(UART1))) {	// Was this specifically the RX flag?
 		if (configUSE_TRACE_FACILITY)
 			vTracePrint(trace_uartRX_isr, "Entering C-Portion of UART-RX ISR");
 		// Maybe echo the new character?
 
 		// Add the current character to the current character string
-		// -> If the return was TRUE, it's the EOL and give semaphore to send message to EEPROM
 		if (getStrU1(current_uart_input, sizeof(current_uart_input))) {
-			xSemaphoreGiveFromISR(send_to_eeprom, &move_to_higher_priority);
+			// If the return was TRUE, it's the EOL and give semaphore to write message to EEPROM
 			if (configUSE_TRACE_FACILITY)
 				vTracePrint(trace_uartRX_isr, "Detected a complete message - Giving semaphore");
+			xSemaphoreGiveFromISR(write_to_eeprom, &move_to_higher_priority);
+			
+			// Turn of LEDA while the message parses
+			mPORTBClearBits(LEDA);
 		}
 
 		// Clear the RX Interrupt Flag
@@ -173,38 +175,37 @@ void isr_uartRXHandler(void) {
 // This task is unblocked when the incoming UART message is finished
 // This task writes the message to the EEPROM then adds that memory location to the read queue
 // While the queue is being written to the EEPROM / reset, interrupts are disabled
-static void task_sendMessageEEPROM(void *task_params) {
+static void task_writeMessageEEPROM(void *task_params) {
 	unsigned int i = 0; // Used for iterating over message buffer
 	portBASE_TYPE queue_status;
-	// Try and take the semaphore to start (no delay) in case it was given
-	// before the task started
-	xSemaphoreTake(send_to_eeprom, 0);
+	// Try and take the semaphore to start (no delay) in case it was given already
+	xSemaphoreTake(write_to_eeprom, 0);
 	for (;;) {
-		// Wait for the send-to-EEPROM semaphore forever
+		// Wait for the write-to-EEPROM semaphore forever
 		// -> Only unblocks when the UART-RX ISR detects a completed message
-		xSemaphoreTake(send_to_eeprom, portMAX_DELAY);
+		xSemaphoreTake(write_to_eeprom, portMAX_DELAY);
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_send_msg_eeprom, "Received the semaphore");
+			vTracePrint(trace_write_msg_eeprom, "Received the semaphore");
 
 		// Disable interrupts
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_send_msg_eeprom, "Disabling interrupts");
+			vTracePrint(trace_write_msg_eeprom, "Disabling interrupts");
 		INTDisableInterrupts();
 
 		// Write the UART message to the EEPROM
 		unsigned int write_error = NO_ERR;
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_send_msg_eeprom, "Writing to the EEPROM");
+			vTracePrint(trace_write_msg_eeprom, "Writing to the EEPROM");
 		write_error = write_eeprom(EEPROM_SLAVE_ADDR, eeprom_write_addr, current_uart_input, UART_MAX_NUM_CHARS);
 		if (write_error && configUSE_TRACE_FACILITY)
-			vTracePrint(trace_send_msg_eeprom, "An error occurred while writing to the EEPROM");
+			vTracePrint(trace_write_msg_eeprom, "An error occurred while writing to the EEPROM");
 
 		// Add the latest message's starting position to the READ queue
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_send_msg_eeprom, "Added EEPROM memory address to read Queue");
-		queue_status = xQueueSendToBack(eeprom_read_queue, &eeprom_write_addr, 0);
+			vTracePrint(trace_write_msg_eeprom, "Added EEPROM memory address to read Queue");
+		queue_status = xQueueSendToBack(eeprom_addr_queue, &eeprom_write_addr, 0);
 		if (configUSE_TRACE_FACILITY && queue_status == errQUEUE_FULL)
-			vTracePrint(trace_send_msg_eeprom, "Error adding to read Queue: Queue full");
+			vTracePrint(trace_write_msg_eeprom, "Error adding to read Queue: Queue full");
 
 		// Increase the memory address where we're currently writing to on the EEPROM - don't run over 'x' messages
 		eeprom_write_addr += message_length;
@@ -214,15 +215,18 @@ static void task_sendMessageEEPROM(void *task_params) {
 		for (i = 0; i < UART_MAX_NUM_CHARS; i++)
 			current_uart_input[i] = 0;
 
+		// Set LEDA to indicate a new message is ready
+		mPortBSetBits(LEDA); 
+
 		// Turn interrupts back on
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_send_msg_eeprom, "Reenabling interrupts");
+			vTracePrint(trace_write_msg_eeprom, "Reenabling interrupts");
 		INTEnableInterrupts();
 	}
 }
 
 // This function is called when the CN ISR triggers
-// Clears the CN flag and gives a semaphore to unblock the handler TASK
+// Clears the CN flag and gives a semaphore to unblock the handler task
 void isr_changeNoticeHandler(void) {
 	// Flag for if returning to a higher priority task is necessary
 	portBASE_TYPE move_to_higher_priority = pdFALSE;
@@ -241,7 +245,7 @@ void isr_changeNoticeHandler(void) {
 }
 
 // This is the handler TASK that executes the CN code
-// Unblocks only from the CN ISR
+// -> Unblocks only from the CN ISR, adds to the pending queue
 static void task_changeNoticeHandler(void *task_params) {
 	portBASE_TYPE queue_status;
 	// Try and take the semaphore to start (no delay) in case it was given
@@ -291,7 +295,7 @@ static void task_readMessageEEPROM(void* task_params) {
 			vTracePrint(trace_read_eeprom, "Retrieval request read from pending queue");
 
 		// Look in the address queue for an address to read at - do not wait any time
-		queue_status = xQueueReceive(eeprom_read_queue, &eeprom_read_addr, 0);
+		queue_status = xQueueReceive(eeprom_addr_queue, &eeprom_read_addr, 0);
 		if (queue_status == pdTRUE) {
 			// There was an address in the address queue - read from the EEPROM
 			if (configUSE_TRACE_FACILITY)
@@ -329,12 +333,17 @@ void vApplicationTickHook(void) {
 	if (configUSE_TRACE_FACILITY) 
 		vTracePrint(trace_heartbeat, "Toggling LEDC");
 	
-	LATBINV = LEDC; // Invert LEDC
+	mPORTBToggleBits(LEDC); // Invert LEDC
 }
 
-// Idle task sets LEDA to the status of BTN1
+// Idle task
+// Looks if the eeprom_addr_queue is empty and sets LEDB accordingly
 void vApplicationIdleHook(void) {
-	
+	// Read how many messages are in the address queue
+	if (uxQueueMessagesWaiting(eeprom_addr_queue) == 0)
+		mPORTBSetBits(LEDB);
+	else
+		mPORTBClearBits(LEDB);
 }
 
 // Function that is called whenever a stack overflows
