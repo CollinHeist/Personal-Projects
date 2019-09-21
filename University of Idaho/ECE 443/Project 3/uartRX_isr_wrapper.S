@@ -12,7 +12,7 @@ implementation of the portSAVE_CONTEXT and portRESTORE_CONTEXT macros. */
 	/* The C portion of the handler is implemented in an external C file. 
 	The .extern directive makes the function visible from within this
 	assembly file. */
- 	.extern isr_uartRXHandler
+ 	.extern isr_uart_RX_handler
 	
 	/* Required by the save and restore macros. */
 	.extern xISRStackTop
@@ -21,14 +21,14 @@ implementation of the portSAVE_CONTEXT and portRESTORE_CONTEXT macros. */
 	Making the wrapper visible from C files means the C compiler key word
 	extensions can be used to populate the interrupt vector table.  See main.c
 	for an example. */
- 	.global	isr_changeNoticeWrapper
+ 	.global	isr_change_notice_wrapper
 
 	.set		noreorder
 	.set 		noat
-	.ent		isr_uartRXWrapper
+	.ent		isr_uart_RX_wrapper
 
 /* Start of the handler implementation. */
-isr_uartRXWrapper:
+isr_uart_RX_wrapper:
 
 	/* Save the context of the currently executing task.  portSAVE_CONTEXT()
 	must be called before anything else is done. */
@@ -36,7 +36,7 @@ isr_uartRXWrapper:
 	
 	/* Call the C portion of the interrupt handler.  A NOP is always required
 	after a jal instruction. */
-	jal isr_uartRXHandler
+	jal isr_uart_RX_handler
 	nop
 	
 	/* Restore the context of the next task to execute - which might be a 
@@ -49,4 +49,4 @@ isr_uartRXWrapper:
 	from the interrupt. */
 	portRESTORE_CONTEXT
 
-	.end		isr_uartRXWrapper
+	.end		isr_uart_RX_wrapper

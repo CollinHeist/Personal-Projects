@@ -19,7 +19,7 @@
 void initialize_LCD();
 void put_string_LCD(char *char_string);
 void put_char_LCD(char c);
-void _write_LCD(int reg, char c);
+static void _write_LCD(int reg, char c);
 void set_cursor_LCD(unsigned int address);
 void reset_clear_LCD();
 unsigned int read_LCD(int address);

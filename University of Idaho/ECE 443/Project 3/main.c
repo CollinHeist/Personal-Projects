@@ -19,9 +19,9 @@
 
 /* --------------------------- Function Prototypes -------------------------- */
 // CN ISR for button presses - Directly calls wrapper function
-void __ISR(_CHANGE_NOTICE_VECTOR, IPL1) isr_changeNoticeWrapper(void);
+void __ISR(_CHANGE_NOTICE_VECTOR, IPL1) isr_change_notice_wrapper(void);
 // UART-RX ISR - Directly calls wrapper function
-void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uartRXWrapper(void)
+void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uart_RX_wrapper(void)
 
 /* ---------------------------- Global Variables ---------------------------- */
 xSemaphoreHandle cn_semaphore;			// Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
@@ -32,8 +32,9 @@ xQueueHandle eeprom_pending_queue;		// Queue of pending retrievals to send to th
 
 unsigned int previous_BTN1_status;		// Previous status of BTN1 - used to detect a PRESS
 unsigned int eeprom_write_addr;			// Current address in EEPROM memory we are writing to
+unsigned int lcd_newline_pos[LCD_MAX_NEWLINE_ADDITIONS];	// Array of positions to update the LCD string with '\n'
 
-char current_uart_input[UART_MAX_NUM_CHARS];	// Character string of the current UART input
+char current_uart_input[UART_MAX_MSG_SIZE];	// Character string of the current UART input
 
 #if (configUSE_TRACE_FACILITY == 1)		// TraceAlyzer variables
 	traceString trace_cn;				// Channel for the Change Notice ISR & Handler
@@ -47,11 +48,12 @@ char current_uart_input[UART_MAX_NUM_CHARS];	// Character string of the current 
 /* ------------------------------ Main Program ------------------------------ */
 int main() {
 	// Initialize and configure the hardware
-	initHardware();
+	init_hardware();
 
+	// Initalize other components of the system
 	unsigned int failure_flag = FALSE;
-	failure_flag = createRTOSObjects();
-	failure_flag |= createTasks();
+	failure_flag = create_RTOS_objects();
+	failure_flag |= create_tasks();
 
 	// If anything failed to initialize, exit
 	if (failure_flag)
@@ -66,19 +68,19 @@ int main() {
 
 /* ------------------------ Initialization Functions ------------------------ */
 // Hardware initialization task
-static void initHardware() {
+static void init_hardware() {
 	chipKIT_PRO_MX7_Setup();				// Set up board
-	initialize_LCD();					   // Initialize the LCD
+	initialize_LCD();						// Initialize the LCD
 	initialize_uart1(19200, ODD_PARITY);	// Initialize UART1 at 19200, odd-parity
 
 	// Set up LEDs
 	PORTSetPinsDigitalOut(IOPORT_B, SM_LEDS);
 	LATBCLR = SM_LEDS;
 	
-	// Configure button
+	// Configure BTN1
 	PORTSetPinsDigitalIn(IOPORT_G, BTN1);
 	
-	// Enable the Interrupt for BTN1
+	// Enable the CN interrupt for BTN1
 	mCNOpen(CN_ON, CN8_ENABLE, 0);
 	mCNSetIntPriority(1);
 	mCNSetIntSubPriority(0);
@@ -90,12 +92,12 @@ static void initHardware() {
 	ConfigIntUART1(UART_ERR_INT_DIS | UART_RX_INT_EN | UART_INT_PR2 |
 		UART_INT_SUB_PR0 | UART_TX_INT_DIS);
 
-	// Turn on the multiple Interrupt Vectors
+	// Turn on the multiple interrupt Vectors
 	INTEnableSystemMultiVectoredInt();
 }
 
 // Create all FreeRTOS Objects - i.e. queues, semaphores, traces, etc.
-static unsigned int createRTOSObjects() {
+static unsigned int create_RTOS_objects() {
 	// Turn on the TraceAlyzer
 	// -> Also assign user-event labels to each of the TraceAlyzer Channels
 	if (configUSE_TRACE_FACILITY) {
@@ -116,20 +118,28 @@ static unsigned int createRTOSObjects() {
 	// Create the EEPROM address queue, and the EEPROM pending retrieval queue
 	eeprom_addr_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
 	eeprom_pending_queue = xQueueCreate(MAX_NUM_MSGS, sizeof(unsigned int));
-	if (eeprom_addr_queue == NULL || eeprom_pending_queue == NULL)
+	if (!eeprom_addr_queue || !eeprom_pending_queue)
 		return TRUE;	// Error creating the queue
+
+	return FALSE;
 } 
 
 // Create all FreeRTOS tasks needed for this project
-static unsigned int createTasks() {
+static unsigned int create_tasks() {
 	BaseType_t task_success;	// Whether the task creation was successful
 
 	// Create the CN ISR handler task
-	task_success = xTaskCreate(task_changeNoticeHandler, "CN ISR Handler Task",
+	task_success = xTaskCreate(task_change_notice_handler, "CN ISR Handler Task",
 		configMINIMAL_STACK_SIZE, NULL, CN_HANDLER_TASK_PRIORITY, NULL);
 	// Create the write-to-EEPROM task
-	task_success |= xTaskCreate(task_writeMessageEEPROM, "Writing to EEPROM Task",
+	task_success |= xTaskCreate(task_write_EEPROM, "Writing to EEPROM Task",
 		configMINIMAL_STACK_SIZE, NULL, EEPROM_WRITE_TASK_PRIORITY, NULL);
+	// Create the read-from-EEPROM task
+	task_success |= xTaskCreate(task_read_EEPROM, "Reading from EEPROM Task",
+		configMINIMAL_STACK_SIZE, NULL, EEPROM_READ_TASK_PRIORITY, NULL);
+	// Create the 1ms heartbeat task
+	task_success |= xTaskCreate(task_1ms_heartbeat, "1ms Heartbeat Task",
+		configMINIMAL_STACK_SIZE, NULL, HEARTBEAT_TASK_PRIORITY, NULL);
 	
 	// Error creating a task - return a failure
 	if (task_success != pdPASS)
@@ -140,7 +150,7 @@ static unsigned int createTasks() {
 
 // ISR for UART1 RX and TX
 // void __ISR(_UART1_VECTOR, IPL2SOFT) isr_uart1Handler() {
-void isr_uartRXHandler(void) {
+void isr_uart_RX_handler(void) {
 	// The RX and TX flags trigger the same interrupt vector
 	portBASE_TYPE move_to_higher_priority = pdFALSE;
 	if (INTGetFlag(INT_SOURCE_UART_RX(UART1))) {	// Was this specifically the RX flag?
@@ -179,7 +189,7 @@ void isr_uartRXHandler(void) {
 // This task is unblocked when the incoming UART message is finished
 // This task writes the message to the EEPROM then adds that memory location to the read queue
 // While the queue is being written to the EEPROM / reset, interrupts are disabled
-static void task_writeMessageEEPROM(void *task_params) {
+static void task_write_EEPROM(void *task_params) {
 	unsigned int i = 0; // Used for iterating over message buffer
 	portBASE_TYPE queue_status;
 	// Try and take the semaphore to start (no delay) in case it was given already
@@ -200,7 +210,7 @@ static void task_writeMessageEEPROM(void *task_params) {
 		unsigned int write_error = NO_ERR;
 		if (configUSE_TRACE_FACILITY)
 			vTracePrint(trace_write_msg_eeprom, "Writing to the EEPROM");
-		write_error = write_eeprom(EEPROM_SLAVE_ADDR, eeprom_write_addr, current_uart_input, UART_MAX_NUM_CHARS);
+		write_error = write_eeprom(EEPROM_SLAVE_ADDR, eeprom_write_addr, current_uart_input, UART_MAX_MSG_SIZE);
 		if (write_error && configUSE_TRACE_FACILITY)
 			vTracePrint(trace_write_msg_eeprom, "An error occurred while writing to the EEPROM");
 
@@ -213,10 +223,10 @@ static void task_writeMessageEEPROM(void *task_params) {
 
 		// Increase the memory address where we're currently writing to on the EEPROM - don't run over 'x' messages
 		eeprom_write_addr += message_length;
-		eeprom_write_addr %= UART_MAX_NUM_CHARS * MAX_NUM_MSGS;
+		eeprom_write_addr %= UART_MAX_MSG_SIZE * MAX_NUM_MSGS;
 
 		// Clear the message buffer - prevents long messages from being rewritten to the EEPROM
-		for (i = 0; i < UART_MAX_NUM_CHARS; i++)
+		for (i = 0; i < UART_MAX_MSG_SIZE; i++)
 			current_uart_input[i] = 0;
 
 		// Set LEDA to indicate a new message is ready
@@ -231,7 +241,7 @@ static void task_writeMessageEEPROM(void *task_params) {
 
 // This function is called when the CN ISR triggers
 // Clears the CN flag and gives a semaphore to unblock the handler task
-void isr_changeNoticeHandler(void) {
+void isr_change_notice_handler(void) {
 	// Flag for if returning to a higher priority task is necessary
 	portBASE_TYPE move_to_higher_priority = pdFALSE;
 	
@@ -250,7 +260,7 @@ void isr_changeNoticeHandler(void) {
 
 // This is the handler TASK that executes the CN code
 // -> Unblocks only from the CN ISR, adds to the pending queue
-static void task_changeNoticeHandler(void *task_params) {
+static void task_change_notice_handler(void *task_params) {
 	portBASE_TYPE queue_status;
 	// Try and take the semaphore to start (no delay) in case it was given
 	// before the task started
@@ -284,14 +294,15 @@ static void task_changeNoticeHandler(void *task_params) {
 
 // This task reads from the EEPROM
 // -> Only unblocked when the CN ISR gives a semaphore, AND the read queue has items in it
-static void task_readMessageEEPROM(void* task_params) {
+// maybe disable interrupts during the read? 
+static void task_read_EEPROM(void* task_params) {
 	portBASE_TYPE queue_status;
 	unsigned int eeprom_read_addr;	// The memory address to read from
-	unsigned int dummy_val;
+	unsigned int dummy_val, i, num_newlines;
 
 	for (;;) {
 		// Create empty message buffer
-		char eeprom_message[UART_MAX_NUM_CHARS] = {0};
+		char eeprom_message[UART_MAX_MSG_SIZE] = {0};
 
 		// Wait for item in pending queue - signifies a button press requested a new retrieval
 		xQueueReceive(eeprom_pending_queue, &dummy_val, portMAX_DELAY);
@@ -305,9 +316,23 @@ static void task_readMessageEEPROM(void* task_params) {
 			if (configUSE_TRACE_FACILITY)
 				vTracePrint(trace_read_eeprom, "Address received from address queue - reading from EEPROM");
 			unsigned int read_error = NO_ERR;	// Error status of I2C read
-			read_error = read_eeprom(EEPROM_SLAVE_ADDR, eeprom_read_addr, eeprom_message, UART_MAX_NUM_CHARS);
+			read_error = read_eeprom(EEPROM_SLAVE_ADDR, eeprom_read_addr, eeprom_message, UART_MAX_MSG_SIZE);
 			if (configUSE_TRACE_FACILITY && read_error)
 				vTracePrint(trace_read_eeprom, "Error occurred while reading from EEPROM");
+
+			// Format the string read from the EEPROM for writing to the LCD
+			num_newlines = format_message_LCD(eeprom_message, UART_MAX_MSG_SIZE, LCD_CHAR_WIDTH);
+			for (i = 0; i < num_newlines; i++)
+				eeprom_message[lcd_newline_pos[i]] = '\n';	// Place a '\n' in the correct position
+
+			// Write the newly formatted string to the LCD
+// maybe disable interrupts before LCD operation?
+			if (configUSE_TRACE_FACILITY)
+				vTracePrint(trace_read_eeprom, "Message formatted for LCD - Clearing display");	
+			reset_clear_LCD();	// Clear the LCD
+// maybe re-enable interrupts
+			vTaskDelay(MS_TO_TICKS(LCD_BLANK_PERIOD_MS));	// Blank the screen for the desired amount of time
+			set_cursor_LCD(SECOND_LINE_START);				// Start on the beginning of the second line
 		}
 		else {
 			// There was a request initiated, but no addresses to read from
@@ -317,15 +342,55 @@ static void task_readMessageEEPROM(void* task_params) {
 	}
 }
 
+// Task to toggle LEDC every 1ms
+static void task_1ms_heartbeat(void* task_params) {
+	for (;;) {
+		if (configUSE_TRACE_FACILITY) 
+			vTracePrint(trace_heartbeat, "Toggling LEDC");
+	
+		mPORTBToggleBits(LEDC); // Invert LEDC
+		taskYIELD();			// Move onto another task
+	}
+}
+
 /* --------------------------- 'Helper' Functions --------------------------- */
+
+// Adds to the list of LCD string positions where '\n' should be placed
+// Returns how many newlines are needed
+static unsigned int format_message_LCD(char* message, unsigned int max_message_length, unsigned int lcd_width) {
+	unsigned int last_space_pos = 0;	// Last location a space was found in the message
+	unsigned int curr_pos;				// Current position in message being looked at
+	unsigned int line_pos;				// Current position in the LCD line
+	unsigned int newline_count = 0;		// How many newlines have been added so far
+
+	// Loop through every character of the message
+	for (curr_pos = 0, line_pos = 0; curr_pos < max_message_length; curr_pos++, line_pos++) {
+		if (message[curr_pos] == '\0')	// Stop when we've reached the end of the message
+			break;
+
+		// Update last_space_pos if a new space or endline has been found
+		if (message[curr_pos] == ' ' || message[curr_pos] == '\r')
+			last_space_pos = curr_pos;
+
+		// If we've reached the end of the LCD line - reset line count, add space position to array
+		if (line_pos % (lcd_width + 1) == 0 && line_pos != 0) {
+			lcd_newline_pos[newline_count++]	// Add the position to the global array
+			curr_pos = last_space_pos;			// Re-evaluate the new line
+			line_pos = 0;						// Reset the line count
+		}
+	}
+
+	return newline_count;	// Return how many newlines need to be added
+}
 
 // Function to return how many characters are in the message buffer
 // -> Increments until the return or null character is found
 static unsigned int getMessageLength(char* message_buffer, unsigned int max_buffer_length) {
 	unsigned int current_size = 0; // Current size of the buffer
 	while (max_buffer_length--) {
-		if (message_buffer[current_size++] == '\r' || message_buffer[current_size] == '\0')
+		if (message_buffer[current_size] == '\r' || message_buffer[current_size] == '\0')
 			return current_size - 1;
+		current_size++;
 	}
 
 	return max_buffer_length;
@@ -335,11 +400,7 @@ static unsigned int getMessageLength(char* message_buffer, unsigned int max_buff
 
 // Tick hook task that toggles LEDC every 1ms 
 void vApplicationTickHook(void) {
-	// Note the LEDB toggle in TraceAlyzer
-	if (configUSE_TRACE_FACILITY) 
-		vTracePrint(trace_heartbeat, "Toggling LEDC");
 	
-	mPORTBToggleBits(LEDC); // Invert LEDC
 }
 
 // Idle task
