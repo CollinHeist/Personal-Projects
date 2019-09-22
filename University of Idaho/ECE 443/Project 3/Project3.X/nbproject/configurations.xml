@@ -29,13 +29,14 @@
       </logicalFolder>
       <itemPath>../main.c</itemPath>
       <itemPath>../chipKIT_PRO_MX7.c</itemPath>
-      <itemPath>../isr_wrapper.S</itemPath>
       <itemPath>U:/TraceRecorder/trcKernelPort.c</itemPath>
       <itemPath>U:/TraceRecorder/trcSnapshotRecorder.c</itemPath>
       <itemPath>U:/TraceRecorder/trcStreamingRecorder.c</itemPath>
       <itemPath>U:/ECE 443/Project 3/LCDlib.c</itemPath>
       <itemPath>U:/ECE 443/Project 3/comm.c</itemPath>
       <itemPath>U:/ECE 443/Project 3/I2C_EEPROM_LIB.c</itemPath>
+      <itemPath>U:/ECE 443/Project 3/cn_isr_wrapper.S</itemPath>
+      <itemPath>U:/ECE 443/Project 3/uartRX_isr_wrapper.S</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

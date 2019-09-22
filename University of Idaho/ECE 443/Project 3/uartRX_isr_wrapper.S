@@ -21,7 +21,7 @@ implementation of the portSAVE_CONTEXT and portRESTORE_CONTEXT macros. */
 	Making the wrapper visible from C files means the C compiler key word
 	extensions can be used to populate the interrupt vector table.  See main.c
 	for an example. */
- 	.global	isr_change_notice_wrapper
+ 	.global		isr_uart_RX_wrapper
 
 	.set		noreorder
 	.set 		noat

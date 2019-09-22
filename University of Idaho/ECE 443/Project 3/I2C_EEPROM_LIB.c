@@ -1,6 +1,6 @@
 #include <plib.h>
 
-#include "CerebotMX7cK.h"
+#include "chipKIT_PRO_MX7.h"
 #include "I2C_EEPROM_LIB.h"
 
 // Initialize the I2C2 peripheral for interacting with the EEPROM
@@ -10,7 +10,7 @@ void init_eeprom() {
 }
 
 int is_multiple(int value, int multiple) {
-	return (value % multiple ? FALSE : TRUE)
+	return (value % multiple ? FALSE : TRUE);
 }
 
 // Read the specified number of bytes from the device with the provided

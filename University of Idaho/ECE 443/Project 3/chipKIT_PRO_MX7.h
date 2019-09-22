@@ -49,7 +49,9 @@
     #define GetSystemClock()        (80000000ul)	/* Hz */
     #define GetCoreClock()          (GetSystemClock()/2)
     #define GetPeripheralClock()    (GetSystemClock()/8)
-    #define SYSTEM_FREQ GetSystemClock()
+    #define SYSTEM_FREQ             GetSystemClock()
+
+    #define FPB                     GetPeripheralClock()
 
     #define CORE_MS_TICK_RATE	GetCoreClock()/1000
 

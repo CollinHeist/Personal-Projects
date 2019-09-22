@@ -1,7 +1,7 @@
 #include <plib.h>
 #include <stdio.h>			  /* Required for printf */
 #include "comm.h"
-#include "CerebotMX7cK.h"		/* Has info regarding the PB clock */
+#include "chipKIT_PRO_MX7.h"		/* Has info regarding the PB clock */
 
 /* initialize_comm FUNCTION DESCRIPTION *************************************
  * SYNTAX:		  void initialize_comm(unsigned int baud, int parity);

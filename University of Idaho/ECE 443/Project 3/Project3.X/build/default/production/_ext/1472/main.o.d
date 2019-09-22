@@ -20,4 +20,7 @@ build/default/production/_ext/1472/main.o:  \
 ../../../source/include/semphr.h  \
  ../../../source/include/queue.h  \
 ../chipKIT_Pro_MX7.h  \
-../main.h 
+../main.h  \
+ ../LCDlib.h  \
+../comm.h  \
+../I2C_EEPROM_LIB.h 

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../../Source/list.c ../../../Source/tasks.c ../../../Source/portable/MPLAB/PIC32MX/port.c ../../../Source/portable/MPLAB/PIC32MX/port_asm.S ../../../Source/portable/MemMang/heap_2.c ../../../Source/queue.c ../main.c ../chipKIT_PRO_MX7.c ../isr_wrapper.S U:/TraceRecorder/trcKernelPort.c U:/TraceRecorder/trcSnapshotRecorder.c U:/TraceRecorder/trcStreamingRecorder.c "U:/ECE 443/Project 3/LCDlib.c" "U:/ECE 443/Project 3/comm.c" "U:/ECE 443/Project 3/I2C_EEPROM_LIB.c"
+SOURCEFILES_QUOTED_IF_SPACED=../../../Source/list.c ../../../Source/tasks.c ../../../Source/portable/MPLAB/PIC32MX/port.c ../../../Source/portable/MPLAB/PIC32MX/port_asm.S ../../../Source/portable/MemMang/heap_2.c ../../../Source/queue.c ../main.c ../chipKIT_PRO_MX7.c U:/TraceRecorder/trcKernelPort.c U:/TraceRecorder/trcSnapshotRecorder.c U:/TraceRecorder/trcStreamingRecorder.c "U:/ECE 443/Project 3/LCDlib.c" "U:/ECE 443/Project 3/comm.c" "U:/ECE 443/Project 3/I2C_EEPROM_LIB.c" "U:/ECE 443/Project 3/cn_isr_wrapper.S" "U:/ECE 443/Project 3/uartRX_isr_wrapper.S"
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/449926602/list.o ${OBJECTDIR}/_ext/449926602/tasks.o ${OBJECTDIR}/_ext/332309696/port.o ${OBJECTDIR}/_ext/332309696/port_asm.o ${OBJECTDIR}/_ext/1884096877/heap_2.o ${OBJECTDIR}/_ext/449926602/queue.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/1472/chipKIT_PRO_MX7.o ${OBJECTDIR}/_ext/1472/isr_wrapper.o ${OBJECTDIR}/_ext/871457993/trcKernelPort.o ${OBJECTDIR}/_ext/871457993/trcSnapshotRecorder.o ${OBJECTDIR}/_ext/871457993/trcStreamingRecorder.o ${OBJECTDIR}/_ext/1661472573/LCDlib.o ${OBJECTDIR}/_ext/1661472573/comm.o ${OBJECTDIR}/_ext/1661472573/I2C_EEPROM_LIB.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/449926602/list.o.d ${OBJECTDIR}/_ext/449926602/tasks.o.d ${OBJECTDIR}/_ext/332309696/port.o.d ${OBJECTDIR}/_ext/332309696/port_asm.o.d ${OBJECTDIR}/_ext/1884096877/heap_2.o.d ${OBJECTDIR}/_ext/449926602/queue.o.d ${OBJECTDIR}/_ext/1472/main.o.d ${OBJECTDIR}/_ext/1472/chipKIT_PRO_MX7.o.d ${OBJECTDIR}/_ext/1472/isr_wrapper.o.d ${OBJECTDIR}/_ext/871457993/trcKernelPort.o.d ${OBJECTDIR}/_ext/871457993/trcSnapshotRecorder.o.d ${OBJECTDIR}/_ext/871457993/trcStreamingRecorder.o.d ${OBJECTDIR}/_ext/1661472573/LCDlib.o.d ${OBJECTDIR}/_ext/1661472573/comm.o.d ${OBJECTDIR}/_ext/1661472573/I2C_EEPROM_LIB.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/449926602/list.o ${OBJECTDIR}/_ext/449926602/tasks.o ${OBJECTDIR}/_ext/332309696/port.o ${OBJECTDIR}/_ext/332309696/port_asm.o ${OBJECTDIR}/_ext/1884096877/heap_2.o ${OBJECTDIR}/_ext/449926602/queue.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/1472/chipKIT_PRO_MX7.o ${OBJECTDIR}/_ext/871457993/trcKernelPort.o ${OBJECTDIR}/_ext/871457993/trcSnapshotRecorder.o ${OBJECTDIR}/_ext/871457993/trcStreamingRecorder.o ${OBJECTDIR}/_ext/1661472573/LCDlib.o ${OBJECTDIR}/_ext/1661472573/comm.o ${OBJECTDIR}/_ext/1661472573/I2C_EEPROM_LIB.o ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/449926602/list.o.d ${OBJECTDIR}/_ext/449926602/tasks.o.d ${OBJECTDIR}/_ext/332309696/port.o.d ${OBJECTDIR}/_ext/332309696/port_asm.o.d ${OBJECTDIR}/_ext/1884096877/heap_2.o.d ${OBJECTDIR}/_ext/449926602/queue.o.d ${OBJECTDIR}/_ext/1472/main.o.d ${OBJECTDIR}/_ext/1472/chipKIT_PRO_MX7.o.d ${OBJECTDIR}/_ext/871457993/trcKernelPort.o.d ${OBJECTDIR}/_ext/871457993/trcSnapshotRecorder.o.d ${OBJECTDIR}/_ext/871457993/trcStreamingRecorder.o.d ${OBJECTDIR}/_ext/1661472573/LCDlib.o.d ${OBJECTDIR}/_ext/1661472573/comm.o.d ${OBJECTDIR}/_ext/1661472573/I2C_EEPROM_LIB.o.d ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.d ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/449926602/list.o ${OBJECTDIR}/_ext/449926602/tasks.o ${OBJECTDIR}/_ext/332309696/port.o ${OBJECTDIR}/_ext/332309696/port_asm.o ${OBJECTDIR}/_ext/1884096877/heap_2.o ${OBJECTDIR}/_ext/449926602/queue.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/1472/chipKIT_PRO_MX7.o ${OBJECTDIR}/_ext/1472/isr_wrapper.o ${OBJECTDIR}/_ext/871457993/trcKernelPort.o ${OBJECTDIR}/_ext/871457993/trcSnapshotRecorder.o ${OBJECTDIR}/_ext/871457993/trcStreamingRecorder.o ${OBJECTDIR}/_ext/1661472573/LCDlib.o ${OBJECTDIR}/_ext/1661472573/comm.o ${OBJECTDIR}/_ext/1661472573/I2C_EEPROM_LIB.o
+OBJECTFILES=${OBJECTDIR}/_ext/449926602/list.o ${OBJECTDIR}/_ext/449926602/tasks.o ${OBJECTDIR}/_ext/332309696/port.o ${OBJECTDIR}/_ext/332309696/port_asm.o ${OBJECTDIR}/_ext/1884096877/heap_2.o ${OBJECTDIR}/_ext/449926602/queue.o ${OBJECTDIR}/_ext/1472/main.o ${OBJECTDIR}/_ext/1472/chipKIT_PRO_MX7.o ${OBJECTDIR}/_ext/871457993/trcKernelPort.o ${OBJECTDIR}/_ext/871457993/trcSnapshotRecorder.o ${OBJECTDIR}/_ext/871457993/trcStreamingRecorder.o ${OBJECTDIR}/_ext/1661472573/LCDlib.o ${OBJECTDIR}/_ext/1661472573/comm.o ${OBJECTDIR}/_ext/1661472573/I2C_EEPROM_LIB.o ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o
 
 # Source Files
-SOURCEFILES=../../../Source/list.c ../../../Source/tasks.c ../../../Source/portable/MPLAB/PIC32MX/port.c ../../../Source/portable/MPLAB/PIC32MX/port_asm.S ../../../Source/portable/MemMang/heap_2.c ../../../Source/queue.c ../main.c ../chipKIT_PRO_MX7.c ../isr_wrapper.S U:/TraceRecorder/trcKernelPort.c U:/TraceRecorder/trcSnapshotRecorder.c U:/TraceRecorder/trcStreamingRecorder.c U:/ECE 443/Project 3/LCDlib.c U:/ECE 443/Project 3/comm.c U:/ECE 443/Project 3/I2C_EEPROM_LIB.c
+SOURCEFILES=../../../Source/list.c ../../../Source/tasks.c ../../../Source/portable/MPLAB/PIC32MX/port.c ../../../Source/portable/MPLAB/PIC32MX/port_asm.S ../../../Source/portable/MemMang/heap_2.c ../../../Source/queue.c ../main.c ../chipKIT_PRO_MX7.c U:/TraceRecorder/trcKernelPort.c U:/TraceRecorder/trcSnapshotRecorder.c U:/TraceRecorder/trcStreamingRecorder.c U:/ECE 443/Project 3/LCDlib.c U:/ECE 443/Project 3/comm.c U:/ECE 443/Project 3/I2C_EEPROM_LIB.c U:/ECE 443/Project 3/cn_isr_wrapper.S U:/ECE 443/Project 3/uartRX_isr_wrapper.S
 
 
 CFLAGS=
@@ -107,12 +107,19 @@ ${OBJECTDIR}/_ext/332309696/port_asm.o: ../../../Source/portable/MPLAB/PIC32MX/p
 	@${RM} ${OBJECTDIR}/_ext/332309696/port_asm.o.ok ${OBJECTDIR}/_ext/332309696/port_asm.o.err 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/332309696/port_asm.o.d" "${OBJECTDIR}/_ext/332309696/port_asm.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/332309696/port_asm.o.d"  -o ${OBJECTDIR}/_ext/332309696/port_asm.o ../../../Source/portable/MPLAB/PIC32MX/port_asm.S  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/332309696/port_asm.o.asm.d",--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--gdwarf-2,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
 	
-${OBJECTDIR}/_ext/1472/isr_wrapper.o: ../isr_wrapper.S  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
-	@${RM} ${OBJECTDIR}/_ext/1472/isr_wrapper.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1472/isr_wrapper.o 
-	@${RM} ${OBJECTDIR}/_ext/1472/isr_wrapper.o.ok ${OBJECTDIR}/_ext/1472/isr_wrapper.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/isr_wrapper.o.d" "${OBJECTDIR}/_ext/1472/isr_wrapper.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/1472/isr_wrapper.o.d"  -o ${OBJECTDIR}/_ext/1472/isr_wrapper.o ../isr_wrapper.S  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/1472/isr_wrapper.o.asm.d",--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--gdwarf-2,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
+${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o: U:/ECE\ 443/Project\ 3/cn_isr_wrapper.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1661472573" 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.ok ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.err 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.d" "${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.d"  -o ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o "U:/ECE 443/Project 3/cn_isr_wrapper.S"  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.asm.d",--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--gdwarf-2,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
+	
+${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o: U:/ECE\ 443/Project\ 3/uartRX_isr_wrapper.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1661472573" 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.ok ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.err 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.d" "${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.d"  -o ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o "U:/ECE 443/Project 3/uartRX_isr_wrapper.S"  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.asm.d",--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--gdwarf-2,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_PK3=1,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
 	
 else
 ${OBJECTDIR}/_ext/332309696/port_asm.o: ../../../Source/portable/MPLAB/PIC32MX/port_asm.S  nbproject/Makefile-${CND_CONF}.mk
@@ -122,12 +129,19 @@ ${OBJECTDIR}/_ext/332309696/port_asm.o: ../../../Source/portable/MPLAB/PIC32MX/p
 	@${RM} ${OBJECTDIR}/_ext/332309696/port_asm.o.ok ${OBJECTDIR}/_ext/332309696/port_asm.o.err 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/332309696/port_asm.o.d" "${OBJECTDIR}/_ext/332309696/port_asm.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/332309696/port_asm.o.d"  -o ${OBJECTDIR}/_ext/332309696/port_asm.o ../../../Source/portable/MPLAB/PIC32MX/port_asm.S  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/332309696/port_asm.o.asm.d",--gdwarf-2,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
 	
-${OBJECTDIR}/_ext/1472/isr_wrapper.o: ../isr_wrapper.S  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1472" 
-	@${RM} ${OBJECTDIR}/_ext/1472/isr_wrapper.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1472/isr_wrapper.o 
-	@${RM} ${OBJECTDIR}/_ext/1472/isr_wrapper.o.ok ${OBJECTDIR}/_ext/1472/isr_wrapper.o.err 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1472/isr_wrapper.o.d" "${OBJECTDIR}/_ext/1472/isr_wrapper.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/1472/isr_wrapper.o.d"  -o ${OBJECTDIR}/_ext/1472/isr_wrapper.o ../isr_wrapper.S  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/1472/isr_wrapper.o.asm.d",--gdwarf-2,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
+${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o: U:/ECE\ 443/Project\ 3/cn_isr_wrapper.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1661472573" 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.ok ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.err 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.d" "${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.d"  -o ${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o "U:/ECE 443/Project 3/cn_isr_wrapper.S"  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/1661472573/cn_isr_wrapper.o.asm.d",--gdwarf-2,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
+	
+${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o: U:/ECE\ 443/Project\ 3/uartRX_isr_wrapper.S  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1661472573" 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o 
+	@${RM} ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.ok ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.err 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.d" "${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.asm.d" -t $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC} $(MP_EXTRA_AS_PRE)  -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"../../common/include" -I"../../../Source/include" -I"../../../Source/portable/mplab/pic32mx" -I".." -MMD -MF "${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.d"  -o ${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o "U:/ECE 443/Project 3/uartRX_isr_wrapper.S"  -DXPRJ_default=$(CND_CONF)    -Wa,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_AS_POST),-MD="${OBJECTDIR}/_ext/1661472573/uartRX_isr_wrapper.o.asm.d",--gdwarf-2,-I"../../../Source/portable/mplab/pic32mx" -I".." -gdwarf-2
 	
 endif
 

@@ -85,7 +85,7 @@ unsigned int read_LCD(int address) {
 }
 
 // Software delay for the appropriate number of milliseconds
-void sw_delay_ms(unsigned int mS) {
+static void sw_delay_ms(unsigned int mS) {
 	int i;
 	while (mS--) {
 		for (i = 0; i < COUNTS_PER_MS; i++);
