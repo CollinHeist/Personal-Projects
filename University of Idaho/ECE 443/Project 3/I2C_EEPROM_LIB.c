@@ -1,9 +1,8 @@
 #include <plib.h>
-
-#include "chipKIT_PRO_MX7.h"
+#include "chipKIT_Pro_MX7.h"
 #include "I2C_EEPROM_LIB.h"
 
-// Initialize the I2C2 peripheral for interacting with the EEPROM
+// Initialzie the I2C2 peripheral for interacting with the EEPROM
 void init_eeprom() {
 	OpenI2C2(I2C_EN, BRG_VAL);
 	IdleI2C2();
@@ -55,16 +54,17 @@ int write_eeprom(int slave_addr, int mem_addr, char* i2c_data, int length) {
 	if (!length)
 		return ERR_ZERO_LENGTH;
 
-	if (mem_addr + length > EEPROM_MAX_MEM_ADDR || mem_addr < 0)
+	if (mem_addr + length > 0x7FFF || mem_addr < 0)
 		return ERR_INVALID_MEM_ADDR;
 
 	int index = 0;
 	int i2c_error = 0;
 
-	StartI2C2();
+    StartI2C2();
 	IdleI2C2();
+    i2c_error |= send_control_byte(slave_addr, mem_addr, WRITE);
 	while (length--) {
-		if (is_multiple(mem_addr + index, PAGE_LEN)) {
+		if (is_multiple(mem_addr + index, PAGE_LEN) && (mem_addr + index != 0)) {
 			StopI2C2();
 			IdleI2C2();
 			poll_eeprom(slave_addr);
