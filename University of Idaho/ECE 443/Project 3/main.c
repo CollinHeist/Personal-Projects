@@ -193,10 +193,10 @@ static void task_write_EEPROM(void *task_params) {
 			vTracePrint(trace_write_msg_eeprom, "Received the semaphore");
 
 		// See if there is room to write the message
-		if (uxQueueMessagesWaiting(eeprom_addr_queue) == MAX_NUM_MSGS) {
+		if (uxQueueMessagesWaiting(eeprom_addr_queue) >= MAX_NUM_MSGS) {
 			// The queue is full, the message CANNOT be written
 			if (configUSE_TRACE_FACILITY) {
-				vTracePrint(trace_write_msg_eeprom, "Error adding to read Queue: Queue full");
+				vTracePrint(trace_write_msg_eeprom, "Cannot write message - Queue full");
 				Nop();
 			}
 		}
@@ -397,7 +397,7 @@ void format_message_LCD(char* message, unsigned int max_message_length, unsigned
 			last_space_pos = curr_pos;
 
 		// If we've reached the end of the LCD line - reset line count, change ' ' to '\n'
-		if (line_pos % lcd_width == 0 && line_pos != 0) {
+		if (line_pos % (lcd_width+1) == 0 && line_pos != 0) {
 			message[last_space_pos] = '\n';		// Replace the last space with newline
 			curr_pos = last_space_pos;			// Re-evaluate stating at newlines
 			line_pos = 0;						// Reset the line position counter
