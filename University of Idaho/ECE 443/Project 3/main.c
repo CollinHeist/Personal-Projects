@@ -31,7 +31,6 @@ xQueueHandle eeprom_addr_queue;			// Queue of addresses the EEPROM needs to read
 xQueueHandle eeprom_pending_queue;		// Queue of pending retrievals to send to the LCD
 
 unsigned int previous_btn1_status;		// Previous status of BTN1 - used to detect a PRESS
-unsigned int eeprom_write_addr;			// Current address in EEPROM memory we are writing to
 
 char uart_input[UART_MAX_MSG_SIZE+1];	// Character string of the current UART input + space for '\0'
 
@@ -180,7 +179,8 @@ void isr_uart_RX_handler(void) {
 // This task is unblocked when the incoming UART message is finished
 // This task writes the message to the EEPROM then adds that memory location to the read queue
 static void task_write_EEPROM(void *task_params) {
-	unsigned int i = 0; // Used for iterating over message buffer
+	unsigned int i = 0; 						// Used for iterating over message buffer
+	static unsigned int eeprom_write_addr = 0;	// Current location in EEPROM memory being written to
 	portBASE_TYPE queue_status;
 	
 	// Try and take the semaphore to start (no delay) in case it was given already
