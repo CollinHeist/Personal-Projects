@@ -13,14 +13,16 @@
 	// Values of RS pin to access each register
 	#define LCD_RS_CMD		0
 	#define LCD_RS_DATA		1
+
+	// Function Prototypes
+	void initialize_LCD();
+	void put_string_LCD(char *char_string);
+	void put_char_LCD(char c);
+	static void _write_LCD(int reg, char c);
+	void set_cursor_LCD(unsigned int address);
+	void reset_clear_LCD();
+	unsigned int read_LCD(int address);
+	static void sw_delay_ms(unsigned int ms);
+	static void sw_delay_us(unsigned int us);
 #endif
 
-// Function Prototypes
-void initialize_LCD();
-void put_string_LCD(char *char_string);
-void put_char_LCD(char c);
-static void _write_LCD(int reg, char c);
-void set_cursor_LCD(unsigned int address);
-void reset_clear_LCD();
-unsigned int read_LCD(int address);
-static void sw_delay_ms(unsigned int mS);

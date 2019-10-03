@@ -1,14 +1,14 @@
 #ifndef __chipKIT_PRO_MX7_H__
     #define __chipKIT_PRO_MX7_H__
 
-    #define BTN1	BIT_6		/* Port G */
-    #define BTN2	BIT_7		/* Port G */
-    #define BTN3	BIT_0		/* Port A */
+    #define BTN1		BIT_6		/* Port G */
+    #define BTN2		BIT_7		/* Port G */
+    #define BTN3		BIT_0		/* Port A */
 
-    #define LED1	BIT_12		/* Port G */
-    #define LED2	BIT_13		/* Port G */
-    #define LED3	BIT_14		/* Port G */
-    #define LED4	BIT_15		/* Port G */
+    #define LED1		BIT_12		/* Port G */
+    #define LED2		BIT_13		/* Port G */
+    #define LED3		BIT_14		/* Port G */
+    #define LED4		BIT_15		/* Port G */
     #define BRD_LEDS	(LED1 | LED2 | LED3 | LED4)
 
     #define LED1_IO(a)  LATG.LATG12 = a
@@ -29,23 +29,23 @@
  * motor driver board that is commonly used for instrumentation and output
  * indication */
 
-    #define LEDA	BIT_2		/*  Port B */
-    #define LEDB	BIT_3		/*  Port B */
-    #define LEDC	BIT_4		/*  Port B */
-    #define LEDD	BIT_6		/*  Port B */
-    #define LEDE	BIT_7		/*  Port B */
-    #define LEDF	BIT_8		/*  Port B */
-    #define LEDG	BIT_9		/*  Port B */
-    #define LEDH	BIT_10		/*  Port B */
-    #define SM1		LEDE
-    #define SM2		LEDF
-    #define SM3		LEDG
-    #define SM4		LEDH
+    #define LEDA		BIT_2		/*  Port B */
+    #define LEDB		BIT_3		/*  Port B */
+    #define LEDC		BIT_4		/*  Port B */
+    #define LEDD		BIT_6		/*  Port B */
+    #define LEDE		BIT_7		/*  Port B */
+    #define LEDF		BIT_8		/*  Port B */
+    #define LEDG		BIT_9		/*  Port B */
+    #define LEDH		BIT_10		/*  Port B */
+    #define SM1			LEDE
+    #define SM2			LEDF
+    #define SM3			LEDG
+    #define SM4			LEDH
 
     #define SM_LEDS	(LEDA | LEDB | LEDC | LEDD | LEDE | LEDF | LEDG | LEDH)
     #define SM_COILS    ( LEDE | LEDF | LEDG | LEDH)
 
-    #define XTAL	(8000000UL) /* 8 MHz Xtal on chipKIT PRO MX7 */
+    #define XTAL					(8000000UL) /* 8 MHz Xtal on chipKIT PRO MX7 */
     #define GetSystemClock()        (80000000ul)	/* Hz */
     #define GetCoreClock()          (GetSystemClock()/2)
     #define GetPeripheralClock()    (GetSystemClock()/8)
@@ -53,8 +53,9 @@
 
     #define FPB                     GetPeripheralClock()
 
-    #define CORE_MS_TICK_RATE	GetCoreClock()/1000
+    #define CORE_MS_TICK_RATE		GetCoreClock()/1000
 
+	// Function Prototypes
+	void chipKIT_PRO_MX7_Setup(void);
 #endif
 
-void chipKIT_PRO_MX7_Setup(void);

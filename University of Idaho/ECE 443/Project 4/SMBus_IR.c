@@ -28,11 +28,11 @@ float read_ir_temp(void) {
      *  Start a read by WRITING and selecting the temperature address, and then 
      *  RESTARTING and sending a read bit. What follows will be the temp + pec.
      **/
-    MasterWriteI2C1(SLAVE_ADDR << 1 | WRITE);   /// Send the slave address and a WRITE bit
-    MasterWriteI2C1(T_OBJ_ADDR);                /// Read from the T1 address register
+    wait_for_ack(SLAVE_ADDR << 1 | WRITE);
+    wait_for_ack(T_OBJ_ADDR);
     RestartI2C1();                              /// Send a ReSTART
     IdleI2C1();
-    MasterWriteI2C1(SLAVE_ADDR << 1 | READ);    /// Resend the slave address w/ a READ bit now
+    wait_for_ack(SLAVE_ADDR << 1 | READ);
     
     int length = 3;                             /// We'll be reading three I2C bytes
     int index = 0;
@@ -54,4 +54,22 @@ float read_ir_temp(void) {
     
     /// Return the temperature in degC
     return (KELVIN_TO_CELSIUS(((float)raw_temp) * IR_SENSOR_RES));
+}
+
+/**	
+ *  @brief  Write to I2C1, resending the data until an ACK is received 
+ *  @param  (unsigned int) The I2C data byte being sent to I2C1.
+ *  @return None.
+ **/
+static void wait_for_ack(unsigned int data_byte) {
+    /// Resend the data byte until an acknowledge is received
+    int tries = ATTEMPT_COUNT;
+    while (tries--) {
+        MasterWriteI2C1(data_byte);
+        IdleI2C1();
+        
+        /// ACKSTAT is 0 when the slave acknowledges 
+        if (!I2C1STATbits.ACKSTAT)
+            break;
+    }
 }
