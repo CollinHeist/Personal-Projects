@@ -2,7 +2,7 @@
 	#define __LCDLIB_H__
 
 	// Used by the software delay
-	#define COUNTS_PER_MS   	8890
+	#define COUNTS_PER_MS		8890
 
 	// Macros for LCD line positioning
 	#define FIRST_LINE_START	0x0000
@@ -11,8 +11,8 @@
 	#define SECOND_LINE_END		0x004F
 
 	// Values of RS pin to access each register
-	#define LCD_RS_CMD		0
-	#define LCD_RS_DATA		1
+	#define LCD_RS_CMD			0
+	#define LCD_RS_DATA			1
 
 	// Function Prototypes
 	void initialize_LCD();
@@ -25,4 +25,3 @@
 	static void sw_delay_ms(unsigned int ms);
 	static void sw_delay_us(unsigned int us);
 #endif
-
