@@ -5,8 +5,9 @@
  *	@author	Collin Heist
  **/
 
-// ----------------------------- Included Files -----------------------------
-//
+/* ----------------------------- Included Files ----------------------------- */
+// Hardware dependent setting
+#include "chipKIT_Pro_MX7.h"
 #include <plib.h>
 
 // FreeRTOS includes
@@ -16,31 +17,34 @@
 #include "queue.h"			// Queues
 #include "semphr.h"			// Semaphore
 
-// Hardware dependent setting
-//
-#include "chipKIT_Pro_MX7.h"
-
 // File-Header includes
 #include "main.h"
 #include "LCDlib.h"
 #include "SMBus_IR.h"
 
-// --------------------------- Function Prototypes --------------------------
+/* -------------------------- Function Prototypes --------------------------- */
 // CN ISR for button presses - Directly calls wrapper function
 void __ISR(_CHANGE_NOTICE_VECTOR, IPL2) isr_change_notice_wrapper(void);
+static void initialize_hardware();
+static unsigned int create_RTOS_objects();
+static unsigned int create_tasks();
+static void task_cn_generator(void* task_params);
+static void task_change_notice_handler(void* task_params);
+static void task_display_lcd(void* task_params);
+static void task_leda_toggle(void* task_params);
 
 /* ---------------------------- Global Variables ---------------------------- */
-xSemaphoreHandle cn_semaphore;		//< Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
+xSemaphoreHandle cn_semaphore;		// Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
 
-xQueueHandle lcd_string_queue;		//< Queue that contains pointer to string to display on LCD
+xQueueHandle lcd_string_queue;		// Queue that contains pointer to string to display on LCD
 
 #if (configUSE_TRACE_FACILITY == 1)
-	traceString trace_cn;			//< TraceAlyzer channel for logging change notice events
-	traceString trace_lcd;			//< TraceAlyzer channel for logging LCD events
-	traceString trace_leda_toggle;	//< TraceAlyzer channel for logging the 3ms toggle of LEDA
+	traceString trace_cn;			// TraceAlyzer channel for logging change notice events
+	traceString trace_lcd;			// TraceAlyzer channel for logging LCD events
+	traceString trace_leda_toggle;	// TraceAlyzer channel for logging the 3ms toggle of LEDA
 #endif
 
-// ------------------------------ Main Program ------------------------------
+/* ------------------------------ Main Program ------------------------------ */
 int main() {
 	// Initialize and configure the hardware
 	initialize_hardware();
@@ -61,16 +65,16 @@ int main() {
 	return 0;
 }
 
-// ------------------------ Initialization Functions ------------------------
-/*!	
- * @brief	Initialize the hardware resources required for this project.
- * @param	None.
- * @return	None.
+/* ------------------------ Initialization Functions ------------------------ */
+
+/**
+ *	@brief	Initialize the hardware / modules required for this project.
+ *	@return	None.
  */
 static void initialize_hardware() {
-	chipKIT_PRO_MX7_Setup();	//< Set up board
-	initialize_LCD();			//< Initialize the LCD
-	initialize_ir_sensor();		//< Initialize the IR Sensor
+	chipKIT_PRO_MX7_Setup();	// Set up board
+	initialize_LCD();			// Initialize the LCD
+	initialize_ir_sensor();		// Initialize the IR Sensor
 
 	// Set up LEDs
 	PORTSetPinsDigitalOut(IOPORT_B, SM_LEDS);
@@ -88,9 +92,8 @@ static void initialize_hardware() {
 	INTEnableSystemMultiVectoredInt();
 }
 
-/*!
+/**
  *	@brief	Create all the FreeRTOS objects for this project.
- *	@param	None.
  *	@return	Boolean flag (TRUE or FALSE) if there was an error or not.
  */
 static unsigned int create_RTOS_objects() {
@@ -115,9 +118,8 @@ static unsigned int create_RTOS_objects() {
 	return FALSE;
 }
 
-/*!
+/**
  *	@brief	Create all the FreeRTOS tasks for this project.
- *	@param	None.
  *	@return	Boolean flag (TRUE or FALSE) if there was an error or not.
  */
 static unsigned int create_tasks() {
@@ -145,9 +147,9 @@ static unsigned int create_tasks() {
 
 /* --------------------------- 'Normal' Functions --------------------------- */
 
-/*!
+/**
  *	@brief		FreeRTOS task that generates a CN interrupt every 5 milliseconds.
- *	@param[in]	Void Pointer that contains the parameters for this task - not used.
+ *	@param[in]	task_params		Contains the parameters for this task - not used.
  *	@return		None.
  */
 static void task_cn_generator(void* task_params) {
@@ -159,12 +161,11 @@ static void task_cn_generator(void* task_params) {
 	}
 }
 
-/*!
+/**
  *	@brief	Change Notice ISR wrapper. Unblocks the CN handler task.
- *	@param	None.
  *	@return	None.
  */
-void isr_change_notice_handler(void) {
+void isr_change_notice_handler() {
 	// Flag for if returning to a higher priority task is necessary
 	portBASE_TYPE move_to_higher_priority = pdFALSE;
 
@@ -181,10 +182,10 @@ void isr_change_notice_handler(void) {
 	portEND_SWITCHING_ISR(move_to_higher_priority);
 }
 
-/*!
- *	@brief	Change Notice Handler task. Reads the object temperature, loads string pointer into the queue.
- *	@param[in]	(void*) that contains the parameters for this task - not used.
- *	@return	None.
+/**
+ *	@brief		Change Notice Handler task. Reads the object temperature, loads string pointer into the queue.
+ *	@param[in]	task_params		Contains the parameters for this task - not used.
+ *	@return		None.
  */
 static void task_change_notice_handler(void* task_params) {
 	float temp = 0.0;						//< Current temperature as read by the IR Sensor
@@ -220,9 +221,9 @@ static void task_change_notice_handler(void* task_params) {
 }
 
 /*!
- *	@brief	Task that displays a message on the LCD.
- *	@param[in]	(void*) that contains the parameters for this task - not used.
- *	@return	None.
+ *	@brief		Task that displays a message on the LCD.
+ *	@param[in]	task_params		Contains the parameters for this task - not used.
+ *	@return		None.
  */
 static void task_display_lcd(void* task_params) {
 	char lcd_message[LCD_WIDTH+1] = {0};	//< String to contain the formatted LCD message
@@ -245,9 +246,9 @@ static void task_display_lcd(void* task_params) {
 	}
 }
 
-/*!
+/**
  *	@brief		Task to toggle LEDA every 3 milliseconds.
- *	@param[in]	(void*) that contains the parameters for this task - not used.
+ *	@param[in]	task_params that contains the parameters for this task - not used.
  *	@return		None.
  */
 static void task_leda_toggle(void* task_params) {
@@ -267,22 +268,34 @@ static void task_leda_toggle(void* task_params) {
 
 /* --------------------- FreeRTOS Functional Functions ---------------------- */
 
-// Tick hook task
+/**
+ *	@brief	Tick Hook function that is called on task switches.
+ *	@return	None.
+ */
 void vApplicationTickHook(void) {
 	
 }
 
-// Idle task
+/**
+ *	@brief	Idle hook function that operates when no tasks are running.
+ *	@return	None.
+ */
 void vApplicationIdleHook(void) {
 
 }
 
-// Function that is called whenever a stack overflows
+/**
+ *	@brief	Function that is called whenever a stack overflows
+ */
 void vApplicationStackOverflowHook() {
 	for(;;) {}
 }
 
-// Generic exception handler
+/**
+ *	@brief		Generic exception handler - Called when an error occurs during runtime.
+ *	@param[in]	ulCause		The cause of the error.
+ *	@param[in]	ulStatus 	The status of the error.
+ */
 void _general_exception_handler(unsigned long ulCause, unsigned long ulStatus) {
 	for(;;) {}
 }
