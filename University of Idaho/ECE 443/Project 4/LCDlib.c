@@ -60,7 +60,7 @@ void put_char_LCD(char c) {
 static void _write_LCD(int reg, char c) {
 	while (read_LCD(LCD_RS_CMD) & 0x0080);
 	PMPSetAddress(reg);
-	sw_delay_us(50);
+	sw_delay_us(25);
 	PMPMasterWrite(c);
 	sw_delay_us(50);
 }

@@ -58,7 +58,7 @@ float read_ir_temp(void) {
 		return ERROR_TEMP;
 	
 	/// Return the temperature in degC
-	return (KELVIN_TO_CELSIUS(((float)raw_temp) * IR_SENSOR_RES));
+	return (CELCIUS_TO_FARENHEIT(KELVIN_TO_CELSIUS(((float)raw_temp) * IR_SENSOR_RES)));
 }
 
 /**	
