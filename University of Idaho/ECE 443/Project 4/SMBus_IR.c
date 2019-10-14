@@ -23,7 +23,7 @@ void initialize_ir_sensor(void) {
  *	@return	(Float) Temperature listed in T_OBJ_ADDR of IR sensor, after conversion to Celsius.
  **/
 float read_ir_temp(void) {
-	int i2c_data[3] = {0};						// Empty array that the I2C data will be read into
+	unsigned int i2c_data[3] = {0};				// Empty array that the I2C data will be read into
 	
 	// Start an I2C transaction
 	StartI2C1();
