@@ -260,6 +260,8 @@ static void task_leda_toggle(void* task_params) {
 		// Do nothing while waiting for the desired time to pass
 		while (ReadCoreTimer() - t_start < t_wait);
 		LATBINV = LEDA;
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_leda_toggle, "Toggled LEDA");
 	}
 }
 
