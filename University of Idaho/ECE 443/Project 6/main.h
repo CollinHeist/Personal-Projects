@@ -12,9 +12,17 @@
 	#define TASK_DISPLAY_LCD_MSG_PRIORITY	1
 	#define TASK_LEDA_TOGGLE_PRIORITY       0
 
+	#define PWM_FREQUENCY_HZ				1000	// What frequency the PWM module is operating at 
+
     #define IO_FREQ_MS                      500		// How often the IO is checked (in ms)
     #define RTR_FREQ_MS                     2000	// How often RTRs are sent (in ms)
 	#define DEBOUNCE_MS						25		// How long to debounce a button press (in ms)
+
+	// PWM Settings
+	#define PWM_MIN_VAL						20.0
+	#define PWM_MAX_VAL						95.0
+	#define PWM_LINEAR_MIN					30.0
+	#define PWM_LINEAR_MAX					85.0
 
 	/// DIY Boolean variables
 	#define FALSE							0

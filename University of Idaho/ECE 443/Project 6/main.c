@@ -36,8 +36,9 @@ typedef enum MODE_STATES {CONFIGURATION_MODE, OPERATIONAL_MODE} current_state;
 
 float latest_temp;					// Current temperature as read by the IR Sensor
 float latest_rps;					// Current RPS of the motor
-float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of previous RPS readings
 float latest_pwm_setting;			// Current PWM setting to the motor
+
+float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of previous RPS readings
 
 unsigned int previous_BTN1_status;	// Previous status of BTN1 (used to detect PRESSES)
 
@@ -78,9 +79,10 @@ int main() {
  *	@return	None.
  **/
 static void initialize_hardware() {
-	chipKIT_PRO_MX7_Setup();		// Set up board
-	initialize_LCD();			   // Initialize the LCD
-	initialize_ir_sensor();		 // Initialize the IR Sensor
+	chipKIT_PRO_MX7_Setup();				// Set up board
+	initialize_LCD();						// Initialize the LCD
+	initialize_ir_sensor();					// Initialize the IR Sensor
+	initialize_pwm(0, PWM_FREQUENCY_HZ);	// Initialize the PWM module 
 
 	// Set up LEDs
 	PORTSetPinsDigitalOut(IOPORT_B, SM_LEDS);
@@ -177,6 +179,8 @@ void __ISR(_INPUT_CAPTURE_5_VECTOR, IPL3) isr_input_capture (void) {
 	unsigned short int delta_t = 0;
 
 	// Read the input capture FIFO and increment variables
+	if (configUSE_TRACE_FACILITY)
+		vTracePrint(trace_IO, "Input Capture interrupt triggered. Reading speed");
 	ReadCapture5(input_buffer);
 	new_capture = input_buffer[0];
 	delta_t = new_capture - old_capture;
@@ -186,7 +190,7 @@ void __ISR(_INPUT_CAPTURE_5_VECTOR, IPL3) isr_input_capture (void) {
 	float rev_per_sec = 10.0E6 / 256.0 / (float) delta_t;
 	unsigned int i = 0;
 	for (i = SPEED_BUFFER_LEN - 1; i > 0; i--)	// Loop through buffer, shift elements down
-			rps_buffer[i] = rps_buffer[i-1];
+		rps_buffer[i] = rps_buffer[i-1];
 	rps_buffer[0] = rev_per_sec;
 
 	mIC5ClearIntFlag();	// Clear interrupt flag
@@ -203,6 +207,8 @@ static void task_read_IO(void* task_params) {
 	const TickType_t task_frequency_ticks = MS_TO_TICKS(IO_FREQ_MS);
 	TickType_t last_time_awake = xTaskGetTickCount();
 	for (;;) {
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_IO, "Reading IO values. Attempting to refill RTR Buffer");
 		// Read the temperature and calculate the average RPS - update the global variables
 		latest_temp = read_ir_temp();
 		latest_rps = average_rps_calculator();
@@ -215,7 +221,7 @@ static void task_read_IO(void* task_params) {
 }
 
 /**	
- *	@brief		FreeRTOS task that sends an RTR from CAN1 to CAN2
+ *	@brief		FreeRTOS task that sends an RTR from CAN1 to CAN2 every RTR_FREQ_MS milliseconds.
  *	@param[in]	Void Pointer that contains the parameters for this task - not used.
  *	@return		None.
  **/
@@ -223,6 +229,8 @@ static void task_send_RTR(void* task_params) {
 	const TickType_t task_frequency_ticks = MS_TO_TICKS(RTR_FREQ_MS);
 	TickType_t last_time_awake = xTaskGetTickCount();
 	for (;;) {
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_RTR, "Sending RTR from CAN1 to CAN2");
 		CAN1_send_RTR();	// Send RTR through CAN1 to CAN2
 		
 		vTaskDelayUntil(&last_time_awake, task_frequency_ticks);	// Wait
@@ -252,7 +260,7 @@ void isr_change_notice_handler(void) {
 }
 
 /**
- *	@brief		Change Notice Handler task. Changes the current state on presses
+ *	@brief		Change Notice Handler task. Changes the current state on presses of BTN1.
  *	@param[in]	(void*) that contains the parameters for this task - not used.
  *	@return		None.
  **/
@@ -284,6 +292,119 @@ static void task_change_notice_handler(void* task_params) {
 	}
 }
 
+/**	
+ *	@brief		FreeRTOS task that implements the two control unit modes.
+ *	@param[in]	Void Pointer that contains the parameters for this task - not used.
+ *	@return		None.
+ **/
+static void task_control_FSM(void* task_params) {
+	char top_lcd_str[18] = {'\0'};					// Character string written to top of the LCD
+	char bottom_lcd_str[18] = {'\0'};				// Character string written to the bottom of the LCD
+	float temp = 0, rps = 0, pwm = 0;				// Values read from the CAN1 RX channel
+	float pwm_low_point = 0, pwm_high_point = 0;	// Set points for low/high PWM
+	float desired_pwm = 0;							// Desired PWM based on temperature reading
+
+	for (;;) {
+		// Clear both string buffers
+		clear_string_buffer(top_lcd_str, sizeof(top_lcd_str));
+		clear_string_buffer(bottom_lcd_str, sizeof(bottom_lcd_str));
+
+		// Implement the 'FSM' as a switch-case
+		switch (current_state) {
+			case CONFIGURATION_MODE:
+				if (configUSE_TRACE_FACILITY)
+					vTracePrint(trace_control_fsm, "In CONFIGURATION mode");
+
+				// Format the string in the given format (--temp.x--) only if a temperature has been read
+				if (temp == 0)
+					strcpy(top_lcd_str, "                ");
+				else
+					sprintf(top_lcd_str, "      %02.1f      ", temp);
+
+				// Write the temperature string to the first line of the LCD
+				set_cursor_LCD(FIRST_LINE_START);
+				put_string_LCD(top_lcd_str);
+
+				// If BTN3 is pressed, update the PWM low point
+				pwm_low_point = (PORTA & BTN3) ? temp : pwm_low_point;
+
+				// If BTN2 is pressed, update the PWM high point
+				pwm_high_point = (PORTG & BTN2) ? temp : pwm_high_point;
+
+				// Clear the low / high points if high < low
+				pwm_low_point = (pwm_high_point < pwm_low_point) ? 0 : pwm_low_point;
+				pwm_high_point = (pwm_high_point < pwm_low_point) ? 0 : pwm_high_point;
+
+				// If the low and high points are zero, the bottom lcd string is empty
+				if (pwm_low_point == 0 && pwm_high_point == 0)
+					strcpy(bottom_lcd_str, "                ");
+				else
+					sprintf(bottom_lcd_str, "%02.1f        %02.1f", pwm_low_point, pwm_high_point);
+
+				// Write the string to the 2nd line of the LCD
+				set_cursor_LCD(SECOND_LINE_START);
+				put_string_LCD(bottom_lcd_str);
+				break;
+			case OPERATIONAL_MODE:
+				if (configUSE_TRACE_FACILITY)
+					vTracePrint(trace_control_fsm, "In OPERATIONAL mode");
+
+				// Read from the CAN1 RX channel
+				if (CAN1_process_RX(&temp, &rps, &pwm) == CAN_MESSAGE_RECIEVED) {
+					if (configUSE_TRACE_FACILITY)
+						vTracePrint(trace_control_fsm, "RTR was responded to by CAN2 - updating LCD");
+					// A message WAS received - update the LCD
+					sprintf(top_lcd_str, "%02.0f%%         %03.2f", pwm, rps);
+					sprintf(bottom_lcd_str, "%02.1f  %02.1f  %02.1f", pwm_low_point, temp, pwm_high_point);
+
+					// Write the messsage to the LCD line-by-line
+					set_cursor_LCD(FIRST_LINE_START);
+					put_string_LCD(top_lcd_str);
+					set_cursor_LCD(SECOND_LINE_START);
+					put_string_LCD(bottom_lcd_str);
+
+					// Calculate the desired PWM value and send that to CAN2
+					if (temp < pwm_low_point)
+						desired_pwm = PWM_MIN_VAL;
+					else if (temp > pwm_high_point)
+						desired_pwm = PWM_MAX_VAL;
+					else
+						desired_pwm = (PWM_LINEAR_MAX - PWM_LINEAR_MIN) * (temp - pwm_low_point) / (pwm_high_point - pwm_low_point) + PWM_LINEAR_MIN;
+
+					if (configUSE_TRACE_FACILITY)
+						vTracePrint(trace_control_fsm, "Sending desired PWM setting to CAN2");
+					CAN1_send_TX(desired_pwm);
+				}
+				break;
+		}
+
+		taskYIELD();	// Allow other tasks to run
+	}
+}
+
+/**	
+ *	@brief		FreeRTOS task that gets the CAN2 RX channel for new PWM settings
+ *	@param[in]	Void Pointer that contains the parameters for this task - not used.
+ *	@return		None.
+ **/
+static void task_update_pwm(void* task_params) {
+	float desired_pwm = 0;
+	for (;;) {
+		if (CAN2_process_RX(&desired_pwm) == CAN_MESSAGE_RECIEVED) {
+			if (configUSE_TRACE_FACILITY)
+				vTracePrint(trace_IO, "New PWM setting receieved - updating PWM output");
+
+			if (set_pwm((unsigned int) desired_pwm)) {
+				// Error occurred while setting PWM (i.e. non-valid entry)
+				if (configUSE_TRACE_FACILITY)
+					vTracePrint(trace_IO, "Requested PWM setting is invalid");
+			}
+		}
+
+		taskYIELD();	// Allow other tasks to run
+	}
+}
+
 
 /* --------------------------- 'Helper' Functions --------------------------- */
 
@@ -299,6 +420,18 @@ float average_rps_calculator(void) {
 		avg += rps_buffer[i];
 				
 	return (avg / ((float) SPEED_BUFFER_LEN));
+}
+
+/**	
+ *  @brief		Function to clear the contents of a given string.
+ *  @param[in]	buffer: Pointer to the character array being cleared
+ *  @param[in]	buffer_length: Length of the buffer (how many characters to clear)
+ *  @return		None.
+ **/
+void clear_string_buffer(char* buffer, unsigned int buffer_length) {
+	unsigned int i = 0;
+	for (i = 0; i < buffer_length; i++)
+		buffer[i] = '\0';
 }
 
 /* --------------------- FreeRTOS Functional Functions ---------------------- */

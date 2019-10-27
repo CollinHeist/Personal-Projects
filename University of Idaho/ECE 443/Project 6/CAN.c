@@ -170,15 +170,16 @@ void initialize_CAN2(void) {
 	while (CANGetOperatingMode(CAN2) != CAN_NORMAL_OPERATION);
 }
 
-void CAN1_process_RX(float* temperature, float* motor_speed, float* pwm_setting) {
+unsigned int CAN1_process_RX(float* temperature, float* motor_speed, float* pwm_setting) {
 	CANRxMessageBuffer* message;	// Pointer to the message read from the RX Channel
 	short temperature_scaled10 = 0;	// 10x scaled value of the read temperature
 	short motor_speed_scaled10 = 0;	// 10x scaled value of the read motor speed
+	short motor_speed_100th    = 0;	// 1/100th place of the motor speed
 	short pwm_setting_scaled10 = 0;	// 10x scaled value of the read pwm setting
 
 	// There was no message received on CAN1 - exit
 	if (CAN1_received_flag == FALSE)
-		return;
+		return CAN_NO_MESSAGE_RECEIVED;
 
 	// There was a message received - reset the flag and parse the message
 	CAN1_received_flag = FALSE;	// Reset the flag
@@ -188,25 +189,29 @@ void CAN1_process_RX(float* temperature, float* motor_speed, float* pwm_setting)
 	// The data is sent as the value (times 10) to represent the decimal
 	temperature_scaled10 = message -> messageWord[0];	// Read the 1st word (temperature)
 	motor_speed_scaled10 = message -> messageWord[1];	// Read the 2nd word (motor speed)
-	pwm_setting_scaled10 = message -> messageWord[2];	// Read the 3rd word (pwm setting)
+	motor_speed_100th    = message -> messageWord[2];	// Read the 3rd word (100th place of motor speed)
+	pwm_setting_scaled10 = message -> messageWord[3];	// Read the 4th word (pwm setting)
 
 	// Scale the readings down (their 10x value is sent to preserve 1 decimal place)
+	// The motor speed has the 100th place sent specifically, so that needs to be added in
 	*temperature = (float) temperature_scaled10 / 10.0;	
-	*motor_speed = (float) motor_speed_scaled10 / 10.0;
+	*motor_speed = ((float) motor_speed_scaled10) / 10.0 + ((float) motor_speed_100th) / 100.0;
 	*pwm_setting = (float) pwm_setting_scaled10 / 10.0;
 
 	// Let the CAN module know message processing is done - enable the event
 	CANUpdateChannel(CAN1, CAN_CHANNEL1);
 	CANEnableChannelEvent(CAN1, CAN_CHANNEL1, CAN_RX_CHANNEL_NOT_EMPTY, TRUE);
+
+	return CAN_MESSAGE_RECEIVED;
 }
 
-void CAN2_process_RX(float* desired_pwm_setting) {
+unsigned int CAN2_process_RX(float* desired_pwm_setting) {
 	CANRxMessageBuffer* message;	// Pointer to the message read from the RX Channel
 	short pwm_setting_scaled10 = 0;	// 10x scaled value of the read pwm setting
 
 	// There was no message received on CAN1 - exit
 	if (CAN2_received_flag == FALSE)
-		return;
+		return CAN_NO_MESSAGE_RECEIVED;
 
 	// There was a message received - reset the flag and parse the message
 	CAN2_received_flag = FALSE;	// Reset the flag
@@ -221,6 +226,8 @@ void CAN2_process_RX(float* desired_pwm_setting) {
 	// Let the CAN module know message processing is done - enable the event
 	CANUpdateChannel(CAN2, CAN_CHANNEL1);
 	CANEnableChannelEvent(CAN2, CAN_CHANNEL1, CAN_RX_CHANNEL_NOT_EMPTY, TRUE);
+
+	return CAN_MESSAGE_RECEIVED;
 }
 
 void CAN1_send_TX(float desired_pwm_setting) {
@@ -300,11 +307,12 @@ void CAN2_refill_RTR_buffer(float temperature, float motor_speed, float pwm_sett
 	// Generate the message itself
 	message -> msgSID.SID = (WORD) (CAN2_RTR_MESSAGE_ID * SID_BIT_MASK);
 	message -> msgEID.IDE = 0;	// Not an extended ID message
-	message -> msgEID.DLC = 6;	// We're sending 6 bytes of data (two BYTES or one WORD per variable)
+	message -> msgEID.DLC = 8;	// We're sending 8 bytes of data (two BYTES or one WORD per variable)
 	message -> msgEID.RTR = 0;	// This is NOT an RTR request even though it is an RTR response
 	message -> messageWord[0] = (short) (temperature * 10);
 	message -> messageWord[1] = (short) (motor_speed * 10);
-	message -> messageWord[2] = (short) (pwm_setting * 10);
+	message -> messageWord[2] = (short) (motor_speed * 100 - ((short) (motor_speed * 10)) * 10);
+	message -> messageWord[3] = (short) (pwm_setting * 10);
 
 	// Let the CAN Module know the message processing is done, and it's ready to be processed
 	CANUpdateChannel(CAN2, CAN_CHANNEL0);
