@@ -86,8 +86,10 @@ static void initialize_hardware() {
 	initialize_pwm(0, PWM_FREQUENCY_HZ);	// Initialize the PWM module 
 
 	// Set up LEDs
-	PORTSetPinsDigitalOut(IOPORT_B, SM_LEDS);
+	PORTSetPinsDigitalOut(IOPORT_B, SM_LEDS);	// LEDA-H on PORTB
 	LATBCLR = SM_LEDS;
+	PORTSetPinsDigitalOut(IOPORT_G, LED1);		// LED1 on PORTG
+	LATGCLR = LED1;
 	
 	// Configure BTN1-3
 	PORTSetPinsDigitalIn(IOPORT_G, BTN1 | BTN2);
@@ -227,6 +229,7 @@ static void task_send_RTR(void* task_params) {
 		if (configUSE_TRACE_FACILITY)
 			vTracePrint(trace_RTR, "Sending RTR from CAN1 to CAN2");
 		CAN1_send_RTR();	// Send RTR through CAN1 to CAN2
+		LATBINV = LEDA;		// Toggle LEDA on sensor request
 		
 		vTaskDelayUntil(&last_time_awake, task_frequency_ticks);	// Wait
 	}
@@ -307,6 +310,7 @@ static void task_control_FSM(void* task_params) {
 		// Implement the 'FSM' as a switch-case
 		switch (current_state) {
 			case CONFIGURATION_MODE:
+				LATGCLR = LED1;
 				if (configUSE_TRACE_FACILITY)
 					vTracePrint(trace_control_fsm, "In CONFIGURATION mode");
 
@@ -341,11 +345,13 @@ static void task_control_FSM(void* task_params) {
 				put_string_LCD(bottom_lcd_str);
 				break;
 			case OPERATIONAL_MODE:
+				LATGSET = LED1;
 				if (configUSE_TRACE_FACILITY)
 					vTracePrint(trace_control_fsm, "In OPERATIONAL mode");
 
 				// Read from the CAN1 RX channel
 				if (CAN1_process_RX(&temp, &rps, &pwm) == CAN_MESSAGE_RECIEVED) {
+					LATBINV = LEDB;		// Toggle LEDB when the sensor message is received
 					if (configUSE_TRACE_FACILITY)
 						vTracePrint(trace_control_fsm, "RTR was responded to by CAN2 - updating LCD");
 					// A message WAS received - update the LCD
@@ -369,6 +375,7 @@ static void task_control_FSM(void* task_params) {
 					if (configUSE_TRACE_FACILITY)
 						vTracePrint(trace_control_fsm, "Sending desired PWM setting to CAN2");
 					CAN1_send_TX(desired_pwm);
+					LATBINV = LEDC;		// Toggle LEDC when a PWM message is sent
 				}
 				break;
 		}
@@ -394,6 +401,8 @@ static void task_update_pwm(void* task_params) {
 				if (configUSE_TRACE_FACILITY)
 					vTracePrint(trace_IO, "Requested PWM setting is invalid");
 			}
+			else
+				LATBINV = LEDD;		// Toggle LEDD when the received PWM setting is applied
 		}
 
 		taskYIELD();	// Allow other tasks to run
