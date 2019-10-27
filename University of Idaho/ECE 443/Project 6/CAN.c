@@ -1,4 +1,9 @@
-// For data-sizes, see: http://dubworks.blogspot.com/2013/08/pic32-variable-type-defs.html
+/** 
+ *	@file	CAN.c
+ *	@brief	CAN program file. Implements CAN1 and CAN2 according to project requirements.
+ *	@author	Collin Heist
+ *	@notes	For data-sizes, see: http://dubworks.blogspot.com/2013/08/pic32-variable-type-defs.html
+ **/
 
 // File Inclusion
 #include <plib.h>
@@ -10,6 +15,12 @@
 static volatile BOOL CAN1_received_flag = FALSE;
 static volatile BOOL CAN2_received_flag = FALSE;
 
+/**	
+ *	@brief	Initialize the CAN1 module. Channel 0 is the TX buffer, Channel 1 is the 
+ *			RX buffer. Channel 1 is configured for a filter for the CAN2 RTR.
+ *	@param	None.
+ *	@return	None.
+ **/
 void initialize_CAN1(void) {
     CAN_BIT_CONFIG canBitConfig;
     
@@ -112,6 +123,13 @@ void initialize_CAN1(void) {
     while(CANGetOperatingMode(CAN1) != CAN_NORMAL_OPERATION);
 }
 
+/**	
+ *	@brief	Initialize the CAN2 module. Channel 0 is the TX buffer, Channel 1 is the 
+ *			RX buffer. Channel 0 is configured for a filter for the CAN2 RTR. Channel 1
+ *			is configured for a filter for the CAN1 PWM ID.
+ *	@param	None.
+ *	@return	None.
+ **/
 void initialize_CAN2(void) {
 	CAN_BIT_CONFIG canBitConfig;
 
@@ -170,6 +188,15 @@ void initialize_CAN2(void) {
 	while (CANGetOperatingMode(CAN2) != CAN_NORMAL_OPERATION);
 }
 
+/**	
+ *	@brief		Processes the receive channel for CAN1. This channel receives the RTR messages
+ *				from CAN2.
+ *	@param[out]	temperature: Floating point temperature as parsed from the RTR message from CAN2.
+ *	@param[out]	motor_speed: Floating point motor speed as parsed from the RTR message from CAN2.
+ *	@param[out]	pwm_setting: Floatign point pwm setting as parsed from the RTR message from CAN2.
+ *	@return		unsigned integer that is either CAN_NO_MESSAGE_RECEIVED or CAN_MESSGE_RECEIVED
+ *				and indicates whether or not CAN1's RX channel had values in it.
+ **/
 unsigned int CAN1_process_RX(float* temperature, float* motor_speed, float* pwm_setting) {
 	CANRxMessageBuffer* message;	// Pointer to the message read from the RX Channel
 	short temperature_scaled10 = 0;	// 10x scaled value of the read temperature
@@ -205,6 +232,13 @@ unsigned int CAN1_process_RX(float* temperature, float* motor_speed, float* pwm_
 	return CAN_MESSAGE_RECEIVED;
 }
 
+/**	
+ *	@brief		Process the receive channel for CAN2. This channel gets data messages from CAN1
+ *				that correspond to the desired PWM setting.
+ *	@param[out]	desired_out_setting: The requested PWM setting as sent by CAN1 to CAN2.
+ *	@return		unsigned integer that is either CAN_NO_MESSAGE_RECEIVED or CAN_MESSGE_RECEIVED
+ *				and indicates whether or not CAN2's RX channel had values in it.
+ **/
 unsigned int CAN2_process_RX(float* desired_pwm_setting) {
 	CANRxMessageBuffer* message;	// Pointer to the message read from the RX Channel
 	short pwm_setting_scaled10 = 0;	// 10x scaled value of the read pwm setting
@@ -230,6 +264,11 @@ unsigned int CAN2_process_RX(float* desired_pwm_setting) {
 	return CAN_MESSAGE_RECEIVED;
 }
 
+/**	
+ *	@brief		Send the passed desired PWM setting over the TX channel of CAN1.
+ *	@param[in]	desired_out_setting: The desired PWM setting to send to CAN2.
+ *	@return		None.
+ **/
 void CAN1_send_TX(float desired_pwm_setting) {
 	CANTxMessageBuffer* message;
 
@@ -258,6 +297,11 @@ void CAN1_send_TX(float desired_pwm_setting) {
 	}
 }
 
+/**	
+ *	@brief	Function to send an RTR request from CAN1 to CAN2.
+ *	@param	None.
+ *	@return	None.
+ **/
 void CAN1_send_RTR(void) {
 	CANTxMessageBuffer* message;
 
@@ -285,6 +329,13 @@ void CAN1_send_RTR(void) {
 	}
 }
 
+/**	
+ *	@brief		Refill the RTR buffer for CAN2 with the passed temperature, motor speed, and current PWM setting.
+ *	@param[in]	temperature: The current temperature as read by the IR sensor.
+ *	@param[in]	motor_speed: The current motor speed, as read by the input capture event.
+ *	@param[in]	pwm_setting: The current PWM setting for the motor - determined by the low / high set points.
+ *	@return		None.
+ **/
 void CAN2_refill_RTR_buffer(float temperature, float motor_speed, float pwm_setting) {
 	CANTxMessageBuffer* message;
 
@@ -318,6 +369,13 @@ void CAN2_refill_RTR_buffer(float temperature, float motor_speed, float pwm_sett
 	CANUpdateChannel(CAN2, CAN_CHANNEL0);
 }
 
+/**	
+ *	@brief	ISR for all CAN1 events. Triggered only by the RX channel not being empty.
+ *			This indicates that the RTR from CAN2 has been received. The corresponding global
+ *			flag is set, and the message can be parsed by CAN1_process_RX().
+ *	@param	None.
+ *	@return	None.
+ **/
 void __ISR(_CAN_1_VECTOR, ipl4) CAN1_isr_handler(void) {
 	// Check if the source of the interrupt is  RX_EVENT.
 	if ((CANGetModuleEvent(CAN1) & CAN_RX_EVENT) != 0) {
@@ -339,6 +397,13 @@ void __ISR(_CAN_1_VECTOR, ipl4) CAN1_isr_handler(void) {
 	INTClearFlag(INT_CAN1);
 }
 
+/**	
+ *	@brief	ISR for all CAN2 events. Triggered only by the RX channel not being empty.
+ *			This indicates that the desired PWM from CAN1 has been received. The
+ *			corresponding global flag is set, and the message can be parsed by CAN2_process_RX().
+ *	@param	None.
+ *	@return	None.
+ **/
 void __ISR(_CAN_2_VECTOR, ipl4) CAN2_isr_handler(void) {
 	// Check if the source of the interrupt is RX_EVENT.
 	if ((CANGetModuleEvent(CAN2) & CAN_RX_EVENT) != 0) {

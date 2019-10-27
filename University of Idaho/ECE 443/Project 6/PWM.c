@@ -1,10 +1,23 @@
+/** 
+ *	@file	PWM.c
+ *	@brief	PWM source file. Uses Timer 2 for PWM implementation.
+ *	@author	Collin Heist
+ **/
+
+// File Inclusion
 #include <plib.h>
 #include "chipKIT_Pro_MX7.h"
 #include "PWM.h"
 
+// Global Variables
 static unsigned int t2_tick;
 
-// Initialize the OC module, as well as timer 2
+/**	
+ *	@brief		Initalize the PWM module for a given starting duty cycle and frequency.
+ *	@param[in]	duty_cycle: What duty cycle (as a %) to initialize the PWM output to.
+ *	@param[in]	pwm_freq: What frequency to initialize Timer 2 to.
+ *	@return		Boolean flag (TRUE or FALSE) if there was an error or not.
+ **/
 unsigned int initialize_pwm(unsigned int duty_cycle, unsigned int pwm_freq) {
 	// Timer 2 Initialization
 	t2_tick = T2_CLOCK_RATE / pwm_freq;
@@ -18,13 +31,18 @@ unsigned int initialize_pwm(unsigned int duty_cycle, unsigned int pwm_freq) {
 	// Output Compare Module
 	if (duty_cycle > 100)
 		return 1;
+
 	unsigned int start_val = duty_cycle * (t2_tick - 1);
 	OpenOC3(OC_ON | OC_TIMER_MODE16 | OC_TIMER2_SRC | OC_PWM_FAULT_PIN_DISABLE, start_val, start_val);
 
 	return 0;
 }
 
-// Set the PWM output to a set duty cycle [0%, 100%]
+/**	
+ *	@brief		Set the PWM output to a given duty cycle (between 0% and 100%).
+ *	@param[in]	duty_cycle: What duty cycle (as a %) to set the PWM output to.
+ *	@return		Boolean flag (TRUE or FALSE) if there was an error or not.
+ **/
 unsigned int set_pwm(unsigned int duty_cycle) {
 	if (duty_cycle > 100)
 		return 1;
@@ -34,7 +52,11 @@ unsigned int set_pwm(unsigned int duty_cycle) {
 	return 0;
 }
 
-// Timer 2, 1ms ISR
+/**	
+ *	@brief	ISR for Timer 2 - the PWM timer.
+ *	@param	None.
+ *	@return	None.
+ **/
 void __ISR(_TIMER_2_VECTOR, IPL2) Timer2Handler(void) {
 	LATBINV = LEDA;
 	mT2ClearIntFlag();

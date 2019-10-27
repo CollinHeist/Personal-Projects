@@ -1,7 +1,8 @@
 /** 
- * @file 	main.c
- * @brief 	Main program file, _________________________
- * @author	Collin Heist
+ *	@file 	main.c
+ *	@brief 	Main program file, implements a temperature-based remote motor control
+ * 			program over the CAN network.
+ *	@author	Collin Heist
  **/
 
 /* ----------------------------- Included Files ----------------------------- */
@@ -19,9 +20,10 @@
 
 // File-Header includes
 #include "main.h"
-#include "LCDlib.h"
-#include "SMBus_IR.h"
-#include "CAN.h"
+#include "LCDlib.h"			// LCD Library
+#include "SMBus_IR.h"		// IR Sensor
+#include "CAN.h"			// CAN implementation
+#include "PWM.h"			// PWM
 
 /* --------------------------- Function Prototypes -------------------------- */
 // CN ISR for button presses - Directly calls wrapper function
@@ -29,8 +31,6 @@ void __ISR(_CHANGE_NOTICE_VECTOR, IPL2) isr_change_notice_wrapper(void);
 
 /* ---------------------------- Global Variables ---------------------------- */
 xSemaphoreHandle cn_semaphore;		// Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
-
-xQueueHandle lcd_string_queue;		// Queue that contains pointer to string to display on LCD
 
 typedef enum MODE_STATES {CONFIGURATION_MODE, OPERATIONAL_MODE} current_state;
 
@@ -43,9 +43,10 @@ float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of previous RPS readings
 unsigned int previous_BTN1_status;	// Previous status of BTN1 (used to detect PRESSES)
 
 #if (configUSE_TRACE_FACILITY == 1)
-	traceString trace_cn;			   // TraceAlyzer channel for logging change notice events
-	traceString trace_lcd;			  // TraceAlyzer channel for logging LCD events
-	traceString trace_leda_toggle;	  // TraceAlyzer channel for logging the 3ms toggle of LEDA
+	traceString trace_IO;			// TraceAlyzer channel for logging change notice events
+	traceString trace_RTR;			// TraceAlyzer channel for RTR events
+	traceString trace_CN;			// TraceAlyzer channel for change notice events
+	traceString trace_control_fsm;	// TraceAlyzer channel for the Control Unit FSM
 #endif
 
 /* ------------------------------ Main Program ------------------------------ */
@@ -53,7 +54,7 @@ int main() {
 	// Initialize and configure the hardware
 	initialize_hardware();
 
-	// Initialize the state machine
+	// Initialize the state machine to config mode
 	current_state = CONFIGURATION_MODE;
 
 	// Initalize other components of the system
@@ -116,23 +117,19 @@ static void initialize_hardware() {
  *	@return	Boolean flag (TRUE or FALSE) if there was an error or not.
  **/
 static unsigned int create_RTOS_objects() {
-	/// Turn on the TraceAlyzer - assign user event labels to each channel
+	// Turn on the TraceAlyzer - assign user event labels to each channel
 	if (configUSE_TRACE_FACILITY) {
 		vTraceEnable(TRC_START);
-		trace_cn = xTraceRegisterString("Change Notice");
-		trace_lcd = xTraceRegisterString("LCD");
-		trace_leda_toggle = xTraceRegisterString("LEDA Toggle");
+		trace_IO = xTraceRegisterString("IO");
+		trace_RTR = xTraceRegisterString("RTR");
+		trace_CN = xTraceRegisterString("Change Notice");
+		trace_control_fsm = xTraceRegisterString("Control Unit FSM")
 	}
 
-	/// Create the semaphore needed for the CN ISR -> Handler, and UART-RX ISR -> Handler
+	// Create the semaphore needed for the CN ISR -> Handler, and UART-RX ISR -> Handler
 	vSemaphoreCreateBinary(cn_semaphore);
 	if (cn_semaphore == NULL)
 		return TRUE;	// Error creating the semaphore(s)
-
-	/// Create the lcd string queue
-	lcd_string_queue = xQueueCreate(1, (LCD_WIDTH + 1) * sizeof(char));
-	if (!lcd_string_queue)
-		return TRUE;	// Error creating the queue
 
 	return FALSE;
 }
@@ -145,22 +142,20 @@ static unsigned int create_RTOS_objects() {
 static unsigned int create_tasks() {
 	BaseType_t task_success;	// Whether the task creation(s) were successful
 
-	// Create the CN ISR handler task
-	task_success = xTaskCreate(task_cn_generator, "Change Notice Generator Task",
-		configMINIMAL_STACK_SIZE, NULL, TASK_CN_GENERATOR_PRIORITY, NULL);
-	// Create the write-to-EEPROM task
-	task_success |= xTaskCreate(task_change_notice_handler, "CN ISR Handler Task",
+	task_success = xTaskCreate(task_read_IO, "Temperature and Motor Speed Reading Task",
+		configMINIMAL_STACK_SIZE, NULL, TASK_READ_IO_PRIORITY, NULL);
+	task_success |= xTaskCreate(task_send_RTR, "RTR Sending Task",
 		configMINIMAL_STACK_SIZE, NULL, TASK_CN_ISR_HANDLER_PRIORITY, NULL);
-	// Create the read-from-EEPROM task
-	task_success |= xTaskCreate(task_display_lcd, "Display Formatted Message on LCD Task",
-		configMINIMAL_STACK_SIZE, NULL, TASK_DISPLAY_LCD_MSG_PRIORITY, NULL);
-	// Create the 1ms heartbeat task
-	task_success |= xTaskCreate(task_leda_toggle, "LEDA Blink Task",
-		configMINIMAL_STACK_SIZE, NULL, TASK_LEDA_TOGGLE_PRIORITY, NULL);
+	task_success |= xTaskCreate(task_change_notice_handler, "Change Notice Handler Task",
+		configMINIMAL_STACK_SIZE, NULL, TASK_CHANGE_NOTICE_PRIORITY, NULL);
+	task_success |= xTaskCreate(task_control_FSM, "Control Unit FSM Task",
+		configMINIMAL_STACK_SIZE, NULL, TASK_CONTROL_FSM_PRIORITY, NULL);
+	task_success |= xTaskCreate(task_update_pwm, "PWM Updating Task",
+		configMINIMAL_STACK_SIZE, NULL, TASK_UPDATE_PWM_PRIORITY, NULL);
 
-	// Error creating a task - return a failure
+	// Error creating a task - return failure
 	if (task_success != pdPASS)
-			return TRUE; 
+		return TRUE; 
 
 	return FALSE;
 }
@@ -248,7 +243,7 @@ void isr_change_notice_handler(void) {
 
 	// Give the semaphore to unlock the task
 	if (configUSE_TRACE_FACILITY)
-		vTracePrint(trace_cn, "Giving semaphore from CN ISR");
+		vTracePrint(trace_CN, "Giving semaphore from CN ISR");
 	xSemaphoreGiveFromISR(cn_semaphore, &move_to_higher_priority);
 
 	// Clear the interrupt flag
@@ -274,7 +269,7 @@ static void task_change_notice_handler(void* task_params) {
 		// This only unblocks when the change notice handler detects a completed message
 		xSemaphoreTake(cn_semaphore, portMAX_DELAY);
 		if (configUSE_TRACE_FACILITY)
-			vTracePrint(trace_cn, "Received semaphore - debouncing");
+			vTracePrint(trace_CN, "Received semaphore - debouncing");
 
 		vTaskDelay(MS_TO_TICKS(DEBOUNCE_MS));	// Debounce
 		current_BTN1_status = PORTG & BTN1;
@@ -282,7 +277,7 @@ static void task_change_notice_handler(void* task_params) {
 		// Make sure this was a PRESS only
 		if (previous_BTN1_status == 0 && current_BTN1_status) {
 			if (configUSE_TRACE_FACILITY)
-				vTracePrint(trace_cn, "Button press detected - changing control modes");
+				vTracePrint(trace_CN, "Button press detected - changing control modes");
 
 			// Transition to the next state
 			current_state = (current_state == CONFIGURATION_MODE) ? OPERATIONAL_MODE : CONFIGURATION_MODE;
@@ -413,7 +408,7 @@ static void task_update_pwm(void* task_params) {
  *  @param  None.
  *  @return	None.
  **/
-float average_rps_calculator(void) {
+static float average_rps_calculator(void) {
 	float avg = 0;	  // Current average
 	unsigned int i = 0; // Iterating variable
 	for (i = 0; i < SPEED_BUFFER_LEN; i++)
@@ -428,7 +423,7 @@ float average_rps_calculator(void) {
  *  @param[in]	buffer_length: Length of the buffer (how many characters to clear)
  *  @return		None.
  **/
-void clear_string_buffer(char* buffer, unsigned int buffer_length) {
+static void clear_string_buffer(char* buffer, unsigned int buffer_length) {
 	unsigned int i = 0;
 	for (i = 0; i < buffer_length; i++)
 		buffer[i] = '\0';

@@ -1,3 +1,9 @@
+/** 
+ *	@file	PWM.h
+ *	@brief	PWM header file. Defines the clock rate for timer 2.
+ *	@author	Collin Heist
+ **/
+
 #ifndef __PWM_H__
 	#define __PWM_H__
 
