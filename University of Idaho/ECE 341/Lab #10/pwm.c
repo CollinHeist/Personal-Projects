@@ -1,3 +1,7 @@
+#include <plib.h>
+#include "CerebotMX7cK.h"
+#include "pwm.h"
+
 unsigned int t2_tick;
 
 // Initialize the OC module, as well as timer 2

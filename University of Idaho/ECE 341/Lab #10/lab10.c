@@ -53,7 +53,7 @@ void system_init() {
 	PORTSetPinsDigitalIn(IOPORT_D, BIT_3 | BIT_12);	// Tachometer inputs
 	mIC5ClearIntFlag();	
 	OpenCapture5(IC_ON | IC_CAP_16BIT | IC_IDLE_STOP | IC_FEDGE_FALL | IC_TIMER3_SRC | IC_INT_1CAPTURE | IC_EVERY_FALL_EDGE);
-	ConfigIntCapture(IC_INT_ON | IC_INT_PRIOR_3 | IC_INT_SUB_PRIOR_0);
+	ConfigIntCapture5(IC_INT_ON | IC_INT_PRIOR_3 | IC_INT_SUB_PRIOR_0);
 	
 	// Change notice interrupt for BTN1 and BTN2
 	mCNOpen(CN_ON, (CN8_ENABLE | CN9_ENABLE), 0);
