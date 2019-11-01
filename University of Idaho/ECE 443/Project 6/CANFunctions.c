@@ -2,7 +2,7 @@
  *	@file	CANFunctions.c
  *	@brief	CAN program file. Implements CAN1 and CAN2 according to project requirements.
  *	@author	Collin Heist
- *	@notes	For data-sizes, see: http://dubworks.blogspot.com/2013/08/pic32-variable-type-defs.html
+ *	@note	For data-sizes, see: http://dubworks.blogspot.com/2013/08/pic32-variable-type-defs.html
  **/
 
 // File Inclusion
