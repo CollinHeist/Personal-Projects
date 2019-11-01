@@ -10,7 +10,7 @@
 #include "input_capture.h"
 
 // Global Variables
-float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of RPS readings
+static float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of RPS readings
 
 void initialize_input_capture(void) {
 	// Timer 3 initialization
