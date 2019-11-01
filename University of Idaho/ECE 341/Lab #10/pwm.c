@@ -1,15 +1,18 @@
+// File Inclusion
 #include <plib.h>
 #include "CerebotMX7cK.h"
 #include "pwm.h"
 
-unsigned int t2_tick;
+// Global Variables
+static unsigned int t2_tick;
 
 // Initialize the OC module, as well as timer 2
 unsigned int init_pwm(unsigned int duty_cycle, unsigned int pwm_freq) {
 	// Timer 2 Initialization
 	t2_tick = T2_CLOCK_RATE / pwm_freq;
-	if (t2_tick > 2^16)
+	if (t2_tick > (1 << 15))
 		return 1;
+	
 	OpenTimer2(T2_ON | T2_SOURCE_INT | T2_PS_1_1, t2_tick - 1);
 	mT2SetIntPriority(2);
 	mT2SetIntSubPriority(1);
@@ -35,7 +38,7 @@ unsigned int set_pwm(unsigned int duty_cycle) {
 }
 
 // Timer 2, 1ms ISR
-void __ISR(_TIMER_2_VECTOR, IPL2) Timer2Handler(void) {
+void __ISR(_TIMER_2_VECTOR, IPL2) isr_timer2_handler(void) {
 	LATBINV = LEDA;
 	mT2ClearIntFlag();
 }

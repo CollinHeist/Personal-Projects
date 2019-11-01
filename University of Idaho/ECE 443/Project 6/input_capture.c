@@ -1,7 +1,16 @@
+/** 
+ *	@file 	input_capture.c
+ *	@brief 	Input Capture source file. Allows for use of the IC5 peripheral (along with Timer 3)
+ *			to measure the average RPS of the motor.
+ *	@author	Collin Heist
+ **/
+
+// Necessary Includes
 #include <plib.h>
 #include "input_capture.h"
 
-float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of previous RPS readings
+// Global Variables
+float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of RPS readings
 
 void initialize_input_capture(void) {
 	// Timer 3 initialization
@@ -9,8 +18,8 @@ void initialize_input_capture(void) {
 	mT3SetIntPriority(2);
 	mT3SetIntSubPriority(2);
 	mT3IntEnable(1);
-    
-    // Input Capture Initialization
+	
+	// Input Capture Initialization
 	PORTSetPinsDigitalIn(IOPORT_D, BIT_3 | BIT_12);	// Tachometer inputs
 	mIC5ClearIntFlag();	
 	OpenCapture5(IC_ON | IC_CAP_16BIT | IC_IDLE_STOP | IC_FEDGE_FALL | IC_TIMER3_SRC | IC_INT_1CAPTURE | IC_EVERY_FALL_EDGE);
@@ -18,13 +27,13 @@ void initialize_input_capture(void) {
 }
 
 /**	
- *  @brief	Function to calculate the average RPS from the global rps_buffer.
- *  @param  None.
- *  @return	Float that is the average of all values in the global rps_buffer.
+ *	@brief	Function to calculate the average RPS from the global rps_buffer.
+ *	@param  None.
+ *	@return	Float that is the average of all values in the global rps_buffer.
  **/
 float get_average_rps(void) {
-	float avg = 0;      // Current average
-	unsigned int i;     // Iterating variable
+	float avg = 0;	// Current average
+	unsigned int i;	// Iterating variable
 	for (i = 0; i < SPEED_BUFFER_LEN; i++)
 		avg += rps_buffer[i];
 				
@@ -36,7 +45,7 @@ float get_average_rps(void) {
  *	@param	None.
  *	@return	None.
  **/
-void __ISR(_INPUT_CAPTURE_5_VECTOR, IPL3) isr_input_capture (void) {
+void __ISR(_INPUT_CAPTURE_5_VECTOR, IPL3) isr_input_capture(void) {
 	unsigned int input_buffer[4] = {0};
 	static unsigned short int new_capture = 0;
 	static unsigned short int old_capture = 0;
@@ -59,6 +68,11 @@ void __ISR(_INPUT_CAPTURE_5_VECTOR, IPL3) isr_input_capture (void) {
 }
 
 // Timer 3 ISR for input capture
+/**	
+ *	@brief	ISR for Timer 3.
+ *	@param	None.
+ *	@return	None.
+ **/
 void __ISR(_TIMER_3_VECTOR, IPL2) isr_timer3(void) {
 	mT3ClearIntFlag();
 }

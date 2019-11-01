@@ -1,3 +1,9 @@
+/** 
+ *	@file 	LCDlib.h
+ *	@brief 	LCD library header file. Provides macros for start / end of lines.
+ *	@author	Collin Heist
+ **/
+
 #ifndef __LCDLIB_H__
 	#define __LCDLIB_H__
 

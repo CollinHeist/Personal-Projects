@@ -1,5 +1,5 @@
 /** 
- *	@file	CAN.c
+ *	@file	CANFunctions.c
  *	@brief	CAN program file. Implements CAN1 and CAN2 according to project requirements.
  *	@author	Collin Heist
  *	@notes	For data-sizes, see: http://dubworks.blogspot.com/2013/08/pic32-variable-type-defs.html
@@ -11,9 +11,9 @@
 #include "chipKIT_Pro_MX7.h"
 #include "CANFunctions.h"
 
-// Flags for whether or not each CAN module received a message
-static volatile BOOL CAN1_received_flag = FALSE;
-static volatile BOOL CAN2_received_flag = FALSE;
+// Global Variables
+static volatile BOOL CAN1_received_flag = FALSE;	// Flag of if CAN1 received a message
+static volatile BOOL CAN2_received_flag = FALSE;	// Flag of if CAN2 received a message
 BYTE CAN1MessageFifoArea[CAN1_MSG_MEMORY];
 BYTE CAN2MessageFifoArea[CAN2_MSG_MEMORY];
 
@@ -24,103 +24,103 @@ BYTE CAN2MessageFifoArea[CAN2_MSG_MEMORY];
  *	@return	None.
  **/
 void initialize_CAN1(void) {
-    CAN_BIT_CONFIG canBitConfig;
-    
-    PORTSetPinsDigitalIn(IOPORT_F, BIT_12);     // Set CAN1 Rx to input
-    PORTSetPinsDigitalOut(IOPORT_F, BIT_13);    // Set CAN1 Tx  to output
-    ODCFSET = BIT_13;// Make output pin open drain */
-        
-    // Step 1: Switch the CAN module ON and switch it to Configuration mode.
-    CANEnableModule(CAN1, TRUE);
-    CANSetOperatingMode(CAN1, CAN_CONFIGURATION);// Set CAN mode of operation
-    while(CANGetOperatingMode(CAN1) != CAN_CONFIGURATION);// Wait for operation to finish
-    
-    /* Step 2: Configure the Clock. The CAN_BIT_CONFIG data structure is used 
-     * for this purpose. The propagation segment, phase segment 1 and phase
-     * segment 2 are configured to have 3TQ. */
-    canBitConfig.phaseSeg2Tq            = CAN_BIT_3TQ;
-    canBitConfig.phaseSeg1Tq            = CAN_BIT_3TQ;
-    canBitConfig.propagationSegTq       = CAN_BIT_3TQ;
-    canBitConfig.phaseSeg2TimeSelect    = TRUE;
-    canBitConfig.sample3Time            = TRUE;
-    canBitConfig.syncJumpWidth          = CAN_BIT_2TQ;
-    CANSetSpeed(CAN1,&canBitConfig, SYSTEM_FREQ, CAN_BUS_SPEED);
-    
-    /* Step 3: Assign the buffer area to the CAN module. */
-    CANAssignMemoryBuffer(CAN1, CAN1MessageFifoArea, CAN1_MSG_MEMORY);
+	CAN_BIT_CONFIG canBitConfig;
+	
+	PORTSetPinsDigitalIn(IOPORT_F, BIT_12);	 // Set CAN1 Rx to input
+	PORTSetPinsDigitalOut(IOPORT_F, BIT_13);	// Set CAN1 Tx  to output
+	ODCFSET = BIT_13;// Make output pin open drain */
+		
+	// Step 1: Switch the CAN module ON and switch it to Configuration mode.
+	CANEnableModule(CAN1, TRUE);
+	CANSetOperatingMode(CAN1, CAN_CONFIGURATION);// Set CAN mode of operation
+	while(CANGetOperatingMode(CAN1) != CAN_CONFIGURATION);// Wait for operation to finish
+	
+	/* Step 2: Configure the Clock. The CAN_BIT_CONFIG data structure is used 
+	 * for this purpose. The propagation segment, phase segment 1 and phase
+	 * segment 2 are configured to have 3TQ. */
+	canBitConfig.phaseSeg2Tq			= CAN_BIT_3TQ;
+	canBitConfig.phaseSeg1Tq			= CAN_BIT_3TQ;
+	canBitConfig.propagationSegTq	   = CAN_BIT_3TQ;
+	canBitConfig.phaseSeg2TimeSelect	= TRUE;
+	canBitConfig.sample3Time			= TRUE;
+	canBitConfig.syncJumpWidth		  = CAN_BIT_2TQ;
+	CANSetSpeed(CAN1,&canBitConfig, SYSTEM_FREQ, CAN_BUS_SPEED);
+	
+	/* Step 3: Assign the buffer area to the CAN module. */
+	CANAssignMemoryBuffer(CAN1, CAN1MessageFifoArea, CAN1_MSG_MEMORY);
 
-    /* Step 4: Configure channel 0 for TX and size of 8 message buffers with RTR 
-     * disabled and low medium priority. Configure channel 1 for RX and size
-     * of 8 message buffers and receive the full message. There can be from 1 to
-     * 32 FIFO buffers each with up to 32 message buffers that are 16 bytes. Each
-     * FIFO, if it is a receive buffer, has an ID filter that specifies which
-     * message to accept. */
-    CANConfigureChannelForTx(CAN1, CAN_CHANNEL0, CAN1_FIFO_BUFFERS, CAN_TX_RTR_DISABLED, CAN_LOW_MEDIUM_PRIORITY);
-    CANConfigureChannelForRx(CAN1, CAN_CHANNEL1, CAN1_FIFO_BUFFERS, CAN_RX_FULL_RECEIVE);
-    
-    /* Step 5: Configure filters and mask. Configure filter 0 to accept SID
-     * messages with SID LED1_INDICATION_MSG. Configure Filter Mask is set to
-     * compare all the ID bits and to filter by the ID type specified in the filter
-     * configuration. Messages accepted by Filter 0 should be stored in Channel 1.
-     */
-    CANConfigureFilter(CAN1, CAN_FILTER0, CAN2_RTR_MESSAGE_ID, CAN_SID);
-    CANConfigureFilterMask(CAN1, CAN_FILTER_MASK0, SID_FILTER_MASK, CAN_SID, CAN_FILTER_MASK_IDE_TYPE);
-    CANLinkFilterToChannel(CAN1, CAN_FILTER0, CAN_FILTER_MASK0, CAN_CHANNEL1);
-    CANEnableFilter(CAN1, CAN_FILTER0, TRUE);
-    
-    /* Step 6: Enable interrupt and events. Enable the receive channel not empty
-     * event (channel event) and the receive channel event (module event).
-     * The interrupt peripheral library is used to enable the CAN interrupt to
-     * the CPU. */
+	/* Step 4: Configure channel 0 for TX and size of 8 message buffers with RTR 
+	 * disabled and low medium priority. Configure channel 1 for RX and size
+	 * of 8 message buffers and receive the full message. There can be from 1 to
+	 * 32 FIFO buffers each with up to 32 message buffers that are 16 bytes. Each
+	 * FIFO, if it is a receive buffer, has an ID filter that specifies which
+	 * message to accept. */
+	CANConfigureChannelForTx(CAN1, CAN_CHANNEL0, CAN1_FIFO_BUFFERS, CAN_TX_RTR_DISABLED, CAN_LOW_MEDIUM_PRIORITY);
+	CANConfigureChannelForRx(CAN1, CAN_CHANNEL1, CAN1_FIFO_BUFFERS, CAN_RX_FULL_RECEIVE);
+	
+	/* Step 5: Configure filters and mask. Configure filter 0 to accept SID
+	 * messages with SID LED1_INDICATION_MSG. Configure Filter Mask is set to
+	 * compare all the ID bits and to filter by the ID type specified in the filter
+	 * configuration. Messages accepted by Filter 0 should be stored in Channel 1.
+	 */
+	CANConfigureFilter(CAN1, CAN_FILTER0, CAN2_RTR_MESSAGE_ID, CAN_SID);
+	CANConfigureFilterMask(CAN1, CAN_FILTER_MASK0, SID_FILTER_MASK, CAN_SID, CAN_FILTER_MASK_IDE_TYPE);
+	CANLinkFilterToChannel(CAN1, CAN_FILTER0, CAN_FILTER_MASK0, CAN_CHANNEL1);
+	CANEnableFilter(CAN1, CAN_FILTER0, TRUE);
+	
+	/* Step 6: Enable interrupt and events. Enable the receive channel not empty
+	 * event (channel event) and the receive channel event (module event).
+	 * The interrupt peripheral library is used to enable the CAN interrupt to
+	 * the CPU. */
 
-    /* CAN Enable Channel Event parameter description:
-     * This routine enables or disables channel level events. Any enabled channel
-     * event will cause a CAN module event. An event can be active regardless of
-     * it being enabled or disabled. Enabling a TX type of event for a RX channel
-     * will have no effect.
-     * 
-     * Parameter 1:     CAN Module:  CAN1 or CAN2
-     * Parameter 2:     CAN FIFO Channel Number: CAN_CHANNEL0 to CAN_CHANNEL31
-     * Parameter 3:     CAN Channel event type - any combination:   	
-     *                      CAN_RX_CHANNEL_NOT_EMPTY
-     *                      CAN_RX_CHANNEL_HALF_FULL
-     *                      CAN_RX_CHANNEL_FULL
-     *                      CAN_RX_CHANNEL_OVERFLOW
-     *                      CAN_RX_CHANNEL_ANY_EVENT
-     *                      CAN_TX_CHANNEL_EMPTY
-     *                      CAN_TX_CHANNEL_HALF_EMPTY
-     *                      CAN_TX_CHANNEL_NOT_FULL
-     *                      CAN_TX_CHANNEL_ANY_EVENT
-     *  Parameter 4:    Event enable - TRUE or FALSE */
-    CANEnableChannelEvent(CAN1, CAN_CHANNEL1, CAN_TX_CHANNEL_ANY_EVENT | CAN_RX_CHANNEL_NOT_EMPTY, TRUE);
+	/* CAN Enable Channel Event parameter description:
+	 * This routine enables or disables channel level events. Any enabled channel
+	 * event will cause a CAN module event. An event can be active regardless of
+	 * it being enabled or disabled. Enabling a TX type of event for a RX channel
+	 * will have no effect.
+	 * 
+	 * Parameter 1:	 CAN Module:  CAN1 or CAN2
+	 * Parameter 2:	 CAN FIFO Channel Number: CAN_CHANNEL0 to CAN_CHANNEL31
+	 * Parameter 3:	 CAN Channel event type - any combination:   	
+	 *					  CAN_RX_CHANNEL_NOT_EMPTY
+	 *					  CAN_RX_CHANNEL_HALF_FULL
+	 *					  CAN_RX_CHANNEL_FULL
+	 *					  CAN_RX_CHANNEL_OVERFLOW
+	 *					  CAN_RX_CHANNEL_ANY_EVENT
+	 *					  CAN_TX_CHANNEL_EMPTY
+	 *					  CAN_TX_CHANNEL_HALF_EMPTY
+	 *					  CAN_TX_CHANNEL_NOT_FULL
+	 *					  CAN_TX_CHANNEL_ANY_EVENT
+	 *  Parameter 4:	Event enable - TRUE or FALSE */
+	CANEnableChannelEvent(CAN1, CAN_CHANNEL1, CAN_TX_CHANNEL_ANY_EVENT | CAN_RX_CHANNEL_NOT_EMPTY, TRUE);
 
-    /* CAN Enable Module Event parameter description:
-     * This routine enables or disables module level events. Any enabled module
-     * event will cause the CAN module to generate a CPU interrupt. An event can
-     * be active regardless of it being enabled or disabled.
-     *
-     * Parameter 1:     CAN Module:  CAN1 or CAN2
-     * Parameter 2:     CAN Event flags - any combination:
-     *                      CAN_TX_EVENT
-     *                      CAN_RX_EVENT
-     *                      CAN_TIMESTAMP_TIMER_OVERFLOW_EVENT
-     *                      CAN_OPERATION_MODE_CHANGE_EVENT
-     *                      CAN_RX_OVERFLOW_EVENT
-     *                      CAN_SYSTEM_ERROR_EVENT
-     *                      CAN_BUS_ERROR_EVENT
-     *                      CAN_BUS_ACTIVITY_WAKEUP_EVENT
-     *                      CAN_INVALID_RX_MESSAGE_EVENT
-     * Parameter 3:     Enable CAN events: TRUE or FALSE */
-    CANEnableModuleEvent(CAN1, CAN_TX_EVENT | CAN_RX_EVENT, TRUE);
+	/* CAN Enable Module Event parameter description:
+	 * This routine enables or disables module level events. Any enabled module
+	 * event will cause the CAN module to generate a CPU interrupt. An event can
+	 * be active regardless of it being enabled or disabled.
+	 *
+	 * Parameter 1:	 CAN Module:  CAN1 or CAN2
+	 * Parameter 2:	 CAN Event flags - any combination:
+	 *					  CAN_TX_EVENT
+	 *					  CAN_RX_EVENT
+	 *					  CAN_TIMESTAMP_TIMER_OVERFLOW_EVENT
+	 *					  CAN_OPERATION_MODE_CHANGE_EVENT
+	 *					  CAN_RX_OVERFLOW_EVENT
+	 *					  CAN_SYSTEM_ERROR_EVENT
+	 *					  CAN_BUS_ERROR_EVENT
+	 *					  CAN_BUS_ACTIVITY_WAKEUP_EVENT
+	 *					  CAN_INVALID_RX_MESSAGE_EVENT
+	 * Parameter 3:	 Enable CAN events: TRUE or FALSE */
+	CANEnableModuleEvent(CAN1, CAN_TX_EVENT | CAN_RX_EVENT, TRUE);
 
-    /* These functions are from interrupt peripheral library. */
-    INTSetVectorPriority(INT_CAN_1_VECTOR, INT_PRIORITY_LEVEL_4);
-    INTSetVectorSubPriority(INT_CAN_1_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
-    INTEnable(INT_CAN1, INT_ENABLED);
-    
-    /* Step 7: Switch the CAN mode to normal mode. */
-    CANSetOperatingMode(CAN1, CAN_NORMAL_OPERATION);
-    while(CANGetOperatingMode(CAN1) != CAN_NORMAL_OPERATION);
+	/* These functions are from interrupt peripheral library. */
+	INTSetVectorPriority(INT_CAN_1_VECTOR, INT_PRIORITY_LEVEL_4);
+	INTSetVectorSubPriority(INT_CAN_1_VECTOR, INT_SUB_PRIORITY_LEVEL_0);
+	INTEnable(INT_CAN1, INT_ENABLED);
+	
+	/* Step 7: Switch the CAN mode to normal mode. */
+	CANSetOperatingMode(CAN1, CAN_NORMAL_OPERATION);
+	while(CANGetOperatingMode(CAN1) != CAN_NORMAL_OPERATION);
 }
 
 /**	
@@ -199,10 +199,10 @@ void initialize_CAN2(void) {
  **/
 unsigned int CAN1_process_RX(float* temperature, float* motor_speed, float* pwm_setting) {
 	CANRxMessageBuffer* message;	// Pointer to the message read from the RX Channel
-    CANRxMessageBuffer* next;       // Pointer to the next message from the RX Channel
+	CANRxMessageBuffer* next;	   // Pointer to the next message from the RX Channel
 	short temperature_scaled10 = 0;	// 10x scaled value of the read temperature
 	short motor_speed_scaled10 = 0;	// 10x scaled value of the read motor speed
-	short motor_speed_100th    = 0;	// 1/100th place of the motor speed
+	short motor_speed_100th	= 0;	// 1/100th place of the motor speed
 	short pwm_setting_scaled10 = 0;	// 10x scaled value of the read pwm setting
 
 	// There was no message received on CAN1 - exit
@@ -213,16 +213,12 @@ unsigned int CAN1_process_RX(float* temperature, float* motor_speed, float* pwm_
 	CAN1_received_flag = FALSE;	// Reset the flag
 	message = (CANRxMessageBuffer*) CANGetRxMessage(CAN1, CAN_CHANNEL1);
 
-	// Parse the message word-by-word into each variable
+	// Parse the message byte-by-byte into each variable
 	// The data is sent as the value (times 10) to represent the decimal
 	temperature_scaled10 = message -> data[0] + (message -> data[1] << 8);
 	motor_speed_scaled10 = message -> data[2] + (message -> data[3] << 8);
 	motor_speed_100th = message -> data[4] + (message -> data[5] << 8);
 	pwm_setting_scaled10 = message -> data[6] + (message -> data[7] << 8);
-//	temperature_scaled10 = message -> messageWord[0];	// Read the 1st word (temperature)
-//	motor_speed_scaled10 = message -> messageWord[1];	// Read the 2nd word (motor speed)
-//	motor_speed_100th    = message -> messageWord[2];	// Read the 3rd word (100th place of motor speed)
-//	pwm_setting_scaled10 = message -> messageWord[3];	// Read the 4th word (pwm setting)
 
 	// Scale the readings down (their 10x value is sent to preserve 1 decimal place)
 	// The motor speed has the 100th place sent specifically, so that needs to be added in
@@ -257,8 +253,8 @@ unsigned int CAN2_process_RX(float* desired_pwm_setting) {
 	message = (CANRxMessageBuffer*) CANGetRxMessage(CAN2, CAN_CHANNEL1);
 
 	// Parse the message
-	pwm_setting_scaled10 = message -> data[0];	    // Read BYTE0 of the data (two bytes)
-	pwm_setting_scaled10 += (message -> data[1]) << 8;  // Read BYTE1 of the data
+	pwm_setting_scaled10 = message -> data[0];			// Read BYTE0 of the data (two bytes)
+	pwm_setting_scaled10 += (message -> data[1]) << 8;	// Read BYTE1 of the data
 
 	// Scale the reading down (its 10x value is sent to preserve 1 decimal place)
 	*desired_pwm_setting = ((float) pwm_setting_scaled10) / 10.0;
@@ -348,8 +344,7 @@ void CAN2_refill_RTR_buffer(float temperature, float motor_speed, float pwm_sett
 
 	// The CAN_TX_CHANNEL_EMPTY flag is set when any FIFO has a message that's not sent
 	// If that flag is NOT set, no RTR has been responded to yet
-//	if ((CANGetChannelEvent(CAN2, CAN_CHANNEL0) & CAN_TX_CHANNEL_EMPTY) == 0)
-    if ((CANGetChannelEvent(CAN2, CAN_CHANNEL0) & CAN_TX_CHANNEL_NOT_FULL) == 0)
+	if ((CANGetChannelEvent(CAN2, CAN_CHANNEL0) & CAN_TX_CHANNEL_EMPTY) == 0)
 		return;
 
 	// An RTR was responded to, emptying the FIFO
@@ -376,10 +371,6 @@ void CAN2_refill_RTR_buffer(float temperature, float motor_speed, float pwm_sett
 	message -> data[5] = ((short) (motor_speed * 100 - ((short) (motor_speed * 10)) * 10) & BYTE_1_MASK) >> 8;
 	message -> data[6] = (short) (pwm_setting * 10) & BYTE_0_MASK;
 	message -> data[7] = ((short) (pwm_setting * 10) & BYTE_1_MASK) >> 8;
-//	message -> messageWord[0] = (short) (temperature * 10);
-//	message -> messageWord[1] = (short) (motor_speed * 10);
-//	message -> messageWord[2] = (short) (motor_speed * 100 - ((short) (motor_speed * 10)) * 10);
-//	message -> messageWord[3] = (short) (pwm_setting * 10);
 
 	// Let the CAN Module know the message processing is done, and it's ready to be processed
 	CANUpdateChannel(CAN2, CAN_CHANNEL0);
@@ -392,7 +383,7 @@ void CAN2_refill_RTR_buffer(float temperature, float motor_speed, float pwm_sett
  *	@param	None.
  *	@return	None.
  **/
-void __ISR(_CAN_1_VECTOR, IPL4) CAN1_isr_handler(void) {
+void __ISR(_CAN_1_VECTOR, IPL4) isr_CAN1_handler(void) {
 	// Check if the source of the interrupt is  RX_EVENT.
 	if ((CANGetModuleEvent(CAN1) & CAN_RX_EVENT) != 0) {
 		/* Within this, you can check which channel caused the event by using the 
@@ -420,7 +411,7 @@ void __ISR(_CAN_1_VECTOR, IPL4) CAN1_isr_handler(void) {
  *	@param	None.
  *	@return	None.
  **/
-void __ISR(_CAN_2_VECTOR, ipl4) CAN2_isr_handler(void) {
+void __ISR(_CAN_2_VECTOR, ipl4) isr_CAN2_handler(void) {
 	// Check if the source of the interrupt is RX_EVENT.
 	if ((CANGetModuleEvent(CAN2) & CAN_RX_EVENT) != 0) {
 		/* Within this, you can check which event caused the interrupt by using the 

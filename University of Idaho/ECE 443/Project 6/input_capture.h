@@ -1,3 +1,9 @@
+/** 
+ *	@file 	input_capture.h
+ *	@brief 	Input Capture header file. Defines the buffer length to use for calculating the average RPS.
+ *	@author	Collin Heist
+ **/
+
 #ifndef __INPUT_CAPTURE_H__
     #define __INPUT_CAPTURE_H__
 

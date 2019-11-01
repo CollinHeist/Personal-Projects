@@ -1,5 +1,5 @@
 /** 
- *	@file	CAN-C.h
+ *	@file	CANFunctions.h
  *	@brief	CAN header file. Defines the bus speed, channel size, and ID masks
  *	@author	Collin Heist
  **/
@@ -7,7 +7,7 @@
 #ifndef __CAN_FUNCTIONS_H__
 	#define __CAN_FUNCTIONS_H__
 
-	#define CAN_BUS_SPEED				250000
+	#define CAN_BUS_SPEED				250000	// Speed to operate the CAN bus at (in HZ)
 
 	/* This is the CAN1 FIFO message area.	 * Note the size of CAN1 message area.
 	 * It is 2 (Channels)*8 (Messages Buffers) 16 (bytes/per message buffer) bytes. */
