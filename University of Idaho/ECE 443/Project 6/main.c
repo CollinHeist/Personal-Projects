@@ -22,8 +22,9 @@
 #include "main.h"
 #include "LCDlib.h"			// LCD Library
 #include "SMBus_IR.h"		// IR Sensor
-#include "CAN.h"			// CAN implementation
-#include "PWM.h"			// PWM
+#include "CANFunctions.h"			// CAN implementation
+#include "PWM_library.h"			// PWM
+#include "input_capture.h"
 
 /* --------------------------- Function Prototypes -------------------------- */
 // CN ISR for button presses - Directly calls wrapper function
@@ -32,13 +33,11 @@ void __ISR(_CHANGE_NOTICE_VECTOR, IPL2) isr_change_notice_wrapper(void);
 /* ---------------------------- Global Variables ---------------------------- */
 xSemaphoreHandle cn_semaphore;		// Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
 
-typedef enum MODE_STATES {CONFIGURATION_MODE, OPERATIONAL_MODE} current_state;
+enum STATE {CONFIGURATION_MODE, OPERATIONAL_MODE} current_state = CONFIGURATION_MODE;
 
 float latest_temp;					// Current temperature as read by the IR Sensor
 float latest_rps;					// Current RPS of the motor
 float latest_pwm_setting;			// Current PWM setting to the motor
-
-float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of previous RPS readings
 
 unsigned int previous_BTN1_status;	// Previous status of BTN1 (used to detect PRESSES)
 
@@ -54,10 +53,7 @@ int main() {
 	// Initialize and configure the hardware
 	initialize_hardware();
 
-	// Initialize the state machine to config mode
-	current_state = CONFIGURATION_MODE;
-
-	// Initalize other components of the system
+	// Initialize other components of the system
 	unsigned int failure_flag = FALSE;
 	failure_flag = create_RTOS_objects();
 	failure_flag |= create_tasks();
@@ -80,10 +76,20 @@ int main() {
  *	@return	None.
  **/
 static void initialize_hardware() {
-	chipKIT_PRO_MX7_Setup();				// Set up board
-	initialize_LCD();						// Initialize the LCD
-	initialize_ir_sensor();					// Initialize the IR Sensor
-	initialize_pwm(0, PWM_FREQUENCY_HZ);	// Initialize the PWM module 
+	chipKIT_PRO_MX7_Setup();    // Set up board
+	
+	// Turn on the multiple interrupt Vectors
+//	INTConfigureSystem(INT_SYSTEM_CONFIG_MULT_VECTOR);  // added
+//	INTEnableInterrupts();	// added
+	INTEnableSystemMultiVectoredInt();
+	
+    // Module / Peripheral Initialization
+	initialize_LCD();
+	initialize_ir_sensor();
+	initialize_pwm(0, PWM_FREQUENCY_HZ);
+    initialize_input_capture();
+	initialize_CAN1();
+	initialize_CAN2();
 
 	// Set up LEDs
 	PORTSetPinsDigitalOut(IOPORT_B, SM_LEDS);	// LEDA-H on PORTB
@@ -95,12 +101,6 @@ static void initialize_hardware() {
 	PORTSetPinsDigitalIn(IOPORT_G, BTN1 | BTN2);
 	PORTSetPinsDigitalIn(IOPORT_A, BTN3); 
 	
-	// Input Capture Initialization
-	PORTSetPinsDigitalIn(IOPORT_D, BIT_3 | BIT_12);	// Tachometer inputs
-	mIC5ClearIntFlag();	
-	OpenCapture5(IC_ON | IC_CAP_16BIT | IC_IDLE_STOP | IC_FEDGE_FALL | IC_TIMER3_SRC | IC_INT_1CAPTURE | IC_EVERY_FALL_EDGE);
-	ConfigIntCapture(IC_INT_ON | IC_INT_PRIOR_3 | IC_INT_SUB_PRIOR_0);
-
 	// Enable the CN interrupt for BTN1
 	mCNOpen(CN_ON, CN8_ENABLE, 0);
 	mCNSetIntPriority(1);
@@ -108,9 +108,6 @@ static void initialize_hardware() {
 	unsigned int x = PORTReadBits(IOPORT_G, BTN1);
 	mCNClearIntFlag();
 	mCNIntEnable(1);
-
-	// Turn on the multiple interrupt Vectors
-	INTEnableSystemMultiVectoredInt();
 }
 
 /**	
@@ -125,7 +122,7 @@ static unsigned int create_RTOS_objects() {
 		trace_IO = xTraceRegisterString("IO");
 		trace_RTR = xTraceRegisterString("RTR");
 		trace_CN = xTraceRegisterString("Change Notice");
-		trace_control_fsm = xTraceRegisterString("Control Unit FSM")
+		trace_control_fsm = xTraceRegisterString("Control Unit FSM");
 	}
 
 	// Create the semaphore needed for the CN ISR -> Handler, and UART-RX ISR -> Handler
@@ -147,7 +144,7 @@ static unsigned int create_tasks() {
 	task_success = xTaskCreate(task_read_IO, "Temperature and Motor Speed Reading Task",
 		configMINIMAL_STACK_SIZE, NULL, TASK_READ_IO_PRIORITY, NULL);
 	task_success |= xTaskCreate(task_send_RTR, "RTR Sending Task",
-		configMINIMAL_STACK_SIZE, NULL, TASK_CN_ISR_HANDLER_PRIORITY, NULL);
+		configMINIMAL_STACK_SIZE, NULL, TASK_SEND_RTR_PRIORITY, NULL);
 	task_success |= xTaskCreate(task_change_notice_handler, "Change Notice Handler Task",
 		configMINIMAL_STACK_SIZE, NULL, TASK_CHANGE_NOTICE_PRIORITY, NULL);
 	task_success |= xTaskCreate(task_control_FSM, "Control Unit FSM Task",
@@ -165,32 +162,25 @@ static unsigned int create_tasks() {
 /* --------------------------- 'Normal' Functions --------------------------- */
 
 /**	
- *	@brief	ISR for the input capture module. Adds the latest reading to the rps_buffer.
+ *	@brief	Change Notice ISR wrapper. Unblocks the CN handler task.
  *	@param	None.
  *	@return	None.
  **/
-void __ISR(_INPUT_CAPTURE_5_VECTOR, IPL3) isr_input_capture (void) {
-	unsigned int input_buffer[4] = {0};
-	static unsigned short int new_capture = 0;
-	static unsigned short int old_capture = 0;
-	unsigned short int delta_t = 0;
+void isr_change_notice_handler(void) {
+	// Flag for if returning to a higher priority task is necessary
+	portBASE_TYPE move_to_higher_priority = pdFALSE;
 
-	// Read the input capture FIFO and increment variables
+	// Give the semaphore to unlock the task
 	if (configUSE_TRACE_FACILITY)
-		vTracePrint(trace_IO, "Input Capture interrupt triggered. Reading speed");
-	ReadCapture5(input_buffer);
-	new_capture = input_buffer[0];
-	delta_t = new_capture - old_capture;
-	old_capture = new_capture;
+		vTracePrint(trace_CN, "Giving semaphore from CN ISR");
+	xSemaphoreGiveFromISR(cn_semaphore, &move_to_higher_priority);
 
-	// Compute the newest rev/s calculation, add to the buffer
-	float rev_per_sec = 10.0E6 / 256.0 / (float) delta_t;
-	unsigned int i = 0;
-	for (i = SPEED_BUFFER_LEN - 1; i > 0; i--)	// Loop through buffer, shift elements down
-		rps_buffer[i] = rps_buffer[i-1];
-	rps_buffer[0] = rev_per_sec;
+	// Clear the interrupt flag
+	mCNClearIntFlag();
+	mCNOpen(CN_OFF, CN8_ENABLE, 0);
 
-	mIC5ClearIntFlag();	// Clear interrupt flag
+	// Exit the ISR, returning to the higher priority task if necessary
+	portEND_SWITCHING_ISR(move_to_higher_priority);
 }
 
 /* --------------------------------- Tasks ---------------------------------- */
@@ -208,7 +198,7 @@ static void task_read_IO(void* task_params) {
 			vTracePrint(trace_IO, "Reading IO values. Attempting to refill RTR Buffer");
 		// Read the temperature and calculate the average RPS - update the global variables
 		latest_temp = read_ir_temp();
-		latest_rps = average_rps_calculator();
+		latest_rps = get_average_rps();
 
 		// Attempt to refill the RTR buffer if necessary
 		CAN2_refill_RTR_buffer(latest_temp, latest_rps, latest_pwm_setting);
@@ -233,28 +223,6 @@ static void task_send_RTR(void* task_params) {
 		
 		vTaskDelayUntil(&last_time_awake, task_frequency_ticks);	// Wait
 	}
-}
-
-/**	
- *	@brief	Change Notice ISR wrapper. Unblocks the CN handler task.
- *	@param	None.
- *	@return	None.
- **/
-void isr_change_notice_handler(void) {
-	// Flag for if returning to a higher priority task is necessary
-	portBASE_TYPE move_to_higher_priority = pdFALSE;
-
-	// Give the semaphore to unlock the task
-	if (configUSE_TRACE_FACILITY)
-		vTracePrint(trace_CN, "Giving semaphore from CN ISR");
-	xSemaphoreGiveFromISR(cn_semaphore, &move_to_higher_priority);
-
-	// Clear the interrupt flag
-	mCNClearIntFlag();
-	mCNOpen(CN_OFF, CN8_ENABLE, 0);
-
-	// Exit the ISR, returning to the higher priority task if necessary
-	portEND_SWITCHING_ISR(move_to_higher_priority);
 }
 
 /**
@@ -301,11 +269,19 @@ static void task_control_FSM(void* task_params) {
 	float temp = 0, rps = 0, pwm = 0;				// Values read from the CAN1 RX channel
 	float pwm_low_point = 0, pwm_high_point = 0;	// Set points for low/high PWM
 	float desired_pwm = 0;							// Desired PWM based on temperature reading
+    unsigned int new_data_flag = FALSE;             // Flag of whether or not the RTR was responded to
 
 	for (;;) {
 		// Clear both string buffers
 		clear_string_buffer(top_lcd_str, sizeof(top_lcd_str));
 		clear_string_buffer(bottom_lcd_str, sizeof(bottom_lcd_str));
+        
+        if (CAN1_process_RX(&temp, &rps, &pwm) == CAN_MESSAGE_RECEIVED) {
+            LATBINV = LEDB;		// Toggle LEDB when the sensor message is received
+            if (configUSE_TRACE_FACILITY)
+                vTracePrint(trace_control_fsm, "RTR was responded to by CAN2 - updating LCD");
+            new_data_flag = TRUE;
+        }
 
 		// Implement the 'FSM' as a switch-case
 		switch (current_state) {
@@ -350,13 +326,14 @@ static void task_control_FSM(void* task_params) {
 					vTracePrint(trace_control_fsm, "In OPERATIONAL mode");
 
 				// Read from the CAN1 RX channel
-				if (CAN1_process_RX(&temp, &rps, &pwm) == CAN_MESSAGE_RECIEVED) {
+				if (new_data_flag) {
+                    new_data_flag = FALSE;
 					LATBINV = LEDB;		// Toggle LEDB when the sensor message is received
 					if (configUSE_TRACE_FACILITY)
 						vTracePrint(trace_control_fsm, "RTR was responded to by CAN2 - updating LCD");
 					// A message WAS received - update the LCD
-					sprintf(top_lcd_str, "%02.0f%%         %03.2f", pwm, rps);
-					sprintf(bottom_lcd_str, "%02.1f  %02.1f  %02.1f", pwm_low_point, temp, pwm_high_point);
+					sprintf(top_lcd_str, "%d%%       %05.2f", (int)pwm, rps);
+					sprintf(bottom_lcd_str, "%03.1f  %03.1f  %03.1f", pwm_low_point, temp, pwm_high_point);
 
 					// Write the messsage to the LCD line-by-line
 					set_cursor_LCD(FIRST_LINE_START);
@@ -366,11 +343,11 @@ static void task_control_FSM(void* task_params) {
 
 					// Calculate the desired PWM value and send that to CAN2
 					if (temp < pwm_low_point)
-						desired_pwm = PWM_MIN_VAL;
+						desired_pwm = (float) PWM_MIN_VAL;
 					else if (temp > pwm_high_point)
-						desired_pwm = PWM_MAX_VAL;
+						desired_pwm = (float) PWM_MAX_VAL;
 					else
-						desired_pwm = (PWM_LINEAR_MAX - PWM_LINEAR_MIN) * (temp - pwm_low_point) / (pwm_high_point - pwm_low_point) + PWM_LINEAR_MIN;
+						desired_pwm = (float) ((PWM_LINEAR_MAX - PWM_LINEAR_MIN) * (temp - pwm_low_point) / (pwm_high_point - pwm_low_point) + PWM_LINEAR_MIN);
 
 					if (configUSE_TRACE_FACILITY)
 						vTracePrint(trace_control_fsm, "Sending desired PWM setting to CAN2");
@@ -390,13 +367,12 @@ static void task_control_FSM(void* task_params) {
  *	@return		None.
  **/
 static void task_update_pwm(void* task_params) {
-	float desired_pwm = 0;
 	for (;;) {
-		if (CAN2_process_RX(&desired_pwm) == CAN_MESSAGE_RECIEVED) {
+		if (CAN2_process_RX(&latest_pwm_setting) == CAN_MESSAGE_RECEIVED) {
 			if (configUSE_TRACE_FACILITY)
 				vTracePrint(trace_IO, "New PWM setting receieved - updating PWM output");
 
-			if (set_pwm((unsigned int) desired_pwm)) {
+			if (set_pwm((unsigned int) latest_pwm_setting)) {
 				// Error occurred while setting PWM (i.e. non-valid entry)
 				if (configUSE_TRACE_FACILITY)
 					vTracePrint(trace_IO, "Requested PWM setting is invalid");
@@ -409,22 +385,7 @@ static void task_update_pwm(void* task_params) {
 	}
 }
 
-
 /* --------------------------- 'Helper' Functions --------------------------- */
-
-/**	
- *  @brief	Function to calculate the average RPS from the global rps_buffer.
- *  @param  None.
- *  @return	None.
- **/
-static float average_rps_calculator(void) {
-	float avg = 0;	  // Current average
-	unsigned int i = 0; // Iterating variable
-	for (i = 0; i < SPEED_BUFFER_LEN; i++)
-		avg += rps_buffer[i];
-				
-	return (avg / ((float) SPEED_BUFFER_LEN));
-}
 
 /**	
  *  @brief		Function to clear the contents of a given string.

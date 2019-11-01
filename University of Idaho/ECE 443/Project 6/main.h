@@ -9,14 +9,12 @@
 	
 	#define MS_TO_TICKS(ms)					(ms / portTICK_RATE_MS)	// Convert a passed number of ms to ticks in FreeRTOS space
 
-	#define SPEED_BUFFER_LEN				32		// How long of a buffer to keep for the motor speed
-
 	// Task Priority Levels
-	#define TASK_READ_IO_PRIORITY			1
-	#define TASK_SEND_RTR_PRIORITY			3
-	#define TASK_CHANGE_NOTICE_PRIORITY		4
+	#define TASK_READ_IO_PRIORITY			3
+	#define TASK_SEND_RTR_PRIORITY			2
+	#define TASK_CHANGE_NOTICE_PRIORITY		3
 	#define TASK_CONTROL_FSM_PRIORITY		2
-	#define TASK_UPDATE_PWM_PRIORITY		3
+	#define TASK_UPDATE_PWM_PRIORITY		2
 
 	// Event timings
 	#define IO_FREQ_MS						500		// How often the IO is checked (in ms)
