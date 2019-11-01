@@ -12,6 +12,11 @@
 // Global Variables
 static float rps_buffer[SPEED_BUFFER_LEN];	// Buffer of RPS readings
 
+/**	
+ *	@brief	Function to initialize the input capture peripheral, as well as Timer 3.
+ *	@param  None.
+ *	@return	None.
+ **/
 void initialize_input_capture(void) {
 	// Timer 3 initialization
 	OpenTimer3(T3_ON | T3_SOURCE_INT | T3_PS_1_256, 0xFFFF);

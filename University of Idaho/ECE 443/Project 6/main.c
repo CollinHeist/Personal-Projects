@@ -15,6 +15,7 @@
 #include "FreeRTOS.h"		// FreeRTOS API
 #include "FreeRTOSConfig.h"	// FreeRTOS configuration
 #include "task.h"			// Generic task
+#include "semphr.h"			// Semaphore
 
 // File-Header includes
 #include "main.h"

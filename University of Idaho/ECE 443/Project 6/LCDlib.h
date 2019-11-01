@@ -15,6 +15,7 @@
 	#define FIRST_LINE_END		0x000F
 	#define SECOND_LINE_START	0x0040
 	#define SECOND_LINE_END		0x004F
+	#define	TAB_WIDTH			4
 
 	// Values of RS pin to access each register
 	#define LCD_RS_CMD			0

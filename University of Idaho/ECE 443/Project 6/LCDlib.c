@@ -62,6 +62,9 @@ void put_char_LCD(char c) {
 		case '\n':	// Move to beginning of next line
 			next_addr = (curr_addr >= SECOND_LINE_START) ? FIRST_LINE_START : SECOND_LINE_START;
 			break;
+		case '\t':	// Increment by four spaces
+			next_addr = curr_addr + TAB_WIDTH;
+			break;
 		default:
 			_write_LCD(LCD_RS_DATA, c);	// Write character to data field of LCD
 			if (curr_addr == FIRST_LINE_END)
