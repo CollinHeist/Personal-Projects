@@ -10,6 +10,8 @@
 	// Used by the software delay
 	#define COUNTS_PER_MS		8890
 
+	#define BLANK_LINE			("                ")
+
 	// Macros for LCD line positioning
 	#define FIRST_LINE_START	0x0000
 	#define FIRST_LINE_END		0x000F

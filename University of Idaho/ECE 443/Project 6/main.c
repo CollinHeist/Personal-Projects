@@ -35,8 +35,6 @@ xSemaphoreHandle cn_semaphore;		// Semaphore for unblocking the handler task fro
 // State machine declaration that contains states for operation and config modes
 enum STATE {CONFIGURATION_MODE, OPERATIONAL_MODE} current_state = CONFIGURATION_MODE;
 
-float latest_temp;					// Current temperature as read by the IR Sensor
-float latest_rps;					// Current RPS of the motor
 float latest_pwm_setting;			// Current PWM setting to the motor
 
 unsigned int previous_BTN1_status;	// Previous status of BTN1 (used to detect PRESSES)
@@ -189,6 +187,8 @@ void isr_change_notice_handler() {
  *	@return		None.
  **/
 static void task_read_IO(void* task_params) {
+	float latest_temp;	// Current temperature as read by the IR Sensor
+	float latest_rps;	// Current RPS of the motor
 	const TickType_t task_frequency_ticks = MS_TO_TICKS(IO_FREQ_MS);
 	TickType_t last_time_awake = xTaskGetTickCount();
 	for (;;) {
@@ -291,7 +291,7 @@ static void task_control_FSM(void* task_params) {
 
 				// Format the string in the given format (--temp.x--) only if a temperature has been read
 				if (temp == 0)
-					strcpy(top_lcd_str, "				");
+					strcpy(top_lcd_str, BLANK_LINE);
 				else
 					sprintf(top_lcd_str, "	  %02.1f	  ", temp);
 
@@ -311,7 +311,7 @@ static void task_control_FSM(void* task_params) {
 
 				// If the low and high points are zero, the bottom lcd string is empty
 				if (pwm_low_point == 0 && pwm_high_point == 0)
-					strcpy(bottom_lcd_str, "				");
+					strcpy(bottom_lcd_str, BLANK_LINE);
 				else
 					sprintf(bottom_lcd_str, "%02.1f		%02.1f", pwm_low_point, pwm_high_point);
 
