@@ -1,28 +1,3 @@
-/*********************************************************************
- *
- *  Main Application Entry Point
- *  Module for Microchip TCP/IP Stack
- *
- *********************************************************************
- * FileName:        VendingMachine.c
- * Dependencies:    TCPIP.h, MainDemo.h, VendingMachine.h
- * Processor:       PIC32
- * Compiler:        Microchip C32 v1.11b or higher
- * Company:         Microchip Technology, Inc.
- *
- *
- * Customized by: 	Richard Wall
- *					University of Idaho
- *					October 21, 2007
- *
- * This hardware profile is specifically modified for the 
- * Cerebot 32MX7 in combination with the UI Stepper motor 
- * PMod and the parallel character LCD using the PMP bus.
- *
- * Note:  UART not specified -- Needs to be set for UART1
- *
- ********************************************************************/
-
 /*
  * This macro uniquely defines this file as the main entry point.
  * There should only be one such definition in the entire project,
@@ -85,34 +60,33 @@ int main(void) {
 	static DWORD t = 0;
 	static DWORD dwLastIP = 0;
 
-// Initialize application specific hardware :  Cerebot 32MX7
     InitializeBoard();
 
 	#if defined(USE_LCD)  // See TCPIP.h for method for setting this define
-	// Initialize and display the stack version on the LCD
+		// Initialize and display the stack version on the LCD
 	    LCDInit();
 	    DelayMs(100);
-	// This writes both LCD lines
+		// This writes both LCD lines
 	    strcpypgm2ram((char*)LCDText, "WebVend Demo App"
 									  "                "); 
 	    LCDUpdate();
 	#endif
 
-// Initialize stack-related hardware components that may be 
-// required by the UART configuration routines
+	// Initialize stack-related hardware components that may be 
+	// required by the UART configuration routines
     TickInit();
     MPFSInit();
 
-// Initialize Stack and application related NV variables into AppConfig.
+	// Initialize Stack and application related NV variables into AppConfig.
     InitAppConfig();
 
-// Initialize core stack layers (MAC, ARP, TCP, UDP) and
-// application modules (HTTP, SNMP, etc.)
+	// Initialize core stack layers (MAC, ARP, TCP, UDP) and
+	// application modules (HTTP, SNMP, etc.)
     StackInit();
 
-// Initialize any application-specific modules or functions/
-// For this demo application, this only includes the
-// UART 2 TCP Bridge
+	// Initialize any application-specific modules or functions/
+	// For this demo application, this only includes the
+	// UART 2 TCP Bridge
 	#if defined(STACK_USE_UART2TCP_BRIDGE)
 	    UART2TCPBridgeInit();
 	#endif
@@ -132,34 +106,33 @@ int main(void) {
     down into smaller pieces so that other tasks can have CPU time.
 */ 
 	while(1) {
-	// Blink LED0 (right most one) every second and poll Ethernet stack.
+		// Blink LED0 (right most one) every second and poll Ethernet stack.
         if(TickGet() - t >= TICK_SECOND/2ul) {
             t = TickGet();
             LED0_IO ^= 1;	// Blink activity LED
         }
 
-/* This task performs normal stack task including checking
-   for incoming packet, type of packet and calling
-   appropriate stack entity to process it. */
+		/* This task performs normal stack task including checking
+		   for incoming packet, type of packet and calling
+		   appropriate stack entity to process it. */
         StackTask();
 
-/* This tasks invokes each of the core stack application tasks */
+		/* This tasks invokes each of the core stack application tasks */
         StackApplications();
 
 
-/*  Process application specific tasks here. For this Web Vending 
-    Machine app, this will include the Generic TCP server and Ping
-    capability. Following that, we will process any IO from
-    the inputs on the board itself.  Any custom modules or processing
-    you need to do should go here.
-*/
+		/*  Process application specific tasks here. For this Web Vending 
+		    Machine app, this will include the Generic TCP server and Ping
+		    capability. Following that, we will process any IO from
+		    the inputs on the board itself.  Any custom modules or processing
+		    you need to do should go here.*/
 
         ProcessIO();
 
-/* If the local IP address has changed (ex: due to DHCP lease change)
-   write the new IP address to the LCD display, UART, and Announce 
-   service
-*/
+		/* If the local IP address has changed (ex: due to DHCP lease change)
+		   write the new IP address to the LCD display, UART, and Announce 
+		   service
+		*/
         if(dwLastIP != AppConfig.MyIPAddr.Val) {
             dwLastIP = AppConfig.MyIPAddr.Val;
 			
@@ -167,7 +140,7 @@ int main(void) {
                 putrsUART((ROM char*)"\r\nNew IP Address: ");
             #endif
 
-// If not vending, show the new IP on terminal and LCD
+			// If not vending, show the new IP on terminal and LCD
             if(smVend == SM_IDLE || smVend == SM_DISPLAY_WAIT) {
                 memcpypgm2ram(LCDText, "WebVend Demo App", 16);
                 DisplayIPValue(AppConfig.MyIPAddr);
@@ -187,7 +160,6 @@ int main(void) {
     }
 }
 
-// Writes an IP address to the LCD display and the UART as available
 /*********************************************************************
  * Function:        DisplayIPValue(IP_ADDR IPVal)
  * PreCondition:    LCD initialized
@@ -244,39 +216,35 @@ static void ProcessIO(void) {
 	static BOOL lcdUpdated;
 
 	// Main application finite state machine
-	switch(smVend)
-	{
+	switch(smVend) {
 		case SM_IDLE:
 			lcdUpdated = FALSE;		
 			// Wait for a button press
 			if(BUTTON0_IO == 1u || BUTTON1_IO == 1u || BUTTON2_IO == 1u) // || BUTTON3_IO == 1u)
 				smVend = SM_DEBOUNCE_DOWN;
 			break;
-
 		case SM_DEBOUNCE_DOWN:
 			Delayms(100);	// Allows dual button press
 			// Check if a button is down
-			if(BUTTON2_IO == 1u && BUTTON1_IO == 1u)
+			if (BUTTON2_IO == 1u && BUTTON1_IO == 1u)
 				smVend = SM_ADD_COIN;
-			else if(BUTTON2_IO == 1u)
+			else if (BUTTON2_IO == 1u)
 				smVend = SM_TRY_VEND;
-			else if(BUTTON1_IO == 1u)
+			else if (BUTTON1_IO == 1u)
 				smVend = SM_PREV;
-			else if(BUTTON0_IO == 1u)
+			else if (BUTTON0_IO == 1u)
 				smVend = SM_NEXT;
 			else
 				smVend = SM_IDLE;
-			break;
+			brek;
 			
 		case SM_ADD_COIN:
 			// Add a quarter, up to $5.00
-			if(curCredit < 20u)
-			{// Increase the credit
+			if (curCredit < 20u) {// Increase the credit
 				curCredit++;
 				smVend = SM_RELEASE_WAIT;
 			}
-			else
-			{// Max credit was reached
+			else { // Max credit was reached
 				strcpypgm2ram((char*)LCDText, (ROM char*)" Coin Returned! Max credit is $5");
 				LCDUpdate();
 				displayTimeout = TickGet() + 2*TICK_SECOND;
@@ -286,15 +254,14 @@ static void ProcessIO(void) {
 		
 		case SM_TRY_VEND:
 			// Try to vend a product
-			if(Products[curItem].stock == 0u)
-			{// Product is sold out
+			if (Products[curItem].stock == 0u) {
+				// Product is sold out
 				strcpypgm2ram((char*)LCDText, (ROM char*)"    SOLD OUT                    ");
 				LCDUpdate();
 				displayTimeout = TickGet() + TICK_SECOND;
 				smVend = SM_DISPLAY_WAIT;
 			}
-			else if(Products[curItem].price > curCredit)
-			{
+			else if(Products[curItem].price > curCredit) {
 				strcpypgm2ram((char*)LCDText, (ROM char*)"Price:  $       Credit: $       ");
 				WritePriceLCD(Products[curItem].price, 9);
 				WritePriceLCD(curCredit, 25);
@@ -302,8 +269,7 @@ static void ProcessIO(void) {
 				displayTimeout = TickGet() + 2*TICK_SECOND;
 				smVend = SM_DISPLAY_WAIT;
 			}
-			else
-			{
+			else {
 				strcpypgm2ram((char*)LCDText, (ROM char*)"   vending...                   ");
 				curCredit -= Products[curItem].price;
 				Products[curItem].stock--;
@@ -315,44 +281,38 @@ static void ProcessIO(void) {
 				// will survive a reset.
 			}
 			break;
-		
 		case SM_PREV:
 			// Move back one product in the list
-			if(curItem > 0u)
+			if (curItem > 0u)
 				curItem--;
 			smVend = SM_RELEASE_WAIT;
 			break;
-		
 		case SM_NEXT:
 			// Move forward one product in the list
 			if(curItem < MAX_PRODUCTS-1)
 				curItem++;
 			smVend = SM_RELEASE_WAIT;
 			break;
-		
 		case SM_DISPLAY_WAIT:
 			// Wait for the timout to occur before continuing
 			if(TickGet() > displayTimeout)
 				smVend = SM_RELEASE_WAIT;
-			break;
-					
+			break;	
 		case SM_RELEASE_WAIT:
 			// Wait for all buttons to be released
 			
-			if(!lcdUpdated)
-			{// Update the LCD
+			if (!lcdUpdated) { // Update the LCD
 				WriteLCDMenu();
 				lcdUpdated = TRUE;
 			}
 			
 			// Continue if all buttons are up
-			if(BUTTON0_IO == 0u && BUTTON1_IO == 0u && BUTTON2_IO == 0u)//  && BUTTON3_IO == 0u)
+			if (BUTTON0_IO == 0u && BUTTON1_IO == 0u && BUTTON2_IO == 0u)//  && BUTTON3_IO == 0u)
 				smVend = SM_DEBOUNCE_UP;
 			break;
-		
 		case SM_DEBOUNCE_UP:
 			// Make sure all buttons were released
-			if(BUTTON0_IO == 0u && BUTTON1_IO == 0u && BUTTON2_IO == 0u)//  && BUTTON3_IO == 0u)
+			if (BUTTON0_IO == 0u && BUTTON1_IO == 0u && BUTTON2_IO == 0u)//  && BUTTON3_IO == 0u)
 				smVend = SM_IDLE;
 			else
 				smVend = SM_RELEASE_WAIT;
@@ -371,9 +331,7 @@ static void ProcessIO(void) {
  * Note:            See ProcessIO for system opearations
  *                  
  ********************************************************************/
-void WriteLCDMenu(void)
-{// Update the LCD screen
-	
+void WriteLCDMenu(void) {
 	// Blank the LCD display
 	strcpypgm2ram((char*)LCDText, (ROM char*)"                                ");
 	
@@ -382,12 +340,10 @@ void WriteLCDMenu(void)
 	LCDText[strlen((char*)Products[curItem].name)] = ' ';
 	
 	// Show the price, or sold out status
-	if(Products[curItem].stock == 0u)
-	{
+	if(Products[curItem].stock == 0u) {
 		memcpypgm2ram(&LCDText[12], (ROM void*)"SOLD", 4);
 	}
-	else
-	{
+	else {
 		LCDText[11] = '$';
 		WritePriceLCD(Products[curItem].price, 12);
 	}
@@ -425,8 +381,7 @@ void WriteLCDMenu(void)
  *					the amount of code provide by the WebVend demo.
  *                  
  ********************************************************************/
-static void WritePriceLCD(BYTE price, BYTE position)
-{
+static void WritePriceLCD(BYTE price, BYTE position) {
 	sprintf((char *) &LCDText[position],"%d.%02d", (price>>2), (price & 0x03)*25);
 }
 
@@ -471,8 +426,7 @@ void VendSetLights(BOOL setOn)
   Remarks:
     None
   ***************************************************************************/
-static void InitializeBoard(void)
-{	
+static void InitializeBoard(void) {	
 	DDPCONbits.JTAGEN = 0;
 
 //  Enable Cerebot 32MX7 PHY
@@ -501,18 +455,12 @@ static void InitializeBoard(void)
 		// Enable multi-vectored interrupts
 	INTEnableSystemMultiVectoredInt();
 		
-// Enable optimal performance
+	// Enable optimal performance
 	SYSTEMConfigPerformance(GetSystemClock());
-//	mOSCSetPBDIV(OSC_PB_DIV_1);				// Use 1:1 CPU Core:Peripheral clocks
+	//	mOSCSetPBDIV(OSC_PB_DIV_1);				// Use 1:1 CPU Core:Peripheral clocks
 	mOSCSetPBDIV(OSC_PB_DIV_8);				// Use 1:1 CPU Core:Peripheral clocks
 		
-		// Disable JTAG port so we get our I/O pins back, but first
-		// wait 50ms so if you want to reprogram the part with 
-		// JTAG, you'll still have a tiny window before JTAG goes away.
-		// The PIC32 Starter Kit debuggers use JTAG and therefore must not 
-		// disable JTAG.
 	DelayMs(50);
-
 	LED_PUT(0x00);				// Turn the LEDs off
 		
 // Comment out line for Cerebot 32MX7
@@ -527,7 +475,6 @@ static void InitializeBoard(void)
 */
 // UART
 	#if defined(STACK_USE_UART)
-
 		UARTTX_TRIS = 0;
 		UARTRX_TRIS = 1;
 		UMODE = 0x8000;			// Set UARTEN.  Note: this must be done before setting UTXEN
@@ -569,8 +516,7 @@ static void InitializeBoard(void)
 static ROM BYTE SerializedMACAddress[6] = {MY_DEFAULT_MAC_BYTE1, MY_DEFAULT_MAC_BYTE2, MY_DEFAULT_MAC_BYTE3, MY_DEFAULT_MAC_BYTE4, MY_DEFAULT_MAC_BYTE5, MY_DEFAULT_MAC_BYTE6};
 //#pragma romdata
 
-static void InitAppConfig(void)
-{
+static void InitAppConfig(void) {
 
 // Start out zeroing all AppConfig bytes to ensure all fields are 
 // deterministic for checksum generation
@@ -587,7 +533,6 @@ static void InitAppConfig(void)
 	AppConfig.MyGateway.Val = MY_DEFAULT_GATE_BYTE1 | MY_DEFAULT_GATE_BYTE2<<8ul | MY_DEFAULT_GATE_BYTE3<<16ul | MY_DEFAULT_GATE_BYTE4<<24ul;
 	AppConfig.PrimaryDNSServer.Val = MY_DEFAULT_PRIMARY_DNS_BYTE1 | MY_DEFAULT_PRIMARY_DNS_BYTE2<<8ul  | MY_DEFAULT_PRIMARY_DNS_BYTE3<<16ul  | MY_DEFAULT_PRIMARY_DNS_BYTE4<<24ul;
 	AppConfig.SecondaryDNSServer.Val = MY_DEFAULT_SECONDARY_DNS_BYTE1 | MY_DEFAULT_SECONDARY_DNS_BYTE2<<8ul  | MY_DEFAULT_SECONDARY_DNS_BYTE3<<16ul  | MY_DEFAULT_SECONDARY_DNS_BYTE4<<24ul;
-	
 	
 // Vending machine specific defaults
 	strcpypgm2ram((char*)Products[0].name, (ROM char*)"Cola");
@@ -626,8 +571,7 @@ static void InitAppConfig(void)
 	Products[4].stock = 4;
 	Products[5].stock = 29;
 	Products[6].stock = 14;
-}  // End of InitAppConfig
-
+}
 
 /*********************************************************************
  * Function:        Delayms(unsigned int msec)
@@ -640,14 +584,10 @@ static void InitAppConfig(void)
  * Note:            None
  *                  
  ********************************************************************/
-static void Delayms(unsigned int msec)
-{
-unsigned int tWait, tStart;
-#define CORE_TICK_RATE (80000000ul /2/1000)
+static void Delayms(unsigned int msec) {
+	unsigned int tWait, tStart;
+	#define CORE_TICK_RATE (80000000ul /2/1000)
 	tWait=(CORE_TICK_RATE)*msec;
 	tStart=ReadCoreTimer();
 	while((ReadCoreTimer()-tStart)<tWait); // wait for the time to pass
 }
-
-// End of VendingMachine.c
-
