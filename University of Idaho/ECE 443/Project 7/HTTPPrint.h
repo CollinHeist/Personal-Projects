@@ -60,12 +60,17 @@ void HTTPPrint_status(WORD);
 void HTTPPrint_version(void);
 void HTTPPrint_builddate(void);
 void HTTPPrint_lights_chk(WORD);
+void HTTPPrint_credits(void);
 void HTTPPrint_price(WORD);
+void HTTPPrint_credits(void);
 
 void HTTPPrint(DWORD callbackID)
 {
 	switch(callbackID)
 	{
+        case 0x00000000:
+			HTTPIncFile((ROM BYTE*)"header.inc");
+			break;
         case 0x00000001:
 			HTTPPrint_hostname();
 			break;
@@ -151,28 +156,28 @@ void HTTPPrint(DWORD callbackID)
 			HTTPPrint_lights_chk(0);
 			break;
         case 0x0000001d:
-			HTTPPrint_price(0);
+			HTTPPrint_credits();
 			break;
         case 0x0000001e:
-			HTTPPrint_price(1);
+			HTTPPrint_price(0);
 			break;
         case 0x0000001f:
-			HTTPPrint_price(2);
+			HTTPPrint_price(1);
 			break;
         case 0x00000020:
-			HTTPPrint_price(3);
+			HTTPPrint_price(2);
 			break;
         case 0x00000021:
-			HTTPPrint_price(4);
+			HTTPPrint_price(3);
 			break;
         case 0x00000022:
-			HTTPPrint_price(5);
+			HTTPPrint_price(4);
 			break;
         case 0x00000023:
-			HTTPPrint_price(6);
+			HTTPPrint_price(5);
 			break;
-        case 0x00000025:
-			HTTPIncFile((ROM BYTE*)"header.inc");
+        case 0x00000024:
+			HTTPPrint_price(6);
 			break;
 		default:
 			// Output notification for undefined values

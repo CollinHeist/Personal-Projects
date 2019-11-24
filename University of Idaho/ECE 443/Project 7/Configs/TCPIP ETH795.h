@@ -143,7 +143,7 @@
 	#define MY_DEFAULT_IP_ADDR_BYTE1        (129ul)
 	#define MY_DEFAULT_IP_ADDR_BYTE2        (101ul)
 	#define MY_DEFAULT_IP_ADDR_BYTE3        (222ul)
-	#define MY_DEFAULT_IP_ADDR_BYTE4        (17ul)
+	#define MY_DEFAULT_IP_ADDR_BYTE4        (29ul)
 
 	#define MY_DEFAULT_MASK_BYTE1           (255ul)
 	#define MY_DEFAULT_MASK_BYTE2           (255ul)

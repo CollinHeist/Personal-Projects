@@ -1,58 +1,3 @@
-/*********************************************************************
- *
- *  Application to Demo HTTP2 Server
- *  Support for HTTP2 module in Microchip TCP/IP Stack
- *	 -Implements the application 
- *	 -Reference: RFC 1002
- *
- *********************************************************************
- * FileName:		CustomHTTPApp.c
- * Dependencies:	TCP/IP stack, TCPIPConfig.h
- * Processor:	   PIC32
- * Compiler:		Microchip C32 v1.05 or higher
- * Company:		 Microchip Technology, Inc.
- *
- * Software License Agreement
- *
- * Copyright (C) 2002-2010 Microchip Technology Inc.  All rights
- * reserved.
- *
- * Microchip licenses to you the right to use, modify, copy, and
- * distribute:
- * (i)  the Software when embedded on a Microchip microcontroller or
- *	  digital signal controller product ("Device") which is
- *	  integrated into Licensee's product; or
- * (ii) ONLY the Software driver source files ENC28J60.c, ENC28J60.h,
- *	ENCX24J600.c and ENCX24J600.h ported to a non-Microchip device
- *	used in conjunction with a Microchip Ethernet controller for
- *	the sole purpose of interfacing with the Ethernet controller.
- *
- * You should refer to the license agreement accompanying this
- * Software for additional information regarding your rights and
- * obligations.
- *
- * THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT
- * WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT
- * LIMITATION, ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- * MICROCHIP BE LIABLE FOR ANY INCIDENTAL, SPECIAL, INDIRECT OR
- * CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF
- * PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY OR SERVICES, ANY CLAIMS
- * BY THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE
- * THEREOF), ANY CLAIMS FOR INDEMNITY OR CONTRIBUTION, OR OTHER
- * SIMILAR COSTS, WHETHER ASSERTED ON THE BASIS OF CONTRACT, TORT
- * (INCLUDING NEGLIGENCE), BREACH OF WARRANTY, OR OTHERWISE.
- *
- *
- * Author			   Date	Comment
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Elliott Wood	 	6/18/07	Original
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Revisions:	   
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Richard Wall			11/6/14	Modified for Digilent chipKIT PRO MX7
- *
- ********************************************************************/
 #define __CUSTOMHTTPAPP_C
 
 #include "TCPIPConfig.h"
@@ -131,13 +76,21 @@ HTTP_IO_RESULT HTTPExecuteGet(void) {
 		// Find the new light state value
 		ptr = HTTPGetROMArg(curHTTP.data, (BYTE *) "lights");
 		strcpy((char *) args,(char *) ptr);
-		if(ptr) 	// Make sure pointer is not NULL
+		if (ptr) 	// Make sure pointer is not NULL
 		{
 			if(strcmppgm2ram((char*) ptr, (char*) "on") == 0)
 				VendSetLights(TRUE);
 			else
 				VendSetLights(FALSE);
 		}
+        ptr = HTTPGetROMArg(curHTTP.data, (BYTE*)"credits");
+        strcpy((char*) args, (char*)ptr);
+        if (ptr) {
+            unsigned int temp_credits = *ptr++ - '0';
+            while (*ptr >= '0' && *ptr <= '9')
+                temp_credits = (temp_credits * 10) + (*ptr++ - '0');
+            vend_set_credits(temp_credits);
+        }
 	}
 
 	return HTTP_IO_DONE;
@@ -227,18 +180,18 @@ HTTP_IO_RESULT HTTPExecutePost(void) {
 			if(Products[item].price > 20)
 				Products[item].price = 20;
 		}
-		else if (memcmppgm2ram(currHTTP.data, (void*) "stock", 5) == 0) {
+		else if (memcmppgm2ram(curHTTP.data, (void*) "stock", 5) == 0) {
 			// A Stock entry was found
-			item = currHTTP.data[6] - '0';	// Grab the product number
+			item = curHTTP.data[6] - '0';	// Grab the product number
 			if (item > MAX_PRODUCTS)
 				continue;
 
 			ptr = curHTTP.data + 9;	// Skip of the "stock[x]=" part of the message
 
 			// Get the parsed stock
-			unsigned int temp_stock = *ptr++;
+			unsigned int temp_stock = *ptr++ - '0';
 			while (*ptr >= '0' && *ptr <= '9')
-				temp_stock = (temp_stock * 10) + *ptr++;
+				temp_stock = (temp_stock * 10) + (*ptr++ - '0');
 			
 			Products[item].stock = temp_stock;	// Assign the stock part of this product
 		}
@@ -348,6 +301,12 @@ void HTTPPrint_price(WORD item) {
 			TCPPutROMString(sktHTTP, (ROM BYTE*)".75");
 			break;
 	}
+}
+
+void HTTPPrint_credits(void) {
+    char credits[5] = {'\0'};
+    sprintf(credits, "%d", vend_get_credits());   
+    TCPPutROMString(sktHTTP, (ROM BYTE*)credits);
 }
 
 #endif

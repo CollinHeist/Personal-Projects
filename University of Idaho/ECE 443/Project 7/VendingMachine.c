@@ -236,7 +236,7 @@ static void ProcessIO(void) {
 				smVend = SM_NEXT;
 			else
 				smVend = SM_IDLE;
-			brek;
+			break;
 			
 		case SM_ADD_COIN:
 			// Add a quarter, up to $5.00
@@ -590,4 +590,14 @@ static void Delayms(unsigned int msec) {
 	tWait=(CORE_TICK_RATE)*msec;
 	tStart=ReadCoreTimer();
 	while((ReadCoreTimer()-tStart)<tWait); // wait for the time to pass
+}
+
+void vend_set_credits(unsigned int credit_value) {
+    curCredit = (credit_value <= 20) ? credit_value : 20;
+    WriteLCDMenu();
+    LCDUpdate();
+}
+
+unsigned int vend_get_credits(void) {
+    return (unsigned int) curCredit;
 }

@@ -261,112 +261,112 @@ Microchip PIC32 Memory-Usage Report
 kseg0 Program-Memory Usage
 section                    address  length [bytes]      (dec)  Description
 -------                 ----------  -------------------------  -----------
-.text                   0x9d000000         0xbfb8       49080  App's exec code 
-.rodata                 0x9d00bfb8         0x1e5c        7772  Read-only const 
-.text                   0x9d00de14         0x9280       37504  App's exec code 
-.text._vfprintf_cdnopux 0x9d017094          0x8b8        2232   
-.rodata                 0x9d01794c          0x7d4        2004  Read-only const 
-.text                   0x9d018120          0xdf4        3572  App's exec code 
-.rodata                 0x9d018f14          0x548        1352  Read-only const 
-.text                   0x9d01945c         0x1bd4        7124  App's exec code 
-.dinit                  0x9d01b030          0x300         768   
-.text                   0x9d01b330          0x2d0         720  App's exec code 
-.text.malloc            0x9d01b600          0x240         576   
-.text.EthRxBuffersAppen 0x9d01b840          0x224         548   
-.text._EthAckPacket     0x9d01ba64          0x1bc         444   
-.text                   0x9d01bc20          0x1a0         416  App's exec code 
-.rodata                 0x9d01bdc0          0x190         400  Read-only const 
-.text._EthRxAckBuffer   0x9d01bf50          0x184         388   
-.text                   0x9d01c0d4          0x5ac        1452  App's exec code 
-.text._EthAppendBusyLis 0x9d01c680          0x160         352   
-.text                   0x9d01c7e0          0x158         344  App's exec code 
-.text.EthRxGetPacket    0x9d01c938          0x150         336   
-.text._sbrk_init        0x9d01ca88          0x14c         332   
-.rodata                 0x9d01cbd4          0x140         320  Read-only const 
-.text.EthDescriptorsPoo 0x9d01cd14          0x130         304   
-.text.realloc           0x9d01ce44          0x130         304   
-.text.fputc             0x9d01cf74          0x128         296   
-.text.EthDescriptorsAdd 0x9d01d09c          0x120         288   
-.text                   0x9d01d1bc          0x120         288  App's exec code 
-.text._flsbuf           0x9d01d2dc          0x110         272   
-.text.EthTxSendPacket   0x9d01d3ec          0x10c         268   
-.rodata                 0x9d01d4f8          0x104         260  Read-only const 
-.text.general_exception 0x9d01d5fc           0xdc         220   
-.rodata                 0x9d01d6d8           0xd0         208  Read-only const 
-.text.EthMACOpen        0x9d01d7a8           0xb8         184   
-.text._mon_putc         0x9d01d860           0xb4         180   
-.text.EthTxSendBuffer   0x9d01d914           0xb0         176   
-.text.EthInit           0x9d01d9c4           0xac         172   
-.text                   0x9d01da70           0xa8         168  App's exec code 
-.text._sbrk             0x9d01db18           0xa4         164   
-.text._EthTxSchedBuffer 0x9d01dbbc           0xa0         160   
-.text                   0x9d01dc5c           0x98         152  App's exec code 
-.text.atol              0x9d01dcf4           0x90         144   
-.rodata                 0x9d01dd84           0x8c         140  Read-only const 
-.text.write             0x9d01de10           0x88         136   
-.text._EthTxSchedList   0x9d01de98           0x84         132   
-.text.EthRxFiltersPMSet 0x9d01df1c           0x64         100   
-.text._sprintf_cdnopuxX 0x9d01df80           0x64         100   
-.text.EthTxGetBufferSta 0x9d01dfe4           0x60          96   
-.text.EthMIIMConfig     0x9d01e044           0x60          96   
-.rodata                 0x9d01e0a4           0x54          84  Read-only const 
-.text.calloc            0x9d01e0f8           0x54          84   
-.text.strncpy           0x9d01e14c           0x50          80   
-.text.main_entry        0x9d01e19c           0x4c          76   
-.text.EthMACSetAddress  0x9d01e1e8           0x4c          76   
-.text.INTEnable         0x9d01e234           0x4c          76   
-.text.sbrk              0x9d01e280           0x48          72   
-.text.EthMACGetAddress  0x9d01e2c8           0x44          68   
-.text.EthMIIMReadStart  0x9d01e30c           0x44          68   
-.text                   0x9d01e350           0x88         136  App's exec code 
-.text.EthRxGetBuffer    0x9d01e3d8           0x3c          60   
-.text.EthMIIMWriteStart 0x9d01e414           0x3c          60   
-.text.PORTSetPinsDigita 0x9d01e450           0x3c          60   
-.text.PORTSetPinsDigita 0x9d01e48c           0x3c          60   
-.text._EthFindPacket    0x9d01e4c8           0x38          56   
-.text.EthMIIMScanStart  0x9d01e500           0x38          56   
-.text.INTSetVectorPrior 0x9d01e538           0x38          56   
-.text.INTSetVectorSubPr 0x9d01e570           0x38          56   
-.text._bootstrap_except 0x9d01e5a8           0x38          56   
-.text._general_exceptio 0x9d01e5e0           0x38          56   
-.text.INTEnableSystemMu 0x9d01e618           0x34          52   
-.text.EthTxAcknowledgeB 0x9d01e64c           0x30          48   
-.text.EthTxAckBuffer    0x9d01e67c           0x30          48   
-.text.EthRxSetBufferSiz 0x9d01e6ac           0x30          48   
-.vector_default         0x9d01e6dc           0x30          48   
-.text.free              0x9d01e70c           0x30          48   
-.text.EthMIIMReadResult 0x9d01e73c           0x2c          44   
-.text.INTGetVectorPrior 0x9d01e768           0x2c          44   
-.text.INTGetVectorSubPr 0x9d01e794           0x2c          44   
-.text._stub_sbd_memlayo 0x9d01e7c0           0x2c          44   
-.text.INTClearFlag      0x9d01e7ec           0x28          40   
-.text.INTSetFlag        0x9d01e814           0x28          40   
-.text.INTGetFlag        0x9d01e83c           0x28          40   
-.text.INTGetEnable      0x9d01e864           0x28          40   
-.text.EthMIIMScanResult 0x9d01e88c           0x24          36   
-.rodata                 0x9d01e8b0           0x1c          28  Read-only const 
-.text.EthRxAcknowledgeB 0x9d01e8cc           0x1c          28   
-.text.EthRxAckBuffer    0x9d01e8e8           0x1c          28   
-.text.INTRestoreInterru 0x9d01e904           0x1c          28   
-.text.EthRxFiltersHTSet 0x9d01e920           0x18          24   
-.text.CheKseg0CacheOff  0x9d01e938           0x18          24   
-.text.CheKseg0CacheOn   0x9d01e950           0x18          24   
-.text                   0x9d01e968           0x18          24  App's exec code 
-.rodata                 0x9d01e980           0x14          20  Read-only const 
-.text.EthMACSetMaxFrame 0x9d01e994           0x14          20   
-.text.EthRxFiltersPMClr 0x9d01e9a8           0x14          20   
-.rodata                 0x9d01e9bc           0x10          16  Read-only const 
-.text.EthRxFiltersSet   0x9d01e9cc           0x10          16   
-.text.EthRxFiltersClr   0x9d01e9dc           0x10          16   
-.text.EthRxFiltersWrite 0x9d01e9ec           0x10          16   
-.rodata                 0x9d01e9fc           0x20          32  Read-only const 
-.text.ReadCoreTimer     0x9d01ea1c            0x8           8   
-.text.INTDisableInterru 0x9d01ea24            0x8           8   
-.text.INTEnableInterrup 0x9d01ea2c            0x8           8   
-.text._on_reset         0x9d01ea34            0x8           8   
-.text._on_bootstrap     0x9d01ea3c            0x8           8   
-.text.getpagesize       0x9d01ea44            0x8           8   
-      Total kseg0_program_mem used  :     0x1ea4c      125516  23.9% of 0x80000
+.text                   0x9d000000         0xbfc4       49092  App's exec code 
+.rodata                 0x9d00bfc4         0x363c       13884  Read-only const 
+.text                   0x9d00f600         0x9564       38244  App's exec code 
+.text._vfprintf_cdnopux 0x9d018b64          0x8b8        2232   
+.rodata                 0x9d01941c          0x7d4        2004  Read-only const 
+.text                   0x9d019bf0          0xdf4        3572  App's exec code 
+.rodata                 0x9d01a9e4          0x548        1352  Read-only const 
+.text                   0x9d01af2c         0x1bd4        7124  App's exec code 
+.dinit                  0x9d01cb00          0x300         768   
+.text                   0x9d01ce00          0x2d0         720  App's exec code 
+.text.malloc            0x9d01d0d0          0x240         576   
+.text.EthRxBuffersAppen 0x9d01d310          0x224         548   
+.text._EthAckPacket     0x9d01d534          0x1bc         444   
+.text                   0x9d01d6f0          0x1a0         416  App's exec code 
+.rodata                 0x9d01d890          0x190         400  Read-only const 
+.text._EthRxAckBuffer   0x9d01da20          0x184         388   
+.text                   0x9d01dba4          0x5ac        1452  App's exec code 
+.text._EthAppendBusyLis 0x9d01e150          0x160         352   
+.text                   0x9d01e2b0          0x158         344  App's exec code 
+.text.EthRxGetPacket    0x9d01e408          0x150         336   
+.text._sbrk_init        0x9d01e558          0x14c         332   
+.rodata                 0x9d01e6a4          0x140         320  Read-only const 
+.text.EthDescriptorsPoo 0x9d01e7e4          0x130         304   
+.text.realloc           0x9d01e914          0x130         304   
+.text.fputc             0x9d01ea44          0x128         296   
+.text.EthDescriptorsAdd 0x9d01eb6c          0x120         288   
+.text                   0x9d01ec8c          0x120         288  App's exec code 
+.text._flsbuf           0x9d01edac          0x110         272   
+.text.EthTxSendPacket   0x9d01eebc          0x10c         268   
+.rodata                 0x9d01efc8          0x104         260  Read-only const 
+.text.general_exception 0x9d01f0cc           0xdc         220   
+.rodata                 0x9d01f1a8           0xd0         208  Read-only const 
+.text.EthMACOpen        0x9d01f278           0xb8         184   
+.text._mon_putc         0x9d01f330           0xb4         180   
+.text.EthTxSendBuffer   0x9d01f3e4           0xb0         176   
+.text.EthInit           0x9d01f494           0xac         172   
+.text                   0x9d01f540           0xa8         168  App's exec code 
+.text._sbrk             0x9d01f5e8           0xa4         164   
+.text._EthTxSchedBuffer 0x9d01f68c           0xa0         160   
+.rodata                 0x9d01f72c           0x9c         156  Read-only const 
+.text                   0x9d01f7c8           0x98         152  App's exec code 
+.text.atol              0x9d01f860           0x90         144   
+.text.write             0x9d01f8f0           0x88         136   
+.text._EthTxSchedList   0x9d01f978           0x84         132   
+.text.EthRxFiltersPMSet 0x9d01f9fc           0x64         100   
+.text._sprintf_cdnopuxX 0x9d01fa60           0x64         100   
+.text.EthTxGetBufferSta 0x9d01fac4           0x60          96   
+.text.EthMIIMConfig     0x9d01fb24           0x60          96   
+.rodata                 0x9d01fb84           0x54          84  Read-only const 
+.text.calloc            0x9d01fbd8           0x54          84   
+.text.strncpy           0x9d01fc2c           0x50          80   
+.text.main_entry        0x9d01fc7c           0x4c          76   
+.text.EthMACSetAddress  0x9d01fcc8           0x4c          76   
+.text.INTEnable         0x9d01fd14           0x4c          76   
+.text.sbrk              0x9d01fd60           0x48          72   
+.text.EthMACGetAddress  0x9d01fda8           0x44          68   
+.text.EthMIIMReadStart  0x9d01fdec           0x44          68   
+.text                   0x9d01fe30           0x88         136  App's exec code 
+.text.EthRxGetBuffer    0x9d01feb8           0x3c          60   
+.text.EthMIIMWriteStart 0x9d01fef4           0x3c          60   
+.text.PORTSetPinsDigita 0x9d01ff30           0x3c          60   
+.text.PORTSetPinsDigita 0x9d01ff6c           0x3c          60   
+.text._EthFindPacket    0x9d01ffa8           0x38          56   
+.text.EthMIIMScanStart  0x9d01ffe0           0x38          56   
+.text.INTSetVectorPrior 0x9d020018           0x38          56   
+.text.INTSetVectorSubPr 0x9d020050           0x38          56   
+.text._bootstrap_except 0x9d020088           0x38          56   
+.text._general_exceptio 0x9d0200c0           0x38          56   
+.text.INTEnableSystemMu 0x9d0200f8           0x34          52   
+.text.EthTxAcknowledgeB 0x9d02012c           0x30          48   
+.text.EthTxAckBuffer    0x9d02015c           0x30          48   
+.text.EthRxSetBufferSiz 0x9d02018c           0x30          48   
+.vector_default         0x9d0201bc           0x30          48   
+.text.free              0x9d0201ec           0x30          48   
+.text.EthMIIMReadResult 0x9d02021c           0x2c          44   
+.text.INTGetVectorPrior 0x9d020248           0x2c          44   
+.text.INTGetVectorSubPr 0x9d020274           0x2c          44   
+.text._stub_sbd_memlayo 0x9d0202a0           0x2c          44   
+.text.INTClearFlag      0x9d0202cc           0x28          40   
+.text.INTSetFlag        0x9d0202f4           0x28          40   
+.text.INTGetFlag        0x9d02031c           0x28          40   
+.text.INTGetEnable      0x9d020344           0x28          40   
+.text.EthMIIMScanResult 0x9d02036c           0x24          36   
+.rodata                 0x9d020390           0x1c          28  Read-only const 
+.text.EthRxAcknowledgeB 0x9d0203ac           0x1c          28   
+.text.EthRxAckBuffer    0x9d0203c8           0x1c          28   
+.text.INTRestoreInterru 0x9d0203e4           0x1c          28   
+.text.EthRxFiltersHTSet 0x9d020400           0x18          24   
+.text.CheKseg0CacheOff  0x9d020418           0x18          24   
+.text.CheKseg0CacheOn   0x9d020430           0x18          24   
+.text                   0x9d020448           0x18          24  App's exec code 
+.rodata                 0x9d020460           0x14          20  Read-only const 
+.text.EthMACSetMaxFrame 0x9d020474           0x14          20   
+.text.EthRxFiltersPMClr 0x9d020488           0x14          20   
+.rodata                 0x9d02049c           0x10          16  Read-only const 
+.text.EthRxFiltersSet   0x9d0204ac           0x10          16   
+.text.EthRxFiltersClr   0x9d0204bc           0x10          16   
+.text.EthRxFiltersWrite 0x9d0204cc           0x10          16   
+.rodata                 0x9d0204dc           0x20          32  Read-only const 
+.text.ReadCoreTimer     0x9d0204fc            0x8           8   
+.text.INTDisableInterru 0x9d020504            0x8           8   
+.text.INTEnableInterrup 0x9d02050c            0x8           8   
+.text._on_reset         0x9d020514            0x8           8   
+.text._on_bootstrap     0x9d02051c            0x8           8   
+.text.getpagesize       0x9d020524            0x8           8   
+      Total kseg0_program_mem used  :     0x2052c      132396  25.3% of 0x80000
 
 kseg0 Boot-Memory Usage
 section                    address  length [bytes]      (dec)  Description
@@ -450,7 +450,7 @@ section                    address  length [bytes]      (dec)  Description
 .bev_excpt              0xbfc00380           0x10          16  BEV-Exception 
          Total kseg1_boot_mem used  :       0x1f8         504  43.2% of 0x490
         --------------------------------------------------------------------------
-         Total Program Memory used  :     0x1ee54      126548  23.8% of 0x81e00
+         Total Program Memory used  :     0x20934      133428  25.1% of 0x81e00
         --------------------------------------------------------------------------
 
 
@@ -1843,7 +1843,7 @@ END GROUP
                 0x000008b8       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
 
 .debug_pubnames
-                0x00000000     0x178d
+                0x00000000     0x17cd
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0x33 build/default/production/_ext/1954962658/Announce.o
@@ -1886,192 +1886,192 @@ END GROUP
  .debug_pubnames
                 0x00000cb5       0x6b build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
  .debug_pubnames
-                0x00000d20      0x125 build/default/production/_ext/1472/CustomHTTPApp.o
+                0x00000d20      0x13b build/default/production/_ext/1472/CustomHTTPApp.o
  .debug_pubnames
-                0x00000e45       0xa9 build/default/production/_ext/1472/VendingMachine.o
+                0x00000e5b       0xd3 build/default/production/_ext/1472/VendingMachine.o
  .debug_pubnames
-                0x00000eee       0x24 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
+                0x00000f2e       0x24 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
  .debug_pubnames
-                0x00000f12       0x80 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+                0x00000f52       0x80 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
  .debug_pubnames
-                0x00000f92       0x42 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
+                0x00000fd2       0x42 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
  .debug_pubnames
-                0x00000fd4       0x1e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
+                0x00001014       0x1e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
  .debug_pubnames
-                0x00000ff2       0x21 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
+                0x00001032       0x21 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
  .debug_pubnames
-                0x00001013       0x52 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+                0x00001053       0x52 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
  .debug_pubnames
-                0x00001065       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
+                0x000010a5       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
  .debug_pubnames
-                0x0000108e       0x92 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+                0x000010ce       0x92 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
  .debug_pubnames
-                0x00001120       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
+                0x00001160       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
  .debug_pubnames
-                0x00001158       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
+                0x00001198       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
  .debug_pubnames
-                0x00001181       0x66 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+                0x000011c1       0x66 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
  .debug_pubnames
-                0x000011e7       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
+                0x00001227       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
  .debug_pubnames
-                0x00001210       0x90 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+                0x00001250       0x90 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
  .debug_pubnames
-                0x000012a0       0x3b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
+                0x000012e0       0x3b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
  .debug_pubnames
-                0x000012db       0x2b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
+                0x0000131b       0x2b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
  .debug_pubnames
-                0x00001306       0x2b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
+                0x00001346       0x2b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
  .debug_pubnames
-                0x00001331       0x36 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
+                0x00001371       0x36 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
  .debug_pubnames
-                0x00001367       0xca c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x000013a7       0xca c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
  .debug_pubnames
-                0x00001431       0x2b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
+                0x00001471       0x2b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
  .debug_pubnames
-                0x0000145c       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
+                0x0000149c       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
  .debug_pubnames
-                0x00001488       0x2a c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
+                0x000014c8       0x2a c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
  .debug_pubnames
-                0x000014b2       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
+                0x000014f2       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
  .debug_pubnames
-                0x000014d2       0x33 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
+                0x00001512       0x33 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
  .debug_pubnames
-                0x00001505       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
+                0x00001545       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
  .debug_pubnames
-                0x00001525       0x24 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
+                0x00001565       0x24 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
  .debug_pubnames
-                0x00001549       0x31 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
+                0x00001589       0x31 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
  .debug_pubnames
-                0x0000157a       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
+                0x000015ba       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
  .debug_pubnames
-                0x000015a2       0x1b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
+                0x000015e2       0x1b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
  .debug_pubnames
-                0x000015bd       0x1d c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
+                0x000015fd       0x1d c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
  .debug_pubnames
-                0x000015da       0x32 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+                0x0000161a       0x32 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
  .debug_pubnames
-                0x0000160c       0x1e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
+                0x0000164c       0x1e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
  .debug_pubnames
-                0x0000162a       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
+                0x0000166a       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
  .debug_pubnames
-                0x00001652       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
+                0x00001692       0x29 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
  .debug_pubnames
-                0x0000167b       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
+                0x000016bb       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
  .debug_pubnames
-                0x00001697       0x1e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
+                0x000016d7       0x1e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
  .debug_pubnames
-                0x000016b5       0x5c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+                0x000016f5       0x5c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
  .debug_pubnames
-                0x00001711       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
+                0x00001751       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
  .debug_pubnames
-                0x0000172d       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
+                0x0000176d       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
  .debug_pubnames
-                0x0000174d       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
+                0x0000178d       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
  .debug_pubnames
-                0x0000176d       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
+                0x000017ad       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
 
-.debug_info     0x00000000    0x4e5ed
+.debug_info     0x00000000    0x4da9f
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000     0x1b78 build/default/production/_ext/1954962658/Announce.o
- .debug_info    0x00001b78     0x1180 build/default/production/_ext/1954962658/ARCFOUR.o
- .debug_info    0x00002cf8     0x1ba9 build/default/production/_ext/1954962658/ARP.o
- .debug_info    0x000048a1     0x117f build/default/production/_ext/1954962658/AutoIP.o
- .debug_info    0x00005a20     0x1184 build/default/production/_ext/1954962658/BerkeleyAPI.o
- .debug_info    0x00006ba4     0x117f build/default/production/_ext/1954962658/BigInt.o
- .debug_info    0x00007d23     0x1239 build/default/production/_ext/1954962658/Delay.o
- .debug_info    0x00008f5c     0x117d build/default/production/_ext/1954962658/DHCP.o
- .debug_info    0x0000a0d9     0x117e build/default/production/_ext/1954962658/DHCPs.o
- .debug_info    0x0000b257     0x1dca build/default/production/_ext/1954962658/DNS.o
- .debug_info    0x0000d021     0x117d build/default/production/_ext/1954962658/DNSs.o
- .debug_info    0x0000e19e     0x117f build/default/production/_ext/1954962658/DynDNS.o
- .debug_info    0x0000f31d     0x26fa build/default/production/_ext/1954962658/ETHPIC32ExtPhy.o
- .debug_info    0x00011a17     0x2d32 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
- .debug_info    0x00014749     0x1183 build/default/production/_ext/1954962658/FileSystem.o
- .debug_info    0x000158cc     0x117c build/default/production/_ext/1954962658/FTP.o
- .debug_info    0x00016a48     0x154f build/default/production/_ext/1954962658/Hashes.o
- .debug_info    0x00017f97     0x257b build/default/production/_ext/1954962658/Helpers.o
- .debug_info    0x0001a512     0x2349 build/default/production/_ext/1954962658/HTTP2.o
- .debug_info    0x0001c85b     0x1773 build/default/production/_ext/1954962658/ICMP.o
- .debug_info    0x0001dfce     0x1b5b build/default/production/_ext/1954962658/IP.o
- .debug_info    0x0001fb29     0x19de build/default/production/_ext/1954962658/LCDBlocking.o
- .debug_info    0x00021507     0x1935 build/default/production/_ext/1954962658/MPFS2.o
- .debug_info    0x00022e3c     0x117d build/default/production/_ext/1954962658/NBNS.o
- .debug_info    0x00023fb9     0x117f build/default/production/_ext/1954962658/Random.o
- .debug_info    0x00025138     0x117f build/default/production/_ext/1954962658/Reboot.o
- .debug_info    0x000262b7     0x117c build/default/production/_ext/1954962658/RSA.o
- .debug_info    0x00027433     0x117d build/default/production/_ext/1954962658/SMTP.o
- .debug_info    0x000285b0     0x117d build/default/production/_ext/1954962658/SNMP.o
- .debug_info    0x0002972d     0x117f build/default/production/_ext/1954962658/SNMPv3.o
- .debug_info    0x0002a8ac     0x1182 build/default/production/_ext/1954962658/SNMPv3USM.o
- .debug_info    0x0002ba2e     0x14ff build/default/production/_ext/1954962658/SNTP.o
- .debug_info    0x0002cf2d     0x1182 build/default/production/_ext/1954962658/SPIEEPROM.o
- .debug_info    0x0002e0af     0x1181 build/default/production/_ext/1954962658/SPIFlash.o
- .debug_info    0x0002f230     0x117f build/default/production/_ext/1954962658/SPIRAM.o
- .debug_info    0x000303af     0x117c build/default/production/_ext/1954962658/SSL.o
- .debug_info    0x0003152b     0x1a26 build/default/production/_ext/1954962658/StackTsk.o
- .debug_info    0x00032f51     0x3218 build/default/production/_ext/1954962658/TCP.o
- .debug_info    0x00036169     0x118b build/default/production/_ext/1954962658/TCPPerformanceTest.o
- .debug_info    0x000372f4     0x117f build/default/production/_ext/1954962658/Telnet.o
- .debug_info    0x00038473     0x117e build/default/production/_ext/1954962658/TFTPc.o
- .debug_info    0x000395f1     0x1cca build/default/production/_ext/1954962658/Tick.o
- .debug_info    0x0003b2bb     0x1187 build/default/production/_ext/1954962658/UART2TCPBridge.o
- .debug_info    0x0003c442     0x117d build/default/production/_ext/1954962658/UART.o
- .debug_info    0x0003d5bf     0x222a build/default/production/_ext/1954962658/UDP.o
- .debug_info    0x0003f7e9     0x118b build/default/production/_ext/1954962658/UDPPerformanceTest.o
- .debug_info    0x00040974     0x1187 build/default/production/_ext/1954962658/ZeroconfHelper.o
- .debug_info    0x00041afb     0x118a build/default/production/_ext/1954962658/ZeroconfLinkLocal.o
- .debug_info    0x00042c85     0x118d build/default/production/_ext/1954962658/ZeroconfMulticastDNS.o
- .debug_info    0x00043e12     0x11a2 build/default/production/_ext/1472/MPFSImg2.o
- .debug_info    0x00044fb4     0x164d build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
- .debug_info    0x00046601     0x225f build/default/production/_ext/1472/CustomHTTPApp.o
- .debug_info    0x00048860     0x2bfc build/default/production/_ext/1472/VendingMachine.o
- .debug_info    0x0004b45c       0xaa c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
- .debug_info    0x0004b506      0x16b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
- .debug_info    0x0004b671       0xf2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
- .debug_info    0x0004b763       0xbe c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
- .debug_info    0x0004b821       0xa2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
- .debug_info    0x0004b8c3       0xf2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
- .debug_info    0x0004b9b5       0xe6 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
- .debug_info    0x0004ba9b      0x147 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
- .debug_info    0x0004bbe2       0xc8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
- .debug_info    0x0004bcaa       0xb4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
- .debug_info    0x0004bd5e      0x176 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
- .debug_info    0x0004bed4       0xd4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
- .debug_info    0x0004bfa8      0x143 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
- .debug_info    0x0004c0eb       0xbf c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
- .debug_info    0x0004c1aa       0xb6 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
- .debug_info    0x0004c260       0xb6 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
- .debug_info    0x0004c316       0xbc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
- .debug_info    0x0004c3d2      0x196 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
- .debug_info    0x0004c568       0xba c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
- .debug_info    0x0004c622       0xbc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
- .debug_info    0x0004c6de        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
- .debug_info    0x0004c6de       0xb4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
- .debug_info    0x0004c792      0x767 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
- .debug_info    0x0004cef9       0xde c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_info    0x0004cfd7       0xb8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
- .debug_info    0x0004d08f       0xc0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
- .debug_info    0x0004d14f       0xda c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
- .debug_info    0x0004d229       0xd2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
- .debug_info    0x0004d2fb       0xad c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
- .debug_info    0x0004d3a8       0xb1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
- .debug_info    0x0004d459        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
- .debug_info    0x0004d459       0xda c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
- .debug_info    0x0004d533       0xb3 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
- .debug_info    0x0004d5e6       0xbd c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
- .debug_info    0x0004d6a3       0xbe c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
- .debug_info    0x0004d761       0xaf c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
- .debug_info    0x0004d810        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_iob.o)
- .debug_info    0x0004d810       0xb2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
- .debug_info    0x0004d8c2      0x111 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
- .debug_info    0x0004d9d3       0xa9 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
- .debug_info    0x0004da7c        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(errno.o)
- .debug_info    0x0004da7c       0xb1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
- .debug_info    0x0004db2d        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(xc32_uart.o)
- .debug_info    0x0004db2d      0x320 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
- .debug_info    0x0004de4d      0x7a0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
+ .debug_info    0x00000000     0x1b3d build/default/production/_ext/1954962658/Announce.o
+ .debug_info    0x00001b3d     0x1145 build/default/production/_ext/1954962658/ARCFOUR.o
+ .debug_info    0x00002c82     0x1b6e build/default/production/_ext/1954962658/ARP.o
+ .debug_info    0x000047f0     0x1144 build/default/production/_ext/1954962658/AutoIP.o
+ .debug_info    0x00005934     0x1149 build/default/production/_ext/1954962658/BerkeleyAPI.o
+ .debug_info    0x00006a7d     0x1144 build/default/production/_ext/1954962658/BigInt.o
+ .debug_info    0x00007bc1     0x11fe build/default/production/_ext/1954962658/Delay.o
+ .debug_info    0x00008dbf     0x1142 build/default/production/_ext/1954962658/DHCP.o
+ .debug_info    0x00009f01     0x1143 build/default/production/_ext/1954962658/DHCPs.o
+ .debug_info    0x0000b044     0x1d8f build/default/production/_ext/1954962658/DNS.o
+ .debug_info    0x0000cdd3     0x1142 build/default/production/_ext/1954962658/DNSs.o
+ .debug_info    0x0000df15     0x1144 build/default/production/_ext/1954962658/DynDNS.o
+ .debug_info    0x0000f059     0x26bf build/default/production/_ext/1954962658/ETHPIC32ExtPhy.o
+ .debug_info    0x00011718     0x2cf7 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
+ .debug_info    0x0001440f     0x1148 build/default/production/_ext/1954962658/FileSystem.o
+ .debug_info    0x00015557     0x1141 build/default/production/_ext/1954962658/FTP.o
+ .debug_info    0x00016698     0x1514 build/default/production/_ext/1954962658/Hashes.o
+ .debug_info    0x00017bac     0x2540 build/default/production/_ext/1954962658/Helpers.o
+ .debug_info    0x0001a0ec     0x230e build/default/production/_ext/1954962658/HTTP2.o
+ .debug_info    0x0001c3fa     0x1738 build/default/production/_ext/1954962658/ICMP.o
+ .debug_info    0x0001db32     0x1b20 build/default/production/_ext/1954962658/IP.o
+ .debug_info    0x0001f652     0x19a3 build/default/production/_ext/1954962658/LCDBlocking.o
+ .debug_info    0x00020ff5     0x18fa build/default/production/_ext/1954962658/MPFS2.o
+ .debug_info    0x000228ef     0x1142 build/default/production/_ext/1954962658/NBNS.o
+ .debug_info    0x00023a31     0x1144 build/default/production/_ext/1954962658/Random.o
+ .debug_info    0x00024b75     0x1144 build/default/production/_ext/1954962658/Reboot.o
+ .debug_info    0x00025cb9     0x1141 build/default/production/_ext/1954962658/RSA.o
+ .debug_info    0x00026dfa     0x1142 build/default/production/_ext/1954962658/SMTP.o
+ .debug_info    0x00027f3c     0x1142 build/default/production/_ext/1954962658/SNMP.o
+ .debug_info    0x0002907e     0x1144 build/default/production/_ext/1954962658/SNMPv3.o
+ .debug_info    0x0002a1c2     0x1147 build/default/production/_ext/1954962658/SNMPv3USM.o
+ .debug_info    0x0002b309     0x14c4 build/default/production/_ext/1954962658/SNTP.o
+ .debug_info    0x0002c7cd     0x1147 build/default/production/_ext/1954962658/SPIEEPROM.o
+ .debug_info    0x0002d914     0x1146 build/default/production/_ext/1954962658/SPIFlash.o
+ .debug_info    0x0002ea5a     0x1144 build/default/production/_ext/1954962658/SPIRAM.o
+ .debug_info    0x0002fb9e     0x1141 build/default/production/_ext/1954962658/SSL.o
+ .debug_info    0x00030cdf     0x19eb build/default/production/_ext/1954962658/StackTsk.o
+ .debug_info    0x000326ca     0x31dd build/default/production/_ext/1954962658/TCP.o
+ .debug_info    0x000358a7     0x1150 build/default/production/_ext/1954962658/TCPPerformanceTest.o
+ .debug_info    0x000369f7     0x1144 build/default/production/_ext/1954962658/Telnet.o
+ .debug_info    0x00037b3b     0x1143 build/default/production/_ext/1954962658/TFTPc.o
+ .debug_info    0x00038c7e     0x1c8f build/default/production/_ext/1954962658/Tick.o
+ .debug_info    0x0003a90d     0x114c build/default/production/_ext/1954962658/UART2TCPBridge.o
+ .debug_info    0x0003ba59     0x1142 build/default/production/_ext/1954962658/UART.o
+ .debug_info    0x0003cb9b     0x21ef build/default/production/_ext/1954962658/UDP.o
+ .debug_info    0x0003ed8a     0x1150 build/default/production/_ext/1954962658/UDPPerformanceTest.o
+ .debug_info    0x0003feda     0x114c build/default/production/_ext/1954962658/ZeroconfHelper.o
+ .debug_info    0x00041026     0x114f build/default/production/_ext/1954962658/ZeroconfLinkLocal.o
+ .debug_info    0x00042175     0x1152 build/default/production/_ext/1954962658/ZeroconfMulticastDNS.o
+ .debug_info    0x000432c7     0x1167 build/default/production/_ext/1472/MPFSImg2.o
+ .debug_info    0x0004442e     0x1612 build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
+ .debug_info    0x00045a40     0x22aa build/default/production/_ext/1472/CustomHTTPApp.o
+ .debug_info    0x00047cea     0x2c24 build/default/production/_ext/1472/VendingMachine.o
+ .debug_info    0x0004a90e       0xaa c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_info    0x0004a9b8      0x16b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+ .debug_info    0x0004ab23       0xf2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
+ .debug_info    0x0004ac15       0xbe c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
+ .debug_info    0x0004acd3       0xa2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
+ .debug_info    0x0004ad75       0xf2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+ .debug_info    0x0004ae67       0xe6 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
+ .debug_info    0x0004af4d      0x147 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+ .debug_info    0x0004b094       0xc8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
+ .debug_info    0x0004b15c       0xb4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
+ .debug_info    0x0004b210      0x176 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+ .debug_info    0x0004b386       0xd4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
+ .debug_info    0x0004b45a      0x143 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+ .debug_info    0x0004b59d       0xbf c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
+ .debug_info    0x0004b65c       0xb6 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
+ .debug_info    0x0004b712       0xb6 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
+ .debug_info    0x0004b7c8       0xbc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
+ .debug_info    0x0004b884      0x196 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+ .debug_info    0x0004ba1a       0xba c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
+ .debug_info    0x0004bad4       0xbc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
+ .debug_info    0x0004bb90        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
+ .debug_info    0x0004bb90       0xb4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
+ .debug_info    0x0004bc44      0x767 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
+ .debug_info    0x0004c3ab       0xde c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_info    0x0004c489       0xb8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
+ .debug_info    0x0004c541       0xc0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
+ .debug_info    0x0004c601       0xda c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
+ .debug_info    0x0004c6db       0xd2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
+ .debug_info    0x0004c7ad       0xad c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
+ .debug_info    0x0004c85a       0xb1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
+ .debug_info    0x0004c90b        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
+ .debug_info    0x0004c90b       0xda c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+ .debug_info    0x0004c9e5       0xb3 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
+ .debug_info    0x0004ca98       0xbd c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
+ .debug_info    0x0004cb55       0xbe c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
+ .debug_info    0x0004cc13       0xaf c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
+ .debug_info    0x0004ccc2        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_iob.o)
+ .debug_info    0x0004ccc2       0xb2 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
+ .debug_info    0x0004cd74      0x111 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+ .debug_info    0x0004ce85       0xa9 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
+ .debug_info    0x0004cf2e        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(errno.o)
+ .debug_info    0x0004cf2e       0xb1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
+ .debug_info    0x0004cfdf        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(xc32_uart.o)
+ .debug_info    0x0004cfdf      0x320 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
+ .debug_info    0x0004d2ff      0x7a0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
 
-.debug_abbrev   0x00000000     0x687b
+.debug_abbrev   0x00000000     0x689b
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x1ff build/default/production/_ext/1954962658/Announce.o
  .debug_abbrev  0x000001ff      0x166 build/default/production/_ext/1954962658/ARCFOUR.o
@@ -2124,156 +2124,156 @@ END GROUP
  .debug_abbrev  0x00005487      0x166 build/default/production/_ext/1954962658/ZeroconfMulticastDNS.o
  .debug_abbrev  0x000055ed      0x180 build/default/production/_ext/1472/MPFSImg2.o
  .debug_abbrev  0x0000576d      0x1ca build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
- .debug_abbrev  0x00005937      0x240 build/default/production/_ext/1472/CustomHTTPApp.o
- .debug_abbrev  0x00005b77      0x3a1 build/default/production/_ext/1472/VendingMachine.o
- .debug_abbrev  0x00005f18       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
- .debug_abbrev  0x00005f3d       0x58 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
- .debug_abbrev  0x00005f95       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
- .debug_abbrev  0x00005fc9       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
- .debug_abbrev  0x00005ffd       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
- .debug_abbrev  0x00006022       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
- .debug_abbrev  0x00006047       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
- .debug_abbrev  0x0000607b       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
- .debug_abbrev  0x000060a0       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
- .debug_abbrev  0x000060c5       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
- .debug_abbrev  0x000060ea       0x58 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
- .debug_abbrev  0x00006142       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
- .debug_abbrev  0x00006176       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
- .debug_abbrev  0x000061ae       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
- .debug_abbrev  0x000061d3       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
- .debug_abbrev  0x000061f8       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
- .debug_abbrev  0x0000621d       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
- .debug_abbrev  0x00006242       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
- .debug_abbrev  0x00006267       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
- .debug_abbrev  0x0000628c       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
- .debug_abbrev  0x000062b1        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
- .debug_abbrev  0x000062b2       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
- .debug_abbrev  0x000062d7      0x132 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
- .debug_abbrev  0x00006409       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_abbrev  0x0000642c       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
- .debug_abbrev  0x0000644f       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
- .debug_abbrev  0x00006472       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
- .debug_abbrev  0x00006495       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
- .debug_abbrev  0x000064b8       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
- .debug_abbrev  0x000064db       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
- .debug_abbrev  0x000064fe        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
- .debug_abbrev  0x000064ff       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
- .debug_abbrev  0x00006522       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
- .debug_abbrev  0x00006545       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
- .debug_abbrev  0x00006568       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
- .debug_abbrev  0x0000658b       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
- .debug_abbrev  0x000065ae        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_iob.o)
- .debug_abbrev  0x000065af       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
- .debug_abbrev  0x000065d2       0x36 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
- .debug_abbrev  0x00006608       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
- .debug_abbrev  0x0000662b        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(errno.o)
- .debug_abbrev  0x0000662c       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
- .debug_abbrev  0x0000664f        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(xc32_uart.o)
- .debug_abbrev  0x00006650       0xe3 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
- .debug_abbrev  0x00006733      0x148 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
+ .debug_abbrev  0x00005937      0x249 build/default/production/_ext/1472/CustomHTTPApp.o
+ .debug_abbrev  0x00005b80      0x3b8 build/default/production/_ext/1472/VendingMachine.o
+ .debug_abbrev  0x00005f38       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_abbrev  0x00005f5d       0x58 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+ .debug_abbrev  0x00005fb5       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
+ .debug_abbrev  0x00005fe9       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
+ .debug_abbrev  0x0000601d       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
+ .debug_abbrev  0x00006042       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+ .debug_abbrev  0x00006067       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
+ .debug_abbrev  0x0000609b       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+ .debug_abbrev  0x000060c0       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
+ .debug_abbrev  0x000060e5       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
+ .debug_abbrev  0x0000610a       0x58 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+ .debug_abbrev  0x00006162       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
+ .debug_abbrev  0x00006196       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+ .debug_abbrev  0x000061ce       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
+ .debug_abbrev  0x000061f3       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
+ .debug_abbrev  0x00006218       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
+ .debug_abbrev  0x0000623d       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
+ .debug_abbrev  0x00006262       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+ .debug_abbrev  0x00006287       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
+ .debug_abbrev  0x000062ac       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
+ .debug_abbrev  0x000062d1        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
+ .debug_abbrev  0x000062d2       0x25 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
+ .debug_abbrev  0x000062f7      0x132 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
+ .debug_abbrev  0x00006429       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_abbrev  0x0000644c       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
+ .debug_abbrev  0x0000646f       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
+ .debug_abbrev  0x00006492       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
+ .debug_abbrev  0x000064b5       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
+ .debug_abbrev  0x000064d8       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
+ .debug_abbrev  0x000064fb       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
+ .debug_abbrev  0x0000651e        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
+ .debug_abbrev  0x0000651f       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+ .debug_abbrev  0x00006542       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
+ .debug_abbrev  0x00006565       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
+ .debug_abbrev  0x00006588       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
+ .debug_abbrev  0x000065ab       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
+ .debug_abbrev  0x000065ce        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_iob.o)
+ .debug_abbrev  0x000065cf       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
+ .debug_abbrev  0x000065f2       0x36 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+ .debug_abbrev  0x00006628       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
+ .debug_abbrev  0x0000664b        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(errno.o)
+ .debug_abbrev  0x0000664c       0x23 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
+ .debug_abbrev  0x0000666f        0x1 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(xc32_uart.o)
+ .debug_abbrev  0x00006670       0xe3 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
+ .debug_abbrev  0x00006753      0x148 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
 
-.debug_line     0x00000000     0x83a0
+.debug_line     0x00000000     0x6fb8
  *(.debug_line)
- .debug_line    0x00000000      0x266 build/default/production/_ext/1954962658/Announce.o
- .debug_line    0x00000266      0x122 build/default/production/_ext/1954962658/ARCFOUR.o
- .debug_line    0x00000388      0x28f build/default/production/_ext/1954962658/ARP.o
- .debug_line    0x00000617      0x122 build/default/production/_ext/1954962658/AutoIP.o
- .debug_line    0x00000739      0x122 build/default/production/_ext/1954962658/BerkeleyAPI.o
- .debug_line    0x0000085b      0x122 build/default/production/_ext/1954962658/BigInt.o
- .debug_line    0x0000097d      0x19f build/default/production/_ext/1954962658/Delay.o
- .debug_line    0x00000b1c      0x122 build/default/production/_ext/1954962658/DHCP.o
- .debug_line    0x00000c3e      0x122 build/default/production/_ext/1954962658/DHCPs.o
- .debug_line    0x00000d60      0x36a build/default/production/_ext/1954962658/DNS.o
- .debug_line    0x000010ca      0x122 build/default/production/_ext/1954962658/DNSs.o
- .debug_line    0x000011ec      0x122 build/default/production/_ext/1954962658/DynDNS.o
- .debug_line    0x0000130e      0x453 build/default/production/_ext/1954962658/ETHPIC32ExtPhy.o
- .debug_line    0x00001761      0x3f6 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
- .debug_line    0x00001b57      0x122 build/default/production/_ext/1954962658/FileSystem.o
- .debug_line    0x00001c79      0x122 build/default/production/_ext/1954962658/FTP.o
- .debug_line    0x00001d9b      0x28e build/default/production/_ext/1954962658/Hashes.o
- .debug_line    0x00002029      0x3cd build/default/production/_ext/1954962658/Helpers.o
- .debug_line    0x000023f6      0x6bd build/default/production/_ext/1954962658/HTTP2.o
- .debug_line    0x00002ab3      0x210 build/default/production/_ext/1954962658/ICMP.o
- .debug_line    0x00002cc3      0x242 build/default/production/_ext/1954962658/IP.o
- .debug_line    0x00002f05      0x277 build/default/production/_ext/1954962658/LCDBlocking.o
- .debug_line    0x0000317c      0x3bd build/default/production/_ext/1954962658/MPFS2.o
- .debug_line    0x00003539      0x122 build/default/production/_ext/1954962658/NBNS.o
- .debug_line    0x0000365b      0x122 build/default/production/_ext/1954962658/Random.o
- .debug_line    0x0000377d      0x122 build/default/production/_ext/1954962658/Reboot.o
- .debug_line    0x0000389f      0x122 build/default/production/_ext/1954962658/RSA.o
- .debug_line    0x000039c1      0x122 build/default/production/_ext/1954962658/SMTP.o
- .debug_line    0x00003ae3      0x122 build/default/production/_ext/1954962658/SNMP.o
- .debug_line    0x00003c05      0x122 build/default/production/_ext/1954962658/SNMPv3.o
- .debug_line    0x00003d27      0x122 build/default/production/_ext/1954962658/SNMPv3USM.o
- .debug_line    0x00003e49      0x257 build/default/production/_ext/1954962658/SNTP.o
- .debug_line    0x000040a0      0x122 build/default/production/_ext/1954962658/SPIEEPROM.o
- .debug_line    0x000041c2      0x122 build/default/production/_ext/1954962658/SPIFlash.o
- .debug_line    0x000042e4      0x122 build/default/production/_ext/1954962658/SPIRAM.o
- .debug_line    0x00004406      0x122 build/default/production/_ext/1954962658/SSL.o
- .debug_line    0x00004528      0x252 build/default/production/_ext/1954962658/StackTsk.o
- .debug_line    0x0000477a      0xc19 build/default/production/_ext/1954962658/TCP.o
- .debug_line    0x00005393      0x122 build/default/production/_ext/1954962658/TCPPerformanceTest.o
- .debug_line    0x000054b5      0x122 build/default/production/_ext/1954962658/Telnet.o
- .debug_line    0x000055d7      0x122 build/default/production/_ext/1954962658/TFTPc.o
- .debug_line    0x000056f9      0x1e8 build/default/production/_ext/1954962658/Tick.o
- .debug_line    0x000058e1      0x122 build/default/production/_ext/1954962658/UART2TCPBridge.o
- .debug_line    0x00005a03      0x122 build/default/production/_ext/1954962658/UART.o
- .debug_line    0x00005b25      0x3d0 build/default/production/_ext/1954962658/UDP.o
- .debug_line    0x00005ef5      0x122 build/default/production/_ext/1954962658/UDPPerformanceTest.o
- .debug_line    0x00006017      0x122 build/default/production/_ext/1954962658/ZeroconfHelper.o
- .debug_line    0x00006139      0x122 build/default/production/_ext/1954962658/ZeroconfLinkLocal.o
- .debug_line    0x0000625b      0x122 build/default/production/_ext/1954962658/ZeroconfMulticastDNS.o
- .debug_line    0x0000637d      0x180 build/default/production/_ext/1472/MPFSImg2.o
- .debug_line    0x000064fd      0x250 build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
- .debug_line    0x0000674d      0x311 build/default/production/_ext/1472/CustomHTTPApp.o
- .debug_line    0x00006a5e      0x459 build/default/production/_ext/1472/VendingMachine.o
- .debug_line    0x00006eb7       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
- .debug_line    0x00006f25       0x80 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
- .debug_line    0x00006fa5       0x85 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
- .debug_line    0x0000702a       0x77 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
- .debug_line    0x000070a1       0x69 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
- .debug_line    0x0000710a       0x74 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
- .debug_line    0x0000717e       0x87 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
- .debug_line    0x00007205       0x6b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
- .debug_line    0x00007270       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
- .debug_line    0x000072de       0x73 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
- .debug_line    0x00007351       0x7f c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
- .debug_line    0x000073d0       0x87 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
- .debug_line    0x00007457       0x68 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
- .debug_line    0x000074bf       0x62 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
- .debug_line    0x00007521       0x73 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
- .debug_line    0x00007594       0x73 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
- .debug_line    0x00007607       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
- .debug_line    0x00007675       0x64 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
- .debug_line    0x000076d9       0x77 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
- .debug_line    0x00007750       0x78 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
- .debug_line    0x000077c8        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
- .debug_line    0x000077c8       0x72 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
- .debug_line    0x0000783a      0x158 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
- .debug_line    0x00007992       0x97 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_line    0x00007a29       0x84 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
- .debug_line    0x00007aad       0x88 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
- .debug_line    0x00007b35       0x95 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
- .debug_line    0x00007bca       0x96 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
- .debug_line    0x00007c60       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
- .debug_line    0x00007cce       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
- .debug_line    0x00007d3e        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
- .debug_line    0x00007d3e       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
- .debug_line    0x00007dae       0x71 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
- .debug_line    0x00007e1f       0x71 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
- .debug_line    0x00007e90       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
- .debug_line    0x00007f00       0x6f c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
- .debug_line    0x00007f6f        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_iob.o)
- .debug_line    0x00007f6f       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
- .debug_line    0x00007fdf       0x78 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
- .debug_line    0x00008057       0x79 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
- .debug_line    0x000080d0        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(errno.o)
- .debug_line    0x000080d0       0x7d c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
- .debug_line    0x0000814d        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(xc32_uart.o)
- .debug_line    0x0000814d       0xfa c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
- .debug_line    0x00008247      0x159 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
+ .debug_line    0x00000000      0x1c4 build/default/production/_ext/1954962658/Announce.o
+ .debug_line    0x000001c4       0xec build/default/production/_ext/1954962658/ARCFOUR.o
+ .debug_line    0x000002b0      0x1ed build/default/production/_ext/1954962658/ARP.o
+ .debug_line    0x0000049d       0xec build/default/production/_ext/1954962658/AutoIP.o
+ .debug_line    0x00000589       0xec build/default/production/_ext/1954962658/BerkeleyAPI.o
+ .debug_line    0x00000675       0xec build/default/production/_ext/1954962658/BigInt.o
+ .debug_line    0x00000761      0x133 build/default/production/_ext/1954962658/Delay.o
+ .debug_line    0x00000894       0xec build/default/production/_ext/1954962658/DHCP.o
+ .debug_line    0x00000980       0xec build/default/production/_ext/1954962658/DHCPs.o
+ .debug_line    0x00000a6c      0x2c8 build/default/production/_ext/1954962658/DNS.o
+ .debug_line    0x00000d34       0xec build/default/production/_ext/1954962658/DNSs.o
+ .debug_line    0x00000e20       0xec build/default/production/_ext/1954962658/DynDNS.o
+ .debug_line    0x00000f0c      0x3b1 build/default/production/_ext/1954962658/ETHPIC32ExtPhy.o
+ .debug_line    0x000012bd      0x354 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
+ .debug_line    0x00001611       0xec build/default/production/_ext/1954962658/FileSystem.o
+ .debug_line    0x000016fd       0xec build/default/production/_ext/1954962658/FTP.o
+ .debug_line    0x000017e9      0x1ec build/default/production/_ext/1954962658/Hashes.o
+ .debug_line    0x000019d5      0x361 build/default/production/_ext/1954962658/Helpers.o
+ .debug_line    0x00001d36      0x5e2 build/default/production/_ext/1954962658/HTTP2.o
+ .debug_line    0x00002318      0x16e build/default/production/_ext/1954962658/ICMP.o
+ .debug_line    0x00002486      0x1a0 build/default/production/_ext/1954962658/IP.o
+ .debug_line    0x00002626      0x1d5 build/default/production/_ext/1954962658/LCDBlocking.o
+ .debug_line    0x000027fb      0x31b build/default/production/_ext/1954962658/MPFS2.o
+ .debug_line    0x00002b16       0xec build/default/production/_ext/1954962658/NBNS.o
+ .debug_line    0x00002c02       0xec build/default/production/_ext/1954962658/Random.o
+ .debug_line    0x00002cee       0xec build/default/production/_ext/1954962658/Reboot.o
+ .debug_line    0x00002dda       0xec build/default/production/_ext/1954962658/RSA.o
+ .debug_line    0x00002ec6       0xec build/default/production/_ext/1954962658/SMTP.o
+ .debug_line    0x00002fb2       0xec build/default/production/_ext/1954962658/SNMP.o
+ .debug_line    0x0000309e       0xec build/default/production/_ext/1954962658/SNMPv3.o
+ .debug_line    0x0000318a       0xec build/default/production/_ext/1954962658/SNMPv3USM.o
+ .debug_line    0x00003276      0x1b5 build/default/production/_ext/1954962658/SNTP.o
+ .debug_line    0x0000342b       0xec build/default/production/_ext/1954962658/SPIEEPROM.o
+ .debug_line    0x00003517       0xec build/default/production/_ext/1954962658/SPIFlash.o
+ .debug_line    0x00003603       0xec build/default/production/_ext/1954962658/SPIRAM.o
+ .debug_line    0x000036ef       0xec build/default/production/_ext/1954962658/SSL.o
+ .debug_line    0x000037db      0x1b0 build/default/production/_ext/1954962658/StackTsk.o
+ .debug_line    0x0000398b      0xb3c build/default/production/_ext/1954962658/TCP.o
+ .debug_line    0x000044c7       0xec build/default/production/_ext/1954962658/TCPPerformanceTest.o
+ .debug_line    0x000045b3       0xec build/default/production/_ext/1954962658/Telnet.o
+ .debug_line    0x0000469f       0xec build/default/production/_ext/1954962658/TFTPc.o
+ .debug_line    0x0000478b      0x17c build/default/production/_ext/1954962658/Tick.o
+ .debug_line    0x00004907       0xec build/default/production/_ext/1954962658/UART2TCPBridge.o
+ .debug_line    0x000049f3       0xec build/default/production/_ext/1954962658/UART.o
+ .debug_line    0x00004adf      0x32e build/default/production/_ext/1954962658/UDP.o
+ .debug_line    0x00004e0d       0xec build/default/production/_ext/1954962658/UDPPerformanceTest.o
+ .debug_line    0x00004ef9       0xec build/default/production/_ext/1954962658/ZeroconfHelper.o
+ .debug_line    0x00004fe5       0xec build/default/production/_ext/1954962658/ZeroconfLinkLocal.o
+ .debug_line    0x000050d1       0xec build/default/production/_ext/1954962658/ZeroconfMulticastDNS.o
+ .debug_line    0x000051bd      0x10f build/default/production/_ext/1472/MPFSImg2.o
+ .debug_line    0x000052cc      0x1ae build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
+ .debug_line    0x0000547a      0x29a build/default/production/_ext/1472/CustomHTTPApp.o
+ .debug_line    0x00005714      0x3bb build/default/production/_ext/1472/VendingMachine.o
+ .debug_line    0x00005acf       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_line    0x00005b3d       0x80 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+ .debug_line    0x00005bbd       0x85 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
+ .debug_line    0x00005c42       0x77 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
+ .debug_line    0x00005cb9       0x69 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
+ .debug_line    0x00005d22       0x74 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+ .debug_line    0x00005d96       0x87 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
+ .debug_line    0x00005e1d       0x6b c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+ .debug_line    0x00005e88       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
+ .debug_line    0x00005ef6       0x73 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
+ .debug_line    0x00005f69       0x7f c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+ .debug_line    0x00005fe8       0x87 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
+ .debug_line    0x0000606f       0x68 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+ .debug_line    0x000060d7       0x62 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
+ .debug_line    0x00006139       0x73 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
+ .debug_line    0x000061ac       0x73 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
+ .debug_line    0x0000621f       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
+ .debug_line    0x0000628d       0x64 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+ .debug_line    0x000062f1       0x77 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
+ .debug_line    0x00006368       0x78 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
+ .debug_line    0x000063e0        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
+ .debug_line    0x000063e0       0x72 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
+ .debug_line    0x00006452      0x158 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
+ .debug_line    0x000065aa       0x97 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_line    0x00006641       0x84 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
+ .debug_line    0x000066c5       0x88 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
+ .debug_line    0x0000674d       0x95 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
+ .debug_line    0x000067e2       0x96 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
+ .debug_line    0x00006878       0x6e c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
+ .debug_line    0x000068e6       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
+ .debug_line    0x00006956        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
+ .debug_line    0x00006956       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+ .debug_line    0x000069c6       0x71 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
+ .debug_line    0x00006a37       0x71 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
+ .debug_line    0x00006aa8       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
+ .debug_line    0x00006b18       0x6f c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
+ .debug_line    0x00006b87        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_iob.o)
+ .debug_line    0x00006b87       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
+ .debug_line    0x00006bf7       0x78 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+ .debug_line    0x00006c6f       0x79 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
+ .debug_line    0x00006ce8        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(errno.o)
+ .debug_line    0x00006ce8       0x7d c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
+ .debug_line    0x00006d65        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(xc32_uart.o)
+ .debug_line    0x00006d65       0xfa c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
+ .debug_line    0x00006e5f      0x159 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
 
-.debug_frame    0x00000000     0x21c0
+.debug_frame    0x00000000     0x2214
  *(.debug_frame)
  .debug_frame   0x00000000       0x48 build/default/production/_ext/1954962658/Announce.o
  .debug_frame   0x00000048       0xd4 build/default/production/_ext/1954962658/ARP.o
@@ -2294,48 +2294,48 @@ END GROUP
  .debug_frame   0x000012d4       0xd8 build/default/production/_ext/1954962658/Tick.o
  .debug_frame   0x000013ac      0x210 build/default/production/_ext/1954962658/UDP.o
  .debug_frame   0x000015bc       0x80 build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
- .debug_frame   0x0000163c      0x184 build/default/production/_ext/1472/CustomHTTPApp.o
- .debug_frame   0x000017c0      0x10c build/default/production/_ext/1472/VendingMachine.o
- .debug_frame   0x000018cc       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
- .debug_frame   0x000018ec       0xb8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
- .debug_frame   0x000019a4       0x54 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
- .debug_frame   0x000019f8       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
- .debug_frame   0x00001a20       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
- .debug_frame   0x00001a40       0x50 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
- .debug_frame   0x00001a90       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
- .debug_frame   0x00001ab8       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
- .debug_frame   0x00001b28       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
- .debug_frame   0x00001b64       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
- .debug_frame   0x00001b84       0x90 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
- .debug_frame   0x00001c14       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
- .debug_frame   0x00001c44       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
- .debug_frame   0x00001cb4       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
- .debug_frame   0x00001ce4       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
- .debug_frame   0x00001d04       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
- .debug_frame   0x00001d24       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
- .debug_frame   0x00001d4c       0xa0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
- .debug_frame   0x00001dec       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
- .debug_frame   0x00001e0c       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
- .debug_frame   0x00001e2c       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
- .debug_frame   0x00001e4c       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
- .debug_frame   0x00001e6c       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_frame   0x00001e94       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
- .debug_frame   0x00001eb4       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
- .debug_frame   0x00001ed4       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
- .debug_frame   0x00001efc       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
- .debug_frame   0x00001f1c       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
- .debug_frame   0x00001f3c       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
- .debug_frame   0x00001f68       0x6c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
- .debug_frame   0x00001fd4       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
- .debug_frame   0x00001ff4       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
- .debug_frame   0x00002020       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
- .debug_frame   0x00002058       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
- .debug_frame   0x00002084       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
- .debug_frame   0x000020ac       0x88 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
- .debug_frame   0x00002134       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
- .debug_frame   0x00002160       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
- .debug_frame   0x00002180       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
- .debug_frame   0x000021a0       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
+ .debug_frame   0x0000163c      0x1a0 build/default/production/_ext/1472/CustomHTTPApp.o
+ .debug_frame   0x000017dc      0x144 build/default/production/_ext/1472/VendingMachine.o
+ .debug_frame   0x00001920       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_frame   0x00001940       0xb8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+ .debug_frame   0x000019f8       0x54 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
+ .debug_frame   0x00001a4c       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
+ .debug_frame   0x00001a74       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
+ .debug_frame   0x00001a94       0x50 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+ .debug_frame   0x00001ae4       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
+ .debug_frame   0x00001b0c       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+ .debug_frame   0x00001b7c       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
+ .debug_frame   0x00001bb8       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
+ .debug_frame   0x00001bd8       0x90 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+ .debug_frame   0x00001c68       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
+ .debug_frame   0x00001c98       0x70 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+ .debug_frame   0x00001d08       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
+ .debug_frame   0x00001d38       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
+ .debug_frame   0x00001d58       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
+ .debug_frame   0x00001d78       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
+ .debug_frame   0x00001da0       0xa0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+ .debug_frame   0x00001e40       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
+ .debug_frame   0x00001e60       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
+ .debug_frame   0x00001e80       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
+ .debug_frame   0x00001ea0       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
+ .debug_frame   0x00001ec0       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_frame   0x00001ee8       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
+ .debug_frame   0x00001f08       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
+ .debug_frame   0x00001f28       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
+ .debug_frame   0x00001f50       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
+ .debug_frame   0x00001f70       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
+ .debug_frame   0x00001f90       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
+ .debug_frame   0x00001fbc       0x6c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+ .debug_frame   0x00002028       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
+ .debug_frame   0x00002048       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
+ .debug_frame   0x00002074       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
+ .debug_frame   0x000020ac       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
+ .debug_frame   0x000020d8       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
+ .debug_frame   0x00002100       0x88 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+ .debug_frame   0x00002188       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
+ .debug_frame   0x000021b4       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
+ .debug_frame   0x000021d4       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
+ .debug_frame   0x000021f4       0x20 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
 
 .debug_str      0x00000000     0x4353
  *(.debug_str)
@@ -3877,7 +3877,7 @@ LOAD data_init
                 0xbfc00480       0x24 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\debug-exception-return.o
                 0xbfc00480                __DbgExecReturn
 
-.text           0x9d000000     0xbfb8
+.text           0x9d000000     0xbfc4
  .text          0x9d000000     0x8668 build/default/production/_ext/1954962658/TCP.o
                 0x9d00012c                TCPInit
                 0x9d000430                TCPOpen
@@ -3904,714 +3904,717 @@ LOAD data_init
                 0x9d002cb4                TCPTick
                 0x9d003d8c                TCPProcess
                 0x9d007d8c                TCPAdjustFIFOSize
- .text          0x9d008668     0x3950 build/default/production/_ext/1954962658/HTTP2.o
+ .text          0x9d008668     0x395c build/default/production/_ext/1954962658/HTTP2.o
                 0x9d008668                HTTPPrint
-                0x9d008a68                HTTPPrint_
-                0x9d008abc                HTTPInit
-                0x9d008bec                HTTPServer
-                0x9d00b630                HTTPURLDecode
-                0x9d00b80c                HTTPGetArg
-                0x9d00b8dc                HTTPReadPostName
-                0x9d00b958                HTTPReadPostValue
-                0x9d00bda0                HTTPIncFile
+                0x9d008a74                HTTPPrint_
+                0x9d008ac8                HTTPInit
+                0x9d008bf8                HTTPServer
+                0x9d00b63c                HTTPURLDecode
+                0x9d00b818                HTTPGetArg
+                0x9d00b8e8                HTTPReadPostName
+                0x9d00b964                HTTPReadPostValue
+                0x9d00bdac                HTTPIncFile
 
-.rodata         0x9d00bfb8     0x1e5c
- .rodata        0x9d00bfb8     0x1e5c build/default/production/_ext/1472/MPFSImg2.o
-                0x9d00bfb8                MPFS_Start
+.rodata         0x9d00bfc4     0x363c
+ .rodata        0x9d00bfc4     0x363c build/default/production/_ext/1472/MPFSImg2.o
+                0x9d00bfc4                MPFS_Start
 
-.text           0x9d00de14     0x9280
- .text          0x9d00de14     0x16c8 build/default/production/_ext/1954962658/MPFS2.o
-                0x9d00de14                MPFSInit
-                0x9d00de98                MPFSOpen
-                0x9d00e1b4                MPFSOpenID
-                0x9d00e324                MPFSClose
-                0x9d00e38c                MPFSGet
-                0x9d00e5b0                MPFSGetArray
-                0x9d00e83c                MPFSGetLong
-                0x9d00e894                MPFSSeek
-                0x9d00ed68                MPFSGetTimestamp
-                0x9d00ee24                MPFSGetMicrotime
-                0x9d00eee0                MPFSGetFlags
-                0x9d00ef9c                MPFSGetSize
-                0x9d00f058                MPFSGetBytesRem
-                0x9d00f0f4                MPFSGetStartAddr
-                0x9d00f1b0                MPFSGetEndAddr
-                0x9d00f27c                MPFSGetFilename
-                0x9d00f37c                MPFSGetPosition
-                0x9d00f3e8                MPFSGetID
- .text          0x9d00f4dc     0x156c build/default/production/_ext/1472/VendingMachine.o
-                0x9d00f4dc                main
-                0x9d00f678                DisplayIPValue
-                0x9d00fcd8                WriteLCDMenu
-                0x9d010038                VendSetLights
- .text          0x9d010a48     0x1380 build/default/production/_ext/1954962658/Helpers.o
-                0x9d010a48                LFSRSeedRand
-                0x9d010acc                LFSRRand
-                0x9d010b44                GenerateRandomDWORD
-                0x9d010da0                StringToIPAddress
-                0x9d011108                Base64Decode
-                0x9d011434                uitoa
-                0x9d011560                hexatob
-                0x9d011654                btohexa_high
-                0x9d0116b8                btohexa_low
-                0x9d01171c                stricmppgm2ram
-                0x9d011888                swaps
-                0x9d0118d4                swapl
-                0x9d0119bc                CalcIPChecksum
-                0x9d011aa4                strupr
-                0x9d011b40                FormatNetBIOSName
-                0x9d011c08                strnchr
-                0x9d011cbc                strncpy_m
- .text          0x9d011dc8     0x1318 build/default/production/_ext/1954962658/UDP.o
-                0x9d011dc8                UDPInit
-                0x9d011e38                UDPOpenEx
-                0x9d01208c                UDPTask
-                0x9d0125d0                UDPIsOpened
-                0x9d012620                UDPClose
-                0x9d0126c8                UDPSetTxBuffer
-                0x9d012728                UDPSetRxBuffer
-                0x9d012778                UDPIsPutReady
-                0x9d012804                UDPPut
-                0x9d012890                UDPPutArray
-                0x9d012938                UDPPutString
-                0x9d012990                UDPFlush
-                0x9d012b74                UDPIsGetReady
-                0x9d012c04                UDPGet
-                0x9d012c88                UDPGetArray
-                0x9d012d48                UDPDiscard
-                0x9d012da8                UDPProcess
- .text          0x9d0130e0     0x1304 build/default/production/_ext/1954962658/ETHPIC32ExtPhy.o
-                0x9d0130e0                EthPhyRestartNegotiation
-                0x9d013174                EthPhyGetHwConfigFlags
-                0x9d0131e4                EthPhyInit
-                0x9d0136c4                EthPhyNegotiationComplete
-                0x9d013924                EthPhyGetNegotiationResult
-                0x9d013c68                EthPhyGetLinkStatus
-                0x9d013d40                EthPhyReset
-                0x9d013e4c                EthPhyScanLinkStart
-                0x9d013e88                EthPhyScanLinkRead
-                0x9d013ef4                EthPhyScanLinkStop
- .text          0x9d0143e4      0xf68 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
-                0x9d0143e4                MACInit
-                0x9d0147ec                MACIsLinked
-                0x9d014814                MACGetTxBaseAddr
-                0x9d014854                MACGetHttpBaseAddr
-                0x9d01487c                MACGetSslBaseAddr
-                0x9d0148a4                MACSetWritePtr
-                0x9d0148dc                MACIsTxReady
-                0x9d014aa8                MACPut
-                0x9d014ae4                MACPutArray
-                0x9d014b44                MACPutHeader
-                0x9d014c28                MACFlush
-                0x9d014c98                MACDiscardRx
-                0x9d014cf8                MACGetHeader
-                0x9d014f24                MACSetReadPtrInRx
-                0x9d014f60                MACSetReadPtr
-                0x9d014f98                MACGet
-                0x9d014fcc                MACGetArray
-                0x9d01503c                MACGetFreeRxSize
-                0x9d01508c                MACMemCopyAsync
-                0x9d015130                MACIsMemCopyDone
-                0x9d015154                CalcIPBufferChecksum
-                0x9d01519c                MACCalcRxChecksum
- .text          0x9d01534c      0xf40 build/default/production/_ext/1954962658/DNS.o
-                0x9d01534c                DNSBeginUsage
-                0x9d0153a0                DNSEndUsage
-                0x9d015410                DNSResolve
-                0x9d0154a4                DNSIsResolved
- .text          0x9d01628c      0xe08 build/default/production/_ext/1472/CustomHTTPApp.o
-                0x9d01628c                HTTPNeedsAuth
-                0x9d0162b4                HTTPCheckAuth
-                0x9d0162e0                HTTPExecuteGet
-                0x9d0163d8                HTTPExecutePost
-                0x9d0169e8                HTTPPrint_version
-                0x9d016a48                HTTPPrint_builddate
-                0x9d016aa8                HTTPPrint_machineDesc
-                0x9d016b78                HTTPPrint_hostname
-                0x9d016bd0                HTTPPrint_name
-                0x9d016c58                HTTPPrint_stock
-                0x9d016cfc                HTTPPrint_status
-                0x9d016dd8                HTTPPrint_lights_chk
-                0x9d016e60                HTTPPrint_price
+.text           0x9d00f600     0x9564
+ .text          0x9d00f600     0x16c8 build/default/production/_ext/1954962658/MPFS2.o
+                0x9d00f600                MPFSInit
+                0x9d00f684                MPFSOpen
+                0x9d00f9a0                MPFSOpenID
+                0x9d00fb10                MPFSClose
+                0x9d00fb78                MPFSGet
+                0x9d00fd9c                MPFSGetArray
+                0x9d010028                MPFSGetLong
+                0x9d010080                MPFSSeek
+                0x9d010554                MPFSGetTimestamp
+                0x9d010610                MPFSGetMicrotime
+                0x9d0106cc                MPFSGetFlags
+                0x9d010788                MPFSGetSize
+                0x9d010844                MPFSGetBytesRem
+                0x9d0108e0                MPFSGetStartAddr
+                0x9d01099c                MPFSGetEndAddr
+                0x9d010a68                MPFSGetFilename
+                0x9d010b68                MPFSGetPosition
+                0x9d010bd4                MPFSGetID
+ .text          0x9d010cc8     0x15e8 build/default/production/_ext/1472/VendingMachine.o
+                0x9d010cc8                main
+                0x9d010e64                DisplayIPValue
+                0x9d0114c4                WriteLCDMenu
+                0x9d011824                VendSetLights
+                0x9d012234                vend_set_credits
+                0x9d01228c                vend_get_credits
+ .text          0x9d0122b0     0x1380 build/default/production/_ext/1954962658/Helpers.o
+                0x9d0122b0                LFSRSeedRand
+                0x9d012334                LFSRRand
+                0x9d0123ac                GenerateRandomDWORD
+                0x9d012608                StringToIPAddress
+                0x9d012970                Base64Decode
+                0x9d012c9c                uitoa
+                0x9d012dc8                hexatob
+                0x9d012ebc                btohexa_high
+                0x9d012f20                btohexa_low
+                0x9d012f84                stricmppgm2ram
+                0x9d0130f0                swaps
+                0x9d01313c                swapl
+                0x9d013224                CalcIPChecksum
+                0x9d01330c                strupr
+                0x9d0133a8                FormatNetBIOSName
+                0x9d013470                strnchr
+                0x9d013524                strncpy_m
+ .text          0x9d013630     0x1318 build/default/production/_ext/1954962658/UDP.o
+                0x9d013630                UDPInit
+                0x9d0136a0                UDPOpenEx
+                0x9d0138f4                UDPTask
+                0x9d013e38                UDPIsOpened
+                0x9d013e88                UDPClose
+                0x9d013f30                UDPSetTxBuffer
+                0x9d013f90                UDPSetRxBuffer
+                0x9d013fe0                UDPIsPutReady
+                0x9d01406c                UDPPut
+                0x9d0140f8                UDPPutArray
+                0x9d0141a0                UDPPutString
+                0x9d0141f8                UDPFlush
+                0x9d0143dc                UDPIsGetReady
+                0x9d01446c                UDPGet
+                0x9d0144f0                UDPGetArray
+                0x9d0145b0                UDPDiscard
+                0x9d014610                UDPProcess
+ .text          0x9d014948     0x1304 build/default/production/_ext/1954962658/ETHPIC32ExtPhy.o
+                0x9d014948                EthPhyRestartNegotiation
+                0x9d0149dc                EthPhyGetHwConfigFlags
+                0x9d014a4c                EthPhyInit
+                0x9d014f2c                EthPhyNegotiationComplete
+                0x9d01518c                EthPhyGetNegotiationResult
+                0x9d0154d0                EthPhyGetLinkStatus
+                0x9d0155a8                EthPhyReset
+                0x9d0156b4                EthPhyScanLinkStart
+                0x9d0156f0                EthPhyScanLinkRead
+                0x9d01575c                EthPhyScanLinkStop
+ .text          0x9d015c4c     0x1070 build/default/production/_ext/1472/CustomHTTPApp.o
+                0x9d015c4c                HTTPNeedsAuth
+                0x9d015c74                HTTPCheckAuth
+                0x9d015ca0                HTTPExecuteGet
+                0x9d015e64                HTTPExecutePost
+                0x9d016588                HTTPPrint_version
+                0x9d0165e8                HTTPPrint_builddate
+                0x9d016648                HTTPPrint_machineDesc
+                0x9d016718                HTTPPrint_hostname
+                0x9d016770                HTTPPrint_name
+                0x9d0167f8                HTTPPrint_stock
+                0x9d01689c                HTTPPrint_status
+                0x9d016978                HTTPPrint_lights_chk
+                0x9d016a00                HTTPPrint_price
+                0x9d016c34                HTTPPrint_credits
+ .text          0x9d016cbc      0xf68 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
+                0x9d016cbc                MACInit
+                0x9d0170c4                MACIsLinked
+                0x9d0170ec                MACGetTxBaseAddr
+                0x9d01712c                MACGetHttpBaseAddr
+                0x9d017154                MACGetSslBaseAddr
+                0x9d01717c                MACSetWritePtr
+                0x9d0171b4                MACIsTxReady
+                0x9d017380                MACPut
+                0x9d0173bc                MACPutArray
+                0x9d01741c                MACPutHeader
+                0x9d017500                MACFlush
+                0x9d017570                MACDiscardRx
+                0x9d0175d0                MACGetHeader
+                0x9d0177fc                MACSetReadPtrInRx
+                0x9d017838                MACSetReadPtr
+                0x9d017870                MACGet
+                0x9d0178a4                MACGetArray
+                0x9d017914                MACGetFreeRxSize
+                0x9d017964                MACMemCopyAsync
+                0x9d017a08                MACIsMemCopyDone
+                0x9d017a2c                CalcIPBufferChecksum
+                0x9d017a74                MACCalcRxChecksum
+ .text          0x9d017c24      0xf40 build/default/production/_ext/1954962658/DNS.o
+                0x9d017c24                DNSBeginUsage
+                0x9d017c78                DNSEndUsage
+                0x9d017ce8                DNSResolve
+                0x9d017d7c                DNSIsResolved
 
 .text._vfprintf_cdnopuxX
-                0x9d017094      0x8b8
+                0x9d018b64      0x8b8
  .text._vfprintf_cdnopuxX
-                0x9d017094      0x8b8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
-                0x9d017094                _vfprintf_cdnopuxX
+                0x9d018b64      0x8b8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
+                0x9d018b64                _vfprintf_cdnopuxX
 
-.rodata         0x9d01794c      0x7d4
- .rodata        0x9d01794c      0x7d4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01794c                __IntSrcTbl
-                0x9d017e68                __IntVectorTbl
+.rodata         0x9d01941c      0x7d4
+ .rodata        0x9d01941c      0x7d4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d01941c                __IntSrcTbl
+                0x9d019938                __IntVectorTbl
 
-.text           0x9d018120      0xdf4
- .text          0x9d018120      0x7ac build/default/production/_ext/1954962658/Hashes.o
-                0x9d018120                HashAddData
-                0x9d018180                MD5Initialize
-                0x9d0181f4                MD5AddData
-                0x9d0185cc                MD5Calculate
- .text          0x9d0188cc      0x648 build/default/production/_ext/1954962658/ARP.o
-                0x9d0188cc                ARPSendPkt
-                0x9d018a74                ARPInit
-                0x9d018b00                ARPProcess
-                0x9d018cc4                ARPResolve
-                0x9d018da8                ARPIsResolved
-                0x9d018e88                SwapARPPacket
+.text           0x9d019bf0      0xdf4
+ .text          0x9d019bf0      0x7ac build/default/production/_ext/1954962658/Hashes.o
+                0x9d019bf0                HashAddData
+                0x9d019c50                MD5Initialize
+                0x9d019cc4                MD5AddData
+                0x9d01a09c                MD5Calculate
+ .text          0x9d01a39c      0x648 build/default/production/_ext/1954962658/ARP.o
+                0x9d01a39c                ARPSendPkt
+                0x9d01a544                ARPInit
+                0x9d01a5d0                ARPProcess
+                0x9d01a794                ARPResolve
+                0x9d01a878                ARPIsResolved
+                0x9d01a958                SwapARPPacket
 
-.rodata         0x9d018f14      0x548
- .rodata        0x9d018f14      0x548 build/default/production/_ext/1954962658/HTTP2.o
+.rodata         0x9d01a9e4      0x548
+ .rodata        0x9d01a9e4      0x548 build/default/production/_ext/1954962658/HTTP2.o
 
-.text           0x9d01945c     0x1bd4
- .text          0x9d01945c      0x480 build/default/production/_ext/1954962658/LCDBlocking.o
-                0x9d019538                LCDInit
-                0x9d0196ac                LCDUpdate
-                0x9d019880                LCDErase
- .text          0x9d0198dc      0x464 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
-                0x9d0198dc                __umoddi3
- .text          0x9d019d40      0x448 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
-                0x9d019d40                __udivdi3
- .text          0x9d01a188      0x3f4 build/default/production/_ext/1954962658/SNTP.o
-                0x9d01a188                SNTPClient
-                0x9d01a4e8                SNTPGetUTCSeconds
- .text          0x9d01a57c      0x3c0 build/default/production/_ext/1954962658/Announce.o
-                0x9d01a57c                AnnounceIP
-                0x9d01a6f8                DiscoveryTask
- .text          0x9d01a93c      0x3ac build/default/production/_ext/1954962658/Tick.o
-                0x9d01a93c                TickInit
-                0x9d01aa80                TickGet
-                0x9d01ab00                TickGetDiv256
-                0x9d01ab80                TickGetDiv64K
-                0x9d01ac00                TickConvertToMilliseconds
-                0x9d01ac68                _T1Interrupt
- .text          0x9d01ace8      0x348 build/default/production/_ext/1954962658/IP.o
-                0x9d01ace8                IPGetHeader
-                0x9d01ae28                IPPutHeader
-                0x9d01af54                IPSetRxBuffer
+.text           0x9d01af2c     0x1bd4
+ .text          0x9d01af2c      0x480 build/default/production/_ext/1954962658/LCDBlocking.o
+                0x9d01b008                LCDInit
+                0x9d01b17c                LCDUpdate
+                0x9d01b350                LCDErase
+ .text          0x9d01b3ac      0x464 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_umoddi3.o)
+                0x9d01b3ac                __umoddi3
+ .text          0x9d01b810      0x448 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_udivdi3.o)
+                0x9d01b810                __udivdi3
+ .text          0x9d01bc58      0x3f4 build/default/production/_ext/1954962658/SNTP.o
+                0x9d01bc58                SNTPClient
+                0x9d01bfb8                SNTPGetUTCSeconds
+ .text          0x9d01c04c      0x3c0 build/default/production/_ext/1954962658/Announce.o
+                0x9d01c04c                AnnounceIP
+                0x9d01c1c8                DiscoveryTask
+ .text          0x9d01c40c      0x3ac build/default/production/_ext/1954962658/Tick.o
+                0x9d01c40c                TickInit
+                0x9d01c550                TickGet
+                0x9d01c5d0                TickGetDiv256
+                0x9d01c650                TickGetDiv64K
+                0x9d01c6d0                TickConvertToMilliseconds
+                0x9d01c738                _T1Interrupt
+ .text          0x9d01c7b8      0x348 build/default/production/_ext/1954962658/IP.o
+                0x9d01c7b8                IPGetHeader
+                0x9d01c8f8                IPPutHeader
+                0x9d01ca24                IPSetRxBuffer
 
-.dinit          0x9d01b030      0x300
- .dinit         0x9d01b030      0x300 data_init
+.dinit          0x9d01cb00      0x300
+ .dinit         0x9d01cb00      0x300 data_init
 
-.text           0x9d01b330      0x2d0
- .text          0x9d01b330      0x2d0 build/default/production/_ext/1954962658/StackTsk.o
-                0x9d01b330                StackInit
-                0x9d01b3ac                StackTask
-                0x9d01b5c0                StackApplications
+.text           0x9d01ce00      0x2d0
+ .text          0x9d01ce00      0x2d0 build/default/production/_ext/1954962658/StackTsk.o
+                0x9d01ce00                StackInit
+                0x9d01ce7c                StackTask
+                0x9d01d090                StackApplications
 
-.text.malloc    0x9d01b600      0x240
- .text.malloc   0x9d01b600      0x240 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
-                0x9d01b600                malloc
+.text.malloc    0x9d01d0d0      0x240
+ .text.malloc   0x9d01d0d0      0x240 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+                0x9d01d0d0                malloc
 
 .text.EthRxBuffersAppend
-                0x9d01b840      0x224
+                0x9d01d310      0x224
  .text.EthRxBuffersAppend
-                0x9d01b840      0x224 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
-                0x9d01b840                EthRxBuffersAppend
+                0x9d01d310      0x224 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_buffers_append_lib.o)
+                0x9d01d310                EthRxBuffersAppend
 
 .text._EthAckPacket
-                0x9d01ba64      0x1bc
+                0x9d01d534      0x1bc
  .text._EthAckPacket
-                0x9d01ba64      0x1bc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
-                0x9d01ba64                _EthAckPacket
+                0x9d01d534      0x1bc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+                0x9d01d534                _EthAckPacket
 
-.text           0x9d01bc20      0x1a0
- .text          0x9d01bc20      0x1a0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(strcpy.o)
-                0x9d01bc20                strcpy
+.text           0x9d01d6f0      0x1a0
+ .text          0x9d01d6f0      0x1a0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(strcpy.o)
+                0x9d01d6f0                strcpy
 
-.rodata         0x9d01bdc0      0x190
- .rodata        0x9d01bdc0      0x190 build/default/production/_ext/1472/VendingMachine.o
+.rodata         0x9d01d890      0x190
+ .rodata        0x9d01d890      0x190 build/default/production/_ext/1472/VendingMachine.o
 
 .text._EthRxAckBuffer
-                0x9d01bf50      0x184
+                0x9d01da20      0x184
  .text._EthRxAckBuffer
-                0x9d01bf50      0x184 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+                0x9d01da20      0x184 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
 
-.text           0x9d01c0d4      0x5ac
- .text          0x9d01c0d4      0x178 build/default/production/_ext/1954962658/ICMP.o
-                0x9d01c0d4                ICMPProcess
- .text          0x9d01c24c      0x168 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(memcpy.o)
-                0x9d01c24c                memcpy
- .text          0x9d01c3b4      0x168 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(strlen.o)
-                0x9d01c3b4                strlen
- .text          0x9d01c51c      0x164 build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
-                0x9d01c51c                EthPhyConfigureMII
-                0x9d01c564                EthPhyConfigureMdix
-                0x9d01c634                EthPhyMIIMAddress
-                0x9d01c658                EthPhyMIIMClock
+.text           0x9d01dba4      0x5ac
+ .text          0x9d01dba4      0x178 build/default/production/_ext/1954962658/ICMP.o
+                0x9d01dba4                ICMPProcess
+ .text          0x9d01dd1c      0x168 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(memcpy.o)
+                0x9d01dd1c                memcpy
+ .text          0x9d01de84      0x168 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(strlen.o)
+                0x9d01de84                strlen
+ .text          0x9d01dfec      0x164 build/default/production/_ext/1954962658/ETHPIC32ExtPhySMSC8720.o
+                0x9d01dfec                EthPhyConfigureMII
+                0x9d01e034                EthPhyConfigureMdix
+                0x9d01e104                EthPhyMIIMAddress
+                0x9d01e128                EthPhyMIIMClock
 
 .text._EthAppendBusyList
-                0x9d01c680      0x160
+                0x9d01e150      0x160
  .text._EthAppendBusyList
-                0x9d01c680      0x160 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
-                0x9d01c680                _EthAppendBusyList
+                0x9d01e150      0x160 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_eth_append_busy_list_lib.o)
+                0x9d01e150                _EthAppendBusyList
 
-.text           0x9d01c7e0      0x158
- .text          0x9d01c7e0      0x158 build/default/production/_ext/1954962658/Delay.o
-                0x9d01c7e0                DelayMs
-                0x9d01c88c                Delay10us
+.text           0x9d01e2b0      0x158
+ .text          0x9d01e2b0      0x158 build/default/production/_ext/1954962658/Delay.o
+                0x9d01e2b0                DelayMs
+                0x9d01e35c                Delay10us
 
 .text.EthRxGetPacket
-                0x9d01c938      0x150
+                0x9d01e408      0x150
  .text.EthRxGetPacket
-                0x9d01c938      0x150 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
-                0x9d01c938                EthRxGetPacket
+                0x9d01e408      0x150 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
+                0x9d01e408                EthRxGetPacket
 
 .text._sbrk_init
-                0x9d01ca88      0x14c
+                0x9d01e558      0x14c
  .text._sbrk_init
-                0x9d01ca88      0x14c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
-                0x9d01ca88                _sbrk_init
+                0x9d01e558      0x14c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+                0x9d01e558                _sbrk_init
 
-.rodata         0x9d01cbd4      0x140
- .rodata        0x9d01cbd4      0x140 build/default/production/_ext/1954962658/Hashes.o
+.rodata         0x9d01e6a4      0x140
+ .rodata        0x9d01e6a4      0x140 build/default/production/_ext/1954962658/Hashes.o
 
 .text.EthDescriptorsPoolAdd
-                0x9d01cd14      0x130
+                0x9d01e7e4      0x130
  .text.EthDescriptorsPoolAdd
-                0x9d01cd14      0x130 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
-                0x9d01cd14                EthDescriptorsPoolAdd
+                0x9d01e7e4      0x130 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
+                0x9d01e7e4                EthDescriptorsPoolAdd
 
-.text.realloc   0x9d01ce44      0x130
- .text.realloc  0x9d01ce44      0x130 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
-                0x9d01ce44                realloc
+.text.realloc   0x9d01e914      0x130
+ .text.realloc  0x9d01e914      0x130 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+                0x9d01e914                realloc
 
-.text.fputc     0x9d01cf74      0x128
- .text.fputc    0x9d01cf74      0x128 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
-                0x9d01cf74                fputc
+.text.fputc     0x9d01ea44      0x128
+ .text.fputc    0x9d01ea44      0x128 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_fputc_simple.o)
+                0x9d01ea44                fputc
 
 .text.EthDescriptorsAdd
-                0x9d01d09c      0x120
+                0x9d01eb6c      0x120
  .text.EthDescriptorsAdd
-                0x9d01d09c      0x120 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
-                0x9d01d09c                EthDescriptorsAdd
+                0x9d01eb6c      0x120 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_descriptors_add_lib.o)
+                0x9d01eb6c                EthDescriptorsAdd
 
-.text           0x9d01d1bc      0x120
- .text          0x9d01d1bc      0x120 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(strcmp.o)
-                0x9d01d1bc                strcmp
+.text           0x9d01ec8c      0x120
+ .text          0x9d01ec8c      0x120 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(strcmp.o)
+                0x9d01ec8c                strcmp
 
-.text._flsbuf   0x9d01d2dc      0x110
- .text._flsbuf  0x9d01d2dc      0x110 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
-                0x9d01d2dc                _flsbuf
+.text._flsbuf   0x9d01edac      0x110
+ .text._flsbuf  0x9d01edac      0x110 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(_flsbuf_simple.o)
+                0x9d01edac                _flsbuf
 
 .text.EthTxSendPacket
-                0x9d01d3ec      0x10c
+                0x9d01eebc      0x10c
  .text.EthTxSendPacket
-                0x9d01d3ec      0x10c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
-                0x9d01d3ec                EthTxSendPacket
+                0x9d01eebc      0x10c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+                0x9d01eebc                EthTxSendPacket
 
-.rodata         0x9d01d4f8      0x104
- .rodata        0x9d01d4f8      0x104 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
-                0x9d01d4f8                _ctype
+.rodata         0x9d01efc8      0x104
+ .rodata        0x9d01efc8      0x104 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(ctype.o)
+                0x9d01efc8                _ctype
 
 .text.general_exception
-                0x9d01d5fc       0xdc
+                0x9d01f0cc       0xdc
  .text.general_exception
-                0x9d01d5fc       0xdc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(general-exception.o)
-                0x9d01d5fc                _general_exception_context
+                0x9d01f0cc       0xdc c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(general-exception.o)
+                0x9d01f0cc                _general_exception_context
 
-.rodata         0x9d01d6d8       0xd0
- .rodata        0x9d01d6d8       0xd0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
+.rodata         0x9d01f1a8       0xd0
+ .rodata        0x9d01f1a8       0xd0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(doprnt_cdnopuxX.eo)
 
 .text.EthMACOpen
-                0x9d01d7a8       0xb8
+                0x9d01f278       0xb8
  .text.EthMACOpen
-                0x9d01d7a8       0xb8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
-                0x9d01d7a8                EthMACOpen
+                0x9d01f278       0xb8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_open_lib.o)
+                0x9d01f278                EthMACOpen
 
 .text._mon_putc
-                0x9d01d860       0xb4
+                0x9d01f330       0xb4
  .text._mon_putc
-                0x9d01d860       0xb4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
-                0x9d01d860                _mon_putc
+                0x9d01f330       0xb4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(_mon_putc.o)
+                0x9d01f330                _mon_putc
 
 .text.EthTxSendBuffer
-                0x9d01d914       0xb0
+                0x9d01f3e4       0xb0
  .text.EthTxSendBuffer
-                0x9d01d914       0xb0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
-                0x9d01d914                EthTxSendBuffer
+                0x9d01f3e4       0xb0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+                0x9d01f3e4                EthTxSendBuffer
 
-.text.EthInit   0x9d01d9c4       0xac
- .text.EthInit  0x9d01d9c4       0xac c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
-                0x9d01d9c4                EthInit
+.text.EthInit   0x9d01f494       0xac
+ .text.EthInit  0x9d01f494       0xac c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_init_lib.o)
+                0x9d01f494                EthInit
 
-.text           0x9d01da70       0xa8
- .text          0x9d01da70       0xa8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(memset.o)
-                0x9d01da70                memset
+.text           0x9d01f540       0xa8
+ .text          0x9d01f540       0xa8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(memset.o)
+                0x9d01f540                memset
 
-.text._sbrk     0x9d01db18       0xa4
- .text._sbrk    0x9d01db18       0xa4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
-                0x9d01db18                _sbrk
+.text._sbrk     0x9d01f5e8       0xa4
+ .text._sbrk    0x9d01f5e8       0xa4 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+                0x9d01f5e8                _sbrk
 
 .text._EthTxSchedBuffer
-                0x9d01dbbc       0xa0
+                0x9d01f68c       0xa0
  .text._EthTxSchedBuffer
-                0x9d01dbbc       0xa0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+                0x9d01f68c       0xa0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
 
-.text           0x9d01dc5c       0x98
- .text          0x9d01dc5c       0x98 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(memcmp.o)
-                0x9d01dc5c                memcmp
+.rodata         0x9d01f72c       0x9c
+ .rodata        0x9d01f72c       0x9c build/default/production/_ext/1472/CustomHTTPApp.o
 
-.text.atol      0x9d01dcf4       0x90
- .text.atol     0x9d01dcf4       0x90 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
-                0x9d01dcf4                atol
+.text           0x9d01f7c8       0x98
+ .text          0x9d01f7c8       0x98 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(memcmp.o)
+                0x9d01f7c8                memcmp
 
-.rodata         0x9d01dd84       0x8c
- .rodata        0x9d01dd84       0x8c build/default/production/_ext/1472/CustomHTTPApp.o
+.text.atol      0x9d01f860       0x90
+ .text.atol     0x9d01f860       0x90 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(atol.o)
+                0x9d01f860                atol
 
-.text.write     0x9d01de10       0x88
- .text.write    0x9d01de10       0x88 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
-                0x9d01de10                write
+.text.write     0x9d01f8f0       0x88
+ .text.write    0x9d01f8f0       0x88 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(write.o)
+                0x9d01f8f0                write
 
 .text._EthTxSchedList
-                0x9d01de98       0x84
+                0x9d01f978       0x84
  .text._EthTxSchedList
-                0x9d01de98       0x84 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+                0x9d01f978       0x84 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
 
 .text.EthRxFiltersPMSet
-                0x9d01df1c       0x64
+                0x9d01f9fc       0x64
  .text.EthRxFiltersPMSet
-                0x9d01df1c       0x64 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
-                0x9d01df1c                EthRxFiltersPMSet
+                0x9d01f9fc       0x64 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+                0x9d01f9fc                EthRxFiltersPMSet
 
 .text._sprintf_cdnopuxX
-                0x9d01df80       0x64
+                0x9d01fa60       0x64
  .text._sprintf_cdnopuxX
-                0x9d01df80       0x64 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
-                0x9d01df80                _sprintf_cdnopuxX
+                0x9d01fa60       0x64 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(sprintf_cdnopuxX.eo)
+                0x9d01fa60                _sprintf_cdnopuxX
 
 .text.EthTxGetBufferStatus
-                0x9d01dfe4       0x60
+                0x9d01fac4       0x60
  .text.EthTxGetBufferStatus
-                0x9d01dfe4       0x60 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
-                0x9d01dfe4                EthTxGetBufferStatus
+                0x9d01fac4       0x60 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+                0x9d01fac4                EthTxGetBufferStatus
 
 .text.EthMIIMConfig
-                0x9d01e044       0x60
+                0x9d01fb24       0x60
  .text.EthMIIMConfig
-                0x9d01e044       0x60 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
-                0x9d01e044                EthMIIMConfig
+                0x9d01fb24       0x60 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+                0x9d01fb24                EthMIIMConfig
 
-.rodata         0x9d01e0a4       0x54
- .rodata        0x9d01e0a4       0x54 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
-                0x9d01e0a4                PortRegTbl
+.rodata         0x9d01fb84       0x54
+ .rodata        0x9d01fb84       0x54 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(_ports_tbl_libp.o)
+                0x9d01fb84                PortRegTbl
 
-.text.calloc    0x9d01e0f8       0x54
- .text.calloc   0x9d01e0f8       0x54 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
-                0x9d01e0f8                calloc
+.text.calloc    0x9d01fbd8       0x54
+ .text.calloc   0x9d01fbd8       0x54 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(calloc.o)
+                0x9d01fbd8                calloc
 
-.text.strncpy   0x9d01e14c       0x50
- .text.strncpy  0x9d01e14c       0x50 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
-                0x9d01e14c                strncpy
+.text.strncpy   0x9d01fc2c       0x50
+ .text.strncpy  0x9d01fc2c       0x50 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(strncpy.o)
+                0x9d01fc2c                strncpy
 
 .text.main_entry
-                0x9d01e19c       0x4c
+                0x9d01fc7c       0x4c
  .text.main_entry
-                0x9d01e19c       0x4c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/./proc/32MX795F512L/crt0_mips32r2.o
-                0x9d01e1c8                __crt0_exit
+                0x9d01fc7c       0x4c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/./proc/32MX795F512L/crt0_mips32r2.o
+                0x9d01fca8                __crt0_exit
 
 .text.EthMACSetAddress
-                0x9d01e1e8       0x4c
+                0x9d01fcc8       0x4c
  .text.EthMACSetAddress
-                0x9d01e1e8       0x4c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
-                0x9d01e1e8                EthMACSetAddress
+                0x9d01fcc8       0x4c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+                0x9d01fcc8                EthMACSetAddress
 
 .text.INTEnable
-                0x9d01e234       0x4c
+                0x9d01fd14       0x4c
  .text.INTEnable
-                0x9d01e234       0x4c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e234                INTEnable
+                0x9d01fd14       0x4c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d01fd14                INTEnable
 
-.text.sbrk      0x9d01e280       0x48
- .text.sbrk     0x9d01e280       0x48 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
-                0x9d01e280                sbrk
+.text.sbrk      0x9d01fd60       0x48
+ .text.sbrk     0x9d01fd60       0x48 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+                0x9d01fd60                sbrk
 
 .text.EthMACGetAddress
-                0x9d01e2c8       0x44
+                0x9d01fda8       0x44
  .text.EthMACGetAddress
-                0x9d01e2c8       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
-                0x9d01e2c8                EthMACGetAddress
+                0x9d01fda8       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+                0x9d01fda8                EthMACGetAddress
 
 .text.EthMIIMReadStart
-                0x9d01e30c       0x44
+                0x9d01fdec       0x44
  .text.EthMIIMReadStart
-                0x9d01e30c       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
-                0x9d01e30c                EthMIIMReadStart
+                0x9d01fdec       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+                0x9d01fdec                EthMIIMReadStart
 
-.text           0x9d01e350       0x88
- .text          0x9d01e350       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(pic32_software_reset.o)
-                0x9d01e350                __pic32_software_reset
- .text          0x9d01e394       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
-                0x9d01e394                __lshrdi3
+.text           0x9d01fe30       0x88
+ .text          0x9d01fe30       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(pic32_software_reset.o)
+                0x9d01fe30                __pic32_software_reset
+ .text          0x9d01fe74       0x44 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/size\libgcc.a(_lshrdi3.o)
+                0x9d01fe74                __lshrdi3
 
 .text.EthRxGetBuffer
-                0x9d01e3d8       0x3c
+                0x9d01feb8       0x3c
  .text.EthRxGetBuffer
-                0x9d01e3d8       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
-                0x9d01e3d8                EthRxGetBuffer
+                0x9d01feb8       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_get_packet_lib.o)
+                0x9d01feb8                EthRxGetBuffer
 
 .text.EthMIIMWriteStart
-                0x9d01e414       0x3c
+                0x9d01fef4       0x3c
  .text.EthMIIMWriteStart
-                0x9d01e414       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
-                0x9d01e414                EthMIIMWriteStart
+                0x9d01fef4       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+                0x9d01fef4                EthMIIMWriteStart
 
 .text.PORTSetPinsDigitalIn
-                0x9d01e450       0x3c
+                0x9d01ff30       0x3c
  .text.PORTSetPinsDigitalIn
-                0x9d01e450       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
-                0x9d01e450                PORTSetPinsDigitalIn
+                0x9d01ff30       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_in_lib.o)
+                0x9d01ff30                PORTSetPinsDigitalIn
 
 .text.PORTSetPinsDigitalOut
-                0x9d01e48c       0x3c
+                0x9d01ff6c       0x3c
  .text.PORTSetPinsDigitalOut
-                0x9d01e48c       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
-                0x9d01e48c                PORTSetPinsDigitalOut
+                0x9d01ff6c       0x3c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(port_set_pins_digital_out_lib.o)
+                0x9d01ff6c                PORTSetPinsDigitalOut
 
 .text._EthFindPacket
-                0x9d01e4c8       0x38
+                0x9d01ffa8       0x38
  .text._EthFindPacket
-                0x9d01e4c8       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
-                0x9d01e4c8                _EthFindPacket
+                0x9d01ffa8       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_tx_packet_lib.o)
+                0x9d01ffa8                _EthFindPacket
 
 .text.EthMIIMScanStart
-                0x9d01e500       0x38
+                0x9d01ffe0       0x38
  .text.EthMIIMScanStart
-                0x9d01e500       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
-                0x9d01e500                EthMIIMScanStart
+                0x9d01ffe0       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+                0x9d01ffe0                EthMIIMScanStart
 
 .text.INTSetVectorPriority
-                0x9d01e538       0x38
+                0x9d020018       0x38
  .text.INTSetVectorPriority
-                0x9d01e538       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e538                INTSetVectorPriority
+                0x9d020018       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d020018                INTSetVectorPriority
 
 .text.INTSetVectorSubPriority
-                0x9d01e570       0x38
+                0x9d020050       0x38
  .text.INTSetVectorSubPriority
-                0x9d01e570       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e570                INTSetVectorSubPriority
+                0x9d020050       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d020050                INTSetVectorSubPriority
 
 .text._bootstrap_exception_handler
-                0x9d01e5a8       0x38
+                0x9d020088       0x38
  .text._bootstrap_exception_handler
-                0x9d01e5a8       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
-                0x9d01e5a8                _bootstrap_exception_handler
+                0x9d020088       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-bootstrap-exception-handler.o)
+                0x9d020088                _bootstrap_exception_handler
 
 .text._general_exception_handler
-                0x9d01e5e0       0x38
+                0x9d0200c0       0x38
  .text._general_exception_handler
-                0x9d01e5e0       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
-                0x9d01e5e0                _general_exception_handler
+                0x9d0200c0       0x38 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-general-exception-handler.o)
+                0x9d0200c0                _general_exception_handler
 
 .text.INTEnableSystemMultiVectoredInt
-                0x9d01e618       0x34
+                0x9d0200f8       0x34
  .text.INTEnableSystemMultiVectoredInt
-                0x9d01e618       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
-                0x9d01e618                INTEnableSystemMultiVectoredInt
+                0x9d0200f8       0x34 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_mv_int_lib.o)
+                0x9d0200f8                INTEnableSystemMultiVectoredInt
 
 .text.EthTxAcknowledgeBuffer
-                0x9d01e64c       0x30
+                0x9d02012c       0x30
  .text.EthTxAcknowledgeBuffer
-                0x9d01e64c       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
-                0x9d01e64c                EthTxAcknowledgeBuffer
+                0x9d02012c       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+                0x9d02012c                EthTxAcknowledgeBuffer
 
 .text.EthTxAckBuffer
-                0x9d01e67c       0x30
+                0x9d02015c       0x30
  .text.EthTxAckBuffer
-                0x9d01e67c       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
-                0x9d01e67c                EthTxAckBuffer
+                0x9d02015c       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+                0x9d02015c                EthTxAckBuffer
 
 .text.EthRxSetBufferSize
-                0x9d01e6ac       0x30
+                0x9d02018c       0x30
  .text.EthRxSetBufferSize
-                0x9d01e6ac       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
-                0x9d01e6ac                EthRxSetBufferSize
+                0x9d02018c       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_set_buffer_size_lib.o)
+                0x9d02018c                EthRxSetBufferSize
 
 .vector_default
-                0x9d01e6dc       0x30
+                0x9d0201bc       0x30
  .vector_default
-                0x9d01e6dc       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
-                0x9d01e6dc                _DefaultInterrupt
+                0x9d0201bc       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(defaultinterrupt.o)
+                0x9d0201bc                _DefaultInterrupt
 
-.text.free      0x9d01e70c       0x30
- .text.free     0x9d01e70c       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
-                0x9d01e70c                free
+.text.free      0x9d0201ec       0x30
+ .text.free     0x9d0201ec       0x30 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libc.a(malloc.o)
+                0x9d0201ec                free
 
 .text.EthMIIMReadResult
-                0x9d01e73c       0x2c
+                0x9d02021c       0x2c
  .text.EthMIIMReadResult
-                0x9d01e73c       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
-                0x9d01e73c                EthMIIMReadResult
+                0x9d02021c       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+                0x9d02021c                EthMIIMReadResult
 
 .text.INTGetVectorPriority
-                0x9d01e768       0x2c
+                0x9d020248       0x2c
  .text.INTGetVectorPriority
-                0x9d01e768       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e768                INTGetVectorPriority
+                0x9d020248       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d020248                INTGetVectorPriority
 
 .text.INTGetVectorSubPriority
-                0x9d01e794       0x2c
+                0x9d020274       0x2c
  .text.INTGetVectorSubPriority
-                0x9d01e794       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e794                INTGetVectorSubPriority
+                0x9d020274       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d020274                INTGetVectorSubPriority
 
 .text._stub_sbd_memlayout
-                0x9d01e7c0       0x2c
+                0x9d0202a0       0x2c
  .text._stub_sbd_memlayout
-                0x9d01e7c0       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
-                0x9d01e7c0                _sbd_memlayout
-                0x9d01e7c0                _stub_sbd_memlayout
+                0x9d0202a0       0x2c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+                0x9d0202a0                _sbd_memlayout
+                0x9d0202a0                _stub_sbd_memlayout
 
 .text.INTClearFlag
-                0x9d01e7ec       0x28
+                0x9d0202cc       0x28
  .text.INTClearFlag
-                0x9d01e7ec       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e7ec                INTClearFlag
+                0x9d0202cc       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d0202cc                INTClearFlag
 
 .text.INTSetFlag
-                0x9d01e814       0x28
+                0x9d0202f4       0x28
  .text.INTSetFlag
-                0x9d01e814       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e814                INTSetFlag
+                0x9d0202f4       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d0202f4                INTSetFlag
 
 .text.INTGetFlag
-                0x9d01e83c       0x28
+                0x9d02031c       0x28
  .text.INTGetFlag
-                0x9d01e83c       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e83c                INTGetFlag
+                0x9d02031c       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d02031c                INTGetFlag
 
 .text.INTGetEnable
-                0x9d01e864       0x28
+                0x9d020344       0x28
  .text.INTGetEnable
-                0x9d01e864       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
-                0x9d01e864                INTGetEnable
+                0x9d020344       0x28 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_tbl_lib.o)
+                0x9d020344                INTGetEnable
 
 .text.EthMIIMScanResult
-                0x9d01e88c       0x24
+                0x9d02036c       0x24
  .text.EthMIIMScanResult
-                0x9d01e88c       0x24 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
-                0x9d01e88c                EthMIIMScanResult
+                0x9d02036c       0x24 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+                0x9d02036c                EthMIIMScanResult
 
-.rodata         0x9d01e8b0       0x1c
- .rodata        0x9d01e8b0       0x1c build/default/production/_ext/1954962658/Announce.o
+.rodata         0x9d020390       0x1c
+ .rodata        0x9d020390       0x1c build/default/production/_ext/1954962658/Announce.o
 
 .text.EthRxAcknowledgeBuffer
-                0x9d01e8cc       0x1c
+                0x9d0203ac       0x1c
  .text.EthRxAcknowledgeBuffer
-                0x9d01e8cc       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
-                0x9d01e8cc                EthRxAcknowledgeBuffer
+                0x9d0203ac       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+                0x9d0203ac                EthRxAcknowledgeBuffer
 
 .text.EthRxAckBuffer
-                0x9d01e8e8       0x1c
+                0x9d0203c8       0x1c
  .text.EthRxAckBuffer
-                0x9d01e8e8       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
-                0x9d01e8e8                EthRxAckBuffer
+                0x9d0203c8       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_ack_packet_lib.o)
+                0x9d0203c8                EthRxAckBuffer
 
 .text.INTRestoreInterrupts
-                0x9d01e904       0x1c
+                0x9d0203e4       0x1c
  .text.INTRestoreInterrupts
-                0x9d01e904       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
-                0x9d01e904                INTRestoreInterrupts
+                0x9d0203e4       0x1c c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_restore_interrupts_lib.o)
+                0x9d0203e4                INTRestoreInterrupts
 
 .text.EthRxFiltersHTSet
-                0x9d01e920       0x18
+                0x9d020400       0x18
  .text.EthRxFiltersHTSet
-                0x9d01e920       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
-                0x9d01e920                EthRxFiltersHTSet
+                0x9d020400       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+                0x9d020400                EthRxFiltersHTSet
 
 .text.CheKseg0CacheOff
-                0x9d01e938       0x18
+                0x9d020418       0x18
  .text.CheKseg0CacheOff
-                0x9d01e938       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
-                0x9d01e938                CheKseg0CacheOff
+                0x9d020418       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
+                0x9d020418                CheKseg0CacheOff
 
 .text.CheKseg0CacheOn
-                0x9d01e950       0x18
+                0x9d020430       0x18
  .text.CheKseg0CacheOn
-                0x9d01e950       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
-                0x9d01e950                CheKseg0CacheOn
+                0x9d020430       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(pcache.o)
+                0x9d020430                CheKseg0CacheOn
 
-.text           0x9d01e968       0x18
- .text          0x9d01e968       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-nmi-handler.o)
-                0x9d01e968                _nmi_handler
+.text           0x9d020448       0x18
+ .text          0x9d020448       0x18 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-nmi-handler.o)
+                0x9d020448                _nmi_handler
 
-.rodata         0x9d01e980       0x14
- .rodata        0x9d01e980       0x14 build/default/production/_ext/1954962658/TCP.o
-                0x9d01e980                TCPSocketInitializer
+.rodata         0x9d020460       0x14
+ .rodata        0x9d020460       0x14 build/default/production/_ext/1954962658/TCP.o
+                0x9d020460                TCPSocketInitializer
 
 .text.EthMACSetMaxFrame
-                0x9d01e994       0x14
+                0x9d020474       0x14
  .text.EthMACSetMaxFrame
-                0x9d01e994       0x14 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
-                0x9d01e994                EthMACSetMaxFrame
+                0x9d020474       0x14 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_mac_set_address_max_lib.o)
+                0x9d020474                EthMACSetMaxFrame
 
 .text.EthRxFiltersPMClr
-                0x9d01e9a8       0x14
+                0x9d020488       0x14
  .text.EthRxFiltersPMClr
-                0x9d01e9a8       0x14 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
-                0x9d01e9a8                EthRxFiltersPMClr
+                0x9d020488       0x14 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+                0x9d020488                EthRxFiltersPMClr
 
-.rodata         0x9d01e9bc       0x10
- .rodata        0x9d01e9bc       0x10 build/default/production/_ext/1954962658/SNTP.o
+.rodata         0x9d02049c       0x10
+ .rodata        0x9d02049c       0x10 build/default/production/_ext/1954962658/SNTP.o
 
 .text.EthRxFiltersSet
-                0x9d01e9cc       0x10
+                0x9d0204ac       0x10
  .text.EthRxFiltersSet
-                0x9d01e9cc       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
-                0x9d01e9cc                EthRxFiltersSet
+                0x9d0204ac       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+                0x9d0204ac                EthRxFiltersSet
 
 .text.EthRxFiltersClr
-                0x9d01e9dc       0x10
+                0x9d0204bc       0x10
  .text.EthRxFiltersClr
-                0x9d01e9dc       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
-                0x9d01e9dc                EthRxFiltersClr
+                0x9d0204bc       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+                0x9d0204bc                EthRxFiltersClr
 
 .text.EthRxFiltersWrite
-                0x9d01e9ec       0x10
+                0x9d0204cc       0x10
  .text.EthRxFiltersWrite
-                0x9d01e9ec       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
-                0x9d01e9ec                EthRxFiltersWrite
+                0x9d0204cc       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_rx_filters_lib.o)
+                0x9d0204cc                EthRxFiltersWrite
 
-.rodata         0x9d01e9fc       0x20
- .rodata        0x9d01e9fc       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
- .rodata        0x9d01ea0c        0x8 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
- .rodata        0x9d01ea14        0x8 build/default/production/_ext/1954962658/MPFS2.o
+.rodata         0x9d0204dc       0x20
+ .rodata        0x9d0204dc       0x10 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(eth_miim_access.o)
+ .rodata        0x9d0204ec        0x8 build/default/production/_ext/1954962658/ETHPIC32IntMac.o
+ .rodata        0x9d0204f4        0x8 build/default/production/_ext/1954962658/MPFS2.o
 
 .text.ReadCoreTimer
-                0x9d01ea1c        0x8
+                0x9d0204fc        0x8
  .text.ReadCoreTimer
-                0x9d01ea1c        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
-                0x9d01ea1c                ReadCoreTimer
+                0x9d0204fc        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral.a(read_core_timer_lib.o)
+                0x9d0204fc                ReadCoreTimer
 
 .text.INTDisableInterrupts
-                0x9d01ea24        0x8
+                0x9d020504        0x8
  .text.INTDisableInterrupts
-                0x9d01ea24        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
-                0x9d01ea24                INTDisableInterrupts
+                0x9d020504        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_disable_interrupts_lib.o)
+                0x9d020504                INTDisableInterrupts
 
 .text.INTEnableInterrupts
-                0x9d01ea2c        0x8
+                0x9d02050c        0x8
  .text.INTEnableInterrupts
-                0x9d01ea2c        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
-                0x9d01ea2c                INTEnableInterrupts
+                0x9d02050c        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libmchp_peripheral_32MX795F512L.a(int_enable_interrupts_lib.o)
+                0x9d02050c                INTEnableInterrupts
 
 .text._on_reset
-                0x9d01ea34        0x8
+                0x9d020514        0x8
  .text._on_reset
-                0x9d01ea34        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
-                0x9d01ea34                _on_reset
+                0x9d020514        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-reset.o)
+                0x9d020514                _on_reset
 
 .text._on_bootstrap
-                0x9d01ea3c        0x8
+                0x9d02051c        0x8
  .text._on_bootstrap
-                0x9d01ea3c        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
-                0x9d01ea3c                _on_bootstrap
+                0x9d02051c        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(default-on-bootstrap.o)
+                0x9d02051c                _on_bootstrap
 
 .text.getpagesize
-                0x9d01ea44        0x8
+                0x9d020524        0x8
  .text.getpagesize
-                0x9d01ea44        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
-                0x9d01ea44                getpagesize
+                0x9d020524        0x8 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\libpic32.a(sbrk.o)
+                0x9d020524                getpagesize
 
 .text%z340      0x00000000        0x0
  .text          0x00000000        0x0 c:/program files (x86)/microchip/xc32/v1.31/bin/../lib/gcc/pic32mx/4.5.2/../../../../pic32mx/lib/size\debug-exception-return.o

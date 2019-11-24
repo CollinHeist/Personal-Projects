@@ -33,4 +33,8 @@
 	// An actual function defined in VendMaching.c for displaying the current IP 
 	// address on the UART and/or LCD.
 	void DisplayIPValue(IP_ADDR IPVal);
+    
+    // Set the current credit value
+    void vend_set_credits(unsigned int credit_value);
+    unsigned int vend_get_credits(void);
 #endif
