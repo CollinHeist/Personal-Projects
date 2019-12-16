@@ -10,6 +10,7 @@
 #include "chipKIT_PRO_MX7.h"
 #include "ADC.h"
 
+// Global Variables
 static unsigned int adc_samples_taken; // Private count of how many ADC samples have been taken
 
 struct prescale_struct {
@@ -85,6 +86,17 @@ static unsigned int initialize_timer3(float timer3_frequency) {
     }
     // This frequency cannot be achieved at any given frequency (must be realllly low)
     return ERROR; 
+}
+
+/**	
+ *	@brief		Re-initialize Timer 3 to the desired variable frequency.
+ *	@param[in]	timer3_frequency: Floating point value that represents the desired frequency to T3.
+ *	@return		unsigned int that is either ERROR or NO_ERROR if the initialization failed.
+ **/
+unsigned int reconfigure_timer3(float timer3_frequency) {
+	CloseTimer3();								// Close T3 for reconfiguration
+	DisableIntT3();								// Disable interrupt for T3
+	return initialize_timer3(timer3_frequency);	// Reconfigure 
 }
 
 /**	

@@ -12,6 +12,12 @@
 	#define sourceAddress				{129, 101, 222, 23}
 	#define listeningPort				(10000)
 
+	// Macros for event timings
+	#define MS_TO_TICKS(ms)				(ms / portTICK_RATE_MS)	// Convert a passed number of ms to ticks in FreeRTOS space
+	#define DEBOUNCE_MS					(25)					// How long to debounce a button press (in ms)
+	#define TCP_LOG_DELAY_MS			(500)					// How long to wait between logging TCP events (in ms)
+
+	// Macros for error-detection
 	#define ERROR						(1)
 	#define NO_ERROR					(0)
 
@@ -22,6 +28,7 @@
 	#define QUANTIZE(N)					(((float) N / (float) MAX_VAL) * (float) QUANTIZED_MAX_VAL)	// Function to quantize a given value
 	#define INT_TO_ASCII(I)				(I + '0')						// Convert a given integer (0-9) to '0'-'9'
 
+	// Macros for DMA settings
 	#define ADC_SAMPLE_COUNT			(64)							// How many samples to store at one time
 	#define ADC_SAMPLE_COUNT_BYTES		(ADC_SAMPLE_COUNT * sizeof(unsigned int))	// How many bytes the sample space takes
 	#define DMA_SOURCE_SIZE_BYTES		(4)								// How many bytes the source of the ADC buffer is
@@ -30,6 +37,8 @@
 	// Function Prototypes
 	static unsigned int initialize_system(void);
 	static unsigned int create_tasks(void);
+	void isr_change_notice_handler(void);
+	static void task_change_notice_handler(void* task_params);
 	static void task_quantize_ADC_buffer(void* task_params);
 	static void task_log_ADC(void* task_params);
 	static void vCreateTCPServerSocket(void *pvParameters);

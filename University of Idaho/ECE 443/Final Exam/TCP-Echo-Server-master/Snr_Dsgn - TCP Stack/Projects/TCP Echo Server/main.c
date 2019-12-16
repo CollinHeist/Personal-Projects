@@ -8,17 +8,25 @@
 
 // File Inclusion
 #include <plib.h>
+
+// FreeRTOS Includes
 #include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "main.h"
-#include "DMA.h"
-#include "ADC.h"
 #include "chipKIT_Pro_MX7.h"
 #include "FreeRTOS.h"
 #include "FreeRTOS_IP_Private.h"
+#include "task.h"
+#include "queue.h"
 
-// TCP Stack global variables
+// 'Library' Includes
+#include "main.h"
+#include "DMA.h"
+#include "ADC.h"
+
+/* --------------------------- Function Prototypes -------------------------- */
+// CN ISR for button presses - Directly calls wrapper function
+void __ISR(_CHANGE_NOTICE_VECTOR, IPL2) isr_change_notice_wrapper(void);
+
+/* ---------------------------- Global Variables ---------------------------- */
 /* The MAC address array is not declared const as the MAC address will
 normally be read from an EEPROM and not hard coded (in real deployed
 applications). In this case the MAC Address is hard coded to the value we
@@ -36,10 +44,27 @@ static const uint8_t ucGatewayAddress[4] = {129, 101, 220, 1};
 /* The following is the address of an OpenDNS server. */
 static const uint8_t ucDNSServerAddress[4] = {0, 0, 0, 0};
 
-// Normal Global Variables
-Socket_t xConnectedSocket; // Global socket used for communication
-unsigned int ADC_results[ADC_SAMPLE_COUNT];
-unsigned char quantized_ADC_results[ADC_SAMPLE_COUNT + 3]; // Room for "\n\r\0"
+Socket_t xConnectedSocket; 		// Global socket used for communication
+
+xSemaphoreHandle cn_semaphore;	// Semaphore for unblocking the handler task from the CN ISR when BTN1 is pressed
+
+unsigned int ADC_results[ADC_SAMPLE_COUNT];					// Memory space where DMA puts ADC results
+
+unsigned char quantized_ADC_results[ADC_SAMPLE_COUNT + 3];	// Quantized ADC results + room for "\n\r\0"
+
+
+// unsigned int previous_BTN1_status;							// Previous status of BTN1 (used to detect PRESSES)
+// unsigned int previous_BTN2_status;							// Previous status of BTN2 (used to detect PRESSES)
+
+float ADC_sample_frequency = 1.0;	// How often ADC samples are taken
+
+struct button_status {
+	unsigned int button1;
+	unsigned int button2;
+}
+
+static struct previous_buttons = {0, 0};
+
 
 /* ------------------------------ Main Program ------------------------------ */
 
@@ -55,6 +80,9 @@ int main(void) {
 	
 	// Create the required tasks and IP stack
 	error_flag |= create_tasks();
+
+	// Create the required FreeRTOS Objects
+	error_flag |= create_RTOS_objects();
 	
 	// Initialize the Quantized results for better 'string' formatting - end in "\n\r\0"
 	quantized_ADC_results[ADC_SAMPLE_COUNT + 3 - 1] = '\0';
@@ -89,9 +117,12 @@ static unsigned int initialize_system(void) {
 	// Enable chipKIT Pro MX7 and Cerebot 32MX7ck PHY - essential for using PHY chip
 	TRISACLR = (unsigned int) BIT_6; // Make bit output
 	LATASET = (unsigned int) BIT_6;	 // Set output high
+
+	// Configure BTN1-2
+	PORTSetPinsDigitalIn(IOPORT_G, BTN1 | BTN2);
 	
 	// Initialize the ADC and the associated Timer (3)
-	error_flag |= initialize_ADC(1.0); // Initialize to 10Hz ADC operation
+	error_flag |= initialize_ADC(ADC_sample_frequency); // Initialize to ADC operation
 	
 	// Initialize the DMA to constantly move data between the ADC buffer and my own array
 	error_flag |= initialize_DMA((void*) &ADC1BUF0, (void*) ADC_results, DMA_SOURCE_SIZE_BYTES, ADC_SAMPLE_COUNT_BYTES, DMA_DEST_SIZE_BYTES);
@@ -102,6 +133,26 @@ static unsigned int initialize_system(void) {
 	portDISABLE_INTERRUPTS();
 	
 	return error_flag;
+}
+
+/**	
+ *	@brief	Create all the FreeRTOS objects for this project.
+ *	@param	None.
+ *	@return	Boolean flag (TRUE or FALSE) if there was an error or not.
+ **/
+static unsigned int create_RTOS_objects(void) {
+	// Turn on the TraceAlyzer - assign user event labels to each channel
+	if (configUSE_TRACE_FACILITY) {
+		vTraceEnable(TRC_START);
+		trace_CN = xTraceRegisterString("Change Notice");
+	}
+
+	// Create the semaphore needed for the CN ISR -> Handler, and UART-RX ISR -> Handler
+	vSemaphoreCreateBinary(cn_semaphore);
+	if (cn_semaphore == NULL)
+		return ERROR;	// Error creating the semaphore(s)
+
+	return NO_ERROR;
 }
 
 /**	
@@ -118,8 +169,8 @@ static unsigned int create_tasks(void) {
 	
 	// Create FreeRTOS Tasks
 	task_success |= xTaskCreate(vCreateTCPServerSocket, "TCP1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
-	task_success |= xTaskCreate(task_process_ADC_buffer, "Quantize Buffer", configMINIMAL_STACK_SIZE, NULL, 0, NULL);
-	task_success |= xTaskCreate(task_log_ADC, "ADC Logger", configMINIMAL_STACK_SIZE, NULL, 2, NULL);
+	task_success |= xTaskCreate(task_quantize_ADC_buffer, "Quantize Buffer", configMINIMAL_STACK_SIZE, NULL, 0, NULL);
+	task_success |= xTaskCreate(task_log_ADC, "ADC Logger", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	
 	if (task_success != pdPASS)
 		return ERROR;
@@ -127,7 +178,76 @@ static unsigned int create_tasks(void) {
 	return NO_ERROR;
 }
 
+/* --------------------------- 'Normal' Functions --------------------------- */
+
+/**	
+ *	@brief	Change Notice ISR wrapper. Unblocks the CN handler task.
+ *	@param	None.
+ *	@return	None.
+ **/
+void isr_change_notice_handler() {
+	// Flag for if returning to a higher priority task is necessary
+	portBASE_TYPE move_to_higher_priority = pdFALSE;
+
+	// Give the semaphore to unlock the task
+	if (configUSE_TRACE_FACILITY)
+		vTracePrint(trace_CN, "Giving semaphore from CN ISR");
+	xSemaphoreGiveFromISR(cn_semaphore, &move_to_higher_priority);
+
+	// Clear the interrupt flag
+	mCNClearIntFlag();
+	mCNOpen(CN_OFF, CN8_ENABLE, 0);
+
+	// Exit the ISR, returning to the higher priority task if necessary
+	portEND_SWITCHING_ISR(move_to_higher_priority);
+}
+
 /* --------------------------------- Tasks ---------------------------------- */
+
+/**
+ *	@brief		Change Notice Handler task. 
+ *	@param[in]	task_params: Void Pointer that contains the parameters for this task - not used.
+ *	@return		None.
+ **/
+static void task_change_notice_handler(void* task_params) {
+	portBASE_TYPE queue_status;			 	// Status of adding to LCD queue
+	struct button_status current_buttons = {0, 0};
+	
+	xSemaphoreTake(cn_semaphore, 0);
+	for (;;) {
+		// Wait for the change notice semaphore forever
+		// This only unblocks when the change notice handler detects a completed message
+		xSemaphoreTake(cn_semaphore, portMAX_DELAY);
+		if (configUSE_TRACE_FACILITY)
+			vTracePrint(trace_CN, "Received semaphore - debouncing");
+
+		vTaskDelay(MS_TO_TICKS(DEBOUNCE_MS));	// Debounce
+		current_buttons = (struct button_status) {PORTG & BTN1, PORTG & BTN2}; // This MIGHT work
+
+		// current_buttons.button1 = PORTG & BTN1;
+		// current_buttons.button2 = PORTG & BTN2;
+
+		// Detect PRESSES of BTN1
+		if (previous_buttons.button1 == 0 && current_buttons.button1 != 0) {
+			if (configUSE_TRACE_FACILITY)
+				vTracePrint(trace_CN, "BTN1 press detected");
+
+			ADC_sample_frequency /= 2.0;
+			reconfigure_timer3(ADC_sample_frequency);
+		}
+
+		// Detect PRESSES of BTN2
+		if (previous_buttons.button2 == 0 && current_buttons.button2 != 0) {
+			if (configUSE_TRACE_FACILITY)
+				vTracePrint(trace_CN, "BTN2 press detected");
+
+			ADC_sample_frequency *= 2.0;
+			reconfigure_timer3(ADC_sample_frequency);
+		}
+		
+		previous_buttons = current_buttons;	// Update button status structure
+	}
+}
 
 /**	
  *	@brief		FreeRTOS task that converts the ADC_results buffer to the converted
@@ -141,6 +261,7 @@ static void task_quantize_ADC_buffer(void* task_params) {
 		// Quantize the buffer
 		for (i = 0; i < ADC_SAMPLE_COUNT; i++)
 			quantized_ADC_results[i] = (unsigned char) INT_TO_ASCII(QUANTIZE(ADC_results[i]));
+
 		taskYIELD();
 	}
 }
@@ -157,9 +278,8 @@ static void task_log_ADC(void* task_params) {
 			packets_sent += (unsigned int) FreeRTOS_send(xConnectedSocket, &quantized_ADC_results[packets_sent], ADC_SAMPLE_COUNT - packets_sent + 3, 0);
 		packets_sent = 0;	// Reset the packet count
 		
-		vTaskDelay(500);
+		vTaskDelay(MS_TO_TICKS(TCP_LOG_DELAY_MS));
 	}
-
 }
 
 /* --------------------------- 'Helper' Functions --------------------------- */

@@ -22,6 +22,7 @@
     // Function Prototypes
     unsigned int initialize_ADC(float timer3_frequency);
     static unsigned int initialize_timer3(float timer3_frequency);
+    unsigned int reconfigure_timer3(float timer3_frequency);
     unsigned int read_ADC(void);
     unsigned int get_sample_count(unsigned int reset);
 #endif

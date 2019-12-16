@@ -1,0 +1,933 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+\author{Collin Heist}
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+\usepackage{float}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{ECE 450 - Exam \#4}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+\section{Solution}
+\subsection{Problem A}
+\subsubsection{The Bandpass Buttersworth Filter Design}
+Following the Buttersworth bandpass filter design procedure, the following $H(s)$ was obtained:
+
+$$H(s)=\frac{s^23,920,400,000,000}{s^4+s^32.8001\cdot 10^6+s^24.6405\cdot 10^{12}+s1.00805\cdot 10^{18}+1.296\cdot 10^{23}}$$
+
+The plot of this function is:
+
+\begin{figure}[H]
+\begin{center}
+\adjustimage{max size={\linewidth}{0.9\paperheight}}{output_21_0.png}
+\caption{\textbf{Figure 1.} Bode plot of the $H(s)$ transfer function - markers on the pass and stopband frequencies.}
+\end{center}
+\end{figure}
+
+I verified that the designed transfer function meets the given attenuation criteria, the results are:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:}   Omega       |H(s)|
+          40000.0     -26.236057
+          200000.0    -1.542419
+          2000000.0   -2.339802
+          10000000.0  -28.077508
+\end{Verbatim}
+
+\subsubsection{Convert $H(s)$ to $H(z)$ Using the Backwards Rectangular Approximation}
+$$T = 50e-9$$
+
+\[H(z)=H(\frac{1-z^{-1}}{T})=\frac{3.9204e12(\frac{1-z^{-1}}{50e-9})^2}{(\frac{1-z^{-1}}{50e-9})^4+2.8e6(\frac{1-z^{-1}}{50e-9})^3+4.64e12(\frac{1-z^{-1}}{50e-9})^2+1.01e18(\frac{1-z^{-1}}{50e-9})^1+1.3e23(\frac{1-z^{-1}}{50e-9})}\]
+
+Resulting in the final \(H(z)\):
+
+\[H(z)=\frac{0.008509z^4-0.017019z^3+0.008509z^2+7.888609\cdot 10^{-31}z+9.860761\cdot 10^{-32}}{z^4-3.857939z^3+5.584246z^2-3.594554z+0.868248}\]
+
+This results in the plot of $H(z)$:
+
+\begin{figure}[H]
+\begin{center}
+\adjustimage{max size={\linewidth}{0.9\paperheight}}{output_25_0.png}
+\caption{\textbf{Figure 2.} Bode plot of the $H(z)$ transfer function - markers on the pass and stopband angles.}
+\end{center}
+\end{figure}
+
+Which still meets the attenuation criteria - the angles checked are a result of $\phi ^{\circ}=\omega \cdot T\cdot \frac{180}{\pi}$.
+
+\hspace{1.25cm}$\phi ^{\circ}$\hspace{1.50cm}$|H(z)|$
+    \begin{verbatim}
+      0.114592   -26.301946
+      0.572958   -2.231689
+      5.729578   -2.983381
+      28.64789   -28.535352
+    \end{verbatim}
+    
+Clearly, the passband is not attenuated more than 3dB, and the stopband is attenuated more than 25dB.
+
+\subsection{Problem B}
+\subsubsection{The Input Signal}
+For this FIR filter, I will be using the following input signal:
+
+$$x(t)=sin(2\pi 1,000t)+sin(2\pi 10,000t)+sin(2\pi 20,000t)+sin(2\pi 50,000t)$$
+
+The time-domain simulation of this signal is shown below, as is the fourier transform of this signal:
+
+\begin{figure}[H]
+\begin{center}
+\adjustimage{max size={\linewidth}{0.9\paperheight}}{output_29_0.png}
+\caption{\textbf{Figure 3.} Time domain simulation of $x(t)$, and the FFT of that signal.}
+\end{center}
+\end{figure}
+
+\subsubsection{The Frequency-Domain Filter Design}
+Filtering out frequencies above the cutoff of $10^4 \frac{rad}{s}$ in the frequency plot results in the following fourier transform and time-domain signal.
+
+\begin{figure}[H]
+\begin{center}
+\adjustimage{max size={\linewidth}{0.9\paperheight}}{output_31_0.png}
+\caption{\textbf{Figure 4.} Lowpass filter applied to the frequency domain of the input signal and the corresponding IFFT of those filtered frequencies.}
+\end{center}
+\end{figure}
+
+\subsubsection{Convert the Frequency-Domain Filter to an FIR Filter}
+The filter designed here has a very slow cutoff, barely reaching the stopband criteria. This results in an easier-to-model FIR filter.
+
+After trial-and-error, a filter length of 12 was determined to be adequate enough. Below is the entire $h[k]$, as well as the non-shifted and shifted results of this filter.
+
+\begin{figure}[H]
+\begin{center}
+\adjustimage{max size={\linewidth}{0.9\paperheight}}{output_34_0.png}
+\caption{\textbf{Figure 5.} FIR implementation of the lowpass filter. Only 12 samples are necessary.}
+\end{center}
+\end{figure}
+
+\subsubsection{Verification of the FIR Filter}
+Convolving this FIR filter with the time-domain input signal results in the following input signal, as well as the new filtered FFT.
+
+\begin{figure}[H]
+\begin{center}
+\adjustimage{max size={\linewidth}{0.9\paperheight}}{output_36_0.png}
+\caption{\textbf{Figure 6.} Filtered input signal and frequency characteristics.}
+\end{center}
+\end{figure}
+
+To ensure this finite filter accomplishes the desired frequency-attenuation, looking at the FFT's magnitude is required. I've highlighted the magnitudes of the input signal's frequencies.
+
+\hspace{1cm}$\omega \frac{rad}{s}$\hspace{2.5cm}$|FFT(X(\omega))|$
+      \begin{verbatim}
+      1001.001001         0.996236
+      10010.01001         0.973437
+      20020.02002         0.147796
+      50050.05005         0.017076
+    \end{verbatim}
+    
+The passband frequencies, those below $10^4$ radians per second, are attenuated less than 15\%, while those above the stopband frequency of $2\cdot 10^4$ radians per second are attenuated more than 15\%.
+
+\subsubsection{Explicit Magnitudes of $h[k]$}
+For this 12-unit long filter, the magnitudes of $h[k]$ are shown below:
+
+
+\hspace{1.5cm}$k$\hspace{1.5cm}$h[k]$
+\begin{Verbatim}
+          0    -0.026368
+          1    -0.111207
+          2    -0.131925
+          3    -0.034091
+          4    -0.408149
+          5     0.819260
+          6     1.000000
+          7     0.819260
+          8     0.408149
+          9     0.034091
+          10    -0.131925
+          11    -0.111207
+\end{Verbatim}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypertarget{code-appendix}{%
+\section{Code Appendix}\label{code-appendix}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{signal} \PY{k}{as} \PY{n}{sig}
+        \PY{k+kn}{from} \PY{n+nn}{control} \PY{k}{import} \PY{n}{margin}\PY{p}{,} \PY{n}{tf}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-convolve-any-number-of-equations}{%
+\subsubsection{Generic function to convolve any number of
+equations}\label{generic-function-to-convolve-any-number-of-equations}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{convolve\PYZus{}all}\PY{p}{(}\PY{n}{values}\PY{p}{)}\PY{p}{:}
+            \PY{n}{temp\PYZus{}conv} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{values}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                \PY{k}{for} \PY{n}{next\PYZus{}val} \PY{o+ow}{in} \PY{n}{values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{:}
+                    \PY{n}{temp\PYZus{}conv} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{convolve}\PY{p}{(}\PY{n}{temp\PYZus{}conv}\PY{p}{,} \PY{n}{next\PYZus{}val}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{temp\PYZus{}conv}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-create-plots}{%
+\subsubsection{Generic function to create
+plots}\label{generic-function-to-create-plots}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}757}]:} \PY{c+c1}{\PYZsh{} Color list for multiple lines on each subplot}
+          \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Generic Function to create a plot}
+          \PY{k}{def} \PY{n+nf}{create\PYZus{}plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{xLabel}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZhy{}Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{yLabel}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZhy{}Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                          \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{,} \PY{n}{logx}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{y\PYZus{}lines}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{k+kc}{None}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{n}{size}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{)}
+              \PY{k}{for} \PY{n}{c}\PY{p}{,} \PY{p}{(}\PY{n}{x\PYZus{}vals}\PY{p}{,} \PY{n}{y\PYZus{}vals}\PY{p}{,} \PY{n}{x\PYZus{}labels}\PY{p}{,} \PY{n}{y\PYZus{}labels}\PY{p}{,} \PY{n}{titles}\PY{p}{,} \PY{n}{lines}\PY{p}{,} \PY{n}{line\PYZus{}labels}\PY{p}{,} \PY{n}{lims}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{xLabel}\PY{p}{,} \PY{n}{yLabel}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{y\PYZus{}lines}\PY{p}{,} \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{p}{,} \PY{n}{ylim}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{n}{lims}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{lims}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{line}\PY{p}{,} \PY{n}{label} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{lines}\PY{p}{,} \PY{n}{line\PYZus{}labels}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Add each vertical line to this plot}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{line}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{label}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{c2}\PY{p}{,} \PY{p}{(}\PY{n}{y\PYZus{}v}\PY{p}{,} \PY{n}{t}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{y\PYZus{}vals}\PY{p}{,} \PY{n}{titles}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{c} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{} Add a plot to the subplot, use transparency so they can both be seen}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}vals}\PY{p}{,} \PY{n}{y\PYZus{}v}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{t}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{colors}\PY{p}{[}\PY{n}{c2}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.70}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y\PYZus{}labels}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x\PYZus{}labels}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                      \PY{k}{if} \PY{n}{logx}\PY{p}{:}
+                          \PY{n}{plt}\PY{o}{.}\PY{n}{xscale}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-generate-the-bode-plots-of-a-transfer-function}{%
+\subsubsection{Generic function to generate the Bode plots of a transfer
+function}\label{generic-function-to-generate-the-bode-plots-of-a-transfer-function}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{magnitude\PYZus{}phase\PYZus{}response}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{den}\PY{p}{,} \PY{n}{omega\PYZus{}range}\PY{p}{,} \PY{n}{omega\PYZus{}step}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{gain\PYZus{}num}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{gain\PYZus{}den}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{gain\PYZus{}num}\PY{p}{,} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n+nb}{list}\PY{p}{)}\PY{p}{)} \PY{o+ow}{and} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{gain\PYZus{}den}\PY{p}{,} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{,} \PY{n+nb}{list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{num} \PY{o}{=} \PY{n}{convolve\PYZus{}all}\PY{p}{(}\PY{p}{[}\PY{n}{num}\PY{p}{,} \PY{n}{gain\PYZus{}num}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{den} \PY{o}{=} \PY{n}{convolve\PYZus{}all}\PY{p}{(}\PY{p}{[}\PY{n}{den}\PY{p}{,} \PY{n}{gain\PYZus{}den}\PY{p}{]}\PY{p}{)}
+                 
+             \PY{n}{system} \PY{o}{=} \PY{n}{sig}\PY{o}{.}\PY{n}{lti}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{den}\PY{p}{)}
+             \PY{n}{w}\PY{p}{,} \PY{n}{h\PYZus{}mag}\PY{p}{,} \PY{n}{h\PYZus{}phase} \PY{o}{=} \PY{n}{sig}\PY{o}{.}\PY{n}{bode}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{omega\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{omega\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{omega\PYZus{}step}\PY{p}{)}\PY{p}{)}
+             \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{phase\PYZus{}margin}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{crossover\PYZus{}w} \PY{o}{=} \PY{n}{margin}\PY{p}{(}\PY{n}{h\PYZus{}mag}\PY{p}{,} \PY{n}{h\PYZus{}phase}\PY{p}{,} \PY{n}{w}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{w}\PY{p}{,} \PY{n}{h\PYZus{}mag}\PY{p}{,} \PY{n}{h\PYZus{}phase}\PY{p}{,} \PY{n}{phase\PYZus{}margin}\PY{p}{,} \PY{n}{crossover\PYZus{}w}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-generate-an-nth-order-buttersworth-filter}{%
+\subsubsection{\texorpdfstring{Generic function to generate an \(nth\)
+order Buttersworth
+Filter}{Generic function to generate an nth order Buttersworth Filter}}\label{generic-function-to-generate-an-nth-order-buttersworth-filter}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{buttersworth\PYZus{}tf}\PY{p}{(}\PY{n}{order}\PY{p}{)}\PY{p}{:}
+             \PY{n}{pole\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{k} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{order}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n+nb}{complex}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{k} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{order}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{order}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+             \PY{n}{s\PYZus{}pole\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{pole}\PY{p}{]} \PY{k}{for} \PY{n}{pole} \PY{o+ow}{in} \PY{n}{pole\PYZus{}list}\PY{p}{]}
+         
+             \PY{k}{return} \PY{n}{convolve\PYZus{}all}\PY{p}{(}\PY{n}{s\PYZus{}pole\PYZus{}list}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-shift-a-given-filter-to-a-new-center-frequency}{%
+\subsubsection{Generic function to shift a given filter to a new center
+frequency}\label{generic-function-to-shift-a-given-filter-to-a-new-center-frequency}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}238}]:} \PY{k}{def} \PY{n+nf}{shift\PYZus{}filter}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{den}\PY{p}{,} \PY{n}{new\PYZus{}center}\PY{p}{)}\PY{p}{:}
+              \PY{n}{new\PYZus{}num} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pad}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{den}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{new\PYZus{}den} \PY{o}{=} \PY{n}{den}
+          
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{new\PYZus{}den}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{new\PYZus{}num}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{n}{new\PYZus{}center} \PY{o}{*}\PY{o}{*} \PY{n}{i}\PY{p}{)}
+                  \PY{n}{new\PYZus{}den}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{n}{new\PYZus{}center} \PY{o}{*}\PY{o}{*} \PY{n}{i}\PY{p}{)}
+                  
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{real}\PY{p}{(}\PY{n}{new\PYZus{}num}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{real}\PY{p}{(}\PY{n}{new\PYZus{}den}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-convert-a-given-lowpass-filter-to-a-bandpass-filter}{%
+\subsubsection{Generic function to convert a given lowpass filter to a
+bandpass
+filter}\label{generic-function-to-convert-a-given-lowpass-filter-to-a-bandpass-filter}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}348}]:} \PY{c+c1}{\PYZsh{} This function assumes the numerator is just a constant, no s\PYZhy{}terms}
+          \PY{k}{def} \PY{n+nf}{convert\PYZus{}to\PYZus{}bandpass}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{den}\PY{p}{,} \PY{n}{w\PYZus{}c}\PY{p}{)}\PY{p}{:}
+              \PY{n}{num} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trim\PYZus{}zeros}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Trim front\PYZhy{}leading zeros}
+              \PY{n}{den} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trim\PYZus{}zeros}\PY{p}{(}\PY{n}{den}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+              \PY{n}{num} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{den}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Shift num. by s\PYZca{}n}
+              \PY{n}{temp\PYZus{}den} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{den}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+              \PY{k}{for} \PY{n}{power}\PY{p}{,} \PY{n}{constant} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{den}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{power} \PY{o+ow}{is} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n}{temp\PYZus{}den}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{den}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{constant} \PY{c+c1}{\PYZsh{} Add in non\PYZhy{}s term, shifted by s\PYZca{}n}
+                      \PY{k}{continue}
+                      
+                  \PY{c+c1}{\PYZsh{} Get product of the (s\PYZca{}2+wc\PYZca{}2)\PYZca{}n for this current power of s\PYZca{}n}
+                  \PY{n}{non\PYZus{}shifted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{constant}\PY{p}{,} \PY{n}{convolve\PYZus{}all}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{w\PYZus{}c} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{]} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{power}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} Shift by the multiplied s\PYZca{}n/s\PYZca{}n}
+                  \PY{n}{shifted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pad}\PY{p}{(}\PY{n}{non\PYZus{}shifted}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{den}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{power}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} Add to running total den.}
+                  \PY{n}{temp\PYZus{}den} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{temp\PYZus{}den}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{pad}\PY{p}{(}\PY{n}{shifted}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{temp\PYZus{}den}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{shifted}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{real}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{real}\PY{p}{(}\PY{n}{temp\PYZus{}den}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-create-a-plot-of-a-z-domain-transfer-function}{%
+\subsubsection{Generic function to create a plot of a z-domain transfer
+function}\label{generic-function-to-create-a-plot-of-a-z-domain-transfer-function}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}734}]:} \PY{k}{def} \PY{n+nf}{z\PYZus{}plot}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{den}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{phi\PYZus{}range}\PY{o}{=}\PY{p}{[}\PY{k+kc}{None}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+              \PY{n}{phi\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{T} \PY{k}{if} \PY{n}{phi\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{is} \PY{k+kc}{None} \PY{k}{else} \PY{n}{phi\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{n}{phi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{phi\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{phi\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{T}\PY{p}{)}
+              \PY{n}{angles} \PY{o}{=} \PY{n}{angles} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n+nb}{complex}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{angle}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{angle} \PY{o+ow}{in} \PY{n}{phi}\PY{p}{]}
+              
+              \PY{c+c1}{\PYZsh{} Loop through all angles, calculate that angles H(z)}
+              \PY{n}{h\PYZus{}z} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{z} \PY{o+ow}{in} \PY{n}{angles}\PY{p}{:}
+                  \PY{n}{num\PYZus{}sum}\PY{p}{,} \PY{n}{den\PYZus{}sum} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+                  \PY{k}{for} \PY{n}{z\PYZus{}pow}\PY{p}{,} \PY{n}{num\PYZus{}val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{num\PYZus{}sum} \PY{o}{+}\PY{o}{=} \PY{n}{num\PYZus{}val} \PY{o}{*} \PY{n}{z} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{num}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{z\PYZus{}pow}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{z\PYZus{}pow}\PY{p}{,} \PY{n}{den\PYZus{}val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{den}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{den\PYZus{}sum} \PY{o}{+}\PY{o}{=} \PY{n}{den\PYZus{}val} \PY{o}{*} \PY{n}{z} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{den}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{z\PYZus{}pow}\PY{p}{)}
+                  \PY{n}{h\PYZus{}z}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{num\PYZus{}sum} \PY{o}{/} \PY{n}{den\PYZus{}sum}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{l+m+mi}{180} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{n}{phi}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{20} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{h\PYZus{}z}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{generic-function-to-convert-a-given-frequency-to-its-z-domain-angle}{%
+\subsubsection{Generic function to convert a given frequency to it's
+z-domain
+angle}\label{generic-function-to-convert-a-given-frequency-to-its-z-domain-angle}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}738}]:} \PY{k}{def} \PY{n+nf}{convert\PYZus{}z\PYZus{}angle}\PY{p}{(}\PY{n}{omega}\PY{p}{,} \PY{n}{T}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{omega} \PY{o}{*} \PY{n}{T} \PY{o}{*} \PY{l+m+mi}{180} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{pi}
+\end{Verbatim}
+
+    \hypertarget{problem-a}{%
+\subsection{Problem A}\label{problem-a}}
+
+\hypertarget{obtain-the-transfer-function-h_bps}{%
+\subsubsection{\texorpdfstring{Obtain the transfer function
+\(H_{BP}(s)\)}{Obtain the transfer function H\_\{BP\}(s)}}\label{obtain-the-transfer-function-h_bps}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}349}]:} \PY{c+c1}{\PYZsh{} Define the variables of this problem}
+          \PY{n}{passband\PYZus{}low}\PY{p}{,} \PY{n}{passband\PYZus{}high} \PY{o}{=} \PY{l+m+mf}{0.2e6}\PY{p}{,} \PY{l+m+mf}{2e6}
+          \PY{n}{stopband\PYZus{}low}\PY{p}{,} \PY{n}{stopband\PYZus{}high} \PY{o}{=} \PY{l+m+mf}{0.04e6}\PY{p}{,} \PY{l+m+mf}{10e6}
+          \PY{n}{h\PYZus{}p\PYZus{}db}\PY{p}{,} \PY{n}{h\PYZus{}s\PYZus{}db} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{25}
+          
+          \PY{n}{bandwidth} \PY{o}{=} \PY{p}{(}\PY{n}{passband\PYZus{}high} \PY{o}{\PYZhy{}} \PY{n}{passband\PYZus{}low}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{1.1} \PY{c+c1}{\PYZsh{} Expand the bandwidth a bit }
+          \PY{n}{center\PYZus{}freq} \PY{o}{=} \PY{o}{.}\PY{l+m+mf}{6e6} \PY{c+c1}{\PYZsh{} Trial and error found this to accomplish the desireable attenuation}
+          \PY{n}{h\PYZus{}p}\PY{p}{,} \PY{n}{h\PYZus{}s} \PY{o}{=} \PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{l+m+mf}{0.05} \PY{o}{*} \PY{n}{h\PYZus{}p\PYZus{}db}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{l+m+mf}{0.05} \PY{o}{*} \PY{n}{h\PYZus{}s\PYZus{}db}\PY{p}{)}
+          \PY{n}{w\PYZus{}p}\PY{p}{,} \PY{n}{w\PYZus{}s} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{n}{stopband\PYZus{}high} \PY{o}{\PYZhy{}} \PY{n}{stopband\PYZus{}low}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{center\PYZus{}freq}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Find the number of poles needed}
+          \PY{n}{n} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{n}{h\PYZus{}s} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{w\PYZus{}s}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Generate the low\PYZhy{}pass filter with a corner frequency of 1}
+          \PY{n}{num\PYZus{}lp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{den\PYZus{}lp} \PY{o}{=} \PY{n}{buttersworth\PYZus{}tf}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Transform to a low\PYZhy{}pass filter at the desired bandwidth}
+          \PY{n}{num\PYZus{}lp\PYZus{}shifted}\PY{p}{,} \PY{n}{den\PYZus{}lp\PYZus{}shifted} \PY{o}{=} \PY{n}{shift\PYZus{}filter}\PY{p}{(}\PY{n}{num\PYZus{}lp}\PY{p}{,} \PY{n}{den\PYZus{}lp}\PY{p}{,} \PY{n}{bandwidth}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Transform to a bandpass filter with G\PYZus{}lp((s\PYZca{}2+center\PYZca{}2)/s)}
+          \PY{n}{num\PYZus{}bp}\PY{p}{,} \PY{n}{den\PYZus{}bp} \PY{o}{=} \PY{n}{convert\PYZus{}to\PYZus{}bandpass}\PY{p}{(}\PY{n}{num\PYZus{}lp\PYZus{}shifted}\PY{p}{,} \PY{n}{den\PYZus{}lp\PYZus{}shifted}\PY{p}{,} \PY{n}{center\PYZus{}freq}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Num: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{num\PYZus{}bp}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Den: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{real}\PY{p}{(}\PY{n}{den\PYZus{}bp}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Num:  [3920400000000             0             0] 
+Den:  [1.00000000e+00 2.80014285e+06 4.64040000e+12 1.00805143e+18
+ 1.29600000e+23]
+
+    \end{Verbatim}
+
+    \hypertarget{plot-the-transfer-function-h_bps}{%
+\subsubsection{\texorpdfstring{Plot the transfer function
+\(H_{BP}(s)\)}{Plot the transfer function H\_\{BP\}(s)}}\label{plot-the-transfer-function-h_bps}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}728}]:} \PY{n}{w}\PY{p}{,} \PY{n}{h\PYZus{}mag}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{magnitude\PYZus{}phase\PYZus{}response}\PY{p}{(}\PY{n}{num\PYZus{}bp}\PY{p}{,} \PY{n}{den\PYZus{}bp}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.03e6}\PY{p}{,} \PY{l+m+mf}{12e6}\PY{p}{]}\PY{p}{,} \PY{n}{omega\PYZus{}step}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+          \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{w}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{n}{h\PYZus{}mag}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega (rad/s)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{|H(s)| (dB)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}H(s)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{logx}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                      \PY{n}{y\PYZus{}lines}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{stopband\PYZus{}low}\PY{p}{,} \PY{n}{passband\PYZus{}low}\PY{p}{,} \PY{n}{passband\PYZus{}high}\PY{p}{,} \PY{n}{stopband\PYZus{}high}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega = 0.04}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{cdot 10\PYZca{}6\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega = 0.2}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{cdot 10\PYZca{}6\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                      \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega = 2}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{cdot 10\PYZca{}6\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega = 10}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{cdot 10\PYZca{}6\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{verify-hs-meets-the-given-attenuation-criteria}{%
+\subsubsection{\texorpdfstring{Verify \(H(s)\) meets the given
+attenuation
+criteria}{Verify H(s) meets the given attenuation criteria}}\label{verify-hs-meets-the-given-attenuation-criteria}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}343}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{[}\PY{n}{w}\PY{p}{,} \PY{n}{h\PYZus{}mag}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|H(s)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{n}{passband\PYZus{}low}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{omega\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{passband\PYZus{}high}\PY{p}{)} \PY{o}{|}\PYZbs{}
+             \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{omega\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{stopband\PYZus{}low}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{omega\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{stopband\PYZus{}high}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}343}]:}         \$\textbackslash{}omega\$   \$|H(s)|\$
+          10       40000.0 -26.236057
+          170     200000.0  -1.542419
+          1970   2000000.0  -2.339802
+          9970  10000000.0 -28.077508
+\end{Verbatim}
+            
+    \hypertarget{convert-hs-to-hz-using-the-backwards-rectangular-approximation}{%
+\subsubsection{\texorpdfstring{Convert \(H(s)\) to \(H(z)\) using the
+backwards rectangular
+approximation}{Convert H(s) to H(z) using the backwards rectangular approximation}}\label{convert-hs-to-hz-using-the-backwards-rectangular-approximation}}
+
+T = 50e-9
+
+\[H(z)=H(\frac{1-z^{-1}}{T})=\frac{3.9204e12(\frac{1-z^{-1}}{50e-9})^2}{(\frac{1-z^{-1}}{50e-9})^4+2.8e6(\frac{1-z^{-1}}{50e-9})^3+4.64e12(\frac{1-z^{-1}}{50e-9})^2+1.01e18(\frac{1-z^{-1}}{50e-9})^1+1.3e23(\frac{1-z^{-1}}{50e-9})}\]
+
+Resulting in the final \(H(z)\):
+
+\[H(z)=\frac{0.008509z^4-0.017019z^3+0.008509z^2+7.888609e{-31}z+9.860761e{-32}}{z^4-3.857939z^3+5.584246z^2-3.594554z+0.868248}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}788}]:} \PY{c+c1}{\PYZsh{} Sample period}
+          \PY{n}{T} \PY{o}{=} \PY{l+m+mf}{50e\PYZhy{}9}
+          \PY{c+c1}{\PYZsh{} The H(z) transfer function}
+          \PY{n}{num} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.008509703539690870822}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.017019407079381741644}\PY{p}{,} \PY{l+m+mf}{0.008509703539690870822}\PY{p}{,}
+                 \PY{l+m+mf}{7.8886090522101180541e\PYZhy{}31}\PY{p}{,} \PY{l+m+mf}{9.8607613152626475676e\PYZhy{}32}\PY{p}{]}
+          \PY{n}{den} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{3.8579392997545856723}\PY{p}{,} \PY{l+m+mf}{5.5842464777865698716}\PY{p}{,}
+                 \PY{o}{\PYZhy{}}\PY{l+m+mf}{3.5945549738519009091}\PY{p}{,} \PY{l+m+mf}{0.86824849910120098173}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} Get the significant angles}
+          \PY{n}{stopband\PYZus{}low\PYZus{}angle}\PY{p}{,} \PY{n}{stopband\PYZus{}high\PYZus{}angle} \PY{o}{=} \PY{n}{convert\PYZus{}z\PYZus{}angle}\PY{p}{(}\PY{n}{stopband\PYZus{}low}\PY{p}{,} \PY{n}{T}\PY{p}{)}\PY{p}{,} \PY{n}{convert\PYZus{}z\PYZus{}angle}\PY{p}{(}\PY{n}{stopband\PYZus{}high}\PY{p}{,} \PY{n}{T}\PY{p}{)}
+          \PY{n}{passband\PYZus{}low\PYZus{}angle}\PY{p}{,} \PY{n}{passband\PYZus{}high\PYZus{}angle} \PY{o}{=} \PY{n}{convert\PYZus{}z\PYZus{}angle}\PY{p}{(}\PY{n}{passband\PYZus{}low}\PY{p}{,} \PY{n}{T}\PY{p}{)}\PY{p}{,} \PY{n}{convert\PYZus{}z\PYZus{}angle}\PY{p}{(}\PY{n}{passband\PYZus{}high}\PY{p}{,} \PY{n}{T}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plot the z\PYZhy{}domain transfer function}
+          \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{z\PYZus{}plot}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{den}\PY{p}{,} \PY{l+m+mf}{0.001}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.00}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{]}\PY{p}{)}
+          \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{real}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{real}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+          \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{phi°\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|H(z)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}H(z)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{logx}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                      \PY{n}{y\PYZus{}lines}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{stopband\PYZus{}low\PYZus{}angle}\PY{p}{,} \PY{n}{stopband\PYZus{}high\PYZus{}angle}\PY{p}{,}\PY{n}{passband\PYZus{}low\PYZus{}angle}\PY{p}{,} \PY{n}{passband\PYZus{}high\PYZus{}angle}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stopband Lower Bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Passband Lower Bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Passband Upper Bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stopband Upper Bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{ylim}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{verify-the-backwards-rectangular-approximation-is-still-valid}{%
+\subsubsection{Verify the backwards rectangular approximation is still
+valid}\label{verify-the-backwards-rectangular-approximation-is-still-valid}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}786}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{phi°\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|H(z)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{phi°\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{stopband\PYZus{}low\PYZus{}angle}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{phi°\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{passband\PYZus{}low\PYZus{}angle}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{phi°\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{passband\PYZus{}high\PYZus{}angle}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{phi°\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{stopband\PYZus{}high\PYZus{}angle}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+    $\phi°$   $|H(z)|$
+2  0.114592 -26.301946
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+     $\phi°$  $|H(z)|$
+10  0.572958 -2.231689
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+      $\phi°$  $|H(z)|$
+100  5.729578 -2.983381
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+      $\phi°$   $|H(z)|$
+500  28.64789 -28.535352
+    \end{verbatim}
+
+    
+    \hypertarget{problem-b}{%
+\subsection{Problem B}\label{problem-b}}
+
+Passband, \(\omega \leq 10^4\) and is attenuated \(0.85\leq |H|\leq 1\).
+
+Stopband, \(\omega \geq 2\cdot 10^4\) and is annenuated
+\(0 \leq |H| \leq 0.15\).
+
+\[T = 10e-6\]
+
+\hypertarget{the-input-signal}{%
+\subsubsection{The input signal}\label{the-input-signal}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}650}]:} \PY{n}{pi2} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}
+          \PY{n}{T}\PY{p}{,} \PY{n}{N} \PY{o}{=} \PY{l+m+mf}{10e\PYZhy{}6}\PY{p}{,} \PY{l+m+mi}{1000}
+          \PY{c+c1}{\PYZsh{} The time domain we\PYZsq{}ll plot against}
+          \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{N}\PY{o}{*}\PY{n}{T}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} The input signal has frequencies of 1,000 Hz, 10,000Hz, 20,000Hz, and 50,000Hz}
+          \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{pi2}\PY{o}{*}\PY{l+m+mf}{1e3}\PY{o}{*}\PY{n}{t}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{pi2}\PY{o}{*}\PY{l+m+mf}{1e4}\PY{o}{*}\PY{n}{t}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{pi2}\PY{o}{*}\PY{l+m+mf}{2e4}\PY{o}{*}\PY{n}{t}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{pi2}\PY{o}{*}\PY{l+m+mf}{5e4}\PY{o}{*}\PY{n}{t}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} The FFT of the input signal \PYZhy{} ignoring the mirrored frequencies}
+          \PY{n}{fft} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{fft}\PY{o}{.}\PY{n}{fft}\PY{p}{(}\PY{n}{s}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2} \PY{o}{/} \PY{n}{N}
+          \PY{n}{f} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{/} \PY{n}{T}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+          
+          \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{,} \PY{n}{f}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fft}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}t (s)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega (rad/s)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|x(t)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|x(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}x(t)=sin(2}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{pi 1,000t)+sin(2}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{pi 10,000t)+sin(2}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{pi 20,000t)+sin(2}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{pi 50,000t)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{,}
+                       \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}FFT(x(t))\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}lines}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{design-the-filter}{%
+\subsubsection{Design the filter}\label{design-the-filter}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}651}]:} \PY{n}{cutoff\PYZus{}freq} \PY{o}{=} \PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{4}
+          \PY{n}{factor} \PY{o}{=} \PY{l+m+mi}{4650} \PY{c+c1}{\PYZsh{} A higher factor means a slower decay \PYZhy{} 4650 barely does it}
+          \PY{c+c1}{\PYZsh{} Design the filter to be zeros and then decaying\PYZhy{}exponential after the cutoff frequency}
+          \PY{n}{filter\PYZus{}f} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.} \PY{k}{if} \PY{n}{freq} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{cutoff\PYZus{}freq} \PY{k}{else} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{freq} \PY{o}{\PYZhy{}} \PY{n}{cutoff\PYZus{}freq}\PY{p}{)} \PY{o}{/} \PY{n}{factor}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{freq} \PY{o+ow}{in} \PY{n}{f}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} Apply the filter to the input signal\PYZsq{}s FFT}
+          \PY{n}{filtered\PYZus{}fft} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{fft}\PY{p}{)}\PY{p}{,} \PY{n}{filter\PYZus{}f}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Take the IFFT of the filtered signal\PYZsq{}s FFT}
+          \PY{n}{filtered\PYZus{}t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{fft}\PY{o}{.}\PY{n}{ifft}\PY{p}{(}\PY{n}{filtered\PYZus{}fft}\PY{p}{)}\PY{o}{.}\PY{n}{real} \PY{o}{*} \PY{n}{N} \PY{o}{/} \PY{l+m+mi}{2}
+          
+          \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{f}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{n}{filtered\PYZus{}fft}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{filter\PYZus{}f}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{filtered\PYZus{}t}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega\PYZdl{} (rad/s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|x(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|x(t)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Filtered FFT(\PYZdl{}x(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega)\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lowpass Filter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Filtered \PYZdl{}x(t)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{y\PYZus{}lines}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}630}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{[}\PY{n}{f}\PY{p}{,} \PY{n}{filtered\PYZus{}fft}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{max}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{2e4}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}630}]:} 0.0915604036855752
+\end{Verbatim}
+            
+    \hypertarget{convert-the-filter-from-the-frequency-filter-to-an-fir-filter}{%
+\subsubsection{Convert the filter from the frequency filter to an FIR
+filter}\label{convert-the-filter-from-the-frequency-filter-to-an-fir-filter}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}724}]:} \PY{n}{fir\PYZus{}length} \PY{o}{=} \PY{l+m+mi}{8}
+          \PY{c+c1}{\PYZsh{} Take the IFFT of the above filter designed above}
+          \PY{n}{filter\PYZus{}fir} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{fft}\PY{o}{.}\PY{n}{ifft}\PY{p}{(}\PY{n}{filter\PYZus{}f}\PY{p}{)}\PY{o}{.}\PY{n}{real} \PY{o}{*} \PY{n}{N} \PY{o}{/} \PY{l+m+mi}{2}
+          \PY{c+c1}{\PYZsh{} Normalize the filter}
+          \PY{n}{max\PYZus{}val} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{filter\PYZus{}fir}\PY{p}{)}
+          \PY{n}{filter\PYZus{}fir} \PY{o}{=} \PY{p}{[}\PY{n}{val} \PY{o}{/} \PY{n}{max\PYZus{}val} \PY{k}{for} \PY{n}{val} \PY{o+ow}{in} \PY{n}{filter\PYZus{}fir}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} Create the shifted and shortened filter}
+          \PY{n}{final\PYZus{}filter} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{filter\PYZus{}fir}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{fir\PYZus{}length}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{filter\PYZus{}fir}\PY{p}{[}\PY{p}{:}\PY{n}{fir\PYZus{}length}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{filter\PYZus{}fir}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{fir\PYZus{}length}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{fir\PYZus{}length} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{p}{(}\PY{n}{filter\PYZus{}fir}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{filter\PYZus{}fir}\PY{p}{[}\PY{p}{:}\PY{n}{fir\PYZus{}length}\PY{p}{]}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{final\PYZus{}filter}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|h[k]|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|h[k]|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|h[k]|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Full h[k]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{First }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ elements of h[k]}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{fir\PYZus{}length}\PY{p}{)}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Final shifted filter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{,} \PY{n}{y\PYZus{}lines}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{verify-the-fir-filter-works}{%
+\subsubsection{Verify the FIR filter
+works}\label{verify-the-fir-filter-works}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}725}]:} \PY{c+c1}{\PYZsh{} Convolve the FIR filter with the input signal}
+          \PY{n}{final\PYZus{}filtered\PYZus{}t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{convolve}\PY{p}{(}\PY{n}{final\PYZus{}filter}\PY{p}{,} \PY{n}{s}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Shift to ignore the \PYZsq{}startup\PYZsq{} phase, and normalize the function}
+          \PY{n}{truncated\PYZus{}filtered\PYZus{}t} \PY{o}{=} \PY{n}{final\PYZus{}filtered\PYZus{}t}\PY{p}{[}\PY{p}{(}\PY{n}{fir\PYZus{}length} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{/} \PY{l+m+mf}{1.5} \PY{o}{/} \PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{final\PYZus{}filter}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Take the FFT of the filtered signal for verification}
+          \PY{n}{final\PYZus{}filtered\PYZus{}fft} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{fft}\PY{o}{.}\PY{n}{fft}\PY{p}{(}\PY{n}{truncated\PYZus{}filtered\PYZus{}t}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{4} \PY{o}{/} \PY{n}{N}
+          
+          \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{,} \PY{n}{f}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{n}{truncated\PYZus{}filtered\PYZus{}t}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{final\PYZus{}filtered\PYZus{}fft}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega\PYZdl{} (rad/s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|x(t)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}|X(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega)|\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                      \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Truncated and filtered input signal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FFT of the filtered signal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{y\PYZus{}lines}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}line\PYZus{}labels}\PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{look-at-the-magnitudes-of-the-input-signals-to-verify-their-attenuation}{%
+\subsubsection{Look at the magnitudes of the input signals to verify
+their
+attenuation}\label{look-at-the-magnitudes-of-the-input-signals-to-verify-their-attenuation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}726}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{[}\PY{n}{f}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{final\PYZus{}filtered\PYZus{}fft}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{N}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                            \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Magnitude of FFT(X(\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{omega\PYZdl{}))}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1000}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{10000}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{20000}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{50000}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+      Frequency  Magnitude of FFT(X($\omega$))
+10  1001.001001                       0.971841
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+       Frequency  Magnitude of FFT(X($\omega$))
+100  10010.01001                       0.934444
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+       Frequency  Magnitude of FFT(X($\omega$))
+200  20020.02002                       0.086387
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+       Frequency  Magnitude of FFT(X($\omega$))
+500  50050.05005                       0.001171
+    \end{verbatim}
+
+    
+    \hypertarget{the-explicit-amplitudes-of-hk}{%
+\subsubsection{\texorpdfstring{The explicit amplitudes of
+\(h[k]\)}{The explicit amplitudes of h{[}k{]}}}\label{the-explicit-amplitudes-of-hk}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}727}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{[}\PY{n}{final\PYZus{}filter}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}h[k]\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{rename\PYZus{}axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}k\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}        \$h[k]\$
+          \$k\$          
+          0    -0.026368
+          1    -0.111207
+          2   -0.131925
+          3   -0.034091
+          4   -0.408149
+          5    0.819260
+          6    1.000000
+          7    0.819260
+          8    0.408149
+          9    0.034091
+          10   -0.131925
+          11   -0.111207
+\end{Verbatim}
+    
+    
+    \end{document}
