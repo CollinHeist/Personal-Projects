@@ -1,4 +1,3 @@
-
 .DS_Store
 Finance Manager/XML Files/*.xml
 Finance Manager/Scanned Text Files/*.txt
@@ -10,3 +9,9 @@ Finance Manager/Receipts/*.jpg
 *.gz
 *.doc
 Duplicate Picture Identifier/.ipynb_checkpoints/Duplicate Picture Identifier-checkpoint.ipynb
+Duplicate Picture Identifier/history.csv
+Statistical Formatting/Processed/*.jpg
+Statistical Formatting/Processed/*.png
+Statistical Formatting/Screenshots/*.jpg
+Statistical Formatting/Screenshots/*.png
+Statistical Formatting/data.csv
