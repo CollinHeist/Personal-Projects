@@ -15,3 +15,5 @@ Statistical Formatting/Processed/*.png
 Statistical Formatting/Screenshots/*.jpg
 Statistical Formatting/Screenshots/*.png
 Statistical Formatting/data.csv
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
