@@ -1,0 +1,6 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  "testbench_time_impl.v"
+sv xil_defaultlib  "../../../../Project_2.srcs/sources_1/new/testbench.sv"
+
+# Do not sort compile order
+nosort
