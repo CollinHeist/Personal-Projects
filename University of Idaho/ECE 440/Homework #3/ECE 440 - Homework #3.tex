@@ -121,4 +121,21 @@
 \lstinputlisting[breaklines, language=Verilog, caption=8-bit Register Testbench, tabsize=2, label={lst:fsm-module}]{testbench.sv}
 \end{mdframed}
 
+\subsection{Simulation Results}
+Although it might be hard to see, the behavioral simulation results are exactly as expected. The asynchronous reset going low (as it is an active low signal) immediately results in \textbf{reg\_out} becoming all zeros, and the shifting operation works as expected.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Sources/Behav-Sim.PNG}
+\caption{Results of the Behavioral Simulation.}
+\end{figure}
+
+The TCL console print statements show the shifting in and shifting left operations working as expected.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Sources/console.PNG}
+\caption{Results of the Behavioral Simulation.}
+\end{figure}
+
 \end{document}

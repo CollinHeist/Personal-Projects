@@ -39,15 +39,15 @@ initial begin
 	async_reset = 1; inputs = 8'b11110001; load = 1; #CLK_PRD;	// Let the register load the inputs
 
 	async_reset = 0; #HOLD_TIME;	// Randomly reset, reg_out should be zeros!
-	$display("$2d: reg_out=%b", $stime, reg_out);
+	$display("%2d: reg_out=%b", $stime, reg_out);
 
-	@(posedge clock); #HOLD_TIME; #CLK_PRD;	// Sync again
+	@(posedge clock); #HOLD_TIME;	// Sync again
 
 	async_reset = 1; inputs = 8'b10110001; load = 1; #CLK_PRD;	// Load the inputs once more
-	$display("$2d: reg_out=%b", $stime, reg_out);
+	$display("%2d: reg_out=%b", $stime, reg_out);
 
 	shift_in = 1; load = 0; shift_left = 1; #CLK_PRD;	// reg_out should be 0b01100011
-	$display("$2d: reg_out=%b", $stime, reg_out);
+	$display("%2d: reg_out=%b", $stime, reg_out);
 
 	$finish;
 end
