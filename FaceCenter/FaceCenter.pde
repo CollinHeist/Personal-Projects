@@ -9,7 +9,7 @@ final int leftGuide = 3039;   // X-coord of Left, small scale is 604, large is 3
 final int rightGuide = 3217;  // X-coord of Right, small scale is 643, large is 3217
 final int bottomGuide = 1556; // Y-Coord of Bottom, small scale is 312, large is 1556
 int guideWidth = rightGuide - leftGuide, toDrawX = 0, toDrawY = 0, i = 0;
-String[] allFiles;
+String[] allFiles ;
 boolean isDone = false, finalImage = false, zoom = false, needToLoad = true;
 
 /* --------- workingOn is the PImage we're resizing, temp is used for zooming -------- */
@@ -43,7 +43,8 @@ void draw() {
   /* --------- Load the next image into memory, one-at-a-time to run smoothly -------- */
   if (needToLoad && i < allFiles.length) { // If a new image needs to be loaded
     workingOn = loadImage(allFiles[i]);
-    workingOn.resize(1200, 800);
+    //workingOn.resize(1200, 800);
+    workingOn.resize(6016, 4000);
     needToLoad = false;
   }
 

@@ -12,7 +12,7 @@
 
 %% Custom FSM's
 \usepackage{tikz}
-\usetikzlibrary{automata, positioning, arrows}
+\usetikzlibrary{automata, positioning, arrows, backgrounds}
 \tikzset{very thick, ->, >=stealth', node distance=6cm, every state/.style={thick, fill=gray!10}, initial text=$ $}
 
 %% Automatic Word Formatting
@@ -97,7 +97,7 @@
 %% Page Margins
 \usepackage[margin=1.00in]{geometry}
 
-% Beginning of Document
+%% Beginning of Document
 \begin{document}
 \counterwithin{lstlisting}{section} % Listings are numbered within sections
 % Title
@@ -110,12 +110,49 @@
 \pagenumbering{arabic}
 
 % Beginning of Report
-\tikzstyle{myBlock}=[draw, fill=grey, minimum size=0.5in, node distance=1.5in]
 \section{Wrapper Module Block Diagram}
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{Project_2/Outputs/Sim4.PNG}
-\caption{Wrapper Module Block Diagram}
+\begin{figure}[h]
+\hspace*{-0.75cm}
+\begin{tikzpicture}[thick, node distance=0.5cm]
+\def \scale {18/38}
+
+\draw[<-] (0, -0) -- (20*\scale, -0);
+\draw[<-] (0, -1*\scale) -- (29*\scale, -1*\scale) node[above left]{\scriptsize{switches[3:0]}};
+\draw[-] (2*\scale, -0) -- (2*\scale, -3*\scale);
+\draw[->] (2*\scale, -3*\scale) -- (4*\scale, -3*\scale) node[above left]{\scriptsize{clock}};
+\draw[->] (0, -4*\scale) -- (4*\scale, -4*\scale) node[above left]{\scriptsize{reset\_button}};
+\draw[->] (0, -5*\scale) -- (4*\scale, -5*\scale) node[above left]{\scriptsize{load\_button}};
+\draw (4*\scale, -2*\scale) rectangle (7*\scale, -6*\scale) node[midway, text width=2cm, xshift=0.35cm]{\scriptsize{Debounce Module}};
+\draw[-] (11*\scale, 0*\scale) -- (11*\scale, -3*\scale);
+\draw[->] (11*\scale, -3*\scale) -- (13*\scale, -3*\scale) node[above left]{\scriptsize{clock}};
+\draw[-] (9*\scale, -1*\scale) -- (9*\scale, -4*\scale);
+\draw[->] (9*\scale, -4*\scale) -- (13*\scale, -4*\scale) node[above left]{\scriptsize{switches[3:0]}};
+\draw[-] (7*\scale, -4*\scale) -- (8.5*\scale, -4*\scale);
+\draw[-] (8.5*\scale, -4*\scale) -- (8.5*\scale, -5*\scale);
+\draw[->] (8.5*\scale, -5*\scale) -- (13*\scale, -5*\scale) node[above left]{\scriptsize{load\_debounce}};
+\draw[-] (7*\scale, -5*\scale) -- (7.5*\scale, -5*\scale);
+\draw[-] (7.5*\scale, -5*\scale) -- (7.5*\scale, -8*\scale);
+\draw[-] (7.5*\scale, -8*\scale) -- (19*\scale, -8*\scale);
+\draw[->] (7.5*\scale, -6*\scale) -- (13*\scale, -6*\scale) node[above left]{\scriptsize{reset\_debounce}};
+\draw (13*\scale, -2*\scale) rectangle (17*\scale, -7*\scale) node[midway, text width=2cm, xshift=0.4cm]{\scriptsize{X and Y Loader}};
+\draw[-] (20*\scale, 0) -- (20*\scale, -3*\scale);
+\draw[->] (20*\scale, -3*\scale) -- (22*\scale, -3*\scale) node[above left]{\scriptsize{clock}};
+\draw[-] (17*\scale, -3*\scale) -- (19*\scale, -3*\scale);
+\draw[-] (19*\scale, -3*\scale) -- (19*\scale, -4*\scale);
+\draw[->] (19*\scale, -4*\scale) -- (22*\scale, -4*\scale) node[above left]{\scriptsize{load}};
+\draw[->] (17*\scale, -5*\scale) -- (22*\scale, -5*\scale) node[above left]{\scriptsize{data[7:0]}};
+\draw[-] (19*\scale, -8*\scale) -- (19*\scale, -6*\scale);
+\draw[->] (19*\scale, -6*\scale) -- (22*\scale, -6*\scale) node[above left]{\scriptsize{reset\_debounce}};
+\draw (22*\scale, -2*\scale) rectangle (26*\scale, -7*\scale) node[midway]{\scriptsize{GCD Core}};
+\draw[-] (29*\scale, -1*\scale) -- (29*\scale, -3*\scale);
+\draw[->] (29*\scale, -3*\scale) -- (30*\scale, -3*\scale);
+\draw[->] (26*\scale, -4*\scale) -- (30*\scale, -4*\scale) node[above left, xshift=3, yshift=-1.5]{\scriptsize{gcd\_result[7:0]}};
+\draw[->] (26*\scale, -5*\scale) -- (30*\scale, -5*\scale) node[above left]{\scriptsize{done}};
+\draw (30*\scale, -2*\scale) rectangle (35*\scale, -6*\scale) node[midway]{\scriptsize{LED Encoder}};
+\draw[->] (35*\scale, -4*\scale) node[above right]{\scriptsize{leds[3:0]}} -- (37*\scale, -4*\scale) ;
+\end{tikzpicture}
 \end{figure}
+
+In this diagram, the debounce module is a \textbf{SystemVeriog} module provided to us. The X and Y loader component is a synchronous block of logic that allows the user to piece-wise input X and Y, and then sends those values (along with the Load signal) to the GCD core. The done signal is then used, along with the results and the switches in the final LED Encoder block. This block is purely combinational. 
 
 \end{document}

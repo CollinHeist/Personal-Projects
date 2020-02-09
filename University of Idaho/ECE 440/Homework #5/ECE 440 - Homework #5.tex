@@ -1,0 +1,134 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{listings} 
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{mathtools}
+
+%% Custom FSM's
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+\tikzset{thick, ->, >=stealth', node distance=6cm, every state/.style={thick, fill=gray!10}, initial text=$ $}
+
+%% Macros for logic timing diagrams
+\newcounter{wavenum}
+\setlength{\unitlength}{1cm}
+% advance clock one cycle, not to be called directly
+\newcommand*{\clki}{
+  \draw (t_cur) -- ++(0,.3) -- ++(.5,0) -- ++(0,-.6) -- ++(.5,0) -- ++(0,.3)
+    node[time] (t_cur) {};
+}
+\newcommand*{\bitvector}[3]{
+  \draw[fill=#3] (t_cur) -- ++( .1, .3) -- ++(#2-.2,0) -- ++(.1, -.3)
+                         -- ++(-.1,-.3) -- ++(.2-#2,0) -- cycle;
+  \path (t_cur) -- node[anchor=mid] {#1} ++(#2,0) node[time] (t_cur) {};
+}
+% \known{val}{length}
+\newcommand*{\known}[2]{
+    \bitvector{#1}{#2}{white}
+}
+% \unknown{length}
+\newcommand*{\unknown}[2][XXX]{
+    \bitvector{#1}{#2}{black!20}
+}
+% \bit{1 or 0}{length}
+\newcommand*{\bit}[2]{
+  \draw (t_cur) -- ++(0,.6*#1-.3) -- ++(#2,0) -- ++(0,.3-.6*#1)
+    node[time] (t_cur) {};
+}
+% \unknownbit{length}
+\newcommand*{\unknownbit}[1]{
+  \draw[ultra thick,black!50] (t_cur) -- ++(#1,0) node[time] (t_cur) {};
+}
+% \nextwave{name}
+\newcommand{\nextwave}[1]{
+  \path (0,\value{wavenum}) node[left] {#1} node[time] (t_cur) {};
+  \addtocounter{wavenum}{-1}
+}
+% \clk{name}{period}
+\newcommand{\clk}[2]{
+    \nextwave{#1}
+    \FPeval{\res}{(\wavewidth+1)/#2}
+    \FPeval{\reshalf}{#2/2}
+    \foreach \t in {1,2,...,\res}{
+        \bit{\reshalf}{1}
+        \bit{\reshalf}{0}
+    }
+}
+
+% \begin{wave}[clkname]{num_waves}{clock_cycles}
+\newenvironment{wave}[3][clk]{
+  \begin{tikzpicture}[draw=black, yscale=.7,xscale=1]
+    \tikzstyle{time}=[coordinate]
+    \setlength{\unitlength}{1cm}
+    \def\wavewidth{#3}
+    \setcounter{wavenum}{0}
+    \nextwave{#1}
+    \foreach \t in {0,1,...,\wavewidth}{
+      \draw[dotted] (t_cur) +(0,.5) node[above] {t=\t} -- ++(0,.4-#2);
+      \clki
+    }
+}{\end{tikzpicture}}
+
+% Specific Line Breaks
+% See https://tex.stackexchange.com/questions/26174/ for details
+\usepackage[british]{babel} 
+
+% Page Margins
+\usepackage[margin=1.00in]{geometry}
+
+% Large, array-sized, ceiling and floor operators
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\definecolor{code-gray}{gray}{0.93}
+
+% Beginning of Document
+\begin{document}
+% Title
+\title{ECE 440 - Homework \#2}
+\author{Collin Heist}
+\date{\today}
+\maketitle
+
+% Table of Content and Listings
+\pagenumbering{arabic}
+
+% Beginning of Report
+\section{Circuit Analysis}
+
+\hspace{-2cm}
+\begin{wave}[\textbf{Clock}]{8}{16}
+\nextwave{Reset} \bit{1}{1.3} \bit{0}{17-1.3}
+\nextwave{Counter[3:0]} \unknown[x]{1} \known{\tiny{0b0000}}{1} \known{\tiny{0b0001}}{1} \known{\tiny{0b0010}}{1} \known{\tiny{0b0011}}{1} \known{\tiny{0b0100}}{1} \known{\tiny{0b0101}}{1} \known{\tiny{0b0110}}{1} \known{\tiny{0b0111}}{1} \known{\tiny{0b1000}}{1} \known{\tiny{0b1001}}{1} \known{\tiny{0b1010}}{1} \known{\tiny{0b1011}}{1} \known{\tiny{0b1100}}{1} \known{\tiny{0b1101}}{1} \known{\tiny{0b1110}}{1} \known{\tiny{0b1111}}{1}
+\nextwave{Write Enable} \unknownbit{1} \bit{0}{9} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1}
+\nextwave{Address} \unknown[x]{1} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2}
+\nextwave{SPO} \unknown[x]{1.3} \known{\tiny{0b11}}{1}
+\nextwave{Data In} \unknown[x]{2} \known{\tiny{0b10}}{1}
+\nextwave{Data Out} \unknown[x]{2} \known{\tiny{0b11}}{1}
+\end{wave}
+
+
+\begin{center}
+\begin{wave}[\textbf{Clock}]{17}{9}
+	\nextwave{DIN[0:8]} \unknown[x]{1.7} \known{6}{0.6} \unknown[x]{0.4} \known{4}{0.6} \unknown[x]{6.7}
+	\nextwave{RESET} \bit{0}{10}
+	\nextwave{LOAD} \bit{0}{0.7} \bit{1}{0.6} \bit{0}{10-0.7-0.6}
+	\nextwave{RESULT} \unknown[x]{2} \known{6}{3} \known{2}{5}
+	\nextwave{DONE} \bit{0}{8.3} \bit{1}{1} \bit{0}{0.7}
+	\nextwave{STATE} \known{\tiny{Idle}}{1.3} \known{\tiny{Load X}}{1} \known{\tiny{Load Y}}{1} \known{\tiny{Wait}}{1} \known{\tiny{Up. X}}{1} \known{\tiny{Wait}}{1} \known{\tiny{Up. Y}}{1} \known{\tiny{Wait}}{1} \known{\tiny{Idle}}{1.7}
+	\nextwave{XSEL} \bit{0}{1.3} \bit{1}{1} \bit{0}{7.7}
+	\nextwave{XLOAD} \bit{0}{1.3} \bit{1}{1} \bit{0}{2} \bit{1}{1} \bit{0}{4.7}
+	\nextwave{YSEL} \bit{0}{2.3} \bit{1}{1} \bit{0}{6.7}
+	\nextwave{YLOAD} \bit{0}{2.3} \bit{1}{1} \bit{0}{3} \bit{1}{1} \bit{0}{2.7}
+	\nextwave{SUB\_SEL} \bit{0}{6.3} \bit{1}{1} \bit{0}{2.7}
+	\nextwave{X\_EQ\_Y} \unknownbit{3} \bit{0}{4} \bit{1}{3}
+	\nextwave{X\_GT\_Y} \unknownbit{3} \bit{1}{2} \bit{0}{5}
+	\nextwave{X} \unknown[x]{2} \known{6}{3} \known{2}{5}
+	\nextwave{Y} \unknown[x]{3} \known{4}{4} \known{2}{3}
+	\nextwave{DIFF} \unknown[x]{3} \known{2}{2} \unknown[x]{1.3} \known{2}{0.7} \known{0}{3}
+\end{wave}
+\end{center}
+
+\end{document}
