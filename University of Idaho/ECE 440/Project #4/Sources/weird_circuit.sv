@@ -7,27 +7,27 @@ module weird_circuit(
 );
 
 // Internal Signals
-logic memory_out, data_in, write_enable;
+logic write_enable;
 logic [3:0] counter;
-logic [1:0] isolated_reg;
+logic [1:0] memory_out, isolated_reg, data_in;
 
 // Implement subtractor, and write-enable 
-assign data_in = (data - 2'b01);
+assign data_in = (isolated_reg - 2'b01);
 assign write_enable = (counter[3] & counter[0]);
+assign data = isolated_reg;
 
 // Instantiate Memory Unit
-memory memory_inst(
-	.clock(clock),
-	.address(counter[2:1]),
-	.data_in(data_in),
-	.write_enable(write_enable),
-	.memory_out(memory_out)
+dist_mem_gen_0 memory(
+	.a({2'b00, counter[2:1]}),
+	.d(data_in),
+	.clk(clock),
+	.we(write_enable),
+	.spo(memory_out)
 );
 
 always_ff @(posedge clock) begin
 	if (reset) begin
 		counter <= 4'b0000;
-		isolated_reg <= 2'b00;
 		end
 	else begin
 		counter <= counter + 4'b0001;

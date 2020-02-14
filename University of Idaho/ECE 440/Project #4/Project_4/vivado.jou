@@ -1,0 +1,125 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Mon Feb 10 11:27:27 2020
+# Process ID: 22308
+# Current directory: C:/Users/heis0741/AppData/Roaming/Xilinx/Vivado
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent22864
+# Log file: C:/Users/heis0741/AppData/Roaming/Xilinx/Vivado/vivado.log
+# Journal file: C:/Users/heis0741/AppData/Roaming/Xilinx/Vivado\vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project Project_4 {U:/ECE 440/Project_4} -part xc7z010clg400-1
+set_property board_part digilentinc.com:zybo:part0:1.0 [current_project]
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sources_1/new
+set_property simulator_language Verilog [current_project]
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sources_1/new
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sources_1/new
+file mkdir {U:/ECE 440/Project_4/Project_4.srcs/sources_1/new}
+close [ open {U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/weird_circuit.sv} w ]
+add_files {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/weird_circuit.sv}}
+create_ip -name dist_mem_gen -vendor xilinx.com -library ip -version 8.0 -module_name dist_mem_gen_0 -dir {u:/ECE 440/Project_4/Project_4.srcs/sources_1/ip}
+set_property -dict [list CONFIG.depth {16} CONFIG.data_width {2} CONFIG.memory_type {single_port_ram} CONFIG.output_options {non_registered} CONFIG.coefficient_file {U:/ECE 440/Project_4/starting_memory.coe}] [get_ips dist_mem_gen_0]
+generate_target {instantiation_template} [get_files {{u:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci}}]
+generate_target all [get_files  {{u:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci}}]
+export_ip_user_files -of_objects [get_files {{u:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci}}] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] {{u:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci}}]
+launch_runs -jobs 4 dist_mem_gen_0_synth_1
+wait_on_run dist_mem_gen_0_synth_1
+export_simulation -of_objects [get_files {{u:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/dist_mem_gen_0.xci}}] -directory {U:/ECE 440/Project_4/Project_4.ip_user_files/sim_scripts} -ip_user_files_dir {U:/ECE 440/Project_4/Project_4.ip_user_files} -ipstatic_source_dir {U:/ECE 440/Project_4/Project_4.ip_user_files/ipstatic} -lib_map_path [list {modelsim=U:/ECE 440/Project_4/Project_4.cache/compile_simlib/modelsim} {questa=U:/ECE 440/Project_4/Project_4.cache/compile_simlib/questa} {riviera=U:/ECE 440/Project_4/Project_4.cache/compile_simlib/riviera} {activehdl=U:/ECE 440/Project_4/Project_4.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sim_1/new
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sim_1/new
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sim_1/new
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sim_1/new
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sim_1/new
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+file mkdir U:/ECE 440/Project_4/Project_4.srcs/sim_1/new
+file mkdir {U:/ECE 440/Project_4/Project_4.srcs/sim_1/new}
+close [ open {U:/ECE 440/Project_4/Project_4.srcs/sim_1/new/testbench.sv} w ]
+add_files -fileset sim_1 {{U:/ECE 440/Project_4/Project_4.srcs/sim_1/new/testbench.sv}}
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+launch_simulation
+launch_simulation
+close [ open {U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.sv} w ]
+add_files {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.sv}}
+remove_files  {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.sv}}
+file delete -force {U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.sv}
+close [ open {U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.v} w ]
+add_files {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.v}}
+remove_files  {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.v}}
+file delete -force {U:/ECE 440/Project_4/Project_4.srcs/sources_1/new/memory.v}
+import_files -norecurse {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/sim/dist_mem_gen_0.v}}
+launch_simulation
+launch_simulation
+source testbench.tcl
+restart
+run all
+restart
+run all
+close_sim
+launch_simulation
+launch_simulation
+source testbench.tcl
+restart
+run all
+save_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+add_files -fileset sim_1 -norecurse {{U:/ECE 440/Project_4/testbench_behav.wcfg}}
+set_property xsim.view {{U:/ECE 440/Project_4/testbench_behav.wcfg}} [get_filesets sim_1]
+close_sim
+launch_simulation
+open_wave_config U:/ECE
+open_wave_config 440/Project_4/testbench_behav.wcfg
+source testbench.tcl
+open_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+restart
+run all
+close_sim
+launch_simulation
+open_wave_config U:/ECE
+open_wave_config 440/Project_4/testbench_behav.wcfg
+source testbench.tcl
+open_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+restart
+run all
+close_sim
+launch_simulation
+open_wave_config U:/ECE
+open_wave_config 440/Project_4/testbench_behav.wcfg
+source testbench.tcl
+open_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+restart
+run all
+save_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config U:/ECE
+open_wave_config 440/Project_4/testbench_behav.wcfg
+source testbench.tcl
+open_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+restart
+run all
+save_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+save_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+save_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+close_sim
+import_files -norecurse {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/synth/dist_mem_gen_0.vhd}}
+import_files -norecurse {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/ip/dist_mem_gen_0/simulation/dist_mem_gen_v8_0.v}}
+remove_files  {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/imports/synth/dist_mem_gen_0.vhd}}
+file delete -force {U:/ECE 440/Project_4/Project_4.srcs/sources_1/imports/synth/dist_mem_gen_0.vhd}
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+remove_files  {{U:/ECE 440/Project_4/Project_4.srcs/sources_1/imports/simulation/dist_mem_gen_v8_0.v}}
+file delete -force {U:/ECE 440/Project_4/Project_4.srcs/sources_1/imports/simulation/dist_mem_gen_v8_0.v}
+launch_simulation
+open_wave_config U:/ECE
+open_wave_config 440/Project_4/testbench_behav.wcfg
+source testbench.tcl
+open_wave_config {U:/ECE 440/Project_4/testbench_behav.wcfg}
+restart
+run all
+archive_project {U:/ECE 440/Project_4.xpr.zip} -temp_dir C:/Users/heis0741/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-22308-ece-bel215-02 -force -exclude_run_results -include_config_settings

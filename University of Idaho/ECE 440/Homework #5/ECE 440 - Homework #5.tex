@@ -58,8 +58,8 @@
     }
 }
 
-% \begin{wave}[clkname]{num_waves}{clock_cycles}
-\newenvironment{wave}[3][clk]{
+% \begin{wave}[clkname]{num_waves}{clock_cycles}{start_val}
+\newenvironment{wave}[4][clk]{
   \begin{tikzpicture}[draw=black, yscale=.7,xscale=1]
     \tikzstyle{time}=[coordinate]
     \setlength{\unitlength}{1cm}
@@ -67,7 +67,8 @@
     \setcounter{wavenum}{0}
     \nextwave{#1}
     \foreach \t in {0,1,...,\wavewidth}{
-      \draw[dotted] (t_cur) +(0,.5) node[above] {t=\t} -- ++(0,.4-#2);
+    	 \pgfmathtruncatemacro{\val}{\t+#4} %Calculate time values
+      \draw[dotted] (t_cur) + (0,.5) node[above] {\tiny{t=\val}} -- ++(0,.4-#2);
       \clki
     }
 }{\end{tikzpicture}}
@@ -87,7 +88,7 @@
 % Beginning of Document
 \begin{document}
 % Title
-\title{ECE 440 - Homework \#2}
+\title{ECE 440 - Homework \#5}
 \author{Collin Heist}
 \date{\today}
 \maketitle
@@ -96,39 +97,98 @@
 \pagenumbering{arabic}
 
 % Beginning of Report
-\section{Circuit Analysis}
+\section{Timing Diagrams}
 
+\begin{figure}[h]
 \hspace{-2cm}
-\begin{wave}[\textbf{Clock}]{8}{16}
+\begin{wave}[\textbf{Clock}]{9}{16}{0}
 \nextwave{Reset} \bit{1}{1.3} \bit{0}{17-1.3}
 \nextwave{Counter[3:0]} \unknown[x]{1} \known{\tiny{0b0000}}{1} \known{\tiny{0b0001}}{1} \known{\tiny{0b0010}}{1} \known{\tiny{0b0011}}{1} \known{\tiny{0b0100}}{1} \known{\tiny{0b0101}}{1} \known{\tiny{0b0110}}{1} \known{\tiny{0b0111}}{1} \known{\tiny{0b1000}}{1} \known{\tiny{0b1001}}{1} \known{\tiny{0b1010}}{1} \known{\tiny{0b1011}}{1} \known{\tiny{0b1100}}{1} \known{\tiny{0b1101}}{1} \known{\tiny{0b1110}}{1} \known{\tiny{0b1111}}{1}
 \nextwave{Write Enable} \unknownbit{1} \bit{0}{9} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1}
 \nextwave{Address} \unknown[x]{1} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2}
-\nextwave{SPO} \unknown[x]{1.3} \known{\tiny{0b11}}{1}
-\nextwave{Data In} \unknown[x]{2} \known{\tiny{0b10}}{1}
-\nextwave{Data Out} \unknown[x]{2} \known{\tiny{0b11}}{1}
+\nextwave{SPO} \unknown[x]{1.3} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{1.7}
+\nextwave{Data In} \unknown[x]{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{1} 
+\nextwave{Data Out$_2$} \unknown[x]{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{1}
+\nextwave{\textbf{Data Out$_{10}$}} \unknown[x]{2} \known{\tiny{3}}{2} \known{\tiny{2}}{2} \known{\tiny{1}}{2} \known{\tiny{0}}{2}\known{\tiny{3}}{2} \known{\tiny{2}}{2} \known{\tiny{1}}{2} \known{\tiny{0}}{1}
 \end{wave}
+\caption{First counter cycle.}
+\end{figure}
 
+During each full cycle of the 4-bit counter, the \textbf{Write-Enable} signal goes high four times (at time 9, 11, 13, and 15). During each of these periods, the currently selected address (in order 0, 1, 2 and 3) is overwritten with one less than its current value. The output is a sequential reading of the memory module (repeated twice), reading 3-2-1-0 at first.
+
+The second full-sequence of the timer shows the pattern of this circuit completely. 
+
+\begin{figure}[H]
+\hspace{-2cm}
+\begin{wave}[\textbf{Clock}]{9}{15}{17}
+\nextwave{Reset} \bit{0}{16}
+\nextwave{Counter[3:0]} \known{\tiny{0b0000}}{1} \known{\tiny{0b0001}}{1} \known{\tiny{0b0010}}{1} \known{\tiny{0b0011}}{1} \known{\tiny{0b0100}}{1} \known{\tiny{0b0101}}{1} \known{\tiny{0b0110}}{1} \known{\tiny{0b0111}}{1} \known{\tiny{0b1000}}{1} \known{\tiny{0b1001}}{1} \known{\tiny{0b1010}}{1} \known{\tiny{0b1011}}{1} \known{\tiny{0b1100}}{1} \known{\tiny{0b1101}}{1} \known{\tiny{0b1110}}{1} \known{\tiny{0b1111}}{1}
+\nextwave{Write Enable} \bit{0}{9} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1}
+\nextwave{Address} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2}
+\nextwave{SPO} \known{\tiny{0}}{0.3} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{1.7}
+\nextwave{Data In} \known{\tiny{0b11}}{1} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{1} 
+\nextwave{Data Out$_2$} \known{\tiny{0b00}}{1}  \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b00}}{1}
+\nextwave{\textbf{Data Out$_{10}$}} \known{\tiny{0}}{1} \known{\tiny{2}}{2} \known{\tiny{1}}{2} \known{\tiny{0}}{2} \known{\tiny{3}}{2}\known{\tiny{2}}{2} \known{\tiny{1}}{2} \known{\tiny{0}}{2} \known{\tiny{3}}{1}
+\end{wave}
+\caption{The second counter cycle.}
+\end{figure}
+
+As discussed previously, on each of the write-enable pulses the currently-selected address is written with its current value minus one. Now the output of the entire circuit is that newly-subtracted values; resulting in 2-1-0-3 (a rotating shift on the original contents in memory).
+
+The following two cycles of the counter follow this same pattern, resulting in the same sequence of events, but a further rotated output that is: 1-0-3-2 and then 0-3-2-1. The timing diagrams for these cycles are shown below.
+
+\begin{figure}[H]
+\hspace{-2cm}
+\begin{wave}[\textbf{Clock}]{9}{15}{33}
+\nextwave{Reset} \bit{0}{16}
+\nextwave{Counter[3:0]} \known{\tiny{0b0000}}{1} \known{\tiny{0b0001}}{1} \known{\tiny{0b0010}}{1} \known{\tiny{0b0011}}{1} \known{\tiny{0b0100}}{1} \known{\tiny{0b0101}}{1} \known{\tiny{0b0110}}{1} \known{\tiny{0b0111}}{1} \known{\tiny{0b1000}}{1} \known{\tiny{0b1001}}{1} \known{\tiny{0b1010}}{1} \known{\tiny{0b1011}}{1} \known{\tiny{0b1100}}{1} \known{\tiny{0b1101}}{1} \known{\tiny{0b1110}}{1} \known{\tiny{0b1111}}{1}
+\nextwave{Write Enable} \bit{0}{9} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1}
+\nextwave{Address} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2}
+\nextwave{SPO} \known{\tiny{3}}{0.3} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{1.7}
+\nextwave{Data In} \known{\tiny{0b11}}{1} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{1} 
+\nextwave{Data Out$_2$} \known{\tiny{0b11}}{1}  \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{1}
+\nextwave{\textbf{Data Out$_{10}$}} \known{\tiny{3}}{1} \known{\tiny{1}}{2} \known{\tiny{0}}{2} \known{\tiny{3}}{2} \known{\tiny{2}}{2}\known{\tiny{1}}{2} \known{\tiny{0}}{2} \known{\tiny{3}}{2} \known{\tiny{2}}{1}
+\end{wave}
+\caption{The third counter cycle.}
+\end{figure}
+
+\begin{figure}[H]
+\hspace{-2cm}
+\begin{wave}[\textbf{Clock}]{9}{15}{49}
+\nextwave{Reset} \bit{0}{16}
+\nextwave{Counter[3:0]} \known{\tiny{0b0000}}{1} \known{\tiny{0b0001}}{1} \known{\tiny{0b0010}}{1} \known{\tiny{0b0011}}{1} \known{\tiny{0b0100}}{1} \known{\tiny{0b0101}}{1} \known{\tiny{0b0110}}{1} \known{\tiny{0b0111}}{1} \known{\tiny{0b1000}}{1} \known{\tiny{0b1001}}{1} \known{\tiny{0b1010}}{1} \known{\tiny{0b1011}}{1} \known{\tiny{0b1100}}{1} \known{\tiny{0b1101}}{1} \known{\tiny{0b1110}}{1} \known{\tiny{0b1111}}{1}
+\nextwave{Write Enable} \bit{0}{9} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1} \bit{0}{1} \bit{1}{1}
+\nextwave{Address} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b11}}{2}
+\nextwave{SPO} \known{\tiny{0}}{0.3} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{1.7}
+\nextwave{Data In} \known{\tiny{0b11}}{1} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{1} 
+\nextwave{Data Out$_2$} \known{\tiny{0b10}}{1}  \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{2} \known{\tiny{0b00}}{2} \known{\tiny{0b11}}{2} \known{\tiny{0b10}}{2} \known{\tiny{0b01}}{1}
+\nextwave{\textbf{Data Out$_{10}$}} \known{\tiny{2}}{1} \known{\tiny{0}}{2} \known{\tiny{3}}{2} \known{\tiny{2}}{2} \known{\tiny{1}}{2}\known{\tiny{0}}{2} \known{\tiny{3}}{2} \known{\tiny{2}}{2} \known{\tiny{1}}{1}
+\end{wave}
+\caption{The fourth counter cycle.}
+\end{figure}
+
+\section{Summary}
+In summary, the output of the circuit is as follows:
 
 \begin{center}
-\begin{wave}[\textbf{Clock}]{17}{9}
-	\nextwave{DIN[0:8]} \unknown[x]{1.7} \known{6}{0.6} \unknown[x]{0.4} \known{4}{0.6} \unknown[x]{6.7}
-	\nextwave{RESET} \bit{0}{10}
-	\nextwave{LOAD} \bit{0}{0.7} \bit{1}{0.6} \bit{0}{10-0.7-0.6}
-	\nextwave{RESULT} \unknown[x]{2} \known{6}{3} \known{2}{5}
-	\nextwave{DONE} \bit{0}{8.3} \bit{1}{1} \bit{0}{0.7}
-	\nextwave{STATE} \known{\tiny{Idle}}{1.3} \known{\tiny{Load X}}{1} \known{\tiny{Load Y}}{1} \known{\tiny{Wait}}{1} \known{\tiny{Up. X}}{1} \known{\tiny{Wait}}{1} \known{\tiny{Up. Y}}{1} \known{\tiny{Wait}}{1} \known{\tiny{Idle}}{1.7}
-	\nextwave{XSEL} \bit{0}{1.3} \bit{1}{1} \bit{0}{7.7}
-	\nextwave{XLOAD} \bit{0}{1.3} \bit{1}{1} \bit{0}{2} \bit{1}{1} \bit{0}{4.7}
-	\nextwave{YSEL} \bit{0}{2.3} \bit{1}{1} \bit{0}{6.7}
-	\nextwave{YLOAD} \bit{0}{2.3} \bit{1}{1} \bit{0}{3} \bit{1}{1} \bit{0}{2.7}
-	\nextwave{SUB\_SEL} \bit{0}{6.3} \bit{1}{1} \bit{0}{2.7}
-	\nextwave{X\_EQ\_Y} \unknownbit{3} \bit{0}{4} \bit{1}{3}
-	\nextwave{X\_GT\_Y} \unknownbit{3} \bit{1}{2} \bit{0}{5}
-	\nextwave{X} \unknown[x]{2} \known{6}{3} \known{2}{5}
-	\nextwave{Y} \unknown[x]{3} \known{4}{4} \known{2}{3}
-	\nextwave{DIFF} \unknown[x]{3} \known{2}{2} \unknown[x]{1.3} \known{2}{0.7} \known{0}{3}
-\end{wave}
+\begin{tabular}{cccc|lll}
+\multicolumn{4}{c}{Outputs} & \multicolumn{3}{c}{Continued Sequence} \\
+\hline
+\textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} & - & - & - \\
+\textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} & - & - & - \\
+\hline
+2 & 1 & 0 & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} \\
+2 & 1 & 0 & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} \\
+\hline
+1 & 0 & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} & - \\
+1 & 0 & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} & - \\
+\hline
+0 & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} & - & -\\
+0 & \textbf{3} & \textbf{2} & \textbf{1} & \textbf{0} & - & -\\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+\end{tabular}
 \end{center}
+
+After these four cycles, the sequence is complete and restarts from the beginning.
 
 \end{document}
