@@ -18,3 +18,7 @@ Statistical Formatting/data.csv
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 University of Idaho/MATH 404/Lectures/*
+University of Idaho/MATH 404/mnist_X_train.npy
+University of Idaho/MATH 404/mnist_X_val.npy
+University of Idaho/MATH 404/mnist_y_train.npy
+University of Idaho/MATH 404/mnist_y_val.npy
