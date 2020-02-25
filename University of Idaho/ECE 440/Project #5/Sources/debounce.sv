@@ -1,9 +1,7 @@
 `timescale 1ns / 1ps
 
 module debounce(
-	input logic clock,
-	input logic reset_button,
-	input logic load_button,
+	input logic clock, reset_button, load_button
 	output logic reset_debounce, load_debounce
 );
 
