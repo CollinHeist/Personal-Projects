@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-// Date        : Thu Feb 20 14:41:31 2020
+// Date        : Thu Feb 20 14:41:27 2020
 // Host        : ece-bel215-12 running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub {U:/ECE
-//               440/Project_5/Project_5.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_stub.v}
+// Command     : write_verilog -force -mode synth_stub -rename_top blk_mem_gen_0 -prefix
+//               blk_mem_gen_0_ blk_mem_gen_0_stub.v
 // Design      : blk_mem_gen_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z010clg400-1

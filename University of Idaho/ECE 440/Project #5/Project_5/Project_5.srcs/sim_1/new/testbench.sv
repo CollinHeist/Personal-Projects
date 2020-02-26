@@ -7,10 +7,8 @@ parameter CLK_PRD = 100;
 parameter HOLD_TIME = (CLK_PRD * 0.3);
 parameter MAX_SIM_TIME = (200 * CLK_PRD);
 
-// Internal logic signals
-logic clock, reset, done;
-
 // Instantiate the GCD core as a UUT
+logic clock, reset, finished, mosi, slave_select, spi_clock;
 memory_reader dut(.*);
 
 // Prevent simulating longer than MAX_SIM_TIME
@@ -20,7 +18,7 @@ initial #(MAX_SIM_TIME) $finish;
 initial begin
 	clock <= 0;
 	forever #(CLK_PRD / 2) clock = ~clock;
-end 
+end
 
 // Main Simulation
 initial begin
@@ -33,11 +31,11 @@ initial begin
 	// Stimulate the dut
 	forever begin
 		@(posedge clock);
-		if (done)
-			$finish
+		// Results should be: 9, 18, 3
+		if (finished) $finish;
 	end
 
 	$finish;
 end
 
-endmodule
+endmodule : testbench
