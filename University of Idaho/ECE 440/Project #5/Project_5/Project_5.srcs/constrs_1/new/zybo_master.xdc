@@ -307,20 +307,20 @@ set_property IOSTANDARD LVCMOS33 [get_ports {reset_button}]
 ### Pmod Header JE   -----------------------------------------------------
 
 ##IO_L4P_T0_34
-#set_property PACKAGE_PIN V12 [get_ports {je[0]}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {je[0]}]
-
-##IO_L18N_T2_34
-set_property PACKAGE_PIN W16 [get_ports {slave_select}]
+set_property PACKAGE_PIN V12 [get_ports {slave_select}]
 set_property IOSTANDARD LVCMOS33 [get_ports {slave_select}]
 
-##IO_25_35
-set_property PACKAGE_PIN J15 [get_ports {spi_clock}]
+##IO_L18N_T2_34
+set_property PACKAGE_PIN W16 [get_ports {spi_clock}]
 set_property IOSTANDARD LVCMOS33 [get_ports {spi_clock}]
 
-##IO_L19P_T3_35
-set_property PACKAGE_PIN H15 [get_ports {mosi}]
+##IO_25_35
+set_property PACKAGE_PIN J15 [get_ports {mosi}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mosi}]
+
+##IO_L19P_T3_35
+#set_property PACKAGE_PIN H15 [get_ports {je[3]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {je[3]}]
 
 ##IO_L3N_T0_DQS_34
 #set_property PACKAGE_PIN V13 [get_ports {je[4]}]

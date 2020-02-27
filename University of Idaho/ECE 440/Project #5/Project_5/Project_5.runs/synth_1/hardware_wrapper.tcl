@@ -3,6 +3,7 @@
 # 
 
 set_param general.maxThreads 8
+set_param xicom.use_bs_reader 1
 set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {HDL 9-1061} -limit 100000
 set_msg_config -id {HDL 9-1654} -limit 100000
@@ -26,8 +27,8 @@ read_verilog -library xil_defaultlib -sv {
   {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/fsm.sv}
   {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/dp.sv}
   {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/gcd_core.sv}
-  {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv}
   {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/gcd_calculator.sv}
+  {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv}
   {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/debounce.sv}
   {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv}
   {U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/hardware_wrapper.sv}

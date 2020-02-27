@@ -2,8 +2,8 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Tue Feb 25 18:10:02 2020
-# Process ID: 2716
+# Start of session at: Wed Feb 26 13:13:38 2020
+# Process ID: 15996
 # Current directory: U:/ECE 440/Project_5/Project_5.runs/synth_1
 # Command line: vivado.exe -log hardware_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source hardware_wrapper.tcl
 # Log file: U:/ECE 440/Project_5/Project_5.runs/synth_1/hardware_wrapper.vds
@@ -16,16 +16,16 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 1824 
+INFO: Helper process launched with PID 8684 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:12 . Memory (MB): peak = 327.129 ; gain = 115.711
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:12 . Memory (MB): peak = 326.363 ; gain = 115.324
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'hardware_wrapper' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/hardware_wrapper.sv:3]
 INFO: [Synth 8-638] synthesizing module 'debounce' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/debounce.sv:3]
 INFO: [Synth 8-256] done synthesizing module 'debounce' (1#1) [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/debounce.sv:3]
-INFO: [Synth 8-638] synthesizing module 'memory_reader' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:7]
-INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_0' [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-2716-ece-bel215-02/realtime/blk_mem_gen_0_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'blk_mem_gen_0' (2#1) [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-2716-ece-bel215-02/realtime/blk_mem_gen_0_stub.v:6]
+INFO: [Synth 8-638] synthesizing module 'memory_reader' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:3]
+INFO: [Synth 8-638] synthesizing module 'blk_mem_gen_0' [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-15996-ece-bel215-02/realtime/blk_mem_gen_0_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'blk_mem_gen_0' (2#1) [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-15996-ece-bel215-02/realtime/blk_mem_gen_0_stub.v:6]
 INFO: [Synth 8-638] synthesizing module 'gcd_calculator' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/gcd_calculator.sv:6]
 INFO: [Synth 8-638] synthesizing module 'gcd_core' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/gcd_core.sv:3]
 INFO: [Synth 8-638] synthesizing module 'dp' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/dp.sv:3]
@@ -39,18 +39,15 @@ INFO: [Synth 8-155] case statement is not full and has no default [U:/ECE 440/Pr
 INFO: [Synth 8-155] case statement is not full and has no default [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/gcd_calculator.sv:47]
 INFO: [Synth 8-256] done synthesizing module 'gcd_calculator' (6#1) [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/gcd_calculator.sv:6]
 INFO: [Synth 8-638] synthesizing module 'spi' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv:3]
-	Parameter clock_scale bound to: 2 - type: integer 
-	Parameter counter_bits bound to: 1 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv:76]
+	Parameter clock_scale bound to: 626 - type: integer 
+	Parameter counter_bits bound to: 10 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'spi' (7#1) [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv:3]
-INFO: [Synth 8-155] case statement is not full and has no default [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:50]
-INFO: [Synth 8-155] case statement is not full and has no default [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:83]
-INFO: [Synth 8-256] done synthesizing module 'memory_reader' (8#1) [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:7]
-WARNING: [Synth 8-3848] Net miso in module/entity hardware_wrapper does not have driver. [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/hardware_wrapper.sv:12]
+INFO: [Synth 8-155] case statement is not full and has no default [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:47]
+INFO: [Synth 8-155] case statement is not full and has no default [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:82]
+INFO: [Synth 8-256] done synthesizing module 'memory_reader' (8#1) [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:3]
 INFO: [Synth 8-256] done synthesizing module 'hardware_wrapper' (9#1) [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/hardware_wrapper.sv:3]
-WARNING: [Synth 8-3331] design memory_reader has unconnected port miso
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 364.426 ; gain = 153.008
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 364.645 ; gain = 153.605
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -60,16 +57,16 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:14 . Memory (MB): peak = 364.426 ; gain = 153.008
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:14 . Memory (MB): peak = 364.645 ; gain = 153.605
 ---------------------------------------------------------------------------------
-WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'blk_mem_gen_0' instantiated as 'memory_reader_instance/block_memory' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:15]
+WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'blk_mem_gen_0' instantiated as 'memory_reader_instance/block_memory' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/memory_reader.sv:13]
 INFO: [Device 21-403] Loading part xc7z010clg400-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-2716-ece-bel215-02/dcp/blk_mem_gen_0_in_context.xdc] for cell 'memory_reader_instance/block_memory'
-Finished Parsing XDC File [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-2716-ece-bel215-02/dcp/blk_mem_gen_0_in_context.xdc] for cell 'memory_reader_instance/block_memory'
+Parsing XDC File [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-15996-ece-bel215-02/dcp/blk_mem_gen_0_in_context.xdc] for cell 'memory_reader_instance/block_memory'
+Finished Parsing XDC File [U:/ECE 440/Project_5/Project_5.runs/synth_1/.Xil/Vivado-15996-ece-bel215-02/dcp/blk_mem_gen_0_in_context.xdc] for cell 'memory_reader_instance/block_memory'
 Parsing XDC File [U:/ECE 440/Project_5/Project_5.srcs/constrs_1/new/zybo_master.xdc]
 Finished Parsing XDC File [U:/ECE 440/Project_5/Project_5.srcs/constrs_1/new/zybo_master.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [U:/ECE 440/Project_5/Project_5.srcs/constrs_1/new/zybo_master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/hardware_wrapper_propImpl.xdc].
@@ -79,23 +76,23 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 666.383 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 666.965 ; gain = 0.000
 WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'memory_reader_instance/block_memory' at clock pin 'clka' is different from the actual clock period '8.000', this can lead to different synthesis results.
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:25 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:25 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:25 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:25 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'fsm'
 INFO: [Synth 8-5544] ROM "data_is_y" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
@@ -107,9 +104,10 @@ INFO: [Synth 8-5544] ROM "state0" won't be mapped to Block RAM because address s
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'gcd_calculator'
 INFO: [Synth 8-5544] ROM "state" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "load" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "reset_fsm" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "state0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "done" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'memory_reader'
 INFO: [Synth 8-5544] ROM "load_y" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "state" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
@@ -146,7 +144,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'memory_reader'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:25 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -159,28 +157,32 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
+	   2 Input     10 Bit       Adders := 1     
 	   3 Input      8 Bit       Adders := 2     
 	   2 Input      5 Bit       Adders := 1     
-	   2 Input      3 Bit       Adders := 1     
-	   2 Input      1 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
 +---Registers : 
+	               10 Bit    Registers := 1     
 	                8 Bit    Registers := 4     
 	                5 Bit    Registers := 1     
-	                3 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 	                2 Bit    Registers := 2     
-	                1 Bit    Registers := 2     
 +---Muxes : 
+	   4 Input     10 Bit        Muxes := 1     
 	   2 Input      8 Bit        Muxes := 6     
 	   5 Input      8 Bit        Muxes := 2     
+	   2 Input      5 Bit        Muxes := 1     
+	   5 Input      5 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
 	   9 Input      3 Bit        Muxes := 1     
 	   8 Input      3 Bit        Muxes := 1     
-	   4 Input      3 Bit        Muxes := 1     
 	  10 Input      3 Bit        Muxes := 1     
-	   6 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   3 Input      2 Bit        Muxes := 1     
 	   5 Input      1 Bit        Muxes := 18    
-	   2 Input      1 Bit        Muxes := 3     
-	   4 Input      1 Bit        Muxes := 2     
-	   6 Input      1 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 5     
+	   2 Input      1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -215,18 +217,20 @@ Detailed RTL Component Info :
 Module spi 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      3 Bit       Adders := 1     
-	   2 Input      1 Bit       Adders := 1     
+	   2 Input     10 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
 +---Registers : 
-	                3 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 2     
 +---Muxes : 
-	   4 Input      3 Bit        Muxes := 1     
-	   6 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 3     
-	   4 Input      1 Bit        Muxes := 2     
-	   6 Input      1 Bit        Muxes := 1     
+	   4 Input     10 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   3 Input      2 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 5     
+	   2 Input      1 Bit        Muxes := 2     
 Module memory_reader 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -237,6 +241,8 @@ Detailed RTL Component Info :
 +---Muxes : 
 	   2 Input      8 Bit        Muxes := 3     
 	   5 Input      8 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   5 Input      5 Bit        Muxes := 1     
 	  10 Input      3 Bit        Muxes := 1     
 	   5 Input      1 Bit        Muxes := 8     
 ---------------------------------------------------------------------------------
@@ -254,18 +260,9 @@ Finished Part Resource Summary
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-3332] Sequential element (memory_reader_instance/spi_instance/do_reset_reg) is unused and will be removed from module hardware_wrapper.
-WARNING: [Synth 8-3332] Sequential element (memory_reader_instance/spi_instance/do_reset_reg__0) is unused and will be removed from module hardware_wrapper.
-CRITICAL WARNING: [Synth 8-3352] multi-driven net Q with 1st driver pin 'memory_reader_instance/spi_instance/do_reset_reg__0/Q' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv:22]
-CRITICAL WARNING: [Synth 8-3352] multi-driven net Q with 2nd driver pin 'VCC' [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv:22]
-CRITICAL WARNING: [Synth 8-5559] multi-driven net Q is connected to constant driver, other driver is ignored [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/spi.sv:22]
-WARNING: [Synth 8-3332] Sequential element (memory_reader_instance/spi_instance/address_reg[2]) is unused and will be removed from module hardware_wrapper.
-WARNING: [Synth 8-3332] Sequential element (memory_reader_instance/spi_instance/address_reg[1]) is unused and will be removed from module hardware_wrapper.
-WARNING: [Synth 8-3332] Sequential element (memory_reader_instance/spi_instance/address_reg[0]) is unused and will be removed from module hardware_wrapper.
-WARNING: [Synth 8-3332] Sequential element (memory_reader_instance/spi_instance/state_reg[1]) is unused and will be removed from module hardware_wrapper.
-WARNING: [Synth 8-3332] Sequential element (memory_reader_instance/spi_instance/state_reg[0]) is unused and will be removed from module hardware_wrapper.
+INFO: [Synth 8-5546] ROM "memory_reader_instance/spi_instance/state" won't be mapped to RAM because it is too sparse
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:27 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -280,59 +277,10 @@ Start Timing Optimization
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:35 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:24 ; elapsed = 00:00:36 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
-Found timing loop:
-     0: i_3/\memory_reader_instance/gcd_calculator_instance/gcd_core_instance/fsm/p_0_in /O (INV)
-     1: i_3/\memory_reader_instance/gcd_calculator_instance/gcd_core_instance/fsm/p_0_in /I (INV)
-     2: i_3/\memory_reader_instance/gcd_calculator_instance//i___0 /O (GATE_2_8_AND)
-     3: i_3/\memory_reader_instance/gcd_calculator_instance//i___0 /I1 (GATE_2_8_AND)
-      : i_3/\memory_reader_instance/gcd_calculator_instance/reset_fsm 
-      : i_1/out3
-      : i_1/i_0/out3
-     4: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_8 /O (GATE_2_1_NOR)
-     5: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_8 /I1 (GATE_2_1_NOR)
-     6: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_6 /O (GATE_2_14_OR)
-     7: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_6 /I1 (GATE_2_14_OR)
-     8: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_9 /O (INV)
-     9: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_9 /I (INV)
-      : i_1/i_0/in6
-      : i_1/in6
-      : i_3/\memory_reader_instance/compute8_out 
-    10: i_3/\memory_reader_instance//i___1 /O (GATE_2_8_AND)
-    11: i_3/\memory_reader_instance//i___1 /I1 (GATE_2_8_AND)
-      : i_3/\memory_reader_instance/compute 
-      : i_2/out5
-      : i_2/i_0/out5
-    12: i_2/i_0/\memory_reader_instance/i_16 /O (GATE_2_1_NOR)
-    13: i_2/i_0/\memory_reader_instance/i_16 /I0 (GATE_2_1_NOR)
-    14: i_2/i_0/\memory_reader_instance/i_15 /O (GATE_2_7_NAND)
-    15: i_2/i_0/\memory_reader_instance/i_15 /I1 (GATE_2_7_NAND)
-      : i_2/i_0/in11
-      : i_2/in11
-      : i_3/O16
-    16: i_3/\memory_reader_instance/ /O (INV)
-    17: i_3/\memory_reader_instance/ /I (INV)
-    18: i_3/\memory_reader_instance/gcd_calculator_instance//i_ /O (GATE_2_8_AND)
-    19: i_3/\memory_reader_instance/gcd_calculator_instance//i_ /I1 (GATE_2_8_AND)
-      : i_3/I9
-      : i_1/out4
-      : i_1/i_0/out4
-    20: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_12 /O (GATE_2_1_NOR)
-    21: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_12 /I1 (GATE_2_1_NOR)
-    22: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_10 /O (GATE_2_7_NAND)
-    23: i_1/i_0/\memory_reader_instance/gcd_calculator_instance/i_10 /I1 (GATE_2_7_NAND)
-      : i_1/i_0/in7
-      : i_1/in7
-      : i_3/\memory_reader_instance/gcd_calculator_instance/done 
-    24: i_3/\memory_reader_instance/gcd_calculator_instance/gcd_core_instance/fsm//i___4 /O (GATE_2_8_AND)
-    25: i_3/\memory_reader_instance/gcd_calculator_instance/gcd_core_instance/fsm//i___4 /I0 (GATE_2_8_AND)
-    26: i_3/\memory_reader_instance/gcd_calculator_instance/gcd_core_instance/fsm/p_0_in /O (INV)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/dp.sv:19]
-Inferred a: "set_disable_timing -from I -to O i_3/\memory_reader_instance/gcd_calculator_instance/gcd_core_instance/fsm/p_0_in "
-INFO: [Synth 8-620] skipping inversion-propagation across instance 'i_3/\memory_reader_instance/gcd_calculator_instance/gcd_core_instance/fsm/p_0_in ' with timing assertions on output pin 'O'
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:35 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Timing Optimization : Time (s): cpu = 00:00:24 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -343,16 +291,8 @@ Report RTL Partitions:
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
-Found timing loop:
-     0: i_58/O (LUT6)
-     1: i_58/I1 (LUT6)
-     2: \memory_reader_instance/gcd_calculator_instance//i___0 /O (LUT6)
-     3: \memory_reader_instance/gcd_calculator_instance//i___0 /I4 (LUT6)
-     4: i_58/O (LUT6)
-CRITICAL WARNING: [Synth 8-295] found timing loop. [U:/ECE 440/Project_5/Project_5.srcs/sources_1/new/hardware_wrapper.sv:3]
-Inferred a: "set_disable_timing -from I1 -to O i_58"
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:35 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Technology Mapping : Time (s): cpu = 00:00:24 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -376,7 +316,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -389,7 +329,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -401,25 +341,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:37 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -440,35 +380,38 @@ Report Cell Usage:
 |2     |BUFG          |     1|
 |3     |CARRY4        |     5|
 |4     |LUT1          |     1|
-|5     |LUT2          |    24|
-|6     |LUT3          |     4|
-|7     |LUT4          |    17|
-|8     |LUT5          |    10|
-|9     |LUT6          |    38|
-|10    |FDRE          |    50|
-|11    |IBUF          |     2|
-|12    |OBUF          |     3|
+|5     |LUT2          |    20|
+|6     |LUT3          |     6|
+|7     |LUT4          |    51|
+|8     |LUT5          |    30|
+|9     |LUT6          |    30|
+|10    |MUXF7         |     4|
+|11    |MUXF8         |     1|
+|12    |FDRE          |    61|
+|13    |FDSE          |     3|
+|14    |IBUF          |     2|
+|15    |OBUF          |     3|
 +------+--------------+------+
 
 Report Instance Areas: 
 +------+----------------------------+---------------+------+
 |      |Instance                    |Module         |Cells |
 +------+----------------------------+---------------+------+
-|1     |top                         |               |   163|
+|1     |top                         |               |   226|
 |2     |  debounce_instance         |debounce       |     2|
-|3     |  memory_reader_instance    |memory_reader  |   155|
-|4     |    gcd_calculator_instance |gcd_calculator |   106|
-|5     |      gcd_core_instance     |gcd_core       |   100|
-|6     |        datapath            |dp             |    59|
-|7     |        fsm                 |fsm            |    41|
-|8     |    spi_instance            |spi            |     4|
+|3     |  memory_reader_instance    |memory_reader  |   218|
+|4     |    gcd_calculator_instance |gcd_calculator |   114|
+|5     |      gcd_core_instance     |gcd_core       |   101|
+|6     |        datapath            |dp             |    53|
+|7     |        fsm                 |fsm            |    48|
+|8     |    spi_instance            |spi            |    51|
 +------+----------------------------+---------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:38 . Memory (MB): peak = 666.965 ; gain = 455.926
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 5 critical warnings and 7 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:13 ; elapsed = 00:00:18 . Memory (MB): peak = 666.383 ; gain = 111.121
-Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 666.383 ; gain = 454.965
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:20 . Memory (MB): peak = 666.965 ; gain = 112.133
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:38 . Memory (MB): peak = 666.965 ; gain = 455.926
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 7 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -478,11 +421,11 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-67 Infos, 11 Warnings, 5 Critical Warnings and 0 Errors encountered.
+67 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:21 ; elapsed = 00:00:28 . Memory (MB): peak = 666.383 ; gain = 418.043
+synth_design: Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 666.965 ; gain = 418.625
 INFO: [Common 17-600] The following parameters have non-default value.
 general.maxThreads
 INFO: [Common 17-1381] The checkpoint 'U:/ECE 440/Project_5/Project_5.runs/synth_1/hardware_wrapper.dcp' has been generated.
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 666.383 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Tue Feb 25 18:10:41 2020...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 666.965 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Wed Feb 26 13:14:19 2020...

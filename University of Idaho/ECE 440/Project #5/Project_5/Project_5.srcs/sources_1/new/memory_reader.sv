@@ -1,9 +1,5 @@
 `timescale 1ns / 1ps
 
-// This module implements reading from a block memory pairs of x and y values.
-// After each reading of x and y, the GCD is computed using the gcd_calculator
-// module, and then sent out over SPI, using the spi module. This is repeated 
-// until a zero is read in the memory block.
 module memory_reader(clock, reset, finished, mosi, slave_select, spi_clock);
 	input logic clock, reset;
 	output logic finished, mosi, slave_select, spi_clock;
@@ -23,25 +19,26 @@ blk_mem_gen_0 block_memory(
 	.douta(memory_out)
 );
 
-// Instantiate the GCD Calculating unit
+// Instantiate the GCD Calculation unit
 logic compute, gcd_ready;
 logic [7:0] data_x, data_y, gcd_result;
 gcd_calculator gcd_calculator_instance(.*);
 
-// Instantiate the SPI communication module
+// Instantiate the SPI Communications unit
 logic start, done;
 logic [7:0] data;
-spi #(2, 1) spi_instance(.*);
+spi #(626, 10) spi_instance(.*);	// 626x slower, requires 10-bits to count 
 
 // Internal signals
 logic latest_is_zero, load_x, load_y;
-assign latest_is_zero = (memory_out == 0);	// simple flag to detect end of reads
+assign latest_is_zero = (memory_out == 0);
 
-// Finite State Machine Implementation
+// FSM States
 typedef enum logic [3:0] {reset_state, read_x, read_y, await_gcd, send_gcd} statetype;
 statetype state;
-
-always_ff @(posedge clock) begin
+ 
+// FSM Advancement Implementation
+always_ff @(posedge clock) begin : fsm_advancement
 	if (reset) begin
 		state <= reset_state;
 		address <= 0;
@@ -53,37 +50,37 @@ always_ff @(posedge clock) begin
 				address <= address + 1;
 				end
 			read_x: begin
-				if (~latest_is_zero) begin
+				if (latest_is_zero) begin
+					state <= reset_state;
+					address <= 0;
+					end
+				else begin
 					state <= read_y;
 					address <= address + 1;
 					end
-				else	// If the latest value was a zero, return to the reset state
-					state <= reset_state;
 				end
-			read_y: state <= await_gcd;
-			await_gcd: state <= (gcd_ready ? send_gcd : await_gcd);
+			read_y:		state <= await_gcd;
+			await_gcd:	state <= (gcd_ready ? send_gcd : await_gcd);
 			send_gcd: begin
 				if (~done)
 					state <= send_gcd;
-				else if (~latest_is_zero) begin
+				else if (latest_is_zero)
+					state <= reset_state;
+				else begin
 					state <= read_x;
 					address <= address + 1;
 					end
-				else
-					state <= reset_state;
 				end
 		endcase
 		end
-end
+end : fsm_advancement
 
-// FSM Output Implementation
-always_comb begin : fsm_output_comb
+// FSM Outputs
+always_comb begin : fsm_outputs
 	enable = 0; load_x = 0; load_y = 0; compute = 0; start = 0; finished = 0; data = 0;
-	if (~reset) begin : not_reset
+	if (~reset) begin
 		case (state)
-			reset_state: begin
-				enable = 1;
-				end
+			reset_state: enable = 1;
 			read_x: begin
 				if (latest_is_zero)
 					finished = 1;
@@ -92,9 +89,8 @@ always_comb begin : fsm_output_comb
 					load_x = 1;
 					end
 				end
-			read_y: begin
+			read_y:
 				load_y = 1;
-				end
 			await_gcd: begin
 				if (~gcd_ready)
 					compute = 1;
@@ -104,23 +100,19 @@ always_comb begin : fsm_output_comb
 					end
 				end
 			send_gcd: begin
-				if (~done) begin
-					start = 1;
+				if (~done)
 					data = gcd_result;
-					end
-				else if (~latest_is_zero) begin
+				else if (~latest_is_zero)
 					enable = 1;
-					start = 0;
-					end
 				else
 					finished = 1;
 				end
 		endcase
-	end : not_reset
-end : fsm_output_comb
+	end
+end : fsm_outputs
 
 // Syncronous loading of the data_x, and data_y register
-always_ff @(posedge clock) begin : register_sync
+always_ff @(posedge clock) begin
 	if (reset) begin
 		data_x <= 0;
 		data_y <= 0;
@@ -129,6 +121,6 @@ always_ff @(posedge clock) begin : register_sync
 		if (load_x)		data_x <= memory_out;
 		if (load_y)		data_y <= memory_out;
 		end
-end : register_sync
+end
 
 endmodule : memory_reader
