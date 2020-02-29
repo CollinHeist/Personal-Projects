@@ -57,8 +57,8 @@ always_ff @(posedge clock) begin : fsm_advancement
 				end
 			read_x:
 				unique case (latest_is_zero)
-					1'b0: begin state <= reset_state; address <= 0;			end
-					1'b1: begin state <= read_y; address <= address + 1;	end
+					1'b1: begin state <= reset_state; address <= 0;			end
+					1'b0: begin state <= read_y; address <= address + 1;	end
 				endcase
 			read_y:		state <= await_gcd;
 			await_gcd:	state <= (gcd_ready ? send_gcd : await_gcd);
