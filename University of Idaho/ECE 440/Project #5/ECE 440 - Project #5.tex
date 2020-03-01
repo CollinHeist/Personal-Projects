@@ -282,6 +282,21 @@ The post-implementation timing simulation was done with the correct (200kHz) SPI
 \label{fig:post-impl-sim}
 \end{figure}
 
+\subsection{WaveForms}
+To verify the output of my SPI communications, I hooked up the appropriate pins on the Zybo board to the Analog Discovery, and these are the results:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\paperheight, keepaspectratio=true]{Sources/waveforms-protocol.PNG}
+\caption{WaveForms \textit{Protocol} view of the SPI output.}
+\label{fig:waveforms-protocol}
+\includegraphics[width=0.85\paperheight, keepaspectratio=true]{Sources/waveforms-signals.PNG}
+\caption{WaveForms \textit{Signal} view of the SPI output.}
+\label{fig:waveforms-signal}
+\end{figure}
+
+In both views you can see the same data is transmitted in all instances (which is what I expected). One thing to note is that the Protocol window shows zeros between data transmissions because I believe the MISO is transmitting zeros in response -- so these can be ignored.
+
 \end{landscape}
 
 \section{Source Code}
