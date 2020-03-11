@@ -1,0 +1,802 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+\author{Collin Heist}
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Math 428 - Final Exam}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{math-428---final-exam}{%
+\section{Math 428 - Final Exam}\label{math-428---final-exam}}
+
+\hypertarget{problem-1}{%
+\subsection{Problem 1}\label{problem-1}}
+
+\hypertarget{part-a}{%
+\subsubsection{Part A}\label{part-a}}
+
+Evaluate \[\int_{0}^{4}x(1-x)e^{-x}dx\] with \(n\) applications of the
+trapezoidal rule. Use \(n=5, 10, 20\).
+
+\hypertarget{graphing-function-setup}{%
+\paragraph{Graphing function \& setup}\label{graphing-function-setup}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{patches}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{purple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Generic Function to create a plot}
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{xLabel}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZhy{}Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{yLabel}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y\PYZhy{}Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                        \PY{n}{title}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{num\PYZus{}rows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{n}{size}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{)}
+            \PY{k}{for} \PY{n}{c}\PY{p}{,} \PY{p}{(}\PY{n}{x\PYZus{}vals}\PY{p}{,} \PY{n}{y\PYZus{}vals}\PY{p}{,} \PY{n}{x\PYZus{}labels}\PY{p}{,} \PY{n}{y\PYZus{}labels}\PY{p}{,} \PY{n}{titles}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}
+                \PY{n+nb}{zip}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{xLabel}\PY{p}{,} \PY{n}{yLabel}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{c2}\PY{p}{,} \PY{p}{(}\PY{n}{y\PYZus{}v}\PY{p}{,} \PY{n}{t}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{y\PYZus{}vals}\PY{p}{,} \PY{n}{titles}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{num\PYZus{}rows}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{c} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{} Add a plot to the subplot, use transparency so they can both be seen}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}vals}\PY{p}{,} \PY{n}{y\PYZus{}v}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{t}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{colors}\PY{p}{[}\PY{n}{c2}\PY{o}{+}\PY{n}{c}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.70}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y\PYZus{}labels}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x\PYZus{}labels}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{trapezoidal-approximation-implementation}{%
+\paragraph{Trapezoidal approximation
+implementation}\label{trapezoidal-approximation-implementation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{trapezoid\PYZus{}rule}\PY{p}{(}\PY{n}{f\PYZus{}x}\PY{p}{,} \PY{n}{x\PYZus{}start}\PY{p}{,} \PY{n}{x\PYZus{}end}\PY{p}{,} \PY{n}{num\PYZus{}divs}\PY{p}{)}\PY{p}{:}
+            \PY{n}{integral} \PY{o}{=} \PY{n}{f\PYZus{}x}\PY{p}{(}\PY{n}{x\PYZus{}start}\PY{p}{)} \PY{o}{+} \PY{n}{f\PYZus{}x}\PY{p}{(}\PY{n}{x\PYZus{}end}\PY{p}{)}
+            \PY{n}{dx} \PY{o}{=} \PY{p}{(}\PY{n}{x\PYZus{}end} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}start}\PY{p}{)} \PY{o}{/} \PY{n}{num\PYZus{}divs}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}divs}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x\PYZus{}val} \PY{o}{=} \PY{n}{x\PYZus{}start} \PY{o}{+} \PY{n}{i} \PY{o}{*} \PY{n}{dx}
+                \PY{n}{integral} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{f\PYZus{}x}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{)}
+                
+            \PY{k}{return} \PY{p}{(}\PY{n}{integral} \PY{o}{*} \PY{p}{(}\PY{n}{x\PYZus{}end} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}start}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{num\PYZus{}divs}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{function-defintion-of-the-integral}{%
+\paragraph{Function defintion of the
+integral}\label{function-defintion-of-the-integral}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{f\PYZus{}x}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{evaluate-with-the-three-different-number-of-steps}{%
+\paragraph{Evaluate with the three different number of
+steps}\label{evaluate-with-the-three-different-number-of-steps}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{n5}  \PY{o}{=} \PY{n}{trapezoid\PYZus{}rule}\PY{p}{(}\PY{n}{f\PYZus{}x}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{n10} \PY{o}{=} \PY{n}{trapezoid\PYZus{}rule}\PY{p}{(}\PY{n}{f\PYZus{}x}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{n20} \PY{o}{=} \PY{n}{trapezoid\PYZus{}rule}\PY{p}{(}\PY{n}{f\PYZus{}x}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n = 5:  }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{n = 10: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{n = 20: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{n5}\PY{p}{,} \PY{n}{n10}\PY{p}{,} \PY{n}{n20}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+n = 5:  -0.6589
+n = 10: -0.6272
+n = 20: -0.6184
+
+    \end{Verbatim}
+
+    \hypertarget{part-b}{%
+\subsubsection{Part B}\label{part-b}}
+
+\[\int_{0}^{4}x(1-x)e^{-x}dx=\int_{0}^{4}xe^{-x}-x^2e^{-x}dx\]
+Performing integration by parts on the second part of the integrand:
+\[u_1=x^2, dv_1=e^{-x}dx\] \[du_1=2xdx, v_1=-e^{-x}\]
+\[\int_{0}^{4}xe^{-x}-x^2e^{-x}dx=\int_{0}^{4}xe^{-x}dx-((-x^2e^{-x})|_0^4-\int_{0}^{4}-2xe^{-x}dx)\]
+\[\int_{0}^{4}xe^{-x}dx-((-x^2e^{-x})|_0^4-\int_{0}^{4}-2xe^{-x}dx)=\int_{0}^{4}xe^{-x}dx+(x^2e^{-x})|_0^4-\int_{0}^{4}2xe^{-x}dx\]
+\[\int_{0}^{4}xe^{-x}dx+(x^2e^{-x})|_0^4-\int_{0}^{4}2xe^{-x}dx=(x^2e^{-x})|_0^4-\int_{0}^{4}xe^{-x}dx\]
+Performing a \emph{second} integration by parts:
+\[u_2=x, dv_2=e^{-x}dx\] \[du_2=dx, v_2=-e^{-x}\]
+\[(x^2e^{-x})|_0^4-\int_{0}^{4}xe^{-x}dx=(x^2e^{-x})|_0^4-((-xe^{-x})|_0^4-\int_{0}^{4}-e^{-x}dx)\]
+\[(x^2e^{-x})|_0^4-((-xe^{-x})|_0^4-\int_{0}^{4}-e^{-x}dx)=(x^2e^{-x})|_0^4+(xe^{-x})|_0^4+(e^{-x})|_0^4\]
+Evaluating the bounds of each of these expressions:
+\[(x^2e^{-x})|_0^4+(xe^{-x})|_0^4+(e^{-x})|_0^4=4^2e^{-4}+4e^{-4}+e^{-4}-e^0\]
+\[4^2e^{-4}+4e^{-4}+e^{-4}-e^0=21e^{-4}-1\] This can be directly
+computed as\ldots{} \[\int_{0}^{4}x(1-x)e^{-x}dx\approx -0.61537158...\]
+This value can be compared with the trapezoidal approximation of the
+integral with \(n=20\) to obtain the approximate truncation error.
+
+\hypertarget{computation-of-the-local-truncation-error}{%
+\paragraph{Computation of the local truncation
+error}\label{computation-of-the-local-truncation-error}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The estimated local truncation error is }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}
+               \PY{p}{(}\PY{l+m+mi}{21}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{n20}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The estimated local truncation error is 0.0030
+
+    \end{Verbatim}
+
+    \hypertarget{part-c}{%
+\subsubsection{Part C}\label{part-c}}
+
+\hypertarget{finding-a-more-accurate-approximation-of-the-integral-with-richardson-extrapolation}{%
+\paragraph{Finding a more accurate approximation of the integral with
+Richardson
+Extrapolation}\label{finding-a-more-accurate-approximation-of-the-integral-with-richardson-extrapolation}}
+
+Richardson extrapolation is defined as the following:
+\[I\approx \frac{4}{3}I(h_2)-\frac{1}{3}I(h_1)\] This can be used with
+the results of the integration from \textbf{Part A} specifically with
+\(n=10\), and \(n=20\).
+\[I\approx \frac{4}{3}(-0.6184)-\frac{1}{3}(-0.6272)\]
+\[I\approx -0.8245+0.2061\approx -0.6155\] This value is (clearly) more
+accurate than the either of the original approximations. With a local
+truncation error of\ldots{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{rich\PYZus{}extrap} \PY{o}{=} \PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{3} \PY{o}{*} \PY{n}{n20} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3} \PY{o}{*} \PY{n}{n10}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The new estimated local truncation error is }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}
+               \PY{p}{(}\PY{l+m+mi}{21}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{rich\PYZus{}extrap}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The estimated local truncation error is 0.0001
+
+    \end{Verbatim}
+
+    \hypertarget{problem-2}{%
+\subsection{Problem 2}\label{problem-2}}
+
+\hypertarget{part-a}{%
+\subsubsection{Part A}\label{part-a}}
+
+Solve the following ODE between the bounds of \(0\leq x\leq 6\) with
+\(y(0)=1\). \[\frac{dy}{dx}=x^2-y^2\]
+
+\hypertarget{function-implementation-of-the-euler-method-of-approximating-odes}{%
+\paragraph{Function implementation of the Euler Method of approximating
+ODE's}\label{function-implementation-of-the-euler-method-of-approximating-odes}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{euler\PYZus{}ode}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{initial}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{initial}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{initial}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{h}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x\PYZus{}n}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{k1} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n}\PY{p}{,} \PY{n}{y\PYZus{}n}\PY{p}{)}
+                \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{i} \PY{o}{*} \PY{n}{h}\PY{p}{)}
+                \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}n} \PY{o}{+} \PY{n}{k1}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{x}\PY{p}{,} \PY{n}{y}
+\end{Verbatim}
+
+    \hypertarget{function-implementation-of-the-ordinary-differential-equation}{%
+\paragraph{Function implementation of the ordinary differential
+equation}\label{function-implementation-of-the-ordinary-differential-equation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{y} \PY{o}{*} \PY{n}{y}
+\end{Verbatim}
+
+    \hypertarget{compute-the-euler-approximation-for-the-step-sizes-of-h0.4-and-h0.2-plot-the-results}{%
+\paragraph{\texorpdfstring{Compute the Euler approximation for the step
+sizes of \(h=0.4\) and \(h=0.2\), plot the
+results}{Compute the Euler approximation for the step sizes of h=0.4 and h=0.2, plot the results}}\label{compute-the-euler-approximation-for-the-step-sizes-of-h0.4-and-h0.2-plot-the-results}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{e\PYZus{}04\PYZus{}x}\PY{p}{,} \PY{n}{e\PYZus{}04\PYZus{}y} \PY{o}{=} \PY{n}{euler\PYZus{}ode}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{initial}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+        \PY{n}{e\PYZus{}02\PYZus{}x}\PY{p}{,} \PY{n}{e\PYZus{}02\PYZus{}y} \PY{o}{=} \PY{n}{euler\PYZus{}ode}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{initial}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{e\PYZus{}04\PYZus{}x}\PY{p}{,} \PY{n}{e\PYZus{}02\PYZus{}x}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{n}{e\PYZus{}04\PYZus{}y}\PY{p}{,} \PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{e\PYZus{}02\PYZus{}y}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}x\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}x\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}y(x)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}y(x)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Euler Approximation (\PYZdl{}h=0.4\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{,}
+                                           \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Euler Approximation (\PYZdl{}h=0.2\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{part-b}{%
+\subsubsection{Part B}\label{part-b}}
+
+As the first plot clearly demonstrates, the step size of
+\(h\approx 0.4\) is less numerically stable than the other step size.
+This can be explicitly proved by looking at the maximum step size:
+
+\[h_{max}=\frac{-2}{\frac{\partial f}{\partial y}}\]
+
+\[h_{max}=\frac{-2}{-2y}\]
+
+\[h_{max}=\frac{1}{y}\]
+
+Since we are using a fixed step size of \(0.4\), the y value at which
+this function becomes numerically unstable is computed as:
+
+\[0.4=\frac{1}{y}\]
+
+\[y=\frac{1}{0.4}=2.5\]
+
+This is in line with the observed euler approximation from \textbf{Part
+A}. At a y value above 2.5 (for this step size) the result is
+increasingly numerically unstable. The reason the effect of this
+instability is only prevalent at larger values of y is because the
+instability is more pronounced for larger values of y.
+
+\hypertarget{part-c}{%
+\subsubsection{Part C}\label{part-c}}
+
+\hypertarget{function-to-visualize-the-slope-field-of-the-given-differential-equation}{%
+\paragraph{Function to visualize the slope field of the given
+differential
+equation}\label{function-to-visualize-the-slope-field-of-the-given-differential-equation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{slope\PYZus{}field}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,} \PY{n}{spacing}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{sol}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{spacing}\PY{p}{)}
+             \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{y\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{n}{y\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{spacing}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Generate the slope field}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{y}\PY{p}{:}
+                     \PY{n}{slope} \PY{o}{=} \PY{n}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}
+                     \PY{n}{dx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{spacing}\PY{o}{/}\PY{l+m+mi}{100}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{n}{slope} \PY{o}{*} \PY{n}{slope}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{dy} \PY{o}{=} \PY{n}{dx} \PY{o}{*} \PY{n}{slope}
+                     \PY{n}{sub\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{n}{dx}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{n}{dx}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{sub\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{j}\PY{o}{\PYZhy{}}\PY{n}{dy}\PY{p}{,} \PY{n}{j}\PY{o}{+}\PY{n}{dy}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sub\PYZus{}x}\PY{p}{,} \PY{n}{sub\PYZus{}y}\PY{p}{,} \PY{n}{solid\PYZus{}capstyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{projecting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{solid\PYZus{}joinstyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bevel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Draw the solution to the provided differential equation}
+             \PY{k}{if} \PY{n}{sol}\PY{p}{:}
+                 \PY{n}{new\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{spacing}\PY{o}{*}\PY{l+m+mi}{10}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{new\PYZus{}x}\PY{p}{,} \PY{n}{sol}\PY{p}{(}\PY{n}{new\PYZus{}x}\PY{p}{)}\PY{p}{)}
+                     
+             \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{draw-the-slope-field}{%
+\paragraph{Draw the slope field}\label{draw-the-slope-field}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{slope\PYZus{}field}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{6.4}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{7.2}\PY{p}{]}\PY{p}{,} \PY{n}{spacing}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Visually, the previously obtained solutions from \textbf{Part A} fit
+very well in the above slope field. Should a line be mentally drawn
+starting at point (0, 1) and following the plotted slopes, then the
+solution is very clearly correct. It can also be seen that at larger y
+values, the `line' where the slopes converge to goes from relatively
+in-line slopes (diagonally starting at (1, 1) and intersecting (3,
+\textasciitilde{}2.8)) to very sharp slopes. This is in line with the
+observed numerical instability at these values.
+
+\hypertarget{problem-3}{%
+\subsection{Problem 3}\label{problem-3}}
+
+\[\frac{d}{dx}(Ky(x)\frac{dy}{dx})+N=0\] Where y is the water depth (in
+meters), x is the horizontal distance (in meters), N is the infiltration
+rate (in meters per day), and K is the hydraulic conductivity of the
+aquifer (meters per day). We'll be supposing \(K=1\), \(N=0.002\) we're
+provided that \(y(0)=20\) and \(y(1500)=10\)
+
+\hypertarget{part-a}{%
+\subsubsection{Part A}\label{part-a}}
+
+The given differential equation can be simplified as:
+\[\frac{d}{dx}(y(x)\frac{dy(x)}{dx})=\frac{-N}{k}\]
+
+\[y(x)\frac{d^2y(x)}{dx^2}+\frac{dy(x)}{dx}\frac{dy(x)}{dx}=\frac{-N}{k}\]
+
+\[y(x)\frac{d^2y(x)}{dx^2}+(\frac{dy(x)}{dx})^2=\frac{-N}{k}\] Rewrite
+the differential equation into the following form:
+\[z(x)=\frac{dy(x)}{dx}, \frac{dz(x)}{dx}=\frac{d^2y(x)}{dx^2}\] Thus
+the system can be represented by these two first-order ODEs:
+\[z(x)=\frac{dy(x)}{dx}\]
+
+\[\frac{dz(x)}{dx}=\frac{\frac{-N}{K}-z(x)^2}{y(x)}\]
+
+\hypertarget{part-b}{%
+\subsubsection{Part B}\label{part-b}}
+
+\[y(0)=20, y'(0)=\alpha\]
+
+\hypertarget{implementation-of-the-runge-kutta-4th-order-method}{%
+\paragraph{Implementation of the Runge-Kutta 4th order
+method}\label{implementation-of-the-runge-kutta-4th-order-method}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Fourth\PYZhy{}order Runge\PYZhy{}Kutta method for two simultaneous ODEs}
+         \PY{k}{def} \PY{n+nf}{runge\PYZus{}kutta4}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{dz\PYZus{}dx}\PY{p}{,} \PY{n}{initial}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}bounds}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{initial}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{initial}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{x\PYZus{}bounds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{h}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x\PYZus{}n}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} t, y, z}
+                 \PY{n}{k1} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n}\PY{p}{,} \PY{n}{y\PYZus{}n}\PY{p}{)}
+                 \PY{n}{m1} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dz\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n}\PY{p}{,} \PY{n}{y\PYZus{}n}\PY{p}{)}
+                 \PY{n}{k2} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n} \PY{o}{+} \PY{n}{k1} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{+} \PY{n}{m1} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{m2} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dz\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n} \PY{o}{+} \PY{n}{k1} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{+} \PY{n}{m1} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{k3} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n} \PY{o}{+} \PY{n}{k2} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{+} \PY{n}{m2} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{m3} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dz\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n} \PY{o}{+} \PY{n}{k2} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{+} \PY{n}{m2} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{k4} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n} \PY{o}{+} \PY{n}{k3}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{+} \PY{n}{m3}\PY{p}{)}
+                 \PY{n}{m4} \PY{o}{=} \PY{n}{h} \PY{o}{*} \PY{n}{dz\PYZus{}dx}\PY{p}{(}\PY{n}{x\PYZus{}n} \PY{o}{+} \PY{n}{k3}\PY{p}{,} \PY{n}{y\PYZus{}n} \PY{o}{+} \PY{n}{m3}\PY{p}{)}
+                 \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x\PYZus{}n} \PY{o}{+} \PY{p}{(}\PY{n}{k1} \PY{o}{+} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{k2} \PY{o}{+} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{k3} \PY{o}{+} \PY{n}{k4}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{6}\PY{p}{)}
+                 \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y\PYZus{}n} \PY{o}{+} \PY{p}{(}\PY{n}{m1} \PY{o}{+} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{m2} \PY{o}{+} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{m3} \PY{o}{+} \PY{n}{m4}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{6}\PY{p}{)}
+                 
+             \PY{k}{return} \PY{n}{x}\PY{p}{,} \PY{n}{y}
+\end{Verbatim}
+
+    \hypertarget{function-implementation-of-the-two-first-order-odes}{%
+\paragraph{Function implementation of the two first-order
+ODE's}\label{function-implementation-of-the-two-first-order-odes}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{dy\PYZus{}dx}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} u(x)}
+             \PY{k}{return} \PY{n}{y}
+         
+         \PY{k}{def} \PY{n+nf}{d2y\PYZus{}dx2}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} u\PYZsq{}(x)}
+             \PY{n}{N}\PY{p}{,} \PY{n}{K} \PY{o}{=} \PY{l+m+mf}{0.0002}\PY{p}{,} \PY{l+m+mi}{1}
+             \PY{k}{if} \PY{n}{y} \PY{o}{\PYZgt{}} \PY{l+m+mf}{10e30}\PY{p}{:} \PY{c+c1}{\PYZsh{} Avoid extremely large values of y}
+                 \PY{k}{return} \PY{l+m+mf}{10e30}
+             \PY{k}{return} \PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{N}\PY{o}{/}\PY{n}{K} \PY{o}{\PYZhy{}} \PY{n}{y} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+    The above functions can be used to numerically solve the two first order
+ODEs given two initial conditions, one of which would be 20 and one of
+which is \(\alpha\).
+
+\hypertarget{part-c}{%
+\subsubsection{Part C}\label{part-c}}
+
+In order to find the correct alpha value for these systems of
+differential equations, I will use a binary search algorithm that
+assumes the changes on the Runge-Kutta approximation of \(y(x)\) is
+linearly related to the input \(\alpha\) value. This is essential for
+the algorithm to work, because I will use this relationship to
+incrementally adjust the \(\alpha\). If \(y(1500)\) for the current
+alpha being tested is higher than 10 (the known result), then I will
+decrease it by half and try again. If the \(y(1500)\) is \emph{below} 10
+then it is instead increased by half. I will repeat this until 10 is
+matched with three decimal places.
+
+\hypertarget{implementation-of-the-binary-search-algorithm}{%
+\paragraph{Implementation of the binary search
+algorithm}\label{implementation-of-the-binary-search-algorithm}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Implementation of a binary search algorithm for finding the correct alpha}
+         \PY{c+c1}{\PYZsh{} The two first order ODEs are used in an RK4 method to iteratively find the}
+         \PY{c+c1}{\PYZsh{} proper alpha value among the provided range. Trying to match y\PYZus{}real with the}
+         \PY{c+c1}{\PYZsh{} given tolerance. This method assumes the changes to the RK estimation of }
+         \PY{c+c1}{\PYZsh{} y(x) is linearly proportional to the changes on alpha}
+         \PY{k}{def} \PY{n+nf}{alpha\PYZus{}binary\PYZus{}search}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{dz\PYZus{}dx}\PY{p}{,} \PY{n}{y\PYZus{}real}\PY{p}{,} \PY{n}{initial}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{x\PYZus{}range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,}
+                                 \PY{n}{x\PYZus{}step\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{alpha\PYZus{}range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{max\PYZus{}iters}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{n}{diff}\PY{p}{,} \PY{n}{iters}\PY{p}{,} \PY{n}{y\PYZus{}est} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]}
+             \PY{n}{alpha} \PY{o}{=} \PY{p}{(}\PY{n}{alpha\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{alpha\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+             \PY{n}{width} \PY{o}{=} \PY{n}{alpha}
+             \PY{c+c1}{\PYZsh{} Search while the result is off by enough, max iters hasn\PYZsq{}t occurred}
+             \PY{c+c1}{\PYZsh{} and the estimation is below the real value}
+             \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{y0\PYZus{}dy0} \PY{o}{=} \PY{p}{[}\PY{n}{initial}\PY{p}{,} \PY{n}{alpha}\PY{p}{]} \PY{c+c1}{\PYZsh{} Array for y(0)=initial and y\PYZsq{}(0)=alpha}
+                 \PY{n}{y\PYZus{}est}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{runge\PYZus{}kutta4}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{dz\PYZus{}dx}\PY{p}{,} \PY{n}{y0\PYZus{}dy0}\PY{p}{,} \PY{n}{x\PYZus{}range}\PY{p}{,} \PY{n}{x\PYZus{}step\PYZus{}size}\PY{p}{)}
+                 \PY{n}{diff} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{y\PYZus{}real} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}est}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} How far off the estimation is}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alpha: }\PY{l+s+si}{\PYZpc{}9.6f}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{y(1500): }\PY{l+s+si}{\PYZpc{}.5f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n}{y\PYZus{}est}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Check if the new estimate fits the exit conditions}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{diff} \PY{o}{\PYZlt{}} \PY{n}{tol} \PY{o+ow}{or} \PY{n}{iters} \PY{o}{\PYZgt{}} \PY{n}{max\PYZus{}iters}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{y\PYZus{}est}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{y\PYZus{}real}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{break}
+                 
+                 \PY{c+c1}{\PYZsh{} Adjust the alpha according to the estimate\PYZsq{}s relative difference}
+                 \PY{k}{if} \PY{n}{y\PYZus{}est}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{y\PYZus{}real}\PY{p}{:}
+                     \PY{n}{alpha} \PY{o}{=} \PY{n}{alpha} \PY{o}{\PYZhy{}} \PY{n}{width} \PY{o}{/} \PY{l+m+mf}{2.0}
+                 \PY{k}{elif} \PY{n}{y\PYZus{}est}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{y\PYZus{}real}\PY{p}{:}
+                     \PY{n}{alpha} \PY{o}{=} \PY{n}{alpha} \PY{o}{+} \PY{n}{width} \PY{o}{/} \PY{l+m+mf}{2.0}
+                     
+                 \PY{c+c1}{\PYZsh{} Half the width each time, increment the iterations}
+                 \PY{n}{width} \PY{o}{/}\PY{o}{=} \PY{l+m+mf}{2.0}
+                 \PY{n}{iters} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 
+             \PY{k}{return} \PY{n}{y\PYZus{}est}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{iters}
+\end{Verbatim}
+
+    \hypertarget{use-the-binary-search-algorithm-to-find-the-alpha-value-that-matches-the-given-condition}{%
+\paragraph{Use the binary search algorithm to find the alpha value that
+matches the given
+condition}\label{use-the-binary-search-algorithm-to-find-the-alpha-value-that-matches-the-given-condition}}
+
+I will be using a step size of 75 for the RK4 method so that numeric
+stability is preserved. Ideally a smaller step size would be used to
+ensure a more accurate result, but the problem requirement states a
+limited requirement for accuracy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{i} \PY{o}{=} \PY{n}{alpha\PYZus{}binary\PYZus{}search}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{d2y\PYZus{}dx2}\PY{p}{,} \PY{n}{y\PYZus{}real}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{initial}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,}
+                                           \PY{n}{x\PYZus{}range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1500}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}step\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{75}\PY{p}{,}
+                                           \PY{n}{alpha\PYZus{}range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Found an alpha of }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s2}{, after }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{ iterations.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Alpha: 50.000000,	y(1500): 7530325144666815141508910187232100352.00000
+Alpha: 25.000000,	y(1500): 6589240219362345509818200499882557440.00000
+Alpha: 12.500000,	y(1500): 5656332808290053030214139594678468608.00000
+Alpha:  6.250000,	y(1500): 4306259327736429587597257237950627840.00000
+Alpha:  3.125000,	y(1500): 3059055851144424326418836468663320576.00000
+Alpha:  1.562500,	y(1500): 11339092365329934405455388606044569600.00000
+Alpha:  0.781250,	y(1500): 3321451425698408253588194370510651392.00000
+Alpha:  0.390625,	y(1500): 122.20415
+Alpha:  0.195312,	y(1500): 106.82599
+Alpha:  0.097656,	y(1500): 76.17045
+Alpha:  0.048828,	y(1500): 53.66049
+Alpha:  0.024414,	y(1500): 37.61426
+Alpha:  0.012207,	y(1500): 26.12319
+Alpha:  0.006104,	y(1500): 17.78232
+Alpha:  0.003052,	y(1500): 11.53726
+Alpha:  0.001526,	y(1500): 6.45148
+Alpha:  0.002289,	y(1500): 9.34556
+Alpha:  0.002670,	y(1500): 10.49869
+Alpha:  0.002480,	y(1500): 9.93883
+Alpha:  0.002575,	y(1500): 10.22259
+Alpha:  0.002527,	y(1500): 10.08171
+Alpha:  0.002503,	y(1500): 10.01053
+Alpha:  0.002491,	y(1500): 9.97475
+Alpha:  0.002497,	y(1500): 9.99265
+Alpha:  0.002500,	y(1500): 10.00159
+Alpha:  0.002499,	y(1500): 9.99712
+Alpha:  0.002500,	y(1500): 9.99936
+Alpha:  0.002500,	y(1500): 10.00048
+
+Found an alpha of 0.002500, after 27 iterations.
+
+    \end{Verbatim}
+
+    \hypertarget{plot-yx-with-the-previously-found-alpha-of-0.0025}{%
+\paragraph{\texorpdfstring{Plot \(y(x)\) with the previously found
+\(\alpha\) of
+0.0025}{Plot y(x) with the previously found \textbackslash{}alpha of 0.0025}}\label{plot-yx-with-the-previously-found-alpha-of-0.0025}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{y\PYZus{}est}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{runge\PYZus{}kutta4}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{d2y\PYZus{}dx2}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{alpha}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1500}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} Compute y(x)}
+         \PY{n}{x\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1500} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} Generate the x\PYZhy{}values between 0 and 1500}
+         \PY{n}{create\PYZus{}plot}\PY{p}{(}\PY{p}{[}\PY{n}{x\PYZus{}vals}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{(}\PY{n}{y\PYZus{}est}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}x\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}y(x)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                     \PY{p}{[}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}y(x)\PYZdl{}, alpha=}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{alpha}\PY{p}{,} \PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{With an alpha of }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s2}{, y(1500) is equal to }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n}{y\PYZus{}est}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+With an alpha of 0.002500, y(1500) is equal to 10.0001
+
+    \end{Verbatim}
+
+    \hypertarget{part-d}{%
+\subsubsection{Part D}\label{part-d}}
+
+In order to identify the maximum water depth of \(y(x)\) for the
+\(\alpha\) previously found in \textbf{Part C} to a precision of
+\(\pm5\) meters, I will use the maximum possible step size of 10, as
+this means in the worst-case scenario the estimation will be at most
+five meters from the real valus (if it was exactly between two points).
+I'll then look at the results of the RK approximation of \(y(x)\) and
+find the maximum value; specifically the maximum value in the RK
+results, and the distance will correspond to the index of that value in
+the x array.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{y\PYZus{}est}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{runge\PYZus{}kutta4}\PY{p}{(}\PY{n}{dy\PYZus{}dx}\PY{p}{,} \PY{n}{d2y\PYZus{}dx2}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{alpha}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1500}\PY{p}{]}\PY{p}{,} \PY{n}{h}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)} \PY{c+c1}{\PYZsh{} y(x)}
+         \PY{n}{dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1500} \PY{o}{+} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)} \PY{c+c1}{\PYZsh{} x}
+         \PY{n}{max\PYZus{}index} \PY{o}{=} \PY{n}{y\PYZus{}est}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{y\PYZus{}est}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Find the index of the maximum water depth}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The maximum water depth is }\PY{l+s+si}{\PYZpc{}.6f}\PY{l+s+s2}{ meters deep, at }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s2}{ meters.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PYZbs{}
+                \PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{y\PYZus{}est}\PY{p}{)}\PY{p}{,} \PY{n}{dist}\PY{p}{[}\PY{n}{max\PYZus{}index}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The maximum water depth is 20.310106 meters deep, at 250.000 meters.
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

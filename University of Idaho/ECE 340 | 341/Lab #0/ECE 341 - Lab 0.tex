@@ -1,0 +1,67 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\definecolor{code-gray}{gray}{0.93}
+
+\begin{document}
+\title{ECE 341 - Lab \#0}
+\author{Collin Heist}
+\date{\today}
+\maketitle
+\pagenumbering{roman}
+\tableofcontents
+\lstlistoflistings
+\newpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+The goal of this lab was to learn some of the important tools available to us through the MPLAB X IDE. This lab was also a quick refresh on a few basics of the C Programming Language.
+
+We first launched MPLAB X, our chosen IDE for interfacing with the Microcontrollers. We then created a new project, selected the \textbf{PIC32MX795F512L} from the list of available 32-bit MCUs available, and selected the \textbf{CerebotMX7ck} licensed debugger so that we can use the available debugging tools provided by the IDE. We chose the X32 compiler, named the project, and were finally ready to actually add code to said project.
+
+Since all the code was provided already, I simply used the \textit{Add Existing Item} option on the Header Files subfolder for the project. I selected the provided .h files, and then repeated this process for the Source Files folder and .c files.
+
+At this point, the 'setup' was largely completed, so I began the actual work of the lab. 
+
+\section{Implementation}
+The only real work necessary was using the provided Debugger to step through the code inside lab0.c. To make my life easier, and avoid miscounting the number of times the main program loop iterated, I did create a local variable called \textbf{count} that incremented each loop. That code is shown in \textbf{Listing 1} below.
+	\begin{mdframed}[backgroundcolor=code-gray, roundcorner=10pt,
+								innerleftmargin=5, innertopmargin=5, innerbottommargin=5]	
+	\begin{lstlisting}[language=C, caption=Counting Variable, tabsize=2]
+	int count = 0;
+	a = ac;
+	b = bc;
+	while (1) {
+		no_swap(a, b);
+		c = swap(&a, &b);
+		a = c - d;
+		count++;
+	}
+	\end{lstlisting}
+	\end{mdframed}
+	
+This code comes directly after the hardware initialization, and the only change I made was the addition of the count code. This variable allowed me to very easily check how many times the while loop had iterated, and how many swaps were performed.
+
+\section{Testing and Validation}
+Testing this week's code was very simple, especially since it was all provided for us. I was able to test each loop without even using a breakpoint, I simply put my cursor on the final line, and selected the debugging option to \textbf{Run to Cursor}, letting each series of swaps happen only once. Beyond performing that iteration four times to see what the values of each variable became, there were no necessary tests for code validation.
+
+\section{Questions}
+\begin{enumerate}
+\item The difference between a \textbf{\#define} statement, and declaring a variable outright is twofold. The \textbf{\#define} is quite simple in implementation, as it just replaces all instances of the defined name with its definition, it is also defined at compile time and can never be changed. A variable, on the other hand, is stored in memory at a specific address. Because of that, you can change its value, ask for its size, etc. It also takes up space in memory that the define statement does not (as there is nothing to store).
+\item If the code was changed to reassign \textbf{d} and not \textbf{a}, the code would not run. I am fairly certain the Compiler would throw an error as well. This is because \textbf{d} is defined as a constant upon its initialization. This means that at no point during the programs run-time can its value be changed at all.
+\item Local variables are created in a few different ways:
+\begin{itemize}
+\item Static Local Variables - A local variable with a fixed memory address.
+\item Automatic Local Variables - A local variable with a temporary memory address.
+\item Function-level Local Variables - A local variable created within a function call and de-allocated when the function returns.
+\end{itemize}
+\item The required information for a function prototype is the function's return type (even if \textbf{void}), the function's name as written in it's implementation, and the argument(s) variable types / names. I believe in C++, the names of the variables are unimportant and even ignored by some compilers, but I am not sure whether C is the same.
+\item With the changed code inside the main \textbf{while(1)} loop (so that \textbf{a = ac; b = bc;} is \textit{above} the loop), it took 80 cycle counts to perform one execution of the code.
+\end{enumerate}
+
+\section{Conclusion}
+This introductory lab was quite enlightening. So far, the IDE is quite intuitive (although I do have prior experience), and all of the available Debugging tools are sure to be very useful in future labs. Reviewing the differences between passing by value and reference was also useful, as that level of C mastery is easy to forget, but very important. There is no real 'design' for this lab, so there are no inherent limitations present.
+
+\end{document}
+

@@ -1,0 +1,15 @@
+D0: LEDA, T2 ISR
+D1: LEDB, CN ISR
+D2: LEDC, T3 ISR
+D3: LEDD, input capture timing
+scope_0: BTN00 - 40% PWM
+scope_1: BTN01 - 65% PWM
+scope_2: BTN10 - 80% PWM
+scope_3: BTN11 - 95% PWM
+
+PWM Cycle, Vm, Fsb, Motor Speed (RPS):
+0, 7.915 V, 0 Hz, 0 (scope_5)
+40, 7.895 V, 307 Hz, 305.85 (scope_6)
+65, 7.880 V, 417 Hz, 435.05 (scope_7)
+80, 7.884 V, 483 Hz, 467.6 (scope_8)
+95, 7.882 V, 485 Hz, 491.32, (scope_9)

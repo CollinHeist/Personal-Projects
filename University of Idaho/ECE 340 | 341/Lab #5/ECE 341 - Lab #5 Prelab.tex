@@ -1,0 +1,20 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{listings} 
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{graphicx}
+\definecolor{code-gray}{gray}{0.93}
+\begin{document}
+\title{ECE 341 - Lab \#5, Pre-lab}
+\author{Collin Heist}
+\date{\today}
+\maketitle
+\pagenumbering{arabic}
+
+\section{Goal and Background Information}
+The goal of this lab is to implement lab \#4, but using entirely interrupt-driven code. We'll be using two interrupts on this particular lab, one for Timer 1 set for a 1 ms flag, and another for the change-notice interrupt flag triggered when either Button 1 or Button 2 are pressed or released. Using each of these interrupts, and their respective \textbf{ISR's}, all important code will be executed (i.e. nothing in the main loop). Other than the \textbf{ISR's}, all other code should be nearly identical to last week's lab. The only relevent piece of background information is the interrupt service routine. Rather than having to poll the flag itself, these routines are called by the micro-controller and automatically execute any necessary code, without the user needing to call them explicity.
+
+\section{Plan}
+I'll first configure both necessary interrupts, which will go in the \textbf{system\_init()} function. I plan on using the timer 1 \textbf{ISR} to decrement the \textbf{step\_delay} global variable. When that delay is zero, then I will progress the FSM and output to the motor before resetting the step delay. The button's CN \textbf{ISR} will read from the buttons, then decode them, storing the mode and such in global variables. I won't need to change much of the motor functionality code, as that part of the program has not changed (just how the functions are called).
+
+\end{document}

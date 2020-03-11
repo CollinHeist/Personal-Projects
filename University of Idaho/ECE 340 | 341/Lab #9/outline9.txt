@@ -1,0 +1,6 @@
+scope_6: 1ms timer capture
+scope_7: 40% duty cycle
+scope_8: CN ISR timing
+scope_9: 65% duty cycle
+scope_10: 80% duty cycle
+scope_11: 95% duty  cycle

@@ -1,0 +1,135 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{pgfplots, mathtools}
+
+%% Listings With Code-Styling and Grey Background
+\usepackage{float, listings} 
+\lstset{						% Global Listing settings
+	language=Verilog,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+%	firstnumber=1,
+	numberfirstline=true,
+	stepnumber=1,
+	tabsize=2,
+	breaklines=true,
+}
+\usepackage{xcolor, mdframed, graphicx}
+\definecolor{code-gray}{gray}{0.93}
+
+%% Make specific pages landscale for larger figures
+\usepackage{pdflscape}
+
+%% Custom FSM's
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows, positioning}
+\tikzset{very thick, ->, >=stealth', node distance=6cm, every state/.style={thick, fill=gray!10}, initial text=$ $}
+
+%% Automatic Word Formatting
+\usepackage{xspace}
+\newcommand*{\Vivado}{\textit{Vivado}\xspace} % Italicize Vivado
+\newcommand*{\SV}{\textbf{SystemVerilog}\xspace} % Bold SystemVerilog
+
+%% Clickable links in the output PDF
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linktoc=all, linkcolor=black}
+
+%% Figure Numbering Within Sections
+\let\counterwithout\relax
+\let\counterwithin\relax
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+
+%% Macros for logic timing diagrams
+\newcounter{wavenum}
+\setlength{\unitlength}{1cm}
+% advance clock one cycle, not to be called directly
+\newcommand*{\clki}{
+  \draw (t_cur) -- ++(0,.3) -- ++(.5,0) -- ++(0,-.6) -- ++(.5,0) -- ++(0,.3)
+    node[time] (t_cur) {};
+}
+\newcommand*{\bitvector}[3]{
+  \draw[fill=#3] (t_cur) -- ++( .1, .3) -- ++(#2-.2,0) -- ++(.1, -.3)
+                         -- ++(-.1,-.3) -- ++(.2-#2,0) -- cycle;
+  \path (t_cur) -- node[anchor=mid] {#1} ++(#2,0) node[time] (t_cur) {};
+}
+% \known{val}{length}
+\newcommand*{\known}[2]{
+    \bitvector{#1}{#2}{white}
+}
+% \unknown{length}
+\newcommand*{\unknown}[2][XXX]{
+    \bitvector{#1}{#2}{black!20}
+}
+% \bit{1 or 0}{length}
+\newcommand*{\bit}[2]{
+  \draw (t_cur) -- ++(0,.6*#1-.3) -- ++(#2,0) -- ++(0,.3-.6*#1)
+    node[time] (t_cur) {};
+}
+% \unknownbit{length}
+\newcommand*{\unknownbit}[1]{
+  \draw[ultra thick,black!50] (t_cur) -- ++(#1,0) node[time] (t_cur) {};
+}
+% \nextwave{name}
+\newcommand{\nextwave}[1]{
+  \path (0,\value{wavenum}) node[left] {#1} node[time] (t_cur) {};
+  \addtocounter{wavenum}{-1}
+}
+% \clk{name}{period}
+\newcommand{\clk}[2]{
+    \nextwave{#1}
+    \FPeval{\res}{(\wavewidth+1)/#2}
+    \FPeval{\reshalf}{#2/2}
+    \foreach \t in {1,2,...,\res}{
+        \bit{\reshalf}{1}
+        \bit{\reshalf}{0}
+    }
+}
+
+% \begin{wave}[clkname]{num_waves}{clock_cycles}
+\newenvironment{wave}[3][clk]{
+  \begin{tikzpicture}[draw=black, yscale=.7,xscale=1]
+    \tikzstyle{time}=[coordinate]
+    \setlength{\unitlength}{1cm}
+    \def\wavewidth{#3}
+    \setcounter{wavenum}{0}
+    \nextwave{#1}
+    \foreach \t in {0,1,...,\wavewidth}{
+      \draw[dotted] (t_cur) +(0,.5) node[above] {t=\t} -- ++(0,.4-#2);
+      \clki
+    }
+}{\end{tikzpicture}}
+
+%$ Specific Line Breaks
+% See https://tex.stackexchange.com/questions/26174/ for details
+\usepackage[british]{babel} 
+
+%% Page Margins
+\usepackage[margin=1.00in]{geometry}
+
+%% Beginning of Document
+\begin{document}
+\counterwithin{lstlisting}{section} % Listings are numbered within sections
+% Title
+\title{ECE 440 - Project \#6}
+\author{Collin Heist}
+\date{\today}
+\maketitle
+
+% Table of Content and Listings
+
+% Beginning of Report
+\section{Trials and Tribulations}
+I ended up struggling the most with the net-selection part of the Debug Wizard. I found that selecting nets on the \textit{outside} of the memory module led to a very weird name convention, but this was solved (after many iterations of Synthesis) by selecting the signals from within the memory instance.
+
+Other than that, I thought I had done something wrong a few times because they post-debug Synthesis gave warnings of the constraints file containing unmatchable net-names. However, I suspect that the Debug Wizard creates these \textbf{set\_property} commands in the constraints file for use during re-Synthesis, and those net names become obsolete afterwards -- resulting in the warning. Ignoring this solved my `problem.'
+
+\section{Debugging Results}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\paperheight, keepaspectratio=true]{debug-window.PNG}
+\caption{Results of the VIvado Debug window immediately before and after a trigger.}
+\label{fig:debug}
+\end{figure}
+
+
+\end{document}

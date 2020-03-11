@@ -1,0 +1,36 @@
+Cases include:
+
+Single byte write in middle of page
+Single byte write at end of page
+64 byte write on page start
+64 byte write in middle of page
+>129 byte write
+-----------------------------------------------------------------
+scope_1 : single byte write (test 1)
+scope_2 : single byte read
+scope_3 : single byte write at end of page (test 2, part 1)
+scope_4 : single byte read at end of page (test 2, part 2)
+scope_5 : DELETE
+scope_6 : 64 byte write (data: 0x00 -> 0x3F) at beginning of page (test 3, part 1)
+scope_7 : 64 byte read(data: 0x00 -> 0x3F) at beginning of page (test 3, part 2)
+scope_8 : 64 byte write in middle of page pre-polling (test 4, part 1)
+scope_9 : 64 byte write in middle of page, post-polling (test 4, part 2)
+scope_10 : 64 byte read in middle of page (test 4, part 3)
+scope_11 : 150 byte write in middle of page, pre-polling1 (test 5, part 1)
+scope_12 : 150 byte write in middle of page, post-polling1 (test 5, part 2)
+scope_13 : 150 byte write in middle of page, post all polling (test 5, part 3)
+scope_14 : 150 byte read in middle of page (test 5, part 4)
+-----------------------------------------------------------------
+W time, R time
+1: 2.905ms [scope_15] | 137.448us [scope_16]
+32: 3.661ms [scope_17] | 921.312us [scope_18]
+63: 4.418ms [scope_19] | 1.7133ms [scope_20]
+64: 4.443ms [scope_21] | 1.737ms [scope_22]
+65: 4.590ms [scope_23] | 1.763ms [scope_24]
+127: 6.103ms [scope_25] | 3.3393ms [scope_28]
+128: 6.135ms [scope_26] | 3.361ms [scope_27]
+129: 9.043ms [scope_29] | 3.389ms [scope_30]
+1024: 68.409ms [scope_31] | 26.133ms [scope_32]
+8096: 560.643ms [scope_33] | 205.683ms [scope_34]
+16384: 1.134s [scope_35] | 414.503ms [scope_36]
+32768: 2.272s [scope_37] | 829.003ms [scope_38]
