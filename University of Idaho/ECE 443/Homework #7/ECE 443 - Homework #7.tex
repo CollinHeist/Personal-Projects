@@ -1,0 +1,35 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{listings} 
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{mathtools}
+
+% Specific Line Breaks
+% See https://tex.stackexchange.com/questions/26174/ for details
+\usepackage[british]{babel} 
+
+% Page Margins
+\usepackage[margin=1.00in]{geometry}
+
+% Large, array-sized, ceiling and floor operators
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\definecolor{code-gray}{gray}{0.93}
+
+% Beginning of Document
+\begin{document}
+% Title
+\title{ECE 443 - Homework \#7}
+\author{Collin Heist}
+\date{\today}
+\maketitle
+
+\pagenumbering{arabic}
+
+% Beginning of Report
+My suggestion for the final project is to design a program, broken up into FreeRTOS tasks, that uses DMA to transfer ADC readings to a user-defined space in memory. There would then be a task that, when the ADC has taken a specific number of readings, would transfer that information to the EEPROM. The user could then request a page of data from a specific location in memory via a webserver over TCP. The program would respond with that data, and it would be displayed on the webpage in a convenient page-by-page program.
+
+\end{document}
