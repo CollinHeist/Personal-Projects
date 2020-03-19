@@ -1,7 +1,8 @@
 `timescale 1ns / 1ps
 
-module codon_reader(clock, reset, codon_index, codon1, codon2, codon3, codon4, codon5, end_of_codon)
+module codon_reader(clock, reset, codon_index, done_reader, codon1, codon2, codon3, codon4, codon5, end_of_codon)
 	input logic clock, reset, codon_index;
+	output logic done_reader;
 	output logic [3:0] codon1, codon2, codon3, codon4, codon5;
 	output logic [4:0] end_of_codon;
 
@@ -67,13 +68,13 @@ end : fsm_advancement
 
 // FSM Outputs
 always_comb begin : fsm_outputs
-	load_codon = 0; done = 0;
+	load_codon = 0; done_reader = 0;
 	if (~reset) begin
 		case (state)
 			reset_state:	load_codon = 1;
-			read_codon:		load_codon = (is_F ? 0 : 1);
+			read_codon:		load_codon = ~is_F;
 			check_next:		load_codon = 1;
-			codons_done:	done = 1;
+			codons_done:	done_reader = 1;
 			endcase
 		end
 end : fsm_outputs

@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
-module codon_counter(clock, reset, done, count_index, codon1, codon2, codon3, codon4, codon5, end_of_codon, codon_index, count)
-	input logic clock, reset, done;
+module codon_counter(clock, reset, done_reader, count_index, codon1, codon2, codon3, codon4, codon5, end_of_codon, done_counter, codon_index, count)
+	input logic clock, reset, done_reader;
 	input logic [2:0] count_index;								// Which codon count to output [1->5]
 	input logic [3:0] codon1, codon2, codon3, codon4, codon5;	// Current nibble of codon 1 to 5
 	input logic [4:0] end_of_codon;								// Encoding of which codon we're on the last nibble of
@@ -52,7 +52,8 @@ always_ff @(posedge clock) begin : fsm_advancement
 		end
 	else begin
 		case (state) 
-			reset_state:	state <= wait_state;
+			reset_state:
+				state <= wait_state;
 			wait_state:
 				unique casez({is_F, done})
 					2'b?0: begin state <= wait_state;						end
@@ -82,6 +83,6 @@ always_ff @(posedge clock) begin : fsm_advancement
 end : fsm_advancement
 
 // FSM Outputs
-assign done = (state == done_state ? 1 : 0);
+assign done_counter = (state == done_state);
 
 endmodule : codon_counter
