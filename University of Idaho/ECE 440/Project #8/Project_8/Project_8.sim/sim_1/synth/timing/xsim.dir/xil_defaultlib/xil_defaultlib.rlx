@@ -1,0 +1,6 @@
+0.6
+2016.4
+Jan 23 2017
+19:37:30
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.sim/sim_1/synth/timing/testbench_time_synth.v,1584921489,verilog,,,,codon_counter;codon_memory;codon_memory_blk_mem_gen_generic_cstr;codon_memory_blk_mem_gen_prim_width;codon_memory_blk_mem_gen_prim_wrapper_init;codon_memory_blk_mem_gen_top;codon_memory_blk_mem_gen_v8_3_5;codon_memory_blk_mem_gen_v8_3_5_synth;codon_reader;gene_memory;gene_memory_blk_mem_gen_generic_cstr;gene_memory_blk_mem_gen_prim_width;gene_memory_blk_mem_gen_prim_wrapper_init;gene_memory_blk_mem_gen_top;gene_memory_blk_mem_gen_v8_3_5;gene_memory_blk_mem_gen_v8_3_5_synth;glbl;hardware_wrapper,,,,,,,,
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.srcs/sim_1/new/testbench.sv,1584920788,systemVerilog,,,,testbench,,,,,,,,

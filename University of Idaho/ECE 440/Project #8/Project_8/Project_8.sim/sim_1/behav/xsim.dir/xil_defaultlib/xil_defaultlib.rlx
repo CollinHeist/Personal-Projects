@@ -1,0 +1,11 @@
+0.6
+2016.4
+Jan 23 2017
+19:37:30
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.sim/sim_1/behav/glbl.v,1485222234,verilog,,,,glbl,,,,,,,,
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.srcs/sim_1/new/testbench.sv,1584922133,systemVerilog,,,,testbench,,,,,,,,
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.srcs/sources_1/ip/codon_memory/sim/codon_memory.v,1584914022,verilog,,,,codon_memory,,,,,,,,
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.srcs/sources_1/ip/gene_memory/sim/gene_memory.v,1584918249,verilog,,,,gene_memory,,,,,,,,
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.srcs/sources_1/new/codon_counter.sv,1584920536,systemVerilog,,,,codon_counter,,,,,,,,
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.srcs/sources_1/new/codon_reader.sv,1584917957,systemVerilog,,,,codon_reader,,,,,,,,
+C:/Users/heis0741/OneDrive - University of Idaho/U-Drive/ECE 440/Project_8/Project_8.srcs/sources_1/new/hardware_wrapper.sv,1584923169,systemVerilog,,,,hardware_wrapper,,,,,,,,
