@@ -16,12 +16,12 @@ assign write_enable = 0;			// Never writing
 assign memory_in = 0;				// Never writing
 assign is_F = (memory_out == 4'hF);	// Flag for if an 0xF has been detected
 codon_memory codon_memory_instance (
-  .clka(clock),			// input wire clka
-  .ena(enable),			// input wire ena
-  .wea(write_enable),	// input wire [0 : 0] wea
-  .addra(address),		// input wire [4 : 0] addra
-  .dina(memory_in),		// input wire [3 : 0] dina
-  .douta(memory_out)	// output wire [3 : 0] douta
+	.clka(clock),
+	.ena(enable),
+	.wea(write_enable),
+	.addra(address),
+	.dina(memory_in),
+	.douta(memory_out)
 );
 
 // Codon Register - End-of-codon detection - Codon Sub Addressing
@@ -32,7 +32,7 @@ assign codon2 = codons[1][codon_index];
 assign codon3 = codons[2][codon_index];
 assign codon4 = codons[3][codon_index];
 assign codon5 = codons[4][codon_index];
-assign end_of_codon[0] = (codons[0][codon_index + 1] == 4'hF);	// Check if next codon value is 0xF
+assign end_of_codon[0] = (codons[0][codon_index + 1] == 4'hF); // Check if next codon value is 0xF
 assign end_of_codon[1] = (codons[1][codon_index + 1] == 4'hF);
 assign end_of_codon[2] = (codons[2][codon_index + 1] == 4'hF);
 assign end_of_codon[3] = (codons[3][codon_index + 1] == 4'hF);
@@ -92,12 +92,10 @@ end : fsm_outputs
 
 // Codon Loading
 always_ff @(posedge clock) begin : codon_loader
-	if (reset) begin
+	if (reset)
 		codons <= '{default:4'b1111};	// Codons should default to 0xF
-		end
 	else
-		if (load_codon)
-			codons[codon_num][codon_sub_addr] = memory_out;
+		if (load_codon) codons[codon_num][codon_sub_addr] = memory_out;
 end : codon_loader
 
 endmodule : codon_reader

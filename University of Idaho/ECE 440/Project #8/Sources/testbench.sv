@@ -15,7 +15,8 @@ hardware_wrapper dut(
 	.clock(clock),
 	.reset(reset),
 	.switches(switches),
-	.leds(leds));
+	.leds(leds)
+);
 
 // Prevent simulating longer than MAX_SIM_TIME
 initial #(MAX_SIM_TIME) $finish;

@@ -18,12 +18,12 @@ assign write_enable = 0;			// Never writing
 assign memory_in = 0;				// Never writing
 assign is_F = (memory_out == 4'hF);	// Flag for if an 0xF has been detected
 gene_memory gene_memory_instance (
-  .clka(clock),			// input wire clka
-  .ena(enable),			// input wire ena
-  .wea(write_enable),	// input wire [0 : 0] wea
-  .addra(address),		// input wire [7 : 0] addra
-  .dina(memory_in),		// input wire [3 : 0] dina
-  .douta(memory_out)	// output wire [3 : 0] douta
+	.clka(clock),
+	.ena(enable),
+	.wea(write_enable),
+	.addra(address),
+	.dina(memory_in),
+	.douta(memory_out)
 );
 
 // All Codon counts register and output assignment
@@ -43,7 +43,6 @@ always_comb begin : codon_match_detection
 	ending_match = | (current_matches & end_of_codon);				// T/F if a match occurred on the last of a codon
 	concurrent_matches = | (current_matches & previous_matches);	// T/F if two same-place sequential matches occurred
 	matches_any = | current_matches;								// T/F if any matches occurred
-
 	detected_codons = (current_matches & previous_matches & end_of_codon);	// 5-Bit field that denotes a completed codon detection
 end : codon_match_detection
 
@@ -58,9 +57,9 @@ always_ff @(posedge clock) begin : fsm_advancement
 		state <= reset_state;			// Go to reset state
 		address <= 0;					// Reset memory address
 		counts <= 0;					// Reset array of all codon counts
-		previous_matches <= 5'b11111;	// Previous matches are default one so immediate end-matches are okay
-		codon_index <= 3'b000;
-		await_new_read <= 0;
+		previous_matches <= 5'b11111;	// Previous matches are default high so immediate end-matches are okay (through AND)
+		codon_index <= 3'b000;			// Reset codon nibble index
+		await_new_read <= 0;			// Reset 'new read' flag
 		end
 	else begin
 		case (state) 
@@ -73,14 +72,14 @@ always_ff @(posedge clock) begin : fsm_advancement
 					2'b01: begin state <= read_DNA;							end
 				endcase
 			read_DNA: begin
-				await_new_read <= ~await_new_read;
+				await_new_read <= ~await_new_read;	// Use this to deal with the 1 clock delay on reads
 				if (~await_new_read) begin
 					address <= address + 1;
 					unique casez({is_F, matches_any, concurrent_matches, ending_match, detected_codons})
 						9'b1????????: begin state <= one_F; address <= address + 1; codon_index <= 3'b000; previous_matches <= 5'b11111;										end // 0xF output from memory
-						9'b00???????: begin state <= read_DNA; address <= (codon_index == 3'b000 ? address + 1 : address); codon_index <= 3'b000; previous_matches <= 5'b11111;	end	// No matches whatsoever
-						9'b010??????: begin state <= read_DNA; codon_index <= 3'b000; previous_matches <= 5'b11111;																end	// Was a match, but not concurrently
-						9'b0110?????: begin state <= read_DNA; address <= address + 1; codon_index <= codon_index + 1; previous_matches <= current_matches;						end	// Concurrent match, but not an end-of-codon one
+						9'b00???????: begin state <= read_DNA; address <= (codon_index == 3'b000 ? address + 1 : address); codon_index <= 3'b000; previous_matches <= 5'b11111;	end // No matches whatsoever
+						9'b010??????: begin state <= read_DNA; codon_index <= 3'b000; previous_matches <= 5'b11111;																end // Was a match, but not concurrently
+						9'b0110?????: begin state <= read_DNA; address <= address + 1; codon_index <= codon_index + 1; previous_matches <= current_matches;						end // Concurrent match, but not an end-of-codon one
 						9'b01111????: begin state <= read_DNA; address <= address + 1; codon_index <= 3'b000; previous_matches <= 5'b11111; counts[4] <= counts[4] + 1;			end // End-of-codon match on codon5
 						9'b011101???: begin state <= read_DNA; address <= address + 1; codon_index <= 3'b000; previous_matches <= 5'b11111; counts[3] <= counts[3] + 1;			end // End-of-codon match on codon4
 						9'b0111001??: begin state <= read_DNA; address <= address + 1; codon_index <= 3'b000; previous_matches <= 5'b11111; counts[2] <= counts[2] + 1;			end // End-of-codon match on codon3

@@ -19,13 +19,13 @@ logic done_counter;
 codon_counter codon_counter_instance(.*);
 always_comb begin : count_assignment
 	count_index = 0;
-	unique casez(switches)
-		3'b00?: count_index = 0;
-		3'b010: count_index = 1;
-		3'b011: count_index = 2;
-		3'b100: count_index = 3;
-		3'b101: count_index = 4;
-		default: count_index = 0;
+	unique casez(switches)	// Messy, but it works
+		3'b00?:		count_index = 0;
+		3'b010:		count_index = 1;
+		3'b011:		count_index = 2;
+		3'b100:		count_index = 3;
+		3'b101:		count_index = 4;
+		default:	count_index = 0;
 	endcase
 end : count_assignment
 
