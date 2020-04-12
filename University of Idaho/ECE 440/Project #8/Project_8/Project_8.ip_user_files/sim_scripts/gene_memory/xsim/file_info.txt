@@ -1,2 +1,0 @@
-gene_memory.v,verilog,xil_defaultlib,../../../../Project_8.srcs/sources_1/ip/gene_memory/sim/gene_memory.v,
-glbl.v,Verilog,xil_defaultlib,glbl.v
