@@ -3,7 +3,7 @@
  * Random (procedural) CityMaker Processing sketch to generate nice-looking city blocks (found online, do not know who to credit).
  * Hard to describe, but it makes some pretty pictures - an example of which is shown below:
 
-![CityMaker Example Image](Reference Images/CityMaker.png)
+<img src="./Reference Images/CityMaker.png">
 
 ## DataScience2020 (Python / Jupyter Notebook)
  * My working notebook for the University of Idaho Data Science 2020 competition.
