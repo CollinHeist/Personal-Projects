@@ -44,6 +44,7 @@ void mouseClicked() {
   city();
   background(0, 0, 1);
   loop();
+  save("image.png");
 }
  
 // ------------------------------------------------------------
