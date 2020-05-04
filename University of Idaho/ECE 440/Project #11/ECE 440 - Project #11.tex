@@ -110,14 +110,55 @@
 \begin{document}
 \counterwithin{lstlisting}{section} % Listings are numbered within sections
 % Title
-\title{ECE 440 - Project \#10\\ \Large{Self Assessment}}
+\title{ECE 440 - Project \#11 Simulations}
 \author{Collin Heist}
 \date{\today}
 \maketitle
 
-\begin{enumerate}
-\item Yes. my factorial project cleanly synthesizes and simulates exactly as expected.
-\item  
-\end{enumerate}
+\pagenumbering{arabic}
 
+
+\section{Simulations}
+The AXI-traffic generator loaded all values from its data coefficient file into the FIFO sequentially, so the total post-synthesis timing simulation was quite long -- but I've included figures of the result for each factorial computation. This output is from the `perspective` of the top-level module, so it remains 0 almost always (during computation), and because of how my \textbf{XFACE} module was designed the result is cleared one clock cycle after it's found (except for the last result). This general behavior is shown clearly in the Behavioral simulation (which is identical in nature to the post-synthesis ones) shown in \textbf{Figure~\ref{fig:behav-sim}} -- however the spacing of events is more evident this way.
+
+\begin{landscape}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\paperheight, keepaspectratio=true]{Sources/fifo-interface-behav.jpg}
+\caption{Larger behavioral simulation of the entire project -- this view clearly shows that \textbf{done} and \textbf{x\_factorial} only stay asserted for one clock cycle before moving onto the next computation.}
+\label{fig:behav-sim}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\paperheight, keepaspectratio=true]{Sources/post-impl-4.jpg}
+\caption{Post-synthesis simulation of the result for $4!=24$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\paperheight, keepaspectratio=true]{Sources/post-impl-6.jpg}
+\caption{Post-synthesis simulation of the result for $6!=720$. \textit{Note: I accidentally placed my cursor on the transition of the FFs and thus the left-value is not the final, stable value.}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\paperheight, keepaspectratio=true]{Sources/post-impl-8.jpg}
+\caption{Post-synthesis simulation of the result for $8!=420,320$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\paperheight, keepaspectratio=true]{Sources/post-impl-10.jpg}
+\caption{Post-synthesis simulation of the result for $10!=3,628,800$. \textit{Note: I accidentally placed my cursor on the transition of the FFs and thus the left-value is not the final, stable value.}}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\paperheight, keepaspectratio=true]{Sources/post-impl-12.jpg}
+\caption{Post-synthesis simulation of the result for $12!=479,001,600$. \textit{Note: I accidentally placed my cursor on the transition of the FFs and thus the left-value is not the final, stable value.}}
+\end{figure}
+
+\end{landscape}
 \end{document}
