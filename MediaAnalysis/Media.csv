@@ -10,16 +10,20 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.79097,0.82153,Monk,Mr. Monk Goes to a Wedding
 ,0.81944,0.85208,Monk,Mr. Monk and Little Monk
 ,0.91319,0.94583,Monk,Mr. Monk and the Secret Santa
-10/28/2015,0.63611,0.66528,The Office,Fun Run
-,0.66528,0.69444,The Office,Dunder Mifflin Infinity
-,0.69583,0.72500,The Office,Launch Party
+10/28/2015,0.63611,0.65069,The Office,Fun Run (1)
+,0.65069,0.66528,The Office,Fun Run (2)
+,0.66528,0.67986,The Office,Dunder Mifflin Infinity (1)
+,0.67986,0.69444,The Office,Dunder Mifflin Infinity (2)
+,0.69583,0.71042,The Office,Launch Party (1)
+,0.71042,0.72500,The Office,Launch Party (2)
 ,0.77292,0.80208,Monk,Mr. Monk Goes to a Fashion Show
 ,0.82708,0.85625,Monk,Mr. Monk Bumps His Head
 ,0.91319,0.94236,Monk,Mr. Monk and the Captain's Marriage
 10/29/2015,0.83472,0.90764,Birdemic: Shock and Terror,-
 ,0.94861,0.98125,Monk,Mr. Monk and the Astronaut
 10/30/2015,0.51458,0.54722,Monk,Mr. Monk Goes to the Dentist
-,0.74653,0.77569,The Office,Money
+,0.74653,0.76111,The Office,Money (1)
+,0.76111,0.77569,The Office,Money (2)
 ,0.77569,0.80486,The Office,Local Ad
 ,0.80347,0.83611,Monk,Mr. Monk Gets Jury Duty
 ,0.83472,0.86458,Monk,Mr. Monk and the Actor
@@ -38,10 +42,10 @@ Date,Start Time,End Time,Title,Episode Title
 11/03/2015,0.66458,0.67986,The Office,Night Out
 ,0.67917,0.69444,The Office,Did I Stutter
 ,0.69444,0.70833,The Office,Job Fair
-,0.71319,0.74236,The Office,"Goodbye, Toby"
+,0.71319,0.72778,The Office,"Goodbye, Toby (1)"
+,0.72778,0.74236,The Office,"Goodbye, Toby (2)"
 ,0.89236,0.92500,Monk,Mr. Monk Goes to a Rock Concert
-11/04/2015,0.67569,0.69097,The Office,Weight Loss: Part 1
-,0.69167,0.70694,The Office,Weight Loss: Part 2
+11/04/2015,0.67639,0.70694,The Office,Weight Loss
 ,0.70694,0.72222,The Office,Business Ethics
 ,0.75833,0.78681,Monk,Mr. Monk Meets His Dad
 ,0.79167,0.82431,Monk,Mr. Monk and the Leper
@@ -64,16 +68,15 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.74444,0.75972,The Office,The Duel
 ,0.76944,0.78472,The Office,Prince Family Paper
 ,0.78264,0.81528,Monk,Mr. Monk is on the Air
-,0.81736,0.83264,The Office,Stress Relief: Part 1
-,0.83194,0.84722,The Office,Stress Relief: Part 2
-,0.84931,0.86458,The Office,Lecture Circuit: Part 1
+,0.83194,0.84722,The Office,Stress Relief
+,0.84931,0.86458,The Office,Lecture Circuit (1)
 11/12/2015,,,-,-
 11/13/2015,0.61736,0.64792,Monk,Mr. Monk Visits a Farm
 ,0.70208,0.73194,Parenthood,Namaste No More
 ,0.82847,0.91875,Tomorrowland,-
 11/14/2015,0.45625,0.48542,Monk,"Mr. Monk and the Really, Really Dead Guy"
 ,0.51736,0.60764,Iron Man 3,-
-,0.63472,0.65000,The Office,Lecture Circuit: Part 2
+,0.63472,0.65000,The Office,Lecture Circuit (2)
 ,0.65000,0.66528,The Office,Blood Drive
 ,0.66528,0.68056,The Office,Golden Ticket
 11/15/2015,0.64931,0.72153,Time Lapse,-
@@ -95,8 +98,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.66319,0.69236,Monk,Mr. Monk and the Rapper
 ,0.69306,0.72222,Monk,Mr. Monk and the Naked Man
 ,0.79722,0.82639,Monk,Mr. Monk and the Birds and the Bees
-11/21/2015,0.74375,0.76111,The Office,Niagara: Part 1
-,0.76597,0.78125,The Office,Niagara: Part 2
+11/21/2015,0.74375,0.76111,The Office,Niagara (1)
+,0.76597,0.78125,The Office,Niagara (2)
 ,0.78125,0.79653,The Office,Mafia
 ,0.80069,0.81597,The Office,The Lover
 ,0.81667,0.83194,The Office,Koi Pond
@@ -108,8 +111,8 @@ Date,Start Time,End Time,Title,Episode Title
 11/22/2015,0.50625,0.52153,The Office,The Banker
 ,0.52292,0.53819,The Office,Sabre
 ,0.54167,0.55694,The Office,Manager and the Salesman
-,0.55625,0.57014,The Office,Delivery: Part 1
-,0.57153,0.58819,The Office,Delivery: Part 2
+,0.55625,0.57014,The Office,The Delivery (1)
+,0.57153,0.58819,The Office,The Delivery (2)
 ,0.59306,0.60833,The Office,St. Patrick's Day
 ,0.61389,0.62917,The Office,New Leads
 ,0.87153,0.90069,Parenthood,Solace
@@ -135,8 +138,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.79444,0.80972,The Office,Viewing Party
 ,0.81042,0.82569,The Office,WUPHF.com
 ,0.82569,0.84097,The Office,China
-,0.84792,0.86528,The Office,Classy Christmas: Part 1
-,0.86597,0.87917,The Office,Classy Christmas: Part 2
+,0.84792,0.86528,The Office,Classy Christmas (1)
+,0.86597,0.87917,The Office,Classy Christmas (2)
 ,0.87917,0.89444,The Office,Ultimatum
 ,0.89444,0.90972,The Office,The Seminar
 ,0.90972,0.92500,The Office,The Search
@@ -150,8 +153,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.71875,0.74792,Monk,Mr. Monk and the Three Julies
 ,0.75278,0.78333,Monk,Mr. Monk Paints His Masterpiece
 ,0.82083,0.91528,Captain America: The Winter Soldier,-
-11/26/2015,-0.02639,0.00417,Monk,Mr. Monk is on the Run: Part 1
-,0.00903,0.03889,Monk,Mr. Monk is on the Run: Part II
+11/26/2015,-0.02639,0.00417,Monk,Mr. Monk Is on the Run (1)
+,0.00903,0.03889,Monk,Mr. Monk Is on the Run (2)
 ,0.52708,0.55764,Monk,Mr. Monk Buys a House
 ,0.59583,0.61111,The Office,Training Day
 ,0.61111,0.62639,The Office,Michael's Last Dundies
@@ -169,8 +172,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.68611,0.71458,Monk,Mr. Monk on Wheels
 ,0.76458,0.77986,The Office,The Inner Circle
 ,0.80139,0.81667,The Office,"Dwight K. Schrute, (Acting) Manager"
-,0.83056,0.84722,The Office,Search Committee: Part 1
-,0.84722,0.86042,The Office,Search Committee: Part 2
+,0.83056,0.84722,The Office,Search Committee (1)
+,0.84722,0.86042,The Office,Search Committee (2)
 ,0.86250,0.87778,The Office,The List
 ,0.87778,0.89306,The Office,The Incentive
 ,0.89792,0.91319,The Office,Lotto
@@ -237,8 +240,8 @@ Date,Start Time,End Time,Title,Episode Title
 12/16/2015,0.64167,0.67083,Monk,Mr. Monk Goes Camping
 ,0.68125,0.71111,Monk,Mr. Monk is the Best Man
 ,0.71667,0.74653,Monk,Mr. Monk and the Badge
-,0.79097,0.82083,Monk,Mr. Monk and the End: Part I
-,0.82292,0.85278,Monk,Mr. Monk and the End: Part II
+,0.79097,0.82083,Monk,Mr. Monk and the End (1)
+,0.82292,0.85278,Monk,Mr. Monk and the End (2)
 12/17/2015,0.73125,0.74653,The Office,Couples Discount
 ,0.76806,0.79722,The Office,Moving On
 ,0.79722,0.81250,The Office,The Farm
@@ -374,8 +377,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.89583,0.90972,The Office,Job Fair
 01/07/2016,,,-,-
 01/08/2016,0.49167,0.52083,The Office,"Goodbye, Toby"
-,0.52153,0.53681,The Office,Weight Loss: Part 1
-,0.53681,0.55208,The Office,Weight Loss: Part 2
+,0.52431,0.55208,The Office,Weight Loss
 ,0.55278,0.56806,The Office,Business Ethics
 ,0.56806,0.58333,The Office,Baby Shower
 ,0.58472,0.60000,The Office,Crime Aid
@@ -428,7 +430,6 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.67014,0.68542,The Office,Moroccan Christmas
 01/19/2016,0.67708,0.69236,The Office,The Duel
 ,0.69306,0.70833,The Office,Prince Family Paper
-,0.70833,0.72361,The Office,Stress Relief: Part 1
 ,0.72500,0.74097,Star Wars: The Clone Wars,Weapons Factory
 ,0.75625,0.77222,Star Wars: The Clone Wars,Legacy of Terror
 ,0.78750,0.80278,Parks and Recreation,Pawnee Zoo
@@ -459,13 +460,13 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.55625,0.57708,Parks and Recreation,The Master Plan
 ,0.57778,0.59514,Parks and Recreation,Freddy Spaghetti
 ,0.59514,0.61042,Parks and Recreation,Go Big or Go Home
-,0.61250,0.62778,The Office,Stress Relief: Part 2
+,0.60000,0.62778,The Office,Stress Relief
 ,0.62778,0.64375,Star Wars: The Clone Wars,Grievous Intrigue 
 ,0.66736,0.68333,Star Wars: The Clone Wars,The Deserter
 ,0.68333,0.69931,Star Wars: The Clone Wars,Lightsaber Lost
 ,0.71944,0.73472,Parks and Recreation,Flu Season
 ,0.73472,0.74931,Parks and Recreation,Time Capsule
-,0.75417,0.76875,Parks and Recreation,Ron and Tammy: Part II
+,0.75417,0.76875,Parks and Recreation,Ron and Tammy II
 ,0.77083,0.78542,Parks and Recreation,Media Blitz
 ,0.78889,0.80347,Parks and Recreation,Indianapolis
 ,0.80417,0.82222,Parks and Recreation,Harvest Festival
@@ -581,8 +582,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.48125,0.49653,Parks and Recreation,Ms. Ludgate-Dwyer Goes to Washington
 ,0.50417,0.51944,Parks and Recreation,Pie-Mary
 ,0.69028,0.70486,Parks and Recreation,The Johnny Karate Super Awesome Musical Explosion Show
-02/14/2016,0.06319,0.07847,The Office,Lecture Circuit: Part 1
-,0.43194,0.44722,The Office,Lecture Circuit: Part 2
+02/14/2016,0.06319,0.07847,The Office,Lecture Circuit (1)
+,0.43194,0.44722,The Office,Lecture Circuit (2)
 ,0.44653,0.46181,The Office,Blood Drive
 ,0.48889,0.50417,The Office,Golden Ticket
 ,0.50486,0.52014,The Office,New Boss
@@ -603,8 +604,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.80417,0.83403,Parks and Recreation,One Last Ride
 02/18/2016,0.60278,0.61806,The Office,The Meeting
 ,0.61875,0.63403,The Office,The Promotion
-,0.70278,0.72014,The Office,Niagara: Part 1
-,0.71944,0.73472,The Office,Niagara: Part 2
+,0.70278,0.72014,The Office,Niagara (1)
+,0.71944,0.73472,The Office,Niagara (2)
 ,0.73472,0.75000,The Office,Mafia
 ,0.75625,0.77153,The Office,The Lover
 ,0.77431,0.82847,Psych,Pilot
@@ -649,7 +650,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.78056,0.81042,Psych,"Indiana Shawn and the Temple of the Kinda Crappy, Rusty Old Dagger"
 ,0.81597,0.84583,Psych,Heeeeee's Lassie - Extended Version
 02/29/2016,0.66389,0.69375,Psych,Shawn and the Real Girl
-03/01/2016,0.66667,0.68056,The Office,Delivery: Part 1
+03/01/2016,0.66667,0.68056,The Office,The Delivery (1)
 ,0.85486,0.88611,The Following,Pilot
 ,0.90972,0.94028,The Following,Chapter 2
 ,0.94167,0.97222,The Following,The Poet's Fire
@@ -668,7 +669,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.65278,0.68264,The Following,Whips and Regret
 ,0.68542,0.71597,The Following,The Curse
 ,0.71597,0.74583,The Following,Havenport
-,0.95347,0.97014,The Office,Delivery: Part 2
+,0.95347,0.97014,The Office,The Delivery (2)
 ,0.98333,0.99861,The Office,St. Patrick's Day
 03/06/2016,0.45278,0.48611,House of Cards,Chapter 30
 ,0.48819,0.52431,House of Cards,Chapter 31
@@ -700,8 +701,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.68889,0.70417,The Office,Viewing Party
 ,0.70417,0.71944,The Office,WUPHF.com
 ,0.72014,0.73542,The Office,China
-,0.73750,0.75486,The Office,Classy Christmas: Part 1
-,0.75486,0.76806,The Office,Classy Christmas: Part 2
+,0.73750,0.75486,The Office,Classy Christmas (1)
+,0.75486,0.76806,The Office,Classy Christmas (2)
 ,0.76875,0.78403,The Office,Ultimatum
 ,0.80208,0.81736,The Office,The Seminar
 ,0.81736,0.83264,The Office,The Search
@@ -1192,7 +1193,7 @@ Date,Start Time,End Time,Title,Episode Title
 08/02/2016,,,-,-
 08/03/2016,,,-,-
 08/04/2016,-0.02222,0.00903,The Blacklist,Pilot
-,0.00833,0.03681,The Blacklist,The Freelancer (No. 145)
+,0.00833,0.03681,The Blacklist,The Freelancer
 08/05/2016,,,-,-
 08/06/2016,,,-,-
 08/07/2016,0.46042,0.49375,Mad Men,Shoot
@@ -1223,17 +1224,17 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.73611,0.76597,Parenthood,Trouble in Candyland
 08/18/2016,,,-,-
 08/19/2016,,,-,-
-08/20/2016,0.40625,0.43542,The Blacklist,The Stewmaker (No. 161)
-,0.43542,0.46597,The Blacklist,The Courier (No. 85)
-,0.46597,0.49583,The Blacklist,Gina Zanetakos (No. 152)
+08/20/2016,0.40625,0.43542,The Blacklist,The Stewmaker
+,0.43542,0.46597,The Blacklist,The Courier
+,0.46597,0.49583,The Blacklist,Gina Zanetakos
 ,0.81597,0.84583,Parenthood,What to My Wondering Eyes
 08/21/2016,,,-,-
 08/22/2016,,,-,-
-08/23/2016,0.42361,0.45347,The Blacklist,Fredrick Barnes (No. 47)
-,0.45278,0.48264,The Blacklist,General Ludd (No. 43)
-,0.48194,0.51181,The Blacklist,Anslo Garrick (No. 16): Part 1
-,0.51250,0.54236,The Blacklist,Anslo Garrick (No. 16): Part 2
-,0.54097,0.57083,The Blacklist,The Good Samaritan (No. 106)
+08/23/2016,0.42361,0.45347,The Blacklist,Fredrick Barnes
+,0.45278,0.48264,The Blacklist,General Ludd
+,0.48194,0.51181,The Blacklist,Anslo Garrick (1)
+,0.51250,0.54236,The Blacklist,Anslo Garrick (2)
+,0.54097,0.57083,The Blacklist,The Good Samaritan
 ,0.93958,0.97292,Mad Men,The Wheel
 08/24/2016,,,-,-
 08/25/2016,-0.00417,0.02708,The Killing,Pilot
@@ -1241,15 +1242,15 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.43056,0.44653,Death Note,Nakama: Comrade
 ,0.50625,0.54028,Mad Men,For Those Who Think Young
 08/26/2016,,,-,-
-08/27/2016,0.85347,0.88333,The Blacklist,The Alchemist (No. 101)
+08/27/2016,0.85347,0.88333,The Blacklist,The Alchemist
 ,0.88264,0.91250,The Blacklist,The Cyprus Agency
-,0.91181,0.94167,The Blacklist,Madeline Pratt (No. 73)
+,0.91181,0.94167,The Blacklist,Madeline Pratt
 08/28/2016,,,-,-
-08/29/2016,0.87708,0.90694,The Blacklist,The Judge (No. 57)
-,0.90972,0.93958,The Blacklist,Mako Tanida (No. 83)
-,0.93958,0.96944,The Blacklist,Ivan (No. 88)
-08/30/2016,0.39097,0.42083,The Blacklist,Milton Bobbit (No. 135)
-,0.42014,0.45000,The Blacklist,The Pavlovich Brothers (No. 199-122)
+08/29/2016,0.87708,0.90694,The Blacklist,The Judge
+,0.90972,0.93958,The Blacklist,Mako Tanida
+,0.93958,0.96944,The Blacklist,Ivan
+08/30/2016,0.39097,0.42083,The Blacklist,Milton Bobbit
+,0.42014,0.45000,The Blacklist,The Pavlovich Brothers
 08/31/2016,,,-,-
 09/01/2016,-0.00764,0.02292,Black Mirror,The National Anthem
 ,0.02361,0.06528,Black Mirror,Fifteen Million Merits
@@ -1266,8 +1267,8 @@ Date,Start Time,End Time,Title,Episode Title
 09/08/2016,,,-,-
 09/09/2016,0.86111,0.91250,Black Mirror,White Christmas
 09/10/2016,-0.02292,0.05208,Ex Machina,-
-,0.56319,0.59306,The Blacklist,Berlin (No. 08)
-,0.59792,0.62778,The Blacklist,Berlin (No. 08): Conclusion
+,0.56319,0.59306,The Blacklist,Berlin (1)
+,0.59792,0.62778,The Blacklist,Berlin: Conclusion (2)
 ,0.67569,0.69167,Death Note,Matsuda: Matsuda
 09/11/2016,,,-,-
 09/12/2016,,,-,-
@@ -1276,21 +1277,21 @@ Date,Start Time,End Time,Title,Episode Title
 09/15/2016,,,-,-
 09/16/2016,,,-,-
 09/17/2016,,,-,-
-09/18/2016,0.63264,0.66250,The Blacklist,Lord Baltimore (No. 104)
+09/18/2016,0.63264,0.66250,The Blacklist,Lord Baltimore
 09/19/2016,,,-,-
 09/20/2016,,,-,-
 09/21/2016,,,-,-
 09/22/2016,,,-,-
 09/23/2016,,,-,-
 09/24/2016,,,-,-
-09/25/2016,0.85000,0.87986,The Blacklist,Monarch Douglas Bank (No. 112)
-09/26/2016,0.81944,0.84931,The Blacklist,Dr. James Covington (No. 89)
-,0.86111,0.89097,The Blacklist,Dr. Linus Creel (No. 82)
+09/25/2016,0.85000,0.87986,The Blacklist,Monarch Douglas Bank
+09/26/2016,0.81944,0.84931,The Blacklist,Dr. James Covington
+,0.86111,0.89097,The Blacklist,Dr. Linus Creel
 09/27/2016,,,-,-
 09/28/2016,,,-,-
 09/29/2016,,,-,-
-09/30/2016,0.93958,0.96944,The Blacklist,The Front (No. 74)
-10/01/2016,0.02083,0.05069,The Blacklist,The Mombasa Cartel (No. 114)
+09/30/2016,0.93958,0.96944,The Blacklist,The Front
+10/01/2016,0.02083,0.05069,The Blacklist,The Mombasa Cartel
 10/02/2016,0.59792,0.67153,Your Name.,-
 10/03/2016,,,-,-
 10/04/2016,,,-,-
@@ -1357,17 +1358,17 @@ Date,Start Time,End Time,Title,Episode Title
 11/04/2016,,,-,-
 11/05/2016,,,-,-
 11/06/2016,0.68125,0.76111,Doctor Strange,-
-11/07/2016,0.93125,0.96111,The Blacklist,The Kenyon Family (No. 71)
-11/08/2016,0.43125,0.46042,The Blacklist,The Deer Hunter (No. 93)
-,0.90069,0.93056,The Blacklist,T. Earl King VI (No. 94)
+11/07/2016,0.93125,0.96111,The Blacklist,The Kenyon Family
+11/08/2016,0.43125,0.46042,The Blacklist,The Deer Hunter
+,0.90069,0.93056,The Blacklist,T. Earl King VI
 11/09/2016,,,-,-
-11/10/2016,0.73542,0.76458,The Blacklist,Tom Keen (No. 7)
+11/10/2016,0.73542,0.76458,The Blacklist,Tom Keen
 11/11/2016,,,-,-
 11/12/2016,,,-,-
 11/13/2016,,,-,-
-11/14/2016,0.92847,0.95833,The Blacklist,The Longevity Initiative (No. 97)
-,0.96042,0.99097,The Blacklist,Venessa Cruz (No. 117)
-11/15/2016,-0.00903,0.02014,The Blacklist,Leonard Caul (No. 62)
+11/14/2016,0.92847,0.95833,The Blacklist,The Longevity Initiative
+,0.96042,0.99097,The Blacklist,Venessa Cruz
+11/15/2016,-0.00903,0.02014,The Blacklist,Leonard Caul
 ,0.64444,0.66042,The Office,Pilot
 ,0.65903,0.67500,The Office,Diversity Day
 ,0.67431,0.69028,The Office,Health Care
@@ -1383,7 +1384,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.73125,0.74653,The Office,The Client
 11/17/2016,0.04375,0.05903,The Office,Performance Review
 ,0.05903,0.07431,The Office,Email Surveillance
-11/18/2016,0.00069,0.03056,The Blacklist,Quon Zhang (No. 87)
+11/18/2016,0.00069,0.03056,The Blacklist,Quon Zhang
 11/19/2016,0.65556,0.72917,Kimi no Na Wa: Your Name,-
 11/20/2016,,,-,-
 11/21/2016,0.40903,0.42431,The Office,Christmas Party
@@ -1424,7 +1425,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.75417,0.76875,The Office,Women's Appreciation
 ,0.90347,0.92292,The Office,Beach Games
 ,0.92361,0.95347,The Office,The Job
-11/28/2016,0.94236,0.97222,The Office,Fun Run
+11/28/2016,0.95764,0.97222,The Office,Fun Run (1)
+,0.97222,0.98750,The Office,Fun Run (2)
 11/29/2016,-0.02708,0.00208,The Office,Dunder Mifflin Infinity
 11/30/2016,,,-,-
 12/01/2016,,,-,-
@@ -1440,11 +1442,10 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.65000,0.66528,The Office,Did I Stutter
 ,0.66528,0.67986,The Office,Job Fair
 ,0.67917,0.70833,The Office,"Goodbye, Toby"
-,0.70833,0.72292,The Office,Weight Loss: Part 1
 12/04/2016,,,-,-
 12/05/2016,,,-,-
 12/06/2016,,,-,-
-12/07/2016,0.67986,0.69444,The Office,Weight Loss: Part 2
+12/07/2016,0.66528,0.69444,The Office,Weight Loss
 ,0.70347,0.71875,The Office,Business Ethics
 12/08/2016,0.52778,0.54306,The Office,Baby Shower
 ,0.59167,0.60694,The Office,Crime Aid
@@ -1456,10 +1457,9 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.97222,0.98750,The Office,Moroccan Christmas
 12/09/2016,-0.01319,0.00208,The Office,The Duel
 ,0.45486,0.47014,The Office,Prince Family Paper
-,0.46944,0.48472,The Office,Stress Relief: Part 1
-,0.48681,0.50208,The Office,Stress Relief: Part 2
-,0.50139,0.51667,The Office,Lecture Circuit: Part 1
-,0.51875,0.53403,The Office,Lecture Circuit: Part 2
+,0.47153,0.50208,The Office,Stress Relief
+,0.50139,0.51667,The Office,Lecture Circuit (1)
+,0.51875,0.53403,The Office,Lecture Circuit (2)
 ,0.68333,0.69861,The Office,Blood Drive
 ,0.69861,0.71389,The Office,Golden Ticket
 12/10/2016,,,-,-
@@ -1476,8 +1476,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.89375,0.90903,The Office,The Meeting
 ,0.90972,0.92500,The Office,The Promotion
 12/12/2016,,,-,-
-12/13/2016,0.67917,0.69653,The Office,Niagara: Part 1
-,0.69514,0.71042,The Office,Niagara: Part 2
+12/13/2016,0.67917,0.69653,The Office,Niagara (1)
+,0.69514,0.71042,The Office,Niagara (2)
 12/14/2016,0.98056,0.99583,The Office,Mafia
 12/15/2016,-0.00417,0.01111,The Office,The Lover
 ,0.01042,0.02569,The Office,Koi Pond
@@ -1491,29 +1491,29 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.70278,0.73194,Army Wives,Family Readiness
 ,0.75764,0.77292,The Office,Sabre
 ,0.80556,0.82083,The Office,Manager and the Salesman
-,0.82083,0.83472,The Office,Delivery: Part 1
-,0.90486,0.93472,The Blacklist,Karakurt (No. 55)
-,0.93403,0.96389,The Blacklist,Tom Connolly (No. 11)
-12/18/2016,0.96597,0.99583,The Blacklist,The Troll Farmer (No. 38)
-,-0.00417,0.02569,The Blacklist,Marvin Gerand (No. 80)
+,0.82083,0.83472,The Office,The Delivery (1)
+,0.90486,0.93472,The Blacklist,Karakurt
+,0.93403,0.96389,The Blacklist,Tom Connolly
+12/18/2016,0.96597,0.99583,The Blacklist,The Troll Farmer
+,-0.00417,0.02569,The Blacklist,Marvin Gerand
 12/19/2016,0.72361,0.81667,Rogue One: A Star Wars Story,-
 12/20/2016,0.89167,0.90625,The Mindy Project,Santa Fe
 12/21/2016,-0.06597,0.00833,The Time Traveler's Wife,-
 ,0.74583,0.76111,The IT Crowd,The Work Outing
-,0.50000,0.52986,The Blacklist,Eli Matchett (No. 72)
-,0.52917,0.55903,The Blacklist,The Djinn (No. 43)
+,0.50000,0.52986,The Blacklist,Eli Matchett
+,0.52917,0.55903,The Blacklist,The Djinn
 12/22/2016,0.90278,0.91875,The Office,Pilot
 ,0.91944,0.93542,The Office,Diversity Day
-12/23/2016,0.84792,0.87778,The Blacklist,Arioch Cain (No. 50)
-,0.88681,0.91667,The Blacklist,Sir Crusoub Crabdall (No. 86)
-,0.91597,0.94583,The Blacklist,Zal Bin Hasaan (No. 31)
-,0.94514,0.97500,The Blacklist,Kings of the Highway (No. 108)
-12/24/2016,-0.02083,0.00903,The Blacklist,The Director (No. 24)
-,0.00903,0.03889,The Blacklist,The Director (No. 24): Conclusion
-,0.03889,0.06875,The Blacklist,Mr. Gregory Devry (No. 95)
-,0.55417,0.57083,The Office,Delivery: Part 2
+12/23/2016,0.84792,0.87778,The Blacklist,Arioch Cain
+,0.88681,0.91667,The Blacklist,Sir Crusoub Crabdall
+,0.91597,0.94583,The Blacklist,Zal Bin Hasaan
+,0.94514,0.97500,The Blacklist,Kings of the Highway
+12/24/2016,-0.02083,0.00903,The Blacklist,The Director (1)
+,0.00903,0.03889,The Blacklist,The Director: Conclusion (2)
+,0.03889,0.06875,The Blacklist,Mr. Gregory Devry
+,0.55417,0.57083,The Office,The Delivery (2)
 ,0.57361,0.58889,The Office,St. Patrick's Day
-,0.61111,0.64097,The Blacklist,The Vehm (No. 132)
+,0.61111,0.64097,The Blacklist,The Vehm
 ,0.92153,0.98333,Snow Day,-
 12/25/2016,0.65972,0.71319,Primer,-
 12/26/2016,0.00972,0.02500,The Office,New Leads
@@ -1524,21 +1524,21 @@ Date,Start Time,End Time,Title,Episode Title
 12/27/2016,0.87222,0.88889,Avatar: The Last Airbender,The Southern Air Temple
 ,0.96111,0.97778,Avatar: The Last Airbender,The King of Omashu
 12/28/2016,0.95417,0.98403,Army Wives,First Response
-12/29/2016,0.48958,0.51944,The Blacklist,Alistair Pitt (No. 103)
+12/29/2016,0.48958,0.51944,The Blacklist,Alistair Pitt
 ,0.70903,0.72569,Avatar: The Last Airbender,Imprisoned
 ,0.84375,0.86042,Naruto Shippûden,The Final Battle
-,0.86736,0.89722,The Blacklist,Lady Ambrosia (No. 77)
-,0.89653,0.92639,The Blacklist,Drexel (No. 113)
-,0.92639,0.95625,The Blacklist,The Caretaker (No. 78)
-,0.95556,0.98542,The Blacklist,Mr. Soloman (No. 32)
-12/30/2016,-0.01528,0.01458,The Blacklist,Mr. Soloman (No. 32): The Conclusion
+,0.86736,0.89722,The Blacklist,Lady Ambrosia
+,0.89653,0.92639,The Blacklist,Drexel
+,0.92639,0.95625,The Blacklist,The Caretaker
+,0.95556,0.98542,The Blacklist,Mr. Soloman (1)
+12/30/2016,-0.01528,0.01458,The Blacklist,Mr. Soloman: Conclusion (2)
 ,0.01806,0.04792,The Blacklist,Cape May
 ,0.43194,0.44722,The Office,The Chump
 ,0.45069,0.46597,Naruto Shippûden,Naruto and Sasuke
 ,0.46250,0.47778,The Office,Whistleblower
 ,0.87986,0.95556,Fools Rush In,-
-,0.96111,0.97778,Avatar: The Last Airbender,"The Spirit World: Winter Solstice, Part 1"
-,0.97778,0.99444,Avatar: The Last Airbender,"Avatar Roku: Winter Solstice, Part 2"
+,0.96111,0.97778,Avatar: The Last Airbender,Winter Solstice: The Spirit World (1)
+,0.97778,0.99444,Avatar: The Last Airbender,Winter Solstice: Avatar Roku (2)
 12/31/2016,0.10833,0.12361,The Office,Nepotism
 ,0.13056,0.14583,The Office,Counseling
 01/01/2017,0.50000,0.51528,The Office,Andy's Play
@@ -1550,8 +1550,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.50972,0.52500,The Office,Viewing Party
 ,0.53472,0.55000,The Office,WUPHF.com
 ,0.55347,0.56875,The Office,China
-,0.57708,0.59236,The Office,Classy Christmas: Part 1
-,0.58958,0.60486,The Office,Classy Christmas: Part 2
+,0.57708,0.59236,The Office,Classy Christmas (1)
+,0.58958,0.60486,The Office,Classy Christmas (2)
 ,0.92153,0.93819,Avatar: The Last Airbender,Jet
 01/03/2017,0.39792,0.41319,The Office,Ultimatum
 ,0.41389,0.42917,The Office,The Seminar
@@ -1561,10 +1561,10 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.42153,0.43681,The Office,PDA
 ,0.47778,0.50764,The Blacklist,The Artax Network
 ,0.53958,0.56944,The Blacklist,Susan Hargrave
-,0.56944,0.59931,The Blacklist,Alexander Kirk (No. 14)
+,0.56944,0.59931,The Blacklist,Alexander Kirk (1)
 ,0.79306,0.83333,Breaking Bad,Pilot
 ,0.84861,0.87917,The Wall,-
-01/05/2017,0.54722,0.57708,The Blacklist,Alexander Kirk (No. 14): Conclusion
+01/05/2017,0.54722,0.57708,The Blacklist,Alexander Kirk: Conclusion (2)
 ,0.69722,0.73056,Breaking Bad,Cat's in the Bag
 ,0.77431,0.80764,Breaking Bad,..And the Bag's in the River
 01/06/2017,0.65694,0.69028,Breaking Bad,Cancer Man
@@ -1618,18 +1618,18 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.86944,0.92986,Sherlock,The Empty Hearse
 01/29/2017,0.81389,0.84722,Breaking Bad,4 Days Out
 ,0.94028,0.97778,Mr. Robot,eps1.9_zer0-day.avi
-01/30/2017,0.98056,0.99583,The Legend of Korra,Civil Wars: Part 1
+01/30/2017,0.98056,0.99583,The Legend of Korra,Civil Wars (1)
 01/31/2017,0.90069,0.95833,The Bachelor,Episode #21.5
 02/01/2017,0.85417,0.92500,Agent Cody Banks,-
-,0.96042,0.97569,The Legend of Korra,Civil Wars: Part 2
+,0.96042,0.97569,The Legend of Korra,Civil Wars (2)
 02/02/2017,0.98125,0.99653,The Legend of Korra,Peacekeepers
 02/03/2017,,,-,-
 02/04/2017,,,-,-
 02/05/2017,0.96319,0.97847,The Legend of Korra,The Sting
-02/06/2017,0.97639,0.99167,The Legend of Korra,"Beginnings, Part 1"
+02/06/2017,0.97639,0.99167,The Legend of Korra,Beginnings (1)
 02/07/2017,0.90069,0.95833,The Bachelor,Episode #21.6
 02/08/2017,0.46319,0.52292,Sherlock,The Sign of Three
-,0.97569,0.99097,The Legend of Korra,"Beginnings, Part 2"
+,0.97569,0.99097,The Legend of Korra,Beginnings (2)
 02/09/2017,,,-,-
 02/10/2017,0.70903,0.77083,Sherlock,His Last Vow
 02/11/2017,-0.02708,0.03472,Sherlock,The Abominable Bride
@@ -1983,7 +1983,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.81667,0.83194,New Girl,Control
 ,0.85417,0.86875,Parks and Recreation,Canvassing
 ,0.97500,0.98958,Community,Basic Lupine Urology
-06/14/2017,0.02500,0.04028,New Girl,Fancyman Part 1
+06/14/2017,0.02500,0.04028,New Girl,Fancyman (1)
 ,0.53542,0.55069,Community,Curriculum Unavailable
 06/15/2017,0.00000,0.01458,New Girl,Normal
 ,0.56389,0.57917,Community,Digital Estate Planning
@@ -2226,7 +2226,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.86111,0.92014,Bachelor in Paradise,Episode #4.1
 09/02/2017,,,-,-
 09/03/2017,0.80347,0.81875,Parks and Recreation,Time Capsule
-,0.81875,0.83403,Parks and Recreation,Ron & Tammy: Part Two
+,0.81875,0.83403,Parks and Recreation,Ron and Tammy II
 ,0.83333,0.84861,Parks and Recreation,Media Blitz
 09/04/2017,0.00000,0.01528,Rick and Morty,The Whirly Dirly Conspiracy
 ,0.74028,0.77847,The Defenders,Worst Behavior
@@ -2503,8 +2503,8 @@ Date,Start Time,End Time,Title,Episode Title
 01/05/2018,-0.01528,0.00000,Brooklyn Nine-Nine,99
 ,0.00069,0.01597,Brooklyn Nine-Nine,Game Night
 ,0.01875,0.03403,Brooklyn Nine-Nine,The Favor
-,0.42569,0.45556,The Blacklist,Esteban (No. 79)
-,0.46806,0.49792,The Blacklist,Mato (No. 66)
+,0.42569,0.45556,The Blacklist,Esteban
+,0.46806,0.49792,The Blacklist,Mato
 01/06/2018,,,-,-
 01/07/2018,0.93681,0.97778,Westworld,Chestnut
 01/08/2018,0.02083,0.03542,The Office,The Dundies
@@ -2562,7 +2562,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.91875,0.94861,Hannibal,Sorbet
 ,0.93750,0.96667,The Office,The Job
 01/16/2018,0.85486,0.88472,Hannibal,Fromage
-01/17/2018,0.51319,0.54236,The Office,Fun Run
+01/17/2018,0.51319,0.54236,The Office,Fun Run (1)
 ,0.67708,0.70694,Hannibal,Trou Normand
 ,0.94653,0.97569,The Office,Dunder Mifflin Infinity
 01/18/2018,0.46667,0.49583,The Office,Launch Party
@@ -2593,8 +2593,7 @@ Date,Start Time,End Time,Title,Episode Title
 01/30/2018,0.74444,0.75972,The Office,Job Fair
 ,0.76528,0.79444,The Office,"Goodbye, Toby"
 ,0.93472,0.96528,Hannibal,Yakimono
-01/31/2018,0.46111,0.47639,The Office,Weight Loss: Part 1
-,0.47500,0.49028,The Office,Weight Loss: Part 2
+01/31/2018,0.45972,0.49028,The Office,Weight Loss
 02/01/2018,0.73889,0.82361,Ocean's Thirteen,-
 ,0.88264,0.89792,Brooklyn Nine-Nine,Hostage Situation
 ,0.91944,0.94931,Hannibal,Su-zakana
@@ -2640,10 +2639,9 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.01875,0.03403,The Office,The Duel
 ,0.03403,0.04931,The Office,Prince Family Paper
 ,0.85347,0.88472,Hannibal,Aperitivo
-,0.94514,0.96042,The Office,Stress Relief: Part 1
-,0.95972,0.97500,The Office,Stress Relief: Part 2
-,0.97431,0.98958,The Office,Lecture Circuit: Part 1
-02/27/2018,0.76319,0.77847,The Office,Lecture Circuit: Part 2
+,0.94583,0.97500,The Office,Stress Relief
+,0.97431,0.98958,The Office,Lecture Circuit (1)
+02/27/2018,0.76319,0.77847,The Office,Lecture Circuit (2)
 ,0.77917,0.79444,The Office,Blood Drive
 ,0.90069,0.91597,The Office,Golden Ticket
 ,0.98403,0.99236,Moral Orel,The Lord's Greatest Gift
@@ -2687,8 +2685,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.52014,0.53542,The Office,Gossip
 ,0.53611,0.55139,The Office,The Meeting
 ,0.55139,0.56667,The Office,The Promotion
-,0.56667,0.58403,The Office,Niagara: Part 1
-,0.58264,0.59792,The Office,Niagara: Part 2
+,0.56667,0.58403,The Office,Niagara (1)
+,0.58264,0.59792,The Office,Niagara (2)
 ,0.84653,0.85486,Moral Orel,Courtship
 ,0.85486,0.86319,Moral Orel,School Pageant
 03/11/2018,0.91111,0.92639,The Office,Mafia
@@ -2725,8 +2723,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.75694,0.77222,The Office,Sabre
 ,0.79306,0.82292,Marvel's Agents of S.H.I.E.L.D.,The Magical Place
 ,0.95833,0.97361,The Office,Manager and the Salesman
-03/22/2018,0.84028,0.84792,Moral Orel,Nature Part 1
-,0.84583,0.85417,Moral Orel,Nature Part 2
+03/22/2018,0.84028,0.84792,Moral Orel,Nature (1)
+,0.84583,0.85417,Moral Orel,Nature (2)
 ,0.85486,0.86319,Moral Orel,Numb
 ,0.95486,0.98472,Marvel's Agents of S.H.I.E.L.D.,T.R.A.C.K.S.
 03/23/2018,0.65556,0.69444,Jessica Jones,AKA Freak Accident
@@ -2774,15 +2772,15 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.77500,0.80486,Marvel's Agents of S.H.I.E.L.D.,Love in the Time of Hydra
 ,0.81944,0.84931,Marvel's Agents of S.H.I.E.L.D.,One Door Closes
 ,0.93333,0.96319,Hannibal,The Great Red Dragon
-04/02/2018,0.94097,0.95486,The Office,Delivery: Part 1
+04/02/2018,0.94097,0.95486,The Office,The Delivery (1)
 04/03/2018,0.55417,0.58403,Marvel's Agents of S.H.I.E.L.D.,Afterlife
 ,0.58750,0.61736,Marvel's Agents of S.H.I.E.L.D.,Melinda
 ,0.78056,0.87361,Black Panther,-
 04/04/2018,0.61736,0.64722,Marvel's Agents of S.H.I.E.L.D.,Frenemy of my Enemy
 ,0.64514,0.67500,Marvel's Agents of S.H.I.E.L.D.,The Dirty Half Dozen
 ,0.67431,0.70417,Marvel's Agents of S.H.I.E.L.D.,Scars
-,0.70417,0.73403,Marvel's Agents of S.H.I.E.L.D.,S.O.S.: Part 1
-,0.73333,0.76319,Marvel's Agents of S.H.I.E.L.D.,S.O.S.: Part 2
+,0.70417,0.73403,Marvel's Agents of S.H.I.E.L.D.,S.O.S. (1)
+,0.73333,0.76319,Marvel's Agents of S.H.I.E.L.D.,S.O.S. (2)
 ,0.81875,0.84861,Hannibal,...And the Woman Clothed with the Sun
 04/05/2018,0.42153,0.45139,Marvel's Agents of S.H.I.E.L.D.,Laws of Nature
 ,0.45417,0.48403,Marvel's Agents of S.H.I.E.L.D.,Purpose In the Machine
@@ -2803,7 +2801,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.81667,0.84653,Fastest Car,David vs. Goliath
 ,0.88750,0.91806,Fastest Car,Built Not Bought
 04/10/2018,,,-,-
-04/11/2018,0.62014,0.63681,The Office,Delivery: Part 2
+04/11/2018,0.62014,0.63681,The Office,The Delivery (2)
 ,0.64097,0.65625,The Office,St Patrick's Day
 ,0.97986,0.99514,The Office,Happy Hour
 04/12/2018,0.52986,0.55972,Marvel's Agents of S.H.I.E.L.D.,The Inside Man
@@ -2995,8 +2993,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.48194,0.51250,Suits,Donna
 ,0.65347,0.66875,Brooklyn Nine-Nine,NutriBoom
 ,0.86319,0.87986,Avatar: The Last Airbender,The Waterbending Master
-,0.89028,0.90625,Avatar: The Last Airbender,The Siege of the North: Part 1
-,0.90833,0.92431,Avatar: The Last Airbender,The Siege of the North: Part 2
+,0.89028,0.90625,Avatar: The Last Airbender,The Siege of the North (1)
+,0.90833,0.92431,Avatar: The Last Airbender,The Siege of the North (2)
 ,0.90625,0.93542,Suits,Hard Truths
 ,0.93819,0.95347,Brooklyn Nine-Nine,DFW
 ,0.95417,0.96944,Brooklyn Nine-Nine,Gray Star Mutual
@@ -3191,8 +3189,8 @@ Date,Start Time,End Time,Title,Episode Title
 07/25/2018,0.85972,0.87639,Avatar: The Last Airbender,The Runaway
 ,0.88958,0.91875,This Is Us,A Father's Advice
 07/26/2018,0.80208,0.81875,Avatar: The Last Airbender,The Puppetmaster
-07/27/2018,0.91597,0.93264,Avatar: The Last Airbender,"The Day of Black Sun, Part 1: The Invasion"
-,0.93403,0.95069,Avatar: The Last Airbender,"The Day of Black Sun, Part 1: The Eclipse"
+07/27/2018,0.91597,0.93264,Avatar: The Last Airbender,The Day of Black Sun: The Invasion (1)
+,0.93403,0.95069,Avatar: The Last Airbender,The Day of Black Sun: The Eclipse (2)
 07/28/2018,0.90486,0.92014,Brooklyn Nine-Nine,The Apartment
 ,0.93056,0.94583,Brooklyn Nine-Nine,Tactical Village
 07/29/2018,0.39861,0.41389,Futurama,Mars University
@@ -3207,17 +3205,17 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.84931,0.86597,Avatar: The Last Airbender,The Firebending Masters
 ,0.90694,0.93611,This Is Us,Déjà Vu
 07/31/2018,0.69583,0.73681,The Wire,Old Cases
-,0.85972,0.87639,Avatar: The Last Airbender,"The Boiling Rock, Part 1"
-,0.87986,0.89653,Avatar: The Last Airbender,"The Boiling Rock, Part 2"
+,0.85972,0.87639,Avatar: The Last Airbender,The Boiling Rock (1)
+,0.87986,0.89653,Avatar: The Last Airbender,The Boiling Rock (2)
 08/01/2018,0.52222,0.56319,The Wire,The Pager
 08/02/2018,0.33750,0.35278,Futurama,Fry and the Slurm Factory
 ,0.87083,0.88611,Avatar: The Last Airbender,The Southern Raiders
 08/03/2018,0.80556,0.87014,Eighth Grade,-
 08/04/2018,0.52986,0.54653,Avatar: The Last Airbender,The Ember Island Players
-,0.89236,0.90903,Avatar: The Last Airbender,"Sozin's Comet, Part 1 - The Phoenix King"
-,0.91042,0.92708,Avatar: The Last Airbender,"Sozin's Comet, Part 1 - The Old Masters"
-,0.93542,0.95208,Avatar: The Last Airbender,"Sozin's Comet, Part 1 - Into the Inferno"
-,0.95208,0.96875,Avatar: The Last Airbender,"Sozin's Comet, Part 1 - Avatar Aang"
+,0.89236,0.90903,Avatar: The Last Airbender,Sozin's Comet: The Phoenix King (1)
+,0.91042,0.92708,Avatar: The Last Airbender,Sozin's Comet: The Old Masters (2)
+,0.93542,0.95208,Avatar: The Last Airbender,Sozin's Comet: Into the Inferno (3)
+,0.95208,0.96875,Avatar: The Last Airbender,Sozin's Comet: Avatar Aang (4)
 08/05/2018,0.92708,0.96806,The Wire,The Wire
 ,0.84583,0.86111,Brooklyn Nine-Nine,Charges and Specs
 ,0.88958,0.90486,Brooklyn Nine-Nine,Undercover
@@ -3367,7 +3365,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.67986,0.69444,Parks and Recreation,Flu Season
 10/05/2018,0.65417,0.75764,Avengers: Infinity War,-
 ,0.76875,0.78333,Parks and Recreation,Time Capsule
-,0.78333,0.79792,Parks and Recreation,Ron and Tammy: Part II
+,0.78333,0.79792,Parks and Recreation,Ron and Tammy II
 ,0.79861,0.81389,The Good Place,"Rhonda, Diana, Jake, and Trent"
 ,0.81319,0.82847,The Good Place,The Burrito
 ,0.82847,0.84375,The Good Place,Somewhere Else
@@ -3744,7 +3742,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.49722,0.52639,Elementary,The Invisible Hand
 ,0.53472,0.56458,Elementary,A Difference in Kind
 ,0.80278,0.81806,Gravity Falls,The Legend of the Gobblewonker
-01/22/2019,0.45833,0.48750,The Office,Fun Run
+01/22/2019,0.45833,0.48750,The Office,Fun Run (1)
 ,0.48681,0.51597,The Office,Dunder Mifflin Infinity
 ,0.81181,0.82708,Gravity Falls,Headhunters
 ,0.82708,0.84236,Gravity Falls,The Hand That Rocks the Mabel
@@ -3769,9 +3767,9 @@ Date,Start Time,End Time,Title,Episode Title
 01/29/2019,0.92014,0.93542,The Office,Did I Stutter
 ,0.93472,0.94931,The Office,Job Fair
 ,0.96042,0.98958,The Office,"Goodbye, Toby"
-01/30/2019,-0.01042,0.00486,The Office,Weight Loss: Part 1
+01/30/2019,,,-,-
 ,0.86806,0.88403,Gravity Falls,The Time Traveler's Pig
-01/31/2019,0.42778,0.44306,The Office,Weight Loss: Part 2
+01/31/2019,0.41389,0.44306,The Office,Weight Loss
 ,0.94306,0.95833,The Office,Business Ethics
 ,0.96806,0.98333,The Office,Baby Shower
 02/01/2019,,,-,-
@@ -4090,8 +4088,8 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.86806,0.88333,New Girl,Bully
 ,0.89722,0.91250,New Girl,Injured
 ,0.91458,0.92986,New Girl,Control
-,0.92986,0.94514,New Girl,"Fancyman, Part 1"
-,0.94514,0.96042,New Girl,"Fancyman, Part 2"
+,0.92986,0.94514,New Girl,Fancyman (1)
+,0.94514,0.96042,New Girl,Fancyman (2)
 ,0.96042,0.97569,New Girl,Secrets
 ,0.97569,0.99097,New Girl,Normal
 05/02/2019,0.44375,0.45903,New Girl,Kids
@@ -4425,7 +4423,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.43750,0.45278,Brooklyn Nine-Nine,Boyle's Hunch
 ,0.45278,0.46806,Brooklyn Nine-Nine,The Oolong Slayer
 ,0.63681,0.66667,White Collar,Taking Stock
-,0.72778,0.74375,The Venture Bros.,"Escape to the House of Mummies, Part 2"
+,0.72778,0.74375,The Venture Bros.,Escape to the House of Mummies (Part II)
 ,0.88125,0.89722,The Venture Bros.,Twenty Years to Midnight
 07/23/2019,0.30625,0.32153,Brooklyn Nine-Nine,Halloween III
 ,0.32778,0.34306,Brooklyn Nine-Nine,Into the Woods
@@ -4517,8 +4515,8 @@ Date,Start Time,End Time,Title,Episode Title
 08/18/2019,0.88333,0.89792,Brooklyn Nine-Nine,HalloVeen
 08/19/2019,0.55069,0.56597,Brooklyn Nine-Nine,Bad Beat
 ,0.57083,0.58611,Brooklyn Nine-Nine,Two Turkeys
-,0.90833,22:10,Brooklyn Nine-Nine,99
-,0.92153,22:29,Brooklyn Nine-Nine,Game Night
+,0.90833,0.92361,Brooklyn Nine-Nine,99
+,0.92153,0.93681,Brooklyn Nine-Nine,Game Night
 08/20/2019,0.50139,0.51667,Brooklyn Nine-Nine,The Favor
 ,0.85069,0.88056,The Americans,Experimental Prottype City of Tomorrow
 08/21/2019,0.35694,0.38681,The Americans,Chloramphenicol
@@ -4657,8 +4655,8 @@ Date,Start Time,End Time,Title,Episode Title
 10/01/2019,0.59236,0.62222,Marvel's Agents of S.H.I.E.L.D.,Frenemy of My Enemy
 ,0.62292,0.65208,Marvel's Agents of S.H.I.E.L.D.,The Dirty Half Dozen
 ,0.67778,0.70764,Marvel's Agents of S.H.I.E.L.D.,Scars
-10/02/2019,0.87014,0.90000,Marvel's Agents of S.H.I.E.L.D.,S.O.S.: Part 1
-10/03/2019,0.85903,0.88889,Marvel's Agents of S.H.I.E.L.D.,S.O.S.: Part 2
+10/02/2019,0.87014,0.90000,Marvel's Agents of S.H.I.E.L.D.,S.O.S. (1)
+10/03/2019,0.85903,0.88889,Marvel's Agents of S.H.I.E.L.D.,S.O.S. (2)
 10/04/2019,0.48194,0.49028,Padre,-
 10/05/2019,,,-,-
 10/06/2019,0.64097,0.67083,Marvel's Agents of S.H.I.E.L.D.,Laws of Nature
@@ -5226,7 +5224,7 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.86736,0.88264,Parks and Recreation,Go Big or Go Home
 ,0.88472,0.89931,Parks and Recreation,Flu Season
 ,0.90000,0.91458,Parks and Recreation,Time Capsule
-,0.93611,0.95069,Parks and Recreation,Ron and Tammy: Part II
+,0.93611,0.95069,Parks and Recreation,Ron and Tammy II
 03/11/2020,0.89167,0.90625,Parks and Recreation,Media Blitz
 ,0.71319,0.72847,Parks and Recreation,Indianapolis
 ,0.74375,0.76181,Parks and Recreation,Harvest Festival
@@ -5418,7 +5416,7 @@ Date,Start Time,End Time,Title,Episode Title
 04/14/2020,0.40625,0.42569,Veep,Some New Beginnings
 ,0.56528,0.59514,Psych,Neil Simon's Lover's Retreat
 ,0.60417,0.61944,My Hero Academia,A Talk about Your Quirk
-,0.61736,0.63264,My Hero Academia,Deku vs. Kacchan: Part 2
+,0.61736,0.63264,My Hero Academia,"Deku vs. Kacchan, Part 2"
 ,0.83889,0.85833,Veep,The Choice
 04/15/2020,0.39583,0.42569,Psych,"Indiana Shawn and the Temple of the Kinda Crappy, Rusty old Dagger"
 ,0.42847,0.45833,Psych,Heeeeeere's Lassie
@@ -5573,9 +5571,9 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.90069,0.92986,Suits,Conflict of Interest
 ,0.93472,0.96389,Suits,Shadow Of A Doubt
 06/21/2020,0.64931,0.67917,Suits,The Other Time
-,0.87500,0.89028,Gravity Falls,Weirdmageddon: Part 1
-,0.88125,0.89653,Gravity Falls,Weirdmageddon 2: Escape from Reality
-,0.90972,0.93889,Gravity Falls,Wierdmageddon 3: Take Back the Falls
+,0.87500,0.89028,Gravity Falls,Weirdmageddon (1)
+,0.88125,0.89653,Gravity Falls,Weirdmageddon (2): Escape From Reality
+,0.90972,0.93889,Gravity Falls,Wierdmageddon (3): Take Back The Falls
 06/22/2020,0.78958,0.81944,Suits,She's Mine
 ,0.82014,0.85000,Suits,Endgame
 ,0.86597,0.89583,Suits,Bad Faith
@@ -5672,11 +5670,11 @@ Date,Start Time,End Time,Title,Episode Title
 07/24/2020,0.90417,0.91944,Brooklyn Nine-Nine,Ransom
 ,0.91875,0.93403,Brooklyn Nine-Nine,Lights Out
 07/25/2020,0.67361,0.68889,Rick and Morty,Star Mort: Rickturn of the Jerri
-,0.82014,0.85000,Burn Notice,"Loose Ends, Part 1"
-,0.88333,0.91319,Burn Notice,"Loose Ends, Part 2"
+,0.82014,0.85000,Burn Notice,Dead Drop
+,0.88333,0.91319,Burn Notice,Loose Ends
 07/26/2020,,,-,-
 07/27/2020,,,-,-
-07/28/2020,0.80000,0.82986,White Collar,"Pilot, Part 1"
+07/28/2020,0.80000,0.82986,White Collar,Pilot
 ,0.83472,0.86458,White Collar,Threads
 ,0.87222,0.90208,White Collar,Book of Hours
 ,0.90208,0.93125,White Collar,Flip of the Coin
@@ -5879,16 +5877,18 @@ Date,Start Time,End Time,Title,Episode Title
 ,0.93889,0.95278,Brooklyn Nine-Nine,Maximum Security
 10/22/2020,,,-,-
 10/23/2020,0.86250,0.95278,John Wick: Chapter 3 - Parabellum,-
-10/24/2020,0.00000,,,
-,0.00000,,,
-,0.00000,,,
-,0.00000,,,
-,0.00000,,,
-,0.00000,,,
-,0.00000,,,
-,0.00000,,,
-,0.00000,,,
-,0.00000,,,
+10/24/2020,,,-,-
+10/25/2020,,,-,-
+10/26/2020,,,-,-
+10/27/2020,0.43750,0.45208,Brooklyn Nine-Nine,Bureau
+,0.45278,0.46736,Brooklyn Nine-Nine,Greg and Larry
+,0.46736,0.48194,Brooklyn Nine-Nine,Coral Palms (1)
+,0.48264,0.49722,Brooklyn Nine-Nine,Coral Palms (2)
+,0.49722,0.51181,Brooklyn Nine-Nine,Coral Palms (3)
+,0.53681,0.55139,Brooklyn Nine-Nine,The Night Shift (1)
+,0.56250,0.57708,Brooklyn Nine-Nine,Halloween IV
+,0.58264,0.59722,Brooklyn Nine-Nine,Monster in the Closet
+,0.60347,0.61806,Brooklyn Nine-Nine,Mr. Santiago
 ,0.00000,,,
 ,0.00000,,,
 ,0.00000,,,
